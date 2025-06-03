@@ -6,6 +6,7 @@ import { getGOVUKFrontendVersion } from "@companieshouse/ch-node-utils";
 import logger from "./lib/Logger";
 import routerDispatch from "./router.dispatch";
 import { authenticationMiddleware } from "./middleware/authentication.middleware";
+import { sessionMiddleware } from "./middleware/session.middleware";
 
 const app = express();
 
@@ -48,6 +49,7 @@ app.use(express.urlencoded({ extended: false }));
 
 app.use(cookieParser());
 
+app.use("/*", sessionMiddleware);
 app.use("/*", authenticationMiddleware);
 
 // Unhandled errors
