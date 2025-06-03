@@ -1,6 +1,7 @@
 import express, { Request, Response, NextFunction } from "express";
 import nunjucks from "nunjucks";
 import path from "path";
+import cookieParser from "cookie-parser";
 import { getGOVUKFrontendVersion } from "@companieshouse/ch-node-utils";
 import logger from "./lib/Logger";
 import routerDispatch from "./router.dispatch";
@@ -43,6 +44,8 @@ app.enable("trust proxy");
 // parse body into req.body
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+
+app.use(cookieParser());
 
 // Unhandled errors
 app.use((err: any, req: Request, res: Response, next: NextFunction) => {
