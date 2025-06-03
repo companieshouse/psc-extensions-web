@@ -5,6 +5,7 @@ import cookieParser from "cookie-parser";
 import { getGOVUKFrontendVersion } from "@companieshouse/ch-node-utils";
 import logger from "./lib/Logger";
 import routerDispatch from "./router.dispatch";
+import { authenticationMiddleware } from "./middleware/authentication.middleware";
 
 const app = express();
 
@@ -46,6 +47,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 app.use(cookieParser());
+
+app.use("/*", authenticationMiddleware);
 
 // Unhandled errors
 app.use((err: any, req: Request, res: Response, next: NextFunction) => {
