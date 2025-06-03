@@ -37,6 +37,7 @@
     "@companieshouse/ch-node-utils": "^2.0.0",
     "@companieshouse/node-session-handler": "^4.1.9",
     "@companieshouse/structured-logging-node": "^1.0.8",
+    "@companieshouse/web-security-node": "^4.4.4",
     "axios": "^1.9.0",
     "cookie-parser": "^1.4.7",
     "express": "^4.21.2",
