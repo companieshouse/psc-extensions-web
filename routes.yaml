@@ -3,4 +3,4 @@ group: web
 
 weight: 100
 routes:
-  1: ^/authorised-agent/*
+  1: ^/extensions/*
