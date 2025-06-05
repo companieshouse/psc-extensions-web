@@ -49,11 +49,11 @@ app.use(express.urlencoded({ extended: false }));
 
 app.use(cookieParser());
 
-app.use("/*", sessionMiddleware);
-app.use("/*", authenticationMiddleware);
+app.use("/extensions", sessionMiddleware);
+app.use("/extensions", authenticationMiddleware);
 
 // Unhandled errors
-app.use((err: any, req: Request, res: Response, next: NextFunction) => {
+app.use((err: any, req: Request, res: Response, _next: NextFunction) => {
     logger.error(`${err.name} - appError: ${err.message} - ${err.stack}`);
     res.render("partials/error_500");
 });

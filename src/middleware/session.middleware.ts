@@ -4,9 +4,6 @@ import * as constants from "../lib/constants";
 
 const sessionStore = new SessionStore(new Redis(`redis://${constants.CACHE_SERVER}`));
 
-// passing true to SessionMiddleware means
-// that a session will be created if none found
-
 export const sessionMiddleware = SessionMiddleware({
     cookieName: constants.COOKIE_NAME,
     cookieSecret: constants.COOKIE_SECRET,
