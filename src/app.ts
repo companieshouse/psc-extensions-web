@@ -7,6 +7,7 @@ import logger from "./lib/Logger";
 import routerDispatch from "./router.dispatch";
 import { authenticationMiddleware } from "./middleware/authentication.middleware";
 import { sessionMiddleware } from "./middleware/session.middleware";
+import { servicePathPrefix } from "./lib/constants";
 
 const app = express();
 
@@ -49,8 +50,8 @@ app.use(express.urlencoded({ extended: false }));
 
 app.use(cookieParser());
 
-app.use("/extensions", sessionMiddleware);
-app.use("/extensions", authenticationMiddleware);
+app.use(servicePathPrefix, sessionMiddleware);
+app.use(servicePathPrefix, authenticationMiddleware);
 
 // Unhandled errors
 app.use((err: any, req: Request, res: Response, _next: NextFunction) => {
