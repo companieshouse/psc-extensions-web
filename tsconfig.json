@@ -1,9 +1,10 @@
 {
   "compilerOptions": {
-    "target": "ES2017",
+    "target": "ES2022",
     "module": "commonjs",
     "esModuleInterop": true,
     "moduleResolution": "node",
+    "resolveJsonModule": true,
     "pretty": true,
     "sourceMap": true,
     "outDir": "./dist",
@@ -19,7 +20,7 @@
     ],
     "types": [
       "node",
-      "mocha"
+      "jest"
     ]
   },
   "ts-node": {

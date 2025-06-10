@@ -1,9 +1,13 @@
 import express, { Request, Response, NextFunction } from "express";
 import nunjucks from "nunjucks";
 import path from "path";
+import cookieParser from "cookie-parser";
 import { getGOVUKFrontendVersion } from "@companieshouse/ch-node-utils";
 import logger from "./lib/Logger";
 import routerDispatch from "./router.dispatch";
+import { authenticationMiddleware } from "./middleware/authentication.middleware";
+import { sessionMiddleware } from "./middleware/session.middleware";
+import { servicePathPrefix } from "./lib/constants";
 
 const app = express();
 
@@ -44,8 +48,13 @@ app.enable("trust proxy");
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
+app.use(cookieParser());
+
+app.use(servicePathPrefix, sessionMiddleware);
+app.use(servicePathPrefix, authenticationMiddleware);
+
 // Unhandled errors
-app.use((err: any, req: Request, res: Response, next: NextFunction) => {
+app.use((err: any, req: Request, res: Response, _next: NextFunction) => {
     logger.error(`${err.name} - appError: ${err.message} - ${err.stack}`);
     res.render("partials/error_500");
 });

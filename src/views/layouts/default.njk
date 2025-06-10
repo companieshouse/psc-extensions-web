@@ -29,9 +29,6 @@
 
 {% block content %}
   <div class="govuk-grid-row">
-    <div class="govuk-grid-column-one-third">
-      {% include "partials/nav/left.njk" %}
-    </div>
     <div class="govuk-grid-column-two-thirds" id="{{ mainContentId }}">
       {% include "partials/error_summary.njk" %}
       {% block main_content %}{% endblock %}
