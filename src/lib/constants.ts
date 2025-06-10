@@ -1,6 +1,6 @@
 import { getEnvironmentValue } from "./utils/environmentValue";
 
-export const servicePathPrefix = "/extensions";
+export const servicePathPrefix = "/psc-extensions";
 
 export const DEFAULT_SESSION_EXPIRATION = getEnvironmentValue("DEFAULT_SESSION_EXPIRATION", "3600");
 export const CACHE_SERVER = getEnvironmentValue("CACHE_SERVER");

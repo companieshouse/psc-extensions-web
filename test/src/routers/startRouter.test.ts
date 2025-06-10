@@ -4,9 +4,9 @@ import app from "../../../src/app";
 
 const router = supertest(app);
 
-const url = "/extensions/extension-info";
+const url = "/psc-extensions/extension-info";
 
-describe("GET /extensions/", () => {
+describe("GET /psc-extensions/", () => {
 
     beforeEach(() => {
         jest.clearAllMocks();
