@@ -23,7 +23,7 @@ const expectedAuthMiddlewareConfig: AuthOptions = {
     returnUrl: URL
 };
 
-describe("authentication middleware tests", () => {
+describe("authentication middleware", () => {
     beforeEach(() => {
         jest.clearAllMocks();
         req.originalUrl = URL;

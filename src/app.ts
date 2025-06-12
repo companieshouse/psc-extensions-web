@@ -2,11 +2,12 @@ import express, { Request, Response, NextFunction } from "express";
 import nunjucks from "nunjucks";
 import path from "path";
 import cookieParser from "cookie-parser";
-import { getGOVUKFrontendVersion } from "@companieshouse/ch-node-utils";
+import { getGOVUKFrontendVersion, LocalesMiddleware } from "@companieshouse/ch-node-utils";
 import logger from "./lib/Logger";
 import routerDispatch from "./router.dispatch";
 import { authenticationMiddleware } from "./middleware/authentication.middleware";
 import { sessionMiddleware } from "./middleware/session.middleware";
+import { translationsMiddleware } from "./middleware/translations.middleware";
 import { servicePathPrefix } from "./lib/constants";
 
 const app = express();
@@ -15,7 +16,8 @@ const app = express();
 app.set("views", [
     path.join(__dirname, "/views"),
     path.join(__dirname, "/../node_modules/govuk-frontend/dist"),
-    path.join(__dirname, "/../node_modules/@companieshouse")
+    path.join(__dirname, "/../node_modules/@companieshouse"),
+    path.join(__dirname, "/../node_modules/@companieshouse/ch-node-utils/templates")
 ]);
 
 const nunjucksLoaderOpts = {
@@ -34,13 +36,14 @@ app.set("view engine", "njk");
 // Serve static files
 app.use(express.static(path.join(__dirname, "/../assets/public")));
 // app.use("/assets", express.static("./../node_modules/govuk-frontend/govuk/assets"));
-app.use("/assets", express.static(path.join(__dirname, '/node_modules/govuk-frontend/dist/govuk/assets')))
+app.use("/assets", express.static(path.join(__dirname, "/node_modules/govuk-frontend/dist/govuk/assets")));
 
 njk.addGlobal("cdnUrlCss", process.env.CDN_URL_CSS);
 njk.addGlobal("cdnUrlJs", process.env.CDN_URL_JS);
 njk.addGlobal("cdnHost", process.env.CDN_HOST);
 njk.addGlobal("govukFrontendVersion", getGOVUKFrontendVersion());
 njk.addGlobal("chsUrl", process.env.CHS_URL);
+njk.addGlobal("accountUrl", process.env.ACCOUNT_URL);
 njk.addGlobal("govukRebrand", true);
 
 // If app is behind a front-facing proxy, and to use the X-Forwarded-* headers to determine the connection and the IP address of the client
@@ -54,6 +57,9 @@ app.use(cookieParser());
 
 app.use(servicePathPrefix, sessionMiddleware);
 app.use(servicePathPrefix, authenticationMiddleware);
+
+app.use(LocalesMiddleware());
+app.use(translationsMiddleware);
 
 // Unhandled errors
 app.use((err: any, req: Request, res: Response, _next: NextFunction) => {
