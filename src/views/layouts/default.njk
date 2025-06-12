@@ -2,14 +2,20 @@
 {% extends "ch-node-utils/templates/layouts/template.njk" %}
 
 {% from "govuk/components/skip-link/macro.njk" import govukSkipLink %}
+{% from "govuk/components/back-link/macro.njk" import govukBackLink %}
+{% from "navbar.njk" import addPredefinedNavbar %}
 
 {% set mainContentId = "main-page-content" %}
 
-{% block pageTitle %}{{ title }}{% endblock %}
+{% block pageTitle %}{{ title }} - {{ lang.service_name }}{% endblock %}
 
 {% block head %}
   {{ super() }}
   {% include "partials/__meta_header.njk" %}
+{% endblock %}
+
+{% block bodyStart %}
+  {# {% include "partials/cookie_consent_banner.njk" %} #}
 {% endblock %}
 
 {% block skipLink %}
@@ -23,8 +29,16 @@
   {% include "partials/__header.njk" %}
 {% endblock %}
 
-{% block bodyStart %}
-  {# {% include "partials/cookie_consent_banner.njk" %} #}
+{% block beforeContent %}
+  {% include "partials/phase-banner.njk" %}
+  {% include "partials/nav/top.njk" %}
+
+  {% if backURL %}
+    {{ govukBackLink({
+    href: backURL,
+    text: lang.back
+  }) }}
+  {% endif %}
 {% endblock %}
 
 {% block content %}
