@@ -1,0 +1,13 @@
+{% from "navbar.njk" import addNavbar %}
+
+{# TODO: Update navbar links #}
+{% set signInHref = chsUrl + "/signin" %}
+{% set userAccountHref = accountUrl + "/user/account" %}
+{% set signOutHref = chsUrl + "/signout" %}
+
+    {% set menuItems = [
+        { id: "your-details", href: userAccountHref , displayText: lang.manage_account },
+        { id: "user-signout", href: signOutHref, displayText: lang.sign_out }
+    ] | reject("falsy") %}
+
+{{ addNavbar(signInHref, menuItems, userEmailAddress, lang) }}

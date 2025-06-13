@@ -1,0 +1,12 @@
+{% from "govuk/components/phase-banner/macro.njk" import govukPhaseBanner %}
+
+{% set phaseBannerContent %}
+  {{ lang.phase_banner_new_service }}<a class="govuk-link" href="https://www.smartsurvey.co.uk/s/reptpscdisp-fdbk/">{{ lang.phase_banner_feedback_link }}</a>{{ lang.phase_banner_help_improve }}
+{% endset %}
+  
+{{ govukPhaseBanner({
+  tag: {
+    text: lang.phase_banner_tag
+  },
+  html: phaseBannerContent
+}) }}
