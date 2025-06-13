@@ -32,9 +32,7 @@ export const translationsMiddleware = (req: LangRequest, res: Response, next: Ne
     const lang = getRequestLanguage(req);
     const locale = locales.i18nCh.resolveNamespacesKeys(lang);
 
-    Object.assign(res.locals, {
-        lang: locale
-    });
+    res.locals.lang = locale;
 
     next();
 };

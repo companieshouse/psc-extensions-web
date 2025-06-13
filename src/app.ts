@@ -8,6 +8,7 @@ import routerDispatch from "./router.dispatch";
 import { authenticationMiddleware } from "./middleware/authentication.middleware";
 import { sessionMiddleware } from "./middleware/session.middleware";
 import { translationsMiddleware } from "./middleware/translations.middleware";
+import { templateMiddleware } from "./middleware/template.middleware";
 import { LANDING_URL } from "./lib/constants";
 
 const app = express();
@@ -60,6 +61,7 @@ app.use(LANDING_URL, authenticationMiddleware);
 
 app.use(LocalesMiddleware());
 app.use(translationsMiddleware);
+app.use(templateMiddleware);
 
 // Unhandled errors
 app.use((err: any, req: Request, res: Response, _next: NextFunction) => {
