@@ -8,7 +8,7 @@ import routerDispatch from "./router.dispatch";
 import { authenticationMiddleware } from "./middleware/authentication.middleware";
 import { sessionMiddleware } from "./middleware/session.middleware";
 import { translationsMiddleware } from "./middleware/translations.middleware";
-import { servicePathPrefix } from "./lib/constants";
+import { LANDING_URL } from "./lib/constants";
 
 const app = express();
 
@@ -55,8 +55,8 @@ app.use(express.urlencoded({ extended: false }));
 
 app.use(cookieParser());
 
-app.use(servicePathPrefix, sessionMiddleware);
-app.use(servicePathPrefix, authenticationMiddleware);
+app.use(LANDING_URL, sessionMiddleware);
+app.use(LANDING_URL, authenticationMiddleware);
 
 app.use(LocalesMiddleware());
 app.use(translationsMiddleware);

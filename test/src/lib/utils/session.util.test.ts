@@ -1,4 +1,4 @@
-import { getUserEmailAddress } from "../../../../src/lib/utils/session.util";
+import { getUserEmail } from "../../../../src/lib/utils/session.util";
 import { Session } from "@companieshouse/node-session-handler";
 import { SessionKey } from "@companieshouse/node-session-handler/lib/session/keys/SessionKey";
 import { SignInInfoKeys } from "@companieshouse/node-session-handler/lib/session/keys/SignInInfoKeys";
@@ -22,18 +22,18 @@ describe("session utils", () => {
         };
     });
 
-    describe("getUserEmailAddress", () => {
-        it("should return the user email address from the session", () => {
-            const userEmailAddress = getUserEmailAddress(mockSession as Session);
-            expect(userEmailAddress).toBe("test@example.com");
+    describe("getUserEmail", () => {
+        it("should return the user email from the session", () => {
+            const userEmail = getUserEmail(mockSession as Session);
+            expect(userEmail).toBe("test@example.com");
         });
 
-        it("should return undefined if user email address is missing", () => {
+        it("should return undefined if user email is missing", () => {
             if (mockSession.data && mockSession.data[SessionKey.SignInInfo]) {
                 delete mockSession.data[SessionKey.SignInInfo].user_profile;
             }
-            const userEmailAddress = getUserEmailAddress(mockSession as Session);
-            expect(userEmailAddress).toBe(undefined);
+            const userEmail = getUserEmail(mockSession as Session);
+            expect(userEmail).toBe(undefined);
         });
     });
 });

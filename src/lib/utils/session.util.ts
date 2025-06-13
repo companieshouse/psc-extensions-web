@@ -8,7 +8,7 @@ const getSignInInfo = (session: Session | undefined): ISignInInfo | undefined =>
     return session?.data?.[SessionKey.SignInInfo];
 };
 
-export const getUserEmailAddress = (session: Session | undefined): string => {
+export const getUserEmail = (session: Session | undefined): string => {
     const signInInfo = getSignInInfo(session);
     return signInInfo?.[SignInInfoKeys.UserProfile]?.[UserProfileKeys.Email] as string;
 };

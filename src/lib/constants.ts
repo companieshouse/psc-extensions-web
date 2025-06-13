@@ -1,6 +1,12 @@
-import { getEnvironmentValue } from "./utils/environment-value.util";
+const getEnvironmentValue = (key: string, defaultValue?: string): string => {
+    const value: string = process.env[key] || "";
 
-export const servicePathPrefix = "/psc-extensions";
+    if (!value && !defaultValue) {
+        throw new Error(`Please set the environment variable "${key}"`);
+    }
+
+    return value || defaultValue as string;
+};
 
 export const DEFAULT_SESSION_EXPIRATION = getEnvironmentValue("DEFAULT_SESSION_EXPIRATION", "3600");
 export const CACHE_SERVER = getEnvironmentValue("CACHE_SERVER");
@@ -11,15 +17,8 @@ export const COOKIE_SECRET = getEnvironmentValue("COOKIE_SECRET");
 export const LOCALES_PATH = getEnvironmentValue("LOCALES_PATH", "locales");
 export const LOCALES_ENABLED = getEnvironmentValue("LOCALES_ENABLED", "true") === "true";
 
-export const Urls = {
-    EXTENSION_INFO: "/extension-info"
-} as const;
+export const EXTENSION_INFO_PAGE = "extension-info";
 
-export const PrefixedUrls = {
-    EXTENSION_INFO: servicePathPrefix + Urls.EXTENSION_INFO
-} as const;
-
-export const ExternalUrls = {
-    SIGNOUT: "/signout",
-    INDIVIDUAL_PSC_LIST: "/persons-with-significant-control-verification/individual/psc-list"
-} as const;
+export const LANDING_URL = "/psc-extensions";
+export const EXTENSION_INFO_URL = `/${EXTENSION_INFO_PAGE}`;
+export const INDIVIDUAL_PSC_LIST_URL = "/persons-with-significant-control-verification/individual/psc-list";
