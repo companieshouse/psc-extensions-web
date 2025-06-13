@@ -1,0 +1,20 @@
+{% extends "layouts/default.njk" %}
+
+{% from "govuk/components/button/macro.njk" import govukButton %}
+
+{% set title =  lang.extension_info_title %}
+
+{% block main_content %}
+  {# TODO: Add PSC and company details #}
+  <span class="govuk-caption-l">[PSC Name] ({{ lang.extension_info_born_caption }} [PSC DOB])</span>
+  <h1 class="govuk-heading-l">{{ lang.extension_info_title }}</h1>
+  <p class="govuk-body">{{ lang.extension_info_request_extension_description_1 }}<b>[PSC Name]</b>{{ lang.extension_info_request_extension_description_2 }}</p>
+  <p class="govuk-body">{{ lang.extension_info_submit_request_description }}</p>
+  <p class="govuk-body">{{ lang.extension_info_role_description_1 }}[Company name]{{ lang.extension_info_role_description_2 }}</p>
+
+{# TODO: Add link to next page #}
+{{ govukButton({
+  text: lang.continue
+}) }}
+
+{% endblock %}
