@@ -7,7 +7,7 @@ import logger from "./lib/Logger";
 import routerDispatch from "./router.dispatch";
 import { authenticationMiddleware } from "./middleware/authentication.middleware";
 import { sessionMiddleware } from "./middleware/session.middleware";
-import { translationsMiddleware } from "./middleware/translations.middleware";
+import { i18nMiddleware } from "./middleware/i18n.middleware";
 import { templateMiddleware } from "./middleware/template.middleware";
 import { LANDING_URL } from "./lib/constants";
 
@@ -60,7 +60,7 @@ app.use(LANDING_URL, sessionMiddleware);
 app.use(LANDING_URL, authenticationMiddleware);
 
 app.use(LocalesMiddleware());
-app.use(translationsMiddleware);
+app.use(i18nMiddleware);
 app.use(templateMiddleware);
 
 // Unhandled errors

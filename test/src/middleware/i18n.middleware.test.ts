@@ -1,6 +1,5 @@
 import { i18nCh } from "@companieshouse/ch-node-utils";
-import { Response, NextFunction } from "express";
-import { LangRequest } from "../../../src/middleware/translations.middleware";
+import { Request, Response, NextFunction } from "express";
 
 interface MockLocalesService {
     i18nCh?: Partial<i18nCh>;
@@ -19,6 +18,11 @@ function mockLocalesService (service?: MockLocalesService) {
                 localesFolder: "mockLocalesFolder",
                 ...service
             })
+        },
+        LanguageNames: {
+            sourceLocales: jest.fn().mockReturnValue({
+                key: "value"
+            })
         }
     }));
 }
@@ -30,14 +34,14 @@ function setLocalesEnabled (enabled: boolean) {
     }));
 }
 
-describe("translations middleware", () => {
+describe("i18n middleware", () => {
     let req: any;
     let res: any;
     let next: any;
-    let translationsMiddleware: (req: LangRequest, res: Response, next: NextFunction) => void;
+    let i18nMiddleware: (req: Request, res: Response, next: NextFunction) => void;
 
     const reloadMiddleware = async () => {
-        translationsMiddleware = (await import("../../../src/middleware/translations.middleware")).translationsMiddleware;
+        i18nMiddleware = (await import("../../../src/middleware/i18n.middleware")).i18nMiddleware;
     };
 
     beforeEach(async () => {
@@ -45,8 +49,9 @@ describe("translations middleware", () => {
         mockLocalesService();
         await reloadMiddleware();
         req = {
-            method: "GET",
-            lang: "en"
+            query: {
+                lang: "en"
+            }
         };
 
         res = {
@@ -56,19 +61,10 @@ describe("translations middleware", () => {
         next = jest.fn();
     });
 
-    it("should only handle GET requests", async () => {
-        req.method = "POST";
-
-        translationsMiddleware(req, res, next);
-
-        expect(next).toHaveBeenCalled();
-        expect(res.locals.lang).toBeUndefined();
-    });
-
     it("should populate the response object with all translations for the language", async () => {
-        translationsMiddleware(req, res, next);
+        i18nMiddleware(req, res, next);
 
-        expect(res.locals.lang).toEqual({
+        expect(res.locals.i18n).toEqual({
             key: "value"
         });
 
@@ -90,10 +86,10 @@ describe("translations middleware", () => {
         await reloadMiddleware();
         req.lang = "cy";
 
-        translationsMiddleware(req, res, next);
+        i18nMiddleware(req, res, next);
 
         expect(resolveKeysMock).toHaveBeenCalledWith("en");
-        expect(res.locals.lang).toEqual({
+        expect(res.locals.i18n).toEqual({
             key: "test"
         });
 

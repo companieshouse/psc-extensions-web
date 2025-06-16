@@ -6,8 +6,8 @@
 {% set signOutHref = chsUrl + "/signout" %}
 
     {% set menuItems = [
-        { id: "your-details", href: userAccountHref , displayText: lang.manage_account },
-        { id: "user-signout", href: signOutHref, displayText: lang.sign_out }
+        { id: "your-details", href: userAccountHref , displayText: i18n.manage_account },
+        { id: "user-signout", href: signOutHref, displayText: i18n.sign_out }
     ] | reject("falsy") %}
 
 {{ addNavbar(signInHref, menuItems, userEmailAddress, lang) }}
