@@ -1,4 +1,24 @@
 {% from "govuk/components/footer/macro.njk" import govukFooter %}
 
-{# TODO: Add footer links #}
-{{ govukFooter({}) }}
+{{ govukFooter({
+  meta: {
+    items: [
+      {
+        href: "https://resources.companieshouse.gov.uk/serviceInformation.shtml",
+        text: i18n.footer_policies
+      },
+      {
+        href: chsUrl + "/help/cookies",
+        text: i18n.footer_cookies
+      },
+      {
+        href: chsUrl + "/help/contact-us",
+        text: i18n.footer_contact_us
+      },
+            {
+        href: "https://developer.company-information.service.gov.uk/",
+        text: i18n.footer_developers
+      }
+    ]
+  }
+}) }}
