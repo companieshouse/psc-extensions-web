@@ -46,6 +46,7 @@ endif
 	cp -r ./dist/* $(tmpdir)
 	cp -r ./package.json $(tmpdir)
 	cp -r ./package-lock.json $(tmpdir)
+	cp -r ./locales $(tmpdir)
 	cp -r ./.git $(tmpdir)
 	cp ./routes.yaml $(tmpdir)
 	cp ./start.sh $(tmpdir)
