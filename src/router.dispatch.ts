@@ -1,8 +1,8 @@
 // Do Router dispatch here, i.e. map incoming routes to appropriate router
 import { Application, Request, Response, Router } from "express";
 import extensionInfoRouter from "./routers/extensionInfoRouter";
-import extensionInfoRouter from "./routers/extensionRefusedRouter";
-import { EXTENSION_INFO_URL, LANDING_URL } from "./lib/constants";
+import extensionRefusedRouter from "./routers/extensionRefusedRouter";
+import { EXTENSION_INFO_URL, LANDING_URL, EXTENSION_REFUSED_URL } from "./lib/constants";
 
 const routerDispatch = (app: Application) => {
     const router = Router();

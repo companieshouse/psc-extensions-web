@@ -4,37 +4,19 @@
 
 {% set title =  i18n.extension_refused_title %}
 
-{% block content %}
-<div class="govuk-grid-row">
-  <div class="govuk-grid-column-two-thirds">
+{% block main_content %}
+  {# TODO: Add PSC and company details #}
+   <span class="govuk-caption-l">[PSC Name] ({{ i18n.extension_refused_born_caption }} [PSC DOB])</span>
+   <h1 class="govuk-heading-l">{{ i18n.extension_refused_title }}</h1>
 
-    <form action="{{currentUrl}}" method="post">
-      <span class="govuk-caption-l">[PSC Name] ({{ i18n.extension_info_born_caption }} [PSC DOB])</span>
-      <h1 class="govuk-heading-l">You cannot request an extension for {{ data [PSC Name]}}</h1>
-
-      <p class="govuk-body">This is for one of the following reasons:</p>
-
-    <ul class="govuk-list govuk-list--bullet">
-        <li>their verification deadline has passed</li>
-        <li>they have reached the limit for the number of extensions they can request</li>
+   <p class="govuk-body">{{ i18n.extension_refused_request_extension_description_1 }}</p>
+      <ul class="govuk-list govuk-list--bullet">
+        <li>{{ i18n.extension_refused_request_extension_description_2 }}</li>
+        <li>{{ i18n.extension_refused_request_extension_description_3 }}</li>
       </ul>
 
-      <p class="govuk-body">{{ data [PSC Name]}} still needs to verify their identity and provide their Companies House personal code. </p>
-
-      <p class="govuk-body">If they do not, Companies House may contact them for more information about why they were unable to provide their verification details.</p>
-
-      <p class="govuk-body">Read the <a href="https://prove-your-identity-prototype.herokuapp.com/release2-v5/pre-one-login/guidance">guidance on verifying your identity for Companies House</a> for more information.</p>
-
-      <div class="govuk-warning-text">
-        <span class="govuk-warning-text__icon" aria-hidden="true">!</span>
-        <strong class="govuk-warning-text__text">
-          <span class="govuk-visually-hidden">Warning</span>
-          If a PSC does not comply with identity verification requirements on time, they will be committing an offence and may have to pay a financial penalty or fine. We may also display a note against their name on the public register.
-        </strong>
-      </div>
-
-    </form>
-  </div>
-</div>
+   <p class="govuk-body"> [PSC Name]{{ i18n.extension_refused_request_description }}</p>
+   <p class="govuk-body"> {{ i18n.extension_refused_warning_description }} </p>
+   <p class="govuk-body"> {{i18n.extension_refused_request_guidance_1 }} <a href="">guidance on verifying your identity for Companies House</a> {{ i18n.extension_refused_request_guidance_2 }}</p>
 
 {% endblock %}
