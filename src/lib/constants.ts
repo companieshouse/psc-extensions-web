@@ -17,10 +17,10 @@ export const COOKIE_SECRET = getEnvironmentValue("COOKIE_SECRET");
 export const LOCALES_PATH = getEnvironmentValue("LOCALES_PATH", "locales");
 export const LOCALES_ENABLED = getEnvironmentValue("LOCALES_ENABLED", "true") === "true";
 
-export const EXTENSION_INFO_PAGE = "extension-info";
-export const EXTENSION_REFUSED_PAGE = "extension-refused";
-
-export const LANDING_URL = "/psc-extensions";
-export const EXTENSION_INFO_URL = `/${EXTENSION_INFO_PAGE}`;
-export const EXTENSION_REFUSED_URL = `/${EXTENSION_REFUSED_PAGE}`;
-export const INDIVIDUAL_PSC_LIST_URL = "/persons-with-significant-control-verification/individual/psc-list";
+export const Urls = {
+    LANDING_URL: "/psc-extensions",
+    EXTENSION_INFO: `/extension-info`,
+    EXTENSION_REFUSED: `/extension-refused`,
+    HEALTHCHECK: "/healthcheck",
+    INDIVIDUAL_PSC_LIST: "/persons-with-significant-control-verification/individual/psc-list"
+} as const;
