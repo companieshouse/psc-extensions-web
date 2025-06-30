@@ -13,8 +13,8 @@ export class ExtensionInfoHandler extends GenericHandler<BaseViewData> {
         return {
             ...baseViewData,
             // TODO: Add search params to backURL
-            backURL: INDIVIDUAL_PSC_LIST,
-            templateName: EXTENSION_INFO
+            backURL: Urls.INDIVIDUAL_PSC_LIST,
+            templateName: Urls.EXTENSION_INFO
         };
     }
 
