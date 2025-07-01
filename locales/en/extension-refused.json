@@ -1,0 +1,11 @@
+   {
+   "extension_refused_title": "You cannot request an extension for",
+    "extension_refused_born_caption": "Born",
+    "extension_refused_request_extension_description_1": "This is for one of the following reasons:",
+    "extension_refused_request_extension_description_2": " their verification deadline has passed",
+    "extension_refused_request_extension_description_3": " they have reached the limit for the number of extensions they can request",
+    "extension_refused_request_description": "still needs to verify their identity and provide their Companies House personal code. ",
+    "extension_refused_warning_description" : "If they do not, Companies House may contact them for more information about why they were unable to provide their verification details.",
+    "extension_refused_request_guidance_1" : "Read the ",
+    "extension_refused_request_guidance_2" : "for more information."
+}
