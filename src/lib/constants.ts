@@ -19,7 +19,7 @@ export const env = {
      LOCALES_ENABLED: getEnvironmentValue("LOCALES_ENABLED", "true") === "true"
 } as const;
 
-export const servicePathPrefix = "/psc-extensions",
+export const servicePathPrefix = "/psc-extensions"
 
 export const Urls = {
     EXTENSION_INFO: `/extension-info`,
