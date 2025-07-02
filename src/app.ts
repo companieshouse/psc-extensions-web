@@ -9,7 +9,7 @@ import { authenticationMiddleware } from "./middleware/authentication.middleware
 import { sessionMiddleware } from "./middleware/session.middleware";
 import { i18nMiddleware } from "./middleware/i18n.middleware";
 import { templateMiddleware } from "./middleware/template.middleware";
-import { LANDING_URL } from "./lib/constants";
+import { Urls } from "./lib/constants";
 
 const app = express();
 
@@ -56,8 +56,8 @@ app.use(express.urlencoded({ extended: false }));
 
 app.use(cookieParser());
 
-app.use(LANDING_URL, sessionMiddleware);
-app.use(LANDING_URL, authenticationMiddleware);
+app.use(Urls.LANDING_URL, sessionMiddleware);
+app.use(Urls.LANDING_URL, authenticationMiddleware);
 
 app.use(LocalesMiddleware());
 app.use(i18nMiddleware);

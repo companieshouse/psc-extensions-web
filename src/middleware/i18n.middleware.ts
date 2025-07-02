@@ -1,8 +1,8 @@
 import { LanguageNames, LocalesService } from "@companieshouse/ch-node-utils";
 import { Request, Response, NextFunction } from "express";
-import { LOCALES_ENABLED, LOCALES_PATH } from "../lib/constants";
+import { env } from "../lib/constants";
 
-const locales = LocalesService.getInstance(LOCALES_PATH, LOCALES_ENABLED);
+const locales = LocalesService.getInstance(env.LOCALES_PATH, env.LOCALES_ENABLED);
 
 enum Lang {
     EN = "en",
@@ -10,7 +10,7 @@ enum Lang {
 }
 
 function resolveLang (lang: any): string {
-    if (!LOCALES_ENABLED) {
+    if (!env.LOCALES_ENABLED) {
         return Lang.EN;
     }
     return Object.values(Lang).includes(lang) ? lang : Lang.EN;
