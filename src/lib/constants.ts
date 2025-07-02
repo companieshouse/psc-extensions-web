@@ -14,16 +14,16 @@ export const env = {
      CHS_URL: getEnvironmentValue("CHS_URL"),
      COOKIE_DOMAIN: getEnvironmentValue("COOKIE_DOMAIN"),
      COOKIE_NAME: getEnvironmentValue("COOKIE_NAME"),
-     COOKIE_SECRET: getEnvironmentValue("COOKIE_SECRET"),
-     LOCALES_PATH: getEnvironmentValue("LOCALES_PATH", "locales"),
-     LOCALES_ENABLED: getEnvironmentValue("LOCALES_ENABLED", "true") === "true"
+     COOKIE_SECRET: getEnvironmentValue("COOKIE_SECRET")
 } as const;
+
+export const LOCALES_PATH = getEnvironmentValue("LOCALES_PATH", "locales");
+export const LOCALES_ENABLED = getEnvironmentValue("LOCALES_ENABLED", "true") === "true";
 
 export const servicePathPrefix = "/psc-extensions"
 
 export const Urls = {
     EXTENSION_INFO: `/extension-info`,
     EXTENSION_REFUSED: `/extension-refused`,
-    HEALTHCHECK: "/healthcheck",
     INDIVIDUAL_PSC_LIST: "/persons-with-significant-control-verification/individual/psc-list"
 } as const;

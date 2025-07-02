@@ -2,7 +2,6 @@
 import { Application, Request, Response, Router } from "express";
 import extensionInfoRouter from "./routers/extensionInfoRouter";
 import extensionRefusedRouter from "./routers/extensionRefusedRouter";
-import healthCheckRouter from "./routers/healthCheckRouter";
 import { servicePathPrefix, Urls } from "./lib/constants";
 
 const routerDispatch = (app: Application) => {
@@ -11,7 +10,6 @@ const routerDispatch = (app: Application) => {
     app.use(servicePathPrefix, router);
     router.use(Urls.EXTENSION_INFO, extensionInfoRouter);
     router.use(Urls.EXTENSION_REFUSED, extensionRefusedRouter);
-    router.use(Urls.HEALTHCHECK, healthCheckRouter);
     router.use("*", (req: Request, res: Response) => {
         res.status(404).render("partials/error_400");
     });
