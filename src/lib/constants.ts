@@ -8,19 +8,20 @@ const getEnvironmentValue = (key: string, defaultValue?: string): string => {
     return value || defaultValue as string;
 };
 
-export const Env = {
-     DEFAULT_SESSION_EXPIRATION = getEnvironmentValue("DEFAULT_SESSION_EXPIRATION", "3600"),
-     CACHE_SERVER = getEnvironmentValue("CACHE_SERVER"),
-     CHS_URL = getEnvironmentValue("CHS_URL"),
-     COOKIE_DOMAIN = getEnvironmentValue("COOKIE_DOMAIN"),
-     COOKIE_NAME = getEnvironmentValue("COOKIE_NAME"),
-     COOKIE_SECRET = getEnvironmentValue("COOKIE_SECRET"),
-     LOCALES_PATH = getEnvironmentValue("LOCALES_PATH", "locales"),
-     LOCALES_ENABLED = getEnvironmentValue("LOCALES_ENABLED", "true") === "true"
+export const env = {
+     DEFAULT_SESSION_EXPIRATION: getEnvironmentValue("DEFAULT_SESSION_EXPIRATION", "3600"),
+     CACHE_SERVER: getEnvironmentValue("CACHE_SERVER"),
+     CHS_URL: getEnvironmentValue("CHS_URL"),
+     COOKIE_DOMAIN: getEnvironmentValue("COOKIE_DOMAIN"),
+     COOKIE_NAME: getEnvironmentValue("COOKIE_NAME"),
+     COOKIE_SECRET: getEnvironmentValue("COOKIE_SECRET"),
+     LOCALES_PATH: getEnvironmentValue("LOCALES_PATH", "locales"),
+     LOCALES_ENABLED: getEnvironmentValue("LOCALES_ENABLED", "true") === "true"
 } as const;
 
+export const servicePathPrefix = "/psc-extensions",
+
 export const Urls = {
-    LANDING_URL: "/psc-extensions",
     EXTENSION_INFO: `/extension-info`,
     EXTENSION_REFUSED: `/extension-refused`,
     HEALTHCHECK: "/healthcheck",

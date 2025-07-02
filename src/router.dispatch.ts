@@ -1,14 +1,14 @@
 // Do Router dispatch here, i.e. map incoming routes to appropriate router
 import { Application, Request, Response, Router } from "express";
 import extensionInfoRouter from "./routers/extensionInfoRouter";
-import extensionInfoRouter from "./routers/extensionRefusedRouter";
+import extensionRefusedRouter from "./routers/extensionRefusedRouter";
 import healthCheckRouter from "./routers/healthCheckRouter";
-import { Urls } from "./lib/constants";
+import { servicePathPrefix, Urls } from "./lib/constants";
 
 const routerDispatch = (app: Application) => {
     const router = Router();
 
-    app.use(LANDING_URL, router);
+    app.use(servicePathPrefix, router);
     router.use(Urls.EXTENSION_INFO, extensionInfoRouter);
     router.use(Urls.EXTENSION_REFUSED, extensionRefusedRouter);
     router.use(Urls.HEALTHCHECK, healthCheckRouter);
