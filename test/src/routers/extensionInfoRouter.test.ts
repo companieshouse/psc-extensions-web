@@ -6,7 +6,7 @@ const router = supertest(app);
 
 const url = "/psc-extensions/extension-info";
 
-describe("GET /psc-extensions/", () => {
+describe("GET extension info router", () => {
 
     beforeEach(() => {
         jest.clearAllMocks();
