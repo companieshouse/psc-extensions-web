@@ -1,6 +1,6 @@
 import { LanguageNames, LocalesService } from "@companieshouse/ch-node-utils";
 import { Request, Response, NextFunction } from "express";
-import { LOCALES_ENABLED, LOCALES_PATH } from "../lib/constants";
+import { LOCALES_PATH, LOCALES_ENABLED } from "../lib/constants";
 
 const locales = LocalesService.getInstance(LOCALES_PATH, LOCALES_ENABLED);
 

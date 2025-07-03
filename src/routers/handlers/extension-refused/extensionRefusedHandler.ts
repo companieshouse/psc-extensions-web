@@ -3,9 +3,9 @@ import { BaseViewData, GenericHandler, ViewModel } from "../generic";
 import logger from "../../../lib/Logger";
 import { Urls } from "../../../lib/constants";
 
-export class ExtensionInfoHandler extends GenericHandler<BaseViewData> {
+export class ExtensionRefusedHandler extends GenericHandler<BaseViewData> {
 
-    public static templatePath = "router_views/extension-info/extension-info";
+    public static templatePath = "router_views/extension-refused/extension-refused";
 
     public async getViewData (req: Request, res: Response): Promise<BaseViewData> {
         const baseViewData = await super.getViewData(req, res);
@@ -14,7 +14,7 @@ export class ExtensionInfoHandler extends GenericHandler<BaseViewData> {
             ...baseViewData,
             // TODO: Add search params to backURL
             backURL: Urls.INDIVIDUAL_PSC_LIST,
-            templateName: Urls.EXTENSION_INFO
+            templateName: Urls.EXTENSION_REFUSED
         };
     }
 
@@ -23,7 +23,7 @@ export class ExtensionInfoHandler extends GenericHandler<BaseViewData> {
 
         // ...process request here and return data for the view
         return {
-            templatePath: ExtensionInfoHandler.templatePath,
+            templatePath: ExtensionRefusedHandler.templatePath,
             viewData: await this.getViewData(req, res)
         };
     }
