@@ -9,11 +9,10 @@ import { authenticationMiddleware } from "./middleware/authentication.middleware
 import { sessionMiddleware } from "./middleware/session.middleware";
 import { i18nMiddleware } from "./middleware/i18n.middleware";
 import { templateMiddleware } from "./middleware/template.middleware";
-import { servicePathPrefix, Urls } from "./lib/constants";
+import { servicePathPrefix  } from "./lib/constants";
 
 const app = express();
 
-// const viewPath = path.join(__dirname, "/views");
 app.set("views", [
     path.join(__dirname, "/views"),
     path.join(__dirname, "/../node_modules/govuk-frontend/dist"),
