@@ -14,7 +14,7 @@ export const getUserEmail = (session: Session | undefined): string => {
 };
 
 export const twoWeeksFromNow = (): Date => {
-  const currentDate = new Date();
-  currentDate.setDate(currentDate.getDate() + 14); // Add 14 days
-  return currentDate;
+    const currentDate = new Date();
+    currentDate.setDate(currentDate.getDate() + 14); // Add 14 days
+    return currentDate;
 };
