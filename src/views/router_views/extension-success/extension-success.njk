@@ -1,0 +1,73 @@
+{% extends "layouts/default.njk" %}
+{% from "govuk/components/panel/macro.njk" import govukPanel %}
+{% from "govuk/components/summary-list/macro.njk" import govukSummaryList %}
+
+{% from "govuk/components/button/macro.njk" import govukButton %}
+
+{% set title =  i18n.extension_refused_title %}
+
+{% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+  {{ govukPanel({
+  titleText: "Extension request successful",
+  html: "Verification deadline extended to <br> <strong>28 June 2025</strong>" 
+}) }}
+    {{ govukSummaryList({
+  rows: [
+    {
+      key: {
+        text: " Company name"
+      },
+      value: {
+        text: ""
+      }
+    },
+    {
+      key: {
+        text: "Company number"
+      },
+      value: {
+        text: ""
+      }
+    },
+    {
+      key: {
+        text: "PSC name"
+      },
+      value: {
+        html: ""
+      }
+    },
+    {
+      key: {
+        text: " Extension request reference number"
+      },
+      value: {
+        html: ''
+      }
+    }
+  ]
+}) }}
+  
+  <p class = "govuk-body"> This PSC has been given an additional 14 days to provide their verification details.</p>
+      <p class="govuk-body">We have sent a confirmation email to <strong>{{userEmailAddress}}</strong>
+        .We'll also send a letter to the PSC to inform them of their new deadline.</p> 
+
+        
+      <h2 class="govuk-heading-m">If you need to request another extension</h2>  
+
+      <p class="govuk-body">You must do so before the new deadline has passed. Next time, your request will not be automatically accepted. 
+      It will be reviewed by a Companies House examiner, who will ask you to provide evidence to support your request.</p>
+
+      <h2 class="govuk-heading-m">What do you want to do next?</h2>
+      <p class="govuk-body">Provide identity verification details or request an extension for:</p>
+<ul class="govuk-list govuk-list--bullet">
+  <li><a href="../company-number" class="govuk-link">PSC of a different company</a>.</li>
+  <li><a href="../company-number" class="govuk-link">another PSC of</a>.</li>
+</ul>
+
+  </div>
+</div>
+
+{% endblock %}
