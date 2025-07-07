@@ -9,18 +9,18 @@ const getEnvironmentValue = (key: string, defaultValue?: string): string => {
 };
 
 export const env = {
-     DEFAULT_SESSION_EXPIRATION: getEnvironmentValue("DEFAULT_SESSION_EXPIRATION", "3600"),
-     CACHE_SERVER: getEnvironmentValue("CACHE_SERVER"),
-     CHS_URL: getEnvironmentValue("CHS_URL"),
-     COOKIE_DOMAIN: getEnvironmentValue("COOKIE_DOMAIN"),
-     COOKIE_NAME: getEnvironmentValue("COOKIE_NAME"),
-     COOKIE_SECRET: getEnvironmentValue("COOKIE_SECRET")
+    DEFAULT_SESSION_EXPIRATION: getEnvironmentValue("DEFAULT_SESSION_EXPIRATION", "3600"),
+    CACHE_SERVER: getEnvironmentValue("CACHE_SERVER"),
+    CHS_URL: getEnvironmentValue("CHS_URL"),
+    COOKIE_DOMAIN: getEnvironmentValue("COOKIE_DOMAIN"),
+    COOKIE_NAME: getEnvironmentValue("COOKIE_NAME"),
+    COOKIE_SECRET: getEnvironmentValue("COOKIE_SECRET")
 } as const;
 
 export const LOCALES_PATH = getEnvironmentValue("LOCALES_PATH", "locales");
 export const LOCALES_ENABLED = getEnvironmentValue("LOCALES_ENABLED", "true") === "true";
 
-export const servicePathPrefix = "/psc-extensions"
+export const servicePathPrefix = "/psc-extensions";
 
 export const Urls = {
     EXTENSION_INFO: `/extension-info`,
