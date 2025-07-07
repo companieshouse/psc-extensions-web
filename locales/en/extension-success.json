@@ -1,0 +1,18 @@
+   {
+    "extension_success_title": "Extension request successful",
+    "extension_success_deadline_html": "Verification deadline extended to",
+    "extension_success_company_name": "Company name",
+    "extension_success_company_number": "Company number",
+    "extension_success_psc_name": "PSC name",
+    "extension_success_reference_number": "Extension request reference number",
+    "extension_success_link_1": "PSC of a different company",
+    "extension_success_link_2": "another PSC of",
+    "extension_success_links_info": "Provide identity verification details or request an extension for:",
+    "extension_success_links_title": "What do you want to do next?",
+    "extension_success_another_extension_info": "You must do so before the new deadline has passed. Next time, your request will not be automatically accepted.It will be reviewed by a Companies House examiner, who will ask you to provide evidence to support your request.",
+    "extension_success_another_extension_title": "If you need to request another extension",
+    "extension_success_first_info": "This PSC has been given an additional 14 days to provide their verification details.",
+    "extension_success_second_info_line1": "We have sent a confirmation email to",
+    "extension_success_second_info_line2": ".We'll also send a letter to the PSC to inform them of their new deadline."
+   
+}

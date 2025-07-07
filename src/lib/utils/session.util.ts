@@ -12,9 +12,3 @@ export const getUserEmail = (session: Session | undefined): string => {
     const signInInfo = getSignInInfo(session);
     return signInInfo?.[SignInInfoKeys.UserProfile]?.[UserProfileKeys.Email] as string;
 };
-
-export const twoWeeksFromNow = (): Date => {
-    const currentDate = new Date();
-    currentDate.setDate(currentDate.getDate() + 14); // Add 14 days
-    return currentDate;
-};
