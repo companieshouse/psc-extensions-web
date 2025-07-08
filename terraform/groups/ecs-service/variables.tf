@@ -112,12 +112,6 @@ variable "cloudwatch_alarms_enabled" {
 # ------------------------------------------------------------------------------
 # Service environment variable configs
 # ------------------------------------------------------------------------------
-variable "log_level" {
-  default     = "info"
-  type        = string
-  description = "The log level for services to use: trace, debug, info or error"
-}
-
 variable "psc_extensions_web_version" {
   type        = string
   description = "The version of the psc-extensions-web container to run."
