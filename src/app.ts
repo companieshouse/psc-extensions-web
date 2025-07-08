@@ -9,7 +9,7 @@ import { authenticationMiddleware } from "./middleware/authentication.middleware
 import { sessionMiddleware } from "./middleware/session.middleware";
 import { i18nMiddleware } from "./middleware/i18n.middleware";
 import { templateMiddleware } from "./middleware/template.middleware";
-import { servicePathPrefix  } from "./lib/constants";
+import { servicePathPrefix } from "./lib/constants";
 
 const app = express();
 
