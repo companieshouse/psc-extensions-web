@@ -7,7 +7,7 @@ locals {
   container_port              = "3000"
   docker_repo                 = "psc-extensions-web"
   kms_alias                   = "alias/${var.aws_profile}/environment-services-kms"
-  lb_listener_rule_priority   = 161
+  lb_listener_rule_priority   = 27
   lb_listener_paths           = ["/persons-with-significant-control-extensions*"]
   healthcheck_path            = "/persons-with-significant-control-extensions/healthcheck"
   healthcheck_matcher         = "200"
