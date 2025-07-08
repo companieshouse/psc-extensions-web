@@ -118,9 +118,9 @@ variable "log_level" {
   description = "The log level for services to use: trace, debug, info or error"
 }
 
-variable "psc_verification_web_version" {
+variable "psc_extensions_web_version" {
   type        = string
-  description = "The version of the psc-verification-web container to run."
+  description = "The version of the psc-extensions-web container to run."
 }
 
 variable "ssm_version_prefix" {
