@@ -5,5 +5,6 @@
   "reason_for_extension_3": "Undergoing medical treatment now or imminently that prevents access to and ability to undertake the task, including no persons able to assist you",
   "reason_for_extension_4": "Technical downtime or failure that has recently occurred and will continue for a prolonged period of time",
   "reason_for_extension_5": "Additional support or reasonable adjustments are required and being arranged",
-  "reason_for_extension_6": "Arranging to identity verify at the Post Office "
+  "reason_for_extension_6": "Arranging to identity verify at the Post Office ",
+  "reason_for_extension_error_message": "Select why you are requesting an extension "
 }

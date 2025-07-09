@@ -13,8 +13,8 @@ export class ReasonForExtensionHandler extends GenericHandler<BaseViewData> {
         return {
             ...baseViewData,
             // TODO: Add search params to backURL
-            backURL: Urls.EXTENSION_INFO_URL,
-            templateName: Urls.REASON_FOR_EXTENSION_PAGE
+            backURL: Urls.EXTENSION_INFO,
+            templateName: Urls.REASON_FOR_EXTENSION
         };
     }
 
