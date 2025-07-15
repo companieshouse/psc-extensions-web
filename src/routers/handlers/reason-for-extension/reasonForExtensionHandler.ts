@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { BaseViewData, GenericHandler, ViewModel } from "../generic";
 import logger from "../../../lib/Logger";
-import { Urls } from "../../../lib/constants";
+import { servicePathPrefix, Urls } from "../../../lib/constants";
 
 export class ReasonForExtensionHandler extends GenericHandler<BaseViewData> {
 
@@ -12,8 +12,7 @@ export class ReasonForExtensionHandler extends GenericHandler<BaseViewData> {
 
         return {
             ...baseViewData,
-            // TODO: Add search params to backURL
-            backURL: Urls.EXTENSION_INFO,
+            backURL: servicePathPrefix + Urls.EXTENSION_INFO,
             templateName: Urls.REASON_FOR_EXTENSION
         };
     }

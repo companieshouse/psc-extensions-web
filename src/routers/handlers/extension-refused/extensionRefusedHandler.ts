@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { BaseViewData, GenericHandler, ViewModel } from "../generic";
 import logger from "../../../lib/Logger";
-import { Urls } from "../../../lib/constants";
+import { servicePathPrefix, Urls } from "../../../lib/constants";
 
 export class ExtensionRefusedHandler extends GenericHandler<BaseViewData> {
 
@@ -13,7 +13,7 @@ export class ExtensionRefusedHandler extends GenericHandler<BaseViewData> {
         return {
             ...baseViewData,
             // TODO: Add search params to backURL
-            backURL: Urls.INDIVIDUAL_PSC_LIST,
+            backURL: servicePathPrefix + Urls.INDIVIDUAL_PSC_LIST,
             templateName: Urls.EXTENSION_REFUSED
         };
     }

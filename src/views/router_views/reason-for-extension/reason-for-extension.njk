@@ -31,24 +31,25 @@
     },
     {
       value: "reason 4",
-      text: i18n.reason_for_extension_4 
+      text: i18n.reason_for_extension_4
     },
     {
       value: "reason 5",
-      text: i18n.reason_for_extension_5 
+      text: i18n.reason_for_extension_5
     },
     {
       value: "reason 6",
-      text: i18n.reason_for_extension_6 
+      text: i18n.reason_for_extension_6
     }
   ]
 }) }}
 
-{# TODO: Add link to next page #}
-{{ govukButton({
-  text: i18n.continue,
-  href: "/psc-extensions/extension-confirmation"
-}) }}
+
+ </div>
 </div>
-</div>
+
+ {{ govukButton({
+    text: i18n.continue,
+    href: "/psc-extensions/extension-confirmation"
+ }) }}
 {% endblock %}
