@@ -46,7 +46,7 @@
                         }
                 ]
             } %}
-                  {% if errorList is not undefined and errorList is not null and errorList | length %}
+                  {% if errors is not undefined and errors is not null and errors | length %}
                      {{ govukRadios({
                          name: radioButtonConfig.name,
                          values: radioButtonConfig.values,
