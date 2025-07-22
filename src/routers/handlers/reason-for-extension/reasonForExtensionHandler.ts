@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { BaseViewData, GenericHandler, ViewModel } from "../generic";
-import logger from "../../../lib/Logger";
+import logger from "../../../lib/logger";
 import { servicePathPrefix, Urls } from "../../../lib/constants";
 // TODO: add import for api
 
