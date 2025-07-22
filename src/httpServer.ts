@@ -2,7 +2,7 @@ import fs from "fs";
 import http from "http";
 import https from "https";
 import app from "./app";
-import { logger } from "./lib/logger";
+import logger from "./lib/logger";
 
 // start the HTTP server
 const httpServer = http.createServer(app);
