@@ -46,10 +46,11 @@
                         }
                 ]
             } %}
-                  {% if errors is not undefined and errors is not null and errors | length %}
+                  {% if errorList is not undefined and errorList is not null and errorList | length %}
                      {{ govukRadios({
                          name: radioButtonConfig.name,
                          values: radioButtonConfig.values,
+                         fieldset: radioButtonConfig.fieldset,
                          items: radioButtonConfig.items,
                          errorMessage: {
                              text: i18n.reason_for_extension_error_message
