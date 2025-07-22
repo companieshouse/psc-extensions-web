@@ -1,19 +1,20 @@
 import { Request, Response } from "express";
 import { BaseViewData, GenericHandler, ViewModel } from "../generic";
-import logger from "../../../lib/logger";
+import logger from "../../../lib/Logger";
 import { servicePathPrefix, Urls } from "../../../lib/constants";
+// TODO: add import for api
 
-export class ExtensionInfoHandler extends GenericHandler<BaseViewData> {
+export class ReasonForExtensionHandler extends GenericHandler<BaseViewData> {
 
-    public static templatePath = "router_views/extension-info/extension-info";
+    public static templatePath = "router_views/reason-for-extension/reason-for-extension";
 
     public async getViewData (req: Request, res: Response): Promise<BaseViewData> {
         const baseViewData = await super.getViewData(req, res);
 
         return {
             ...baseViewData,
-            backURL: servicePathPrefix + Urls.INDIVIDUAL_PSC_LIST,
-            templateName: Urls.EXTENSION_INFO
+            backURL: servicePathPrefix + Urls.EXTENSION_INFO,
+            templateName: Urls.REASON_FOR_EXTENSION
         };
     }
 
@@ -22,8 +23,11 @@ export class ExtensionInfoHandler extends GenericHandler<BaseViewData> {
 
         // ...process request here and return data for the view
         return {
-            templatePath: ExtensionInfoHandler.templatePath,
+            templatePath: ReasonForExtensionHandler.templatePath,
             viewData: await this.getViewData(req, res)
         };
     }
+
+    // TODO: add executePost for error validation
+
 }
