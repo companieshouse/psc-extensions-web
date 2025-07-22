@@ -4,68 +4,64 @@
 {% from "govuk/components/button/macro.njk" import govukButton %}
 
 {% set title =  i18n.reason_for_extension_title %}
-{% block content %}
-    <div class="govuk-grid-row">
-        <div class="govuk-grid-column-two-thirds">
-            <form action="" method="post">
-                {# TODO: Add PSC and company details #}
-                <span class="govuk-caption-l">[PSC Name] ({{ i18n.reason_for_extension_born_caption }} [PSC DOB])</span>
+{% block main_content %}
+    <form action="" method="post">
+        {# TODO: Add PSC and company details #}
+        <span class="govuk-caption-l">[PSC Name] ({{ i18n.reason_for_extension_born_caption }} [PSC DOB])</span>
 
-                    {% set radioButtonConfig = {
-                        name: "whyDoYouNeedAnExtension",
-                        values: whyDoYouNeedAnExtension,
-                        fieldset: {
-                            legend: {
-                                text: i18n.reason_for_extension_title,
-                                isPageHeading: true,
-                                classes: "govuk-fieldset__legend--l"
-                            }
+            {% set radioButtonConfig = {
+                name: "whyDoYouNeedAnExtension",
+                values: whyDoYouNeedAnExtension,
+                fieldset: {
+                    legend: {
+                        text: i18n.reason_for_extension_title,
+                        isPageHeading: true,
+                        classes: "govuk-fieldset__legend--l"
+                    }
+                },
+                items: [
+                        {
+                            value: "reason_for_extension_1",
+                            text: i18n.reason_for_extension_1
                         },
-                        items: [
-                                {
-                                    value: "reason_for_extension_1",
-                                    text: i18n.reason_for_extension_1
-                                },
-                                {
-                                    value: "reason_for_extension_2",
-                                    text: i18n.reason_for_extension_2
-                                },
-                                {
-                                    value: "reason_for_extension_3",
-                                    text: i18n.reason_for_extension_3
-                                },
-                                {
-                                    value: "reason_for_extension_4",
-                                    text: i18n.reason_for_extension_4
-                                },
-                                {
-                                    value: "reason_for_extension_5",
-                                    text: i18n.reason_for_extension_5
-                                },
-                                {
-                                    value: "reason_for_extension_6",
-                                    text: i18n.reason_for_extension_6
-                                }
-                        ]
-                    } %}
-                          {% if errors is not undefined and errors is not null and errors | length %}
-                             {{ govukRadios({
-                                 name: radioButtonConfig.name,
-                                 values: radioButtonConfig.values,
-                                 items: radioButtonConfig.items,
-                                 errorMessage: {
-                                     text: i18n.reason_for_extension_error_message
-                                 }
-                             }) }}
-                          {% else %}
-                             {{ govukRadios(radioButtonConfig) }}
-                          {% endif %}
-                     {{ govukButton({
-                        text: i18n.continue,
-                        href: "/psc-extensions/extension-confirmation"
+                        {
+                            value: "reason_for_extension_2",
+                            text: i18n.reason_for_extension_2
+                        },
+                        {
+                            value: "reason_for_extension_3",
+                            text: i18n.reason_for_extension_3
+                        },
+                        {
+                            value: "reason_for_extension_4",
+                            text: i18n.reason_for_extension_4
+                        },
+                        {
+                            value: "reason_for_extension_5",
+                            text: i18n.reason_for_extension_5
+                        },
+                        {
+                            value: "reason_for_extension_6",
+                            text: i18n.reason_for_extension_6
+                        }
+                ]
+            } %}
+                  {% if errors is not undefined and errors is not null and errors | length %}
+                     {{ govukRadios({
+                         name: radioButtonConfig.name,
+                         values: radioButtonConfig.values,
+                         items: radioButtonConfig.items,
+                         errorMessage: {
+                             text: i18n.reason_for_extension_error_message
+                         }
                      }) }}
-            </form>
-        </div>
-    </div>
+                  {% else %}
+                     {{ govukRadios(radioButtonConfig) }}
+                  {% endif %}
+             {{ govukButton({
+                text: i18n.continue,
+                href: "/psc-extensions/extension-confirmation"
+             }) }}
+    </form>
 
 {% endblock %}
