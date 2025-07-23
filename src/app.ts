@@ -3,7 +3,7 @@ import nunjucks from "nunjucks";
 import path from "path";
 import cookieParser from "cookie-parser";
 import { getGOVUKFrontendVersion, LocalesMiddleware } from "@companieshouse/ch-node-utils";
-import logger from "./lib/Logger";
+import logger from "./lib/logger";
 import routerDispatch from "./router.dispatch";
 import { authenticationMiddleware } from "./middleware/authentication.middleware";
 import { sessionMiddleware } from "./middleware/session.middleware";
