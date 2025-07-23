@@ -41,7 +41,6 @@ app.use("/assets", express.static(path.join(__dirname, "/node_modules/govuk-fron
 njk.addGlobal("cdnUrlCss", process.env.CDN_URL_CSS);
 njk.addGlobal("cdnUrlJs", process.env.CDN_URL_JS);
 njk.addGlobal("cdnHost", process.env.CDN_HOST);
-njk.addGlobal("govukFrontendVersion", getGOVUKFrontendVersion());
 njk.addGlobal("chsUrl", process.env.CHS_URL);
 njk.addGlobal("accountUrl", process.env.ACCOUNT_URL);
 njk.addGlobal("govukRebrand", true);
