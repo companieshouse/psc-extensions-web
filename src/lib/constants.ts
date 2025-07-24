@@ -24,6 +24,7 @@ export const servicePathPrefix = "/psc-extensions";
 
 export const Urls = {
     EXTENSION_INFO: `/extension-info`,
+    HEALTHCHECK: '/healthcheck',
     EXTENSION_REFUSED: `/extension-refused`,
     REASON_FOR_EXTENSION: `/reason-for-extension`,
     EXTENSION_CONFIRMATION: `/extension-confirmation`,
