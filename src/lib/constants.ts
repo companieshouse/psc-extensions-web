@@ -23,10 +23,10 @@ export const LOCALES_ENABLED = getEnvironmentValue("LOCALES_ENABLED", "true") ==
 export const servicePathPrefix = "/psc-extensions";
 
 export const Urls = {
-    EXTENSION_INFO: `/extension-info`,
-    HEALTHCHECK: '/healthcheck',
-    EXTENSION_REFUSED: `/extension-refused`,
-    REASON_FOR_EXTENSION: `/reason-for-extension`,
-    EXTENSION_CONFIRMATION: `/extension-confirmation`,
+    EXTENSION_INFO: "/extension-info",
+    HEALTHCHECK: "/healthcheck",
+    EXTENSION_REFUSED: "/extension-refused",
+    REASON_FOR_EXTENSION: "/reason-for-extension",
+    EXTENSION_CONFIRMATION: "/extension-confirmation",
     INDIVIDUAL_PSC_LIST: "/persons-with-significant-control-verification/individual/psc-list"
 } as const;

@@ -11,10 +11,10 @@ const routerDispatch = (app: Application) => {
     const router = Router();
 
     app.use(servicePathPrefix, router);
+    router.use(Urls.HEALTHCHECK, healthCheckRouter);
     router.use(Urls.EXTENSION_INFO, extensionInfoRouter);
     router.use(Urls.EXTENSION_REFUSED, extensionRefusedRouter);
     router.use(Urls.REASON_FOR_EXTENSION, reasonForExtensionRouter);
-    router.use(Urls.HEALTHCHECK, healthCheckRouter);
     router.use(Urls.EXTENSION_CONFIRMATION, extensionConfirmationHandler);
     router.use("*", (req: Request, res: Response) => {
         res.status(404).render("partials/error_400");
