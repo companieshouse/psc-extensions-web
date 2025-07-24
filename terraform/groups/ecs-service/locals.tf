@@ -8,8 +8,8 @@ locals {
   docker_repo                 = "psc-extensions-web"
   kms_alias                   = "alias/${var.aws_profile}/environment-services-kms"
   lb_listener_rule_priority   = 27
-  lb_listener_paths           = ["/persons-with-significant-control-extensions*"]
-  healthcheck_path            = "/persons-with-significant-control-extensions/healthcheck"
+  lb_listener_paths           = ["/psc-extensions*"]
+  healthcheck_path            = "/psc-extensions/healthcheck"
   healthcheck_matcher         = "200"
   vpc_name                    = data.aws_ssm_parameter.secret[format("/%s/%s", local.name_prefix, "vpc-name")].value
   s3_config_bucket            = data.vault_generic_secret.shared_s3.data["config_bucket_name"]
