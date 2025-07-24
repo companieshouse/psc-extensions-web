@@ -17,7 +17,7 @@ const routerDispatch = (app: Application) => {
     router.use(Urls.EXTENSION_REFUSED, authenticate, extensionRefusedRouter);
     router.use(Urls.REASON_FOR_EXTENSION, authenticate, reasonForExtensionRouter);
     router.use(Urls.EXTENSION_CONFIRMATION, authenticate, extensionConfirmationRouter);
-    router.use("*", (req: Request, res: Response) => {
+    router.use("/", (req: Request, res: Response) => {
         res.status(404).render("partials/error_400");
     });
 };
