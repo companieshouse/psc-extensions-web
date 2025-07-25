@@ -5,7 +5,6 @@ import cookieParser from "cookie-parser";
 import { getGOVUKFrontendVersion, LocalesMiddleware } from "@companieshouse/ch-node-utils";
 import logger from "./lib/logger";
 import routerDispatch from "./router.dispatch";
-import { authenticationMiddleware } from "./middleware/authentication.middleware";
 import { sessionMiddleware } from "./middleware/session.middleware";
 import { i18nMiddleware } from "./middleware/i18n.middleware";
 import { templateMiddleware } from "./middleware/template.middleware";
@@ -54,8 +53,8 @@ app.use(express.urlencoded({ extended: false }));
 
 app.use(cookieParser());
 
+// initiate session and attach to middleware
 app.use(servicePathPrefix, sessionMiddleware);
-app.use(servicePathPrefix, authenticationMiddleware);
 
 app.use(LocalesMiddleware());
 app.use(i18nMiddleware);
