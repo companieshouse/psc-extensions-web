@@ -2,7 +2,6 @@
 {% extends "ch-node-utils/templates/layouts/template.njk" %}
 {% import "ch-node-utils/templates/add-lang-to-url.njk" as lang2url %}
 {% from "ch-node-utils/templates/navbar.njk" import addNavbar %}
-{% from "govuk/components/skip-link/macro.njk" import govukSkipLink %}
 {% from "govuk/components/back-link/macro.njk" import govukBackLink %}
 
 {% set mainContentId = "main-page-content" %}
@@ -20,12 +19,6 @@
 
 {% block bodyStart %}
   {# {% include "partials/cookie_consent_banner.njk" %} #}
-{% block skipLink %}
-  {{ govukSkipLink({
-    text: "Skip to main content",
-    href: "#" + mainContentId
-  }) }}
-  {% endblock %}
 {% endblock %}
 
 {% block beforeContent %}
