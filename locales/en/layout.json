@@ -10,5 +10,11 @@
     "footer_cookies": "Cookies",
     "footer_contact_us": "Contact us",
     "footer_developers": "Developers",
-    "footer_accessibility_statement": "Accessibility Statement"
+    "footer_accessibility_statement": "Accessibility Statement",
+
+    "global_footer_ogl_v3": "Open Government Licence v3.0",
+    "global_footer_ogl_v3_url": "https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/",
+    "global_footer_licence_p1": "All content is available under the ",
+    "global_footer_licence_p2": ", except where otherwise stated",
+    "global_footer_crown_copyright": "© Crown copyright"
 }
