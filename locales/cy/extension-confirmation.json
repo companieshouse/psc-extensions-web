@@ -13,6 +13,11 @@
   "extension_confirmation_another_extension_title": "Proin quis quam pellentesque, efficitur ipsum sit amet, porttitor sapien",
   "extension_confirmation_first_info": "Sed vitae gravida sapien. Nunc consectetur nisl sed iaculis suscipit proin ultrice",
   "extension_confirmation_second_info_line1": "Cras et ex at tortor interdum mattis",
-  "extension_confirmation_second_info_line2": "Maecenas magna urna, sagittis eu dictum congue, iaculis"
+  "extension_confirmation_second_info_line2": "Maecenas magna urna, sagittis eu dictum congue, iaculis",
+  "extension_confirmation_second_info_line3": " ultrices et, hendrerit eget orci. Mauris gravida urna a aliquet lobortis. Integer volutpat, sapien eu ultrices venenatis.",
+  "extension_confirmation_verify_extension_title": "Interdum finibus mauris",
+  "extension_confirmation_verify_info_line1": "Proin quis quam pellentesque, efficitur ipsum sit amet, porttitor sapien.",
+  "extension_confirmation_verify_info_line2": "Cras et ex at tortor interdum mattis, ",
+  "extension_confirmation_verify_info_link": "Sed vitae gravida sapien. Nunc consectetur nisl sed iaculis suscipit proin ultrice."
 
 }
