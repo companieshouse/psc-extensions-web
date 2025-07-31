@@ -1,9 +1,8 @@
 {
     "extension_info_title": "Requesting an extension",
     "extension_info_born_caption": "Born",
-    "extension_info_request_extension_description_1": "If you request an extension, ",
-    "extension_info_request_extension_description_2": " will be given an extra 14 days to provide their verification details.",
-    "extension_info_submit_request_description": "You must submit your request before their current verification deadline has passed.",
+    "extension_info_request_extension_description": "If you request an extension, you'll be given an extra 14 days to provide your identity verification details",
+    "extension_info_submit_request_description": "You must submit your request before the current verification deadline has passed.",
     "extension_info_role_description_1" : "The extension will only apply to their role as a PSC of ",
-    "extension_info_role_description_2" : ", not to any other PSC or company director roles they hold."
+    "extension_info_role_description_2" : ", not to any other PSC or company director roles you hold."
 }
