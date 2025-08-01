@@ -1,5 +1,6 @@
 {# Extends the Companies House Page Template: https://github.com/companieshouse/ch-node-utils/blob/2.0.0/docs/page-template.md #}
 {% extends "ch-node-utils/templates/layouts/template.njk" %}
+{% import "ch-node-utils/templates/add-lang-to-url.njk" as lang2url %}
 
 {% block pageTitle %}{{ title }}{% endblock %}
 
@@ -12,8 +13,21 @@
   {% include "partials/__header.njk" %}
 {% endblock %}
 
+{% block bodyStart %}
+  {% endblock %}
+
+{% block beforeContent %}
+   {% include "ch-node-utils/templates/locales-banner.njk" %}
+{% endblock %}
+
+
 {% block content %}
-    {% block main_content %}{% endblock %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-{{ gridColumnClass | default('two-thirds') }}" id="{{ mainContentId }}">
+      {% include "partials/error_summary.njk" %}
+      {% block main_content %}{% endblock %}
+    </div>
+  </div>
 {% endblock %}
 
 {% block footer %}
