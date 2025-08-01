@@ -12,8 +12,6 @@
 {% endset %}
 
 {% block main_content %}
-<div class="govuk-grid-row">
-  <div class="govuk-grid-column-two-thirds">
   {{ govukPanel({
   titleText: i18n.extension_confirmation_title,
   html: panel
@@ -71,8 +69,5 @@
   <li><a href="/persons-with-significant-control-verification/confirm-company" class="govuk-link">{{i18n.extension_confirmation_link_2}}</a>.</li>
    <li><a href="/persons-with-significant-control-verification/company-number" class="govuk-link">{{i18n.extension_confirmation_link_1}}</a>.</li>
 </ul>
-
-  </div>
-</div>
 
 {% endblock %}
