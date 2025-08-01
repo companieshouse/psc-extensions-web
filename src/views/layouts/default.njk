@@ -13,6 +13,13 @@
   {% include "partials/__meta_header.njk" %}
 {% endblock %}
 
+{% block skipLink %}
+  {{ govukSkipLink({
+    text: "Skip to main content",
+    href: "#" + mainContentId
+  }) }}
+{% endblock %}
+
 {% block header %}
   {% include "partials/__header.njk" %}
 {% endblock %}
