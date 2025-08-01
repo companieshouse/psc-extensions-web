@@ -1,6 +1,7 @@
 {# Extends the Companies House Page Template: https://github.com/companieshouse/ch-node-utils/blob/2.0.0/docs/page-template.md #}
 {% extends "ch-node-utils/templates/layouts/template.njk" %}
 
+{% from "govuk/components/skip-link/macro.njk" import govukSkipLink %}
 {% from "govuk/components/back-link/macro.njk" import govukBackLink %}
 
 {% set mainContentId = "main-page-content" %}
@@ -14,6 +15,12 @@
 
 {% block bodyStart %}
   {# {% include "partials/cookie_consent_banner.njk" %} #}
+{% endblock %}
+{% block skipLink %}
+  {{ govukSkipLink({
+    text: "Skip to main content",
+    href: "#" + mainContentId
+  }) }}
 {% endblock %}
 
 {% block header %}
