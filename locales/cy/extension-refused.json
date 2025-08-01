@@ -1,11 +1,10 @@
 {
-  "extension_refused_title": "Lorem ipsum dolor",
+  "extension_refused_title": "Ni allwch wneud cais am estyniad",
   "extension_refused_born_caption": "Consectetur",
-  "extension_refused_request_extension_description_1": "Praesent scelerisque aliquam erat sit amet suscipit:",
-  "extension_refused_request_extension_description_2": " sagittis vel tempor sit amet",
-  "extension_refused_request_extension_description_3": " interdum finibus mauris",
-  "extension_refused_request_description": "hendrerit eget orci mauris gravida urna a aliquet lobortis. ",
-  "extension_refused_warning_description" : "Ultrices et, hendrerit eget orci mauris gravida urna a aliquet lobortis integer volutpat, sapien eu ultrices venenatis",
-  "extension_refused_request_guidance_1" : "Cras et ex at ",
-  "extension_refused_request_guidance_2" : "tortor interdum mattis."
+  "extension_refused_request_extension_description_1": "Mae hyn am un o'r rhesymau canlynol:",
+  "extension_refused_request_extension_description_2": " mae eich dyddiad cau ar gyfer gwiriad wedi mynd heibio",
+  "extension_refused_request_extension_description_3": " rydych wedi cyrraedd y terfyn ar nifer yr estyniadau y gallwch wneud cais amdanynt",
+  "extension_refused_request_description": "Dylech gwblhau gwiriad hunaniaeth a darparu eich cod personol a'ch datganiad dilysu cyn gynted â phosibl, hyd yn oed os yw'ch dyddiad cau eisoes wedi mynd heibio.",
+  "extension_refused_request_guidance_1" : "I gael gwybodaeth am sut i wneud hyn, ",
+  "extension_refused_request_guidance_2" : "darllenwch y cyfarwyddyd ar 'Gwirio eich hunaniaeth ar gyfer Tŷ'r Cwmnïau’."
 }
