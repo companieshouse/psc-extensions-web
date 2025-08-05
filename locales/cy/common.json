@@ -1,7 +1,8 @@
 {
 
   "continue": "Parhau",
-  "back": "Nol",
+  "submit_request": "Parhau",
+  "back": "Yn ôl",
   "sign_out": "dolor sit",
   "manage_account": "amet consectetur"
 }
