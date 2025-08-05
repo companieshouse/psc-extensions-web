@@ -1,6 +1,8 @@
 {
-  "continue": "Lorem",
-  "back": "ipsum",
+
+  "continue": "Parhau",
+  "submit_request": "Parhau",
+  "back": "Yn ôl",
   "sign_out": "dolor sit",
   "manage_account": "amet consectetur"
 }

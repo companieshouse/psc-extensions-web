@@ -1,9 +1,8 @@
 {
-    "extension_info_title": "Lorem ipsum dolor",
-    "extension_info_born_caption": "consectetur",
-    "extension_info_request_extension_description_1": "adipiscing elit cras, ",
-    "extension_info_request_extension_description_2": " praesent scelerisque aliquam erat sit amet suscipit",
-    "extension_info_submit_request_description": "Ultrices et, hendrerit eget orci. Mauris gravida urna a aliquet lobortis. ",
-    "extension_info_role_description_1" : "Proin quis quam pellentesque, efficitur ipsum sit amet ",
-    "extension_info_role_description_2" : ", consectetur nisl sed iaculis suscipit proin ultrice."
+    "extension_info_title": "Cais am estyniad",
+    "extension_info_born_caption": "Ganwyd",
+    "extension_info_request_extension_description": "Os byddwch yn gwneud cais am estyniad, byddwch yn cael 14 diwrnod ychwanegol i ddarparu eich manylion gwiriad hunaniaeth.",
+    "extension_info_submit_request_description": "Rhaid i chi gyflwyno'ch cais cyn i'r dyddiad cau gwiriad presennol fynd heibio.",
+    "extension_info_role_description_1" : "Bydd yr estyniad yn berthnasol i'ch rôl fel PRhA o ",
+    "extension_info_role_description_2" : ", yn unig, nid i unrhyw rolau PRhA neu gyfarwyddwr cwmni eraill rydych yn ei ddal."
 }
