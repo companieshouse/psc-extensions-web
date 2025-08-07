@@ -20,7 +20,7 @@ export const env = {
 export const LOCALES_PATH = getEnvironmentValue("LOCALES_PATH", "locales");
 export const LOCALES_ENABLED = getEnvironmentValue("LOCALES_ENABLED", "true") === "true";
 
-export const servicePathPrefix = "/psc-extensions";
+export const servicePathPrefix = "/persons-with-significant-control-extension";
 
 export const Urls = {
     EXTENSION_INFO: "/extension-info",
@@ -28,5 +28,14 @@ export const Urls = {
     EXTENSION_REFUSED: "/extension-refused",
     REASON_FOR_EXTENSION: "/reason-for-extension",
     EXTENSION_CONFIRMATION: "/extension-confirmation",
-    INDIVIDUAL_PSC_LIST: "/persons-with-significant-control-verification/individual/psc-list"
+    INDIVIDUAL_PSC_LIST: "/persons-with-significant-control-verification/individual/psc-list" // Confirm verification link for this
+} as const;
+
+export const PrefixedUrls = {
+    EXTENSION_INFO: servicePathPrefix + Urls.EXTENSION_INFO,
+    HEALTHCHECK: servicePathPrefix + Urls.HEALTHCHECK,
+    EXTENSION_REFUSED: servicePathPrefix + Urls.EXTENSION_REFUSED,
+    REASON_FOR_EXTENSION: servicePathPrefix + Urls.REASON_FOR_EXTENSION,
+    EXTENSION_CONFIRMATION: servicePathPrefix + Urls.EXTENSION_CONFIRMATION,
+    INDIVIDUAL_PSC_LIST: servicePathPrefix + Urls.INDIVIDUAL_PSC_LIST
 } as const;

@@ -1,10 +1,9 @@
 import mocks from "../../mocks/all.middleware.mock";
 import supertest from "supertest";
 import app from "../../../src/app";
+import { PrefixedUrls } from "../../../src/lib/constants";
 
 const router = supertest(app);
-
-const url = "/psc-extensions/extension-info";
 
 describe("GET extension info router", () => {
 
@@ -13,12 +12,12 @@ describe("GET extension info router", () => {
     });
 
     it("should check session and user auth before returning the page", async () => {
-        await router.get(url);
+        await router.get(PrefixedUrls.EXTENSION_INFO);
         expect(mocks.mockSessionMiddleware).toHaveBeenCalled();
         expect(mocks.mockAuthenticationMiddleware).toHaveBeenCalled();
     });
 
     it("should return status 200", async () => {
-        await router.get(url).expect(200);
+        await router.get(PrefixedUrls.EXTENSION_INFO).expect(200);
     });
 });
