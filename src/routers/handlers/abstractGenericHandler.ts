@@ -12,6 +12,7 @@ export interface BaseViewData {
 
 const defaultBaseViewData: Partial<BaseViewData> = {
     errors: {},
+    title: "",
     backURL: null
 } as const;
 
