@@ -1,11 +1,12 @@
 {
   "reason_for_extension_born_caption": "Born",
-  "reason_for_extension_title": "Why do you need an extension?",
-  "reason_for_extension_1": "The identity documents required to complete ID Verification have been applied for but not yet arrived",
-  "reason_for_extension_2": "Making corrections to information on the register so that they match with ID documents",
-  "reason_for_extension_3": "Undergoing medical treatment now or imminently that prevents access to and ability to undertake the task, including no persons able to assist you",
-  "reason_for_extension_4": "Technical downtime or failure that has recently occurred and will continue for a prolonged period of time",
-  "reason_for_extension_5": "Additional support or reasonable adjustments are required and being arranged",
-  "reason_for_extension_6": "Arranging to identity verify at the Post Office ",
-  "reason_for_extension_error_message": "Select why you are requesting an extension "
+  "reason_for_extension_title": "What is the reason for the extension request?",
+  "reason_for_extension_hint": "If more than one reason applies, choose the main one.",
+  "reason_for_extension_1": "Have applied for the identity documents needed for verification, but they’ve not arrived yet",
+  "reason_for_extension_2": "Have arranged through GOV.UK One Login to verify identity at the Post Office",
+  "reason_for_extension_3": "Undergoing medical treatment that means identity cannot be verified on time",
+  "reason_for_extension_4": "Unable to verify identity without assistance, and have arranged additional support",
+  "reason_for_extension_5": "Experiencing technical issues for a prolonged period of time, which means identity cannot be verified on time",
+  "reason_for_extension_6": "The PSC details on the company record are wrong, and more time is needed to file a correction",
+  "reason_for_extension_error_message": "Select a reason for the extension request"
 }

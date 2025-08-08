@@ -1,0 +1,12 @@
+{
+  "reason_for_extension_born_caption": "Ganwyd Mai",
+  "reason_for_extension_title": "Beth yw'r rheswm dros y cais am estyniad?",
+  "reason_for_extension_hint": "Os oes mwy nag un rheswm yn berthnasol, dewiswch y prif un. ",
+  "reason_for_extension_1": "Wedi gwneud cais am y dogfennau adnabod sydd eu hangen ar gyfer gwiriad, ond nid ydynt wedi cyrraedd eto",
+  "reason_for_extension_2": "Wedi trefnu i gwblhau gwiriad hunaniaeth trwy GOV.UK One Login yn Swyddfa'r Post",
+  "reason_for_extension_3": "Derbyn triniaeth feddygol sy'n golygu na ellir cwblhau gwiriad hunaniaeth ar amser",
+  "reason_for_extension_4": "Methu cwblhau gwiriad hunaniaeth heb gymorth, ac wedi trefnu cymorth ychwanegol",
+  "reason_for_extension_5": "Profi problemau technegol am gyfnod hir o amser, sy'n golygu na ellir cwblhau gwiriad hunaniaeth ar amser",
+  "reason_for_extension_6": "Mae manylion y PRhA ar gofnod y cwmni yn anghywir, ac mae angen mwy o amser i ffeilio cywiriad",
+  "reason_for_extension_error_message": "Dewiswch reswm dros y cais am estyniad"
+}

@@ -19,6 +19,9 @@
                         classes: "govuk-fieldset__legend--l"
                     }
                 },
+                hint: {
+                    text: i18n.reason_for_extension_hint
+                },
                 items: [
                         {
                             value: "reason_for_extension_1",
@@ -60,8 +63,8 @@
                      {{ govukRadios(radioButtonConfig) }}
                   {% endif %}
              {{ govukButton({
-                text: i18n.continue,
-                href: "/psc-extensions/extension-confirmation"
+                text: i18n.submit_request,
+                href: "/psc-extensions/extension-confirmation" + "?lang=" +lang 
              }) }}
     </form>
 

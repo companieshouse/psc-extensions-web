@@ -11,9 +11,7 @@
 </strong>
 {% endset %}
 
-{% block content %}
-<div class="govuk-grid-row">
-  <div class="govuk-grid-column-two-thirds">
+{% block main_content %}
   {{ govukPanel({
   titleText: i18n.extension_confirmation_title,
   html: panel
@@ -59,7 +57,12 @@
   <p class = "govuk-body">{{i18n.extension_confirmation_first_info}}</p>
       <p class="govuk-body">{{i18n.extension_confirmation_second_info_line1}} <strong>{{userEmailAddress}}</strong>
         {{i18n.extension_confirmation_second_info_line2}}</p> 
+        <p class="govuk-body">{{i18n.extension_confirmation_second_info_line3}}</p>
 
+        <h2 class="govuk-heading-m">{{i18n.extension_confirmation_verify_extension_title}}</h2>  
+        <p class="govuk-body">{{i18n.extension_confirmation_verify_info_line1}}</p>
+        <p class="govuk-body"></p>
+        <p class="govuk-body"> {{i18n.extension_confirmation_verify_info_line2}} <a href="https://www.gov.uk/guidance/verifying-your-identity-for-companies-house">{{ i18n.extension_confirmation_verify_info_link}}</a> </p>
       <h2 class="govuk-heading-m">{{i18n.extension_confirmation_another_extension_title}}</h2>  
 
       <p class="govuk-body">{{i18n.extension_confirmation_another_extension_info}}</p>
@@ -68,11 +71,8 @@
       <p class="govuk-body">{{i18n.extension_confirmation_links_info}}</p>
 <ul class="govuk-list govuk-list--bullet">
  {# TODO: Update link to direct to individual psc list with provided company number #}
-  <li><a href="/persons-with-significant-control-verification/confirm-company" class="govuk-link">{{i18n.extension_confirmation_link_2}}</a>.</li>
-   <li><a href="/persons-with-significant-control-verification/company-number" class="govuk-link">{{i18n.extension_confirmation_link_1}}</a>.</li>
+  <li><a href="/persons-with-significant-control-verification/confirm-company" class="govuk-link">{{i18n.extension_confirmation_link_2}}</a></li>
+   <li><a href="/persons-with-significant-control-verification/company-number" class="govuk-link">{{i18n.extension_confirmation_link_1}}</a></li>
 </ul>
-
-  </div>
-</div>
 
 {% endblock %}
