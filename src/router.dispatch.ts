@@ -6,17 +6,19 @@ import extensionRefusedRouter from "./routers/extensionRefusedRouter";
 import reasonForExtensionRouter from "./routers/reasonForExtensionRouter";
 import healthCheckRouter from "./routers/healthCheckRouter";
 import extensionConfirmationRouter from "./routers/extensionConfirmationRouter";
-import { servicePathPrefix, Urls } from "./lib/constants";
+import extensionAlreadySubmittedRouter from "./routers/extensionAlreadySubmittedRouter";
+import { SERVICE_PATH_PREFIX, PATHS } from "./lib/constants";
 
 const routerDispatch = (app: Application) => {
     const router = Router();
 
-    app.use(servicePathPrefix, router);
-    router.use(Urls.HEALTHCHECK, healthCheckRouter);
-    router.use(Urls.EXTENSION_INFO, authenticate, extensionInfoRouter);
-    router.use(Urls.EXTENSION_REFUSED, authenticate, extensionRefusedRouter);
-    router.use(Urls.REASON_FOR_EXTENSION, authenticate, reasonForExtensionRouter);
-    router.use(Urls.EXTENSION_CONFIRMATION, authenticate, extensionConfirmationRouter);
+    app.use(SERVICE_PATH_PREFIX, router);
+    router.use(PATHS.HEALTHCHECK, healthCheckRouter);
+    router.use(PATHS.EXTENSION_INFO, authenticate, extensionInfoRouter);
+    router.use(PATHS.EXTENSION_REFUSED, authenticate, extensionRefusedRouter);
+    router.use(PATHS.REASON_FOR_EXTENSION, authenticate, reasonForExtensionRouter);
+    router.use(PATHS.EXTENSION_CONFIRMATION, authenticate, extensionConfirmationRouter);
+    router.use(PATHS.EXTENSION_ALREADY_SUBMITTED, authenticate, extensionAlreadySubmittedRouter);
     router.use("/", (req: Request, res: Response) => {
         res.status(404).render("partials/error_400");
     });

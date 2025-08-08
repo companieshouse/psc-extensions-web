@@ -1,5 +1,5 @@
 const getEnvironmentValue = (key: string, defaultValue?: string): string => {
-    const value: string = process.env[key] || "";
+    const value: string = process.env[key] ?? "";
 
     if (!value && !defaultValue) {
         throw new Error(`Please set the environment variable "${key}"`);
@@ -20,13 +20,15 @@ export const env = {
 export const LOCALES_PATH = getEnvironmentValue("LOCALES_PATH", "locales");
 export const LOCALES_ENABLED = getEnvironmentValue("LOCALES_ENABLED", "true") === "true";
 
-export const servicePathPrefix = "/psc-extensions";
+export const SERVICE_PATH_PREFIX = "/psc-extensions";
+export const ROUTER_VIEWS_FOLDER_PATH = "router_views";
 
-export const Urls = {
+export const PATHS = {
     EXTENSION_INFO: "/extension-info",
     HEALTHCHECK: "/healthcheck",
     EXTENSION_REFUSED: "/extension-refused",
     REASON_FOR_EXTENSION: "/reason-for-extension",
     EXTENSION_CONFIRMATION: "/extension-confirmation",
+    EXTENSION_ALREADY_SUBMITTED: "/extension-already-submitted",
     INDIVIDUAL_PSC_LIST: "/persons-with-significant-control-verification/individual/psc-list"
 } as const;
