@@ -3,10 +3,9 @@ import mocks from "../mocks/all.middleware.mock";
 import app from "../../src/app";
 import * as cheerio from "cheerio";
 import request from "supertest";
+import { SERVICE_PATH_PREFIX, PATHS } from "../../src/lib/constants";
 
 const router = request(app);
-
-const url = "/psc-extensions/extension-info";
 
 describe("GET extension info router and retrieve components such as footer links for both english or welsh depending on selected language", () => {
 
@@ -15,12 +14,12 @@ describe("GET extension info router and retrieve components such as footer links
     });
 
     it("should check session and user auth before returning the page", async () => {
-        await router.get(url);
+        await router.get(SERVICE_PATH_PREFIX + PATHS.EXTENSION_INFO);
         expect(mocks.mockSessionMiddleware).toHaveBeenCalled();
         expect(mocks.mockAuthenticationMiddleware).toHaveBeenCalled();
     });
     it("should render the footer with the expected links in English when user has selected 'English' link", async () => {
-        const resp = await request(app).get(`/psc-extensions/extension-info?lang=en`);
+        const resp = await request(app).get(`/persons-with-significant-control-extension/extension-info?lang=en`);
         expect(resp.status).toBe(HttpStatusCode.Ok);
         const $ = cheerio.load(resp.text);
 
@@ -42,7 +41,7 @@ describe("GET extension info router and retrieve components such as footer links
     });
 
     it("should render the footer with the expected links in Welsh when user has selected 'Cymraeg' link", async () => {
-        const resp = await request(app).get(`/psc-extensions/extension-info?lang=cy`);
+        const resp = await request(app).get(`/persons-with-significant-control-extension/extension-info?lang=cy`);
         expect(resp.status).toBe(HttpStatusCode.Ok);
         const $ = cheerio.load(resp.text);
 
