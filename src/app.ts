@@ -8,7 +8,7 @@ import routerDispatch from "./router.dispatch";
 import { sessionMiddleware } from "./middleware/session.middleware";
 import { i18nMiddleware } from "./middleware/i18n.middleware";
 import { templateMiddleware } from "./middleware/template.middleware";
-import { servicePathPrefix } from "./lib/constants";
+import { SERVICE_PATH_PREFIX } from "./lib/constants";
 
 const app = express();
 
@@ -56,7 +56,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
 // initiate session and attach to middleware
-app.use(servicePathPrefix, sessionMiddleware);
+app.use(SERVICE_PATH_PREFIX, sessionMiddleware);
 
 app.use(LocalesMiddleware());
 app.use(i18nMiddleware);
