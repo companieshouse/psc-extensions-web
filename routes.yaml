@@ -3,4 +3,4 @@ group: web
 
 weight: 100
 routes:
-  1: ^/psc-extensions/*
+  1: ^/persons-with-significant-control-extension/*
