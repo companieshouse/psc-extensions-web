@@ -1,4 +1,4 @@
-   {
+{
     "extension_confirmation_title": "Extension request accepted",
     "extension_confirmation_deadline_html": "Verification deadline extended to",
     "extension_confirmation_company_name": "Company name",
@@ -19,5 +19,4 @@
     "extension_confirmation_links_info": "Provide identity verification details or request an extension for:",
     "extension_confirmation_link_2": "another PSC of",
     "extension_confirmation_link_1": "a PSC of a different company"
-   
 }
