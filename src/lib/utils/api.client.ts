@@ -1,5 +1,6 @@
-import ApiClient, {createApiClient} from "@companieshouse/api-sdk-node";
-import {Session} from "express-session";
+import {createApiClient} from "@companieshouse/api-sdk-node";
+import ApiClient from "@companieshouse/api-sdk-node/dist/client";
+import {Session} from "@companieshouse/node-session-handler";
 
 export const createOAuthApiClient = (session: Session): ApiClient => {
     const accessToken = session?.data?.oauth2_nonce;
