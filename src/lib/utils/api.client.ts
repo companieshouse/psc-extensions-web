@@ -1,4 +1,4 @@
-import {ApiClient, createApiClient} from "@companieshouse/api-sdk-node";
+import ApiClient, {createApiClient} from "@companieshouse/api-sdk-node";
 import {Session} from "express-session";
 
 export const createOAuthApiClient = (session: Session): ApiClient => {

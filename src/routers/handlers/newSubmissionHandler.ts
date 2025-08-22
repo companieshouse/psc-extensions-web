@@ -1,8 +1,8 @@
 import {Request, Response} from "express";
 import {Transaction} from "@companieshouse/api-sdk-node/dist/services/transaction/types";
-import {ApiErrorResponse, Resource} from "@companieshouse/api-sdk-node/dist/services/resource";
-import {postTransaction} from "../../../services/transactionService";
-import {createPscExtension, PscExtensions, PscExtensionsData} from "../../../services/pscExtensionsService";
+import Resource, {ApiErrorResponse} from "@companieshouse/api-sdk-node/dist/services/resource";
+import {postTransaction} from "../../services/transactionService";
+import {createPscExtension, PscExtensions, PscExtensionsData} from "../../services/pscExtensionsService";
 import logger from "../../lib/logger";
 
 export class NewSubmissionHandler {

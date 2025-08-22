@@ -1,9 +1,9 @@
 import {Request} from "express";
 import {Transaction} from "@companieshouse/api-sdk-node/dist/services/transaction/types";
-import {ApiErrorResponse, Resource} from "@companieshouse/api-sdk-node/dist/services/resource";
+import Resource, {ApiErrorResponse} from "@companieshouse/api-sdk-node/dist/services/resource";
 import {HttpStatusCode} from "axios";
 import {createOAuthApiClient} from "../lib/utils/api.client";
-import {logger} from "../lib/logger";
+import logger from "../lib/logger";
 
 // todo: move this to sdk?
 export interface PscExtensionsData {
