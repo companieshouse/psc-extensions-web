@@ -5,7 +5,7 @@ import {Session} from "@companieshouse/node-session-handler";
 import {env} from "../../config";
 import {getAccessToken} from "./session.util";
 
-export const createOAuthApiClient = (session: Session | undefined, baseUrl: string = env.API_URL): ApiClient => {
+export const createOAuthApiClient = (session: Session | undefined, baseUrl: string = env.API_URL as string): ApiClient => {
     if (!session) throw new Error();
     return createApiClient(undefined, getAccessToken(session as Session), baseUrl);
 };

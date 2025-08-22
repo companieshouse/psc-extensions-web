@@ -56,7 +56,9 @@ export const createPscExtension = async (request: Request, transaction: Transact
     try {
         // todo(any): this is psuedo, actually use the sdk and call the psc-extensions-api
         //  this goes to psc-extensions-api's uk.gov.companieshouse.psc.extensions.api.controller.impl.PscExtensionsControllerImpl#createPscExtension
-        const response = await oAuthApiClient.httpPost(url, extensionData, headers);
+        const response = await oAuthApiClient.companyProfile.getCompanyProfile("");
+        // todo: use this after adding to api-sdk-node
+        // const response = await oAuthApiClient.pscExtension.postExtensionRequest(url, extensionData, headers);
 
         if (!response) {
             throw new Error(`PSC Extension POST request returned no response for transactionId="${transaction.id}"`);

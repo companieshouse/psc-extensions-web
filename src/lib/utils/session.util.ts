@@ -1,4 +1,5 @@
 import {Session} from "@companieshouse/node-session-handler";
+import {AccessTokenKeys} from "@companieshouse/node-session-handler/lib/session/keys/AccessTokenKeys";
 import {SessionKey} from "@companieshouse/node-session-handler/lib/session/keys/SessionKey";
 import {SignInInfoKeys} from "@companieshouse/node-session-handler/lib/session/keys/SignInInfoKeys";
 import {UserProfileKeys} from "@companieshouse/node-session-handler//lib/session/keys/UserProfileKeys";
