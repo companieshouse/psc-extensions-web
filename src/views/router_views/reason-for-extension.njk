@@ -62,7 +62,7 @@
                             value: "reason_for_extension_6",
                             text: i18n.reason_for_extension_6,
                             attributes: {
-                                    "data-event-id": "pcs-details-wrong-option"
+                                    "data-event-id": "psc-details-wrong-option"
                             }
                         }
                 ]
@@ -83,7 +83,9 @@
              {{ govukButton({
                 text: i18n.submit_request,
                 href: "/persons-with-significant-control-extension/extension-confirmation" + "?lang=" +lang,
-                "data-event-id": "submit-request-button"
+                attributes: {
+                        "data-event-id": "submit-request-button"
+                    }
              }) }}
     </form>
 
