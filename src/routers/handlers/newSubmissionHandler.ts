@@ -3,7 +3,7 @@ import {Transaction} from "@companieshouse/api-sdk-node/dist/services/transactio
 import {ApiErrorResponse, Resource} from "@companieshouse/api-sdk-node/dist/services/resource";
 import {postTransaction} from "../../../services/transactionService";
 import {createPscExtension, PscExtensions, PscExtensionsData} from "../../../services/pscExtensionsService";
-import {logger} from "../../../lib/logger";
+import logger from "../../lib/logger";
 
 export class NewSubmissionHandler {
 
