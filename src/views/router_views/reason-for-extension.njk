@@ -25,27 +25,45 @@
                 items: [
                         {
                             value: "reason_for_extension_1",
-                            text: i18n.reason_for_extension_1
+                            text: i18n.reason_for_extension_1,
+                            attributes: {
+                                    "data-event-id": "documents-not-arrived-option"
+                            }
                         },
                         {
                             value: "reason_for_extension_2",
-                            text: i18n.reason_for_extension_2
+                            text: i18n.reason_for_extension_2,
+                            attributes: {
+                                    "data-event-id": "arranged-to-verify-at-post-office-option"
+                            }
                         },
                         {
                             value: "reason_for_extension_3",
-                            text: i18n.reason_for_extension_3
+                            text: i18n.reason_for_extension_3,
+                            attributes: {
+                                    "data-event-id": "medical-treatment-option"
+                            }
                         },
                         {
                             value: "reason_for_extension_4",
-                            text: i18n.reason_for_extension_4
+                            text: i18n.reason_for_extension_4,
+                            attributes: {
+                                    "data-event-id": "unable-without-support-option"
+                            }
                         },
                         {
                             value: "reason_for_extension_5",
-                            text: i18n.reason_for_extension_5
+                            text: i18n.reason_for_extension_5,
+                            attributes: {
+                                    "data-event-id": "technical-issues-option"
+                            }
                         },
                         {
                             value: "reason_for_extension_6",
-                            text: i18n.reason_for_extension_6
+                            text: i18n.reason_for_extension_6,
+                            attributes: {
+                                    "data-event-id": "pcs-details-wrong-option"
+                            }
                         }
                 ]
             } %}
@@ -64,7 +82,8 @@
                   {% endif %}
              {{ govukButton({
                 text: i18n.submit_request,
-                href: "/persons-with-significant-control-extension/extension-confirmation" + "?lang=" +lang
+                href: "/persons-with-significant-control-extension/extension-confirmation" + "?lang=" +lang,
+                "data-event-id": "submit-request-button"
              }) }}
     </form>
 
