@@ -12,8 +12,8 @@
    <p class="govuk-body">{{ i18n.extension_already_submitted_links_info }}</p>
 <ul class="govuk-list govuk-list--bullet">
  {# TODO: Update link to direct to individual psc list with provided company number #}
-  <li><a href="/persons-with-significant-control-verification/confirm-company" class="govuk-link">{{i18n.extension_confirmation_link_1}}</a>.</li>
-  <li><a href="/persons-with-significant-control-verification/company-number" class="govuk-link">{{i18n.extension_confirmation_link_2}}</a>.</li>
+  <li><a href="/persons-with-significant-control-verification/confirm-company" data-event-id="another-PSC-of-this-company-link" class="govuk-link">{{i18n.extension_confirmation_link_1}}</a>.</li>
+  <li><a href="/persons-with-significant-control-verification/company-number" data-event-id="PSC-of-different-company-link" class="govuk-link">{{i18n.extension_confirmation_link_2}}</a>.</li>
 </ul>
 
 {% endblock %}

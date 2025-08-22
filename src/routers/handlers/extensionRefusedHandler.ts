@@ -10,7 +10,8 @@ export class ExtensionRefusedHandler extends GenericHandler<BaseViewData> {
         return {
             ...baseViewData,
             // TODO: Add search params to backURL
-            backURL: SERVICE_PATH_PREFIX + PATHS.INDIVIDUAL_PSC_LIST
+            backURL: SERVICE_PATH_PREFIX + PATHS.INDIVIDUAL_PSC_LIST,
+            templateName: PATHS.EXTENSION_REFUSED.slice(1)
         };
     }
 

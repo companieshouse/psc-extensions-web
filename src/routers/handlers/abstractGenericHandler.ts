@@ -8,12 +8,14 @@ export interface BaseViewData {
     errors?: Record<string, string>;
     title: string;
     backURL: string | null;
+    templateName: string | null;
 }
 
 const defaultBaseViewData: Partial<BaseViewData> = {
     errors: {},
     title: "",
-    backURL: null
+    backURL: null,
+    templateName: null
 } as const;
 
 export abstract class GenericHandler<T extends BaseViewData> {
