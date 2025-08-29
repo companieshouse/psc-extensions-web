@@ -8,7 +8,8 @@ export class ExtensionConfirmationHandler extends GenericHandler<BaseViewData> {
     protected override async getViewData (req: Request, res: Response): Promise<BaseViewData> {
         const baseViewData = await super.getViewData(req, res);
         return {
-            ...baseViewData
+            ...baseViewData,
+            templateName: PATHS.EXTENSION_CONFIRMATION.slice(1)
         };
     }
 
