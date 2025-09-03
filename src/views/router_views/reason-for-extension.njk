@@ -2,11 +2,24 @@
 
 {% from "govuk/components/radios/macro.njk" import govukRadios %}
 {% from "govuk/components/button/macro.njk" import govukButton %}
+{% from "govuk/components/error-summary/macro.njk" import govukErrorSummary %}
 
 {% set title =  i18n.reason_for_extension_title %}
 {% block main_content %}
     <form action="" method="post">
         {# TODO: Add PSC and company details #}
+
+        {% if errors is not undefined and errors is not null and errors | length %}
+            {{ govukErrorSummary({
+              titleText: "There is a problem",
+              errorList: [
+                {
+                  text: i18n.reason_for_extension_error_message,
+                  href: "#"
+                }
+              ]
+            }) }}
+        {%endif %}
         <span class="govuk-caption-l">[PSC Name] ({{ i18n.reason_for_extension_born_caption }} [PSC DOB])</span>
 
             {% set radioButtonConfig = {
@@ -73,7 +86,7 @@
                          values: radioButtonConfig.values,
                          fieldset: radioButtonConfig.fieldset,
                          items: radioButtonConfig.items,
-                         errorMessage: {
+                         ererorMessage: {
                              text: i18n.reason_for_extension_error_message
                          }
                      }) }}
