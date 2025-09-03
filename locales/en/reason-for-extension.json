@@ -8,5 +8,6 @@
   "reason_for_extension_4": "Unable to verify identity without assistance, and have arranged additional support",
   "reason_for_extension_5": "Experiencing technical issues for a prolonged period of time, which means identity cannot be verified on time",
   "reason_for_extension_6": "The PSC details on the company record are wrong, and more time is needed to file a correction",
-  "reason_for_extension_error_message": "Select why you are requesting an extension"
+  "reason_for_extension_error_message": "Select why you are requesting an extension",
+  "error_summary_title": "There is a problem"
 }
