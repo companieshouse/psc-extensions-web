@@ -5,7 +5,7 @@ import { Request, Response } from "express";
 import errorManifest from "../../lib/utils/error_manifests/default";
 
 export interface BaseViewData {
-    errors?: Record<string, string>;
+    errors?: Record<string, { summary: string }>;
     title: string;
     backURL: string | null;
     templateName: string | null;

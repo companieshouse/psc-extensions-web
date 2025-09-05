@@ -2,7 +2,9 @@ import { Request, Response } from "express";
 import { BaseViewData, GenericHandler, ViewModel } from "./abstractGenericHandler";
 import logger from "../../lib/logger";
 import { SERVICE_PATH_PREFIX, PATHS, ROUTER_VIEWS_FOLDER_PATH } from "../../lib/constants";
-// TODO: add import for api
+import { PscExtensionsFormsValidator } from "../../lib/validation/form-validators/pscExtensions";
+
+export const EXTENSION_REASONS = ["reason_for_extension_1", "reason_for_extension_2", "reason_for_extension_3", "reason_for_extension_4", "reason_for_extension_5", "reason_for_extension_6"];
 
 export class ReasonForExtensionHandler extends GenericHandler<BaseViewData> {
 
@@ -23,6 +25,21 @@ export class ReasonForExtensionHandler extends GenericHandler<BaseViewData> {
         };
     }
 
-    // TODO: add executePost for error validation
+    public async executePost (req: Request, res: Response): Promise<ViewModel<BaseViewData>> {
+
+        const viewData = await this.getViewData(req, res);
+        const selectedOption = req.body.whyDoYouNeedAnExtension;
+        const validator = new PscExtensionsFormsValidator();
+        const errorKey: string | null = validator.validateExtensionReason(selectedOption);
+
+        if (errorKey) {
+            viewData.errors = { whyDoYouNeedAnExtension: { summary: errorKey } };
+        }
+        return {
+            templatePath: ROUTER_VIEWS_FOLDER_PATH + PATHS.REASON_FOR_EXTENSION,
+            viewData
+        };
+
+    }
 
 }
