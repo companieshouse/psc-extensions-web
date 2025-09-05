@@ -2,11 +2,13 @@
 
 {% from "govuk/components/radios/macro.njk" import govukRadios %}
 {% from "govuk/components/button/macro.njk" import govukButton %}
+{% from "govuk/components/error-summary/macro.njk" import govukErrorSummary %}
 
 {% set title =  i18n.reason_for_extension_title %}
 {% block main_content %}
     <form action="" method="post">
         {# TODO: Add PSC and company details #}
+
         <span class="govuk-caption-l">[PSC Name] ({{ i18n.reason_for_extension_born_caption }} [PSC DOB])</span>
 
             {% set radioButtonConfig = {

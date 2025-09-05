@@ -11,7 +11,7 @@ export class ReasonForExtensionHandler extends GenericHandler<BaseViewData> {
         return {
             ...baseViewData,
             backURL: SERVICE_PATH_PREFIX + PATHS.EXTENSION_INFO,
-            templateName: PATHS.REASON_FOR_EXTENSION.slice(1)
+            templateName: PATHS.REASON_FOR_EXTENSION.slice(1),
         };
     }
 
