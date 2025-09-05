@@ -1,6 +1,6 @@
 import { HttpStatusCode } from "axios";
 import { Request, Response, Router } from "express";
-import logger from "../lib/logger";
+import { logger } from "../lib/logger";
 
 const healthCheckRouter: Router = Router();
 

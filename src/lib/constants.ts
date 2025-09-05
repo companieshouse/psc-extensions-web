@@ -32,3 +32,5 @@ export const PATHS = {
     EXTENSION_ALREADY_SUBMITTED: "/extension-already-submitted",
     INDIVIDUAL_PSC_LIST: "/persons-with-significant-control-verification/individual/psc-list"
 } as const;
+
+export const PSC_EXTENSION_WEB_NAMESPACE = "psc-extension-web";

@@ -7,6 +7,7 @@ import reasonForExtensionRouter from "./routers/reasonForExtensionRouter";
 import healthCheckRouter from "./routers/healthCheckRouter";
 import extensionConfirmationRouter from "./routers/extensionConfirmationRouter";
 import extensionAlreadySubmittedRouter from "./routers/extensionAlreadySubmittedRouter";
+import { fetchCompany } from "./middleware/fetchCompany";
 import { SERVICE_PATH_PREFIX, PATHS } from "./lib/constants";
 
 const routerDispatch = (app: Application) => {
@@ -17,7 +18,7 @@ const routerDispatch = (app: Application) => {
     router.use(PATHS.EXTENSION_INFO, authenticate, extensionInfoRouter);
     router.use(PATHS.EXTENSION_REFUSED, authenticate, extensionRefusedRouter);
     router.use(PATHS.REASON_FOR_EXTENSION, authenticate, reasonForExtensionRouter);
-    router.use(PATHS.EXTENSION_CONFIRMATION, authenticate, extensionConfirmationRouter);
+    router.use(PATHS.EXTENSION_CONFIRMATION, authenticate, fetchCompany, extensionConfirmationRouter);
     router.use(PATHS.EXTENSION_ALREADY_SUBMITTED, authenticate, extensionAlreadySubmittedRouter);
     router.use("/", (req: Request, res: Response) => {
         res.status(404).render("partials/error_400");

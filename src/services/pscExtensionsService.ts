@@ -1,9 +1,11 @@
-import {Request} from "express";
-import {Transaction} from "@companieshouse/api-sdk-node/dist/services/transaction/types";
-import Resource, {ApiErrorResponse} from "@companieshouse/api-sdk-node/dist/services/resource";
-import {HttpStatusCode} from "axios";
-import {createOAuthApiClient} from "../lib/utils/api.client";
-import logger from "../lib/logger";
+import { Request } from "express";
+import { Transaction } from "@companieshouse/api-sdk-node/dist/services/transaction/types";
+import Resource, { ApiErrorResponse } from "@companieshouse/api-sdk-node/dist/services/resource";
+import { HttpStatusCode } from "axios";
+import { createOAuthApiClient } from "../lib/utils/api.client";
+import { logger } from "../lib/logger";
+import ApiClient from "@companieshouse/api-sdk-node/dist/client";
+import { HttpError } from "lib/errors/httpError";
 
 // todo: move this to sdk?
 export interface PscExtensionsData {
@@ -47,8 +49,6 @@ export const createPscExtension = async (request: Request, transaction: Transact
 
     logger.debug(`Creating PSC extension resource for transactionId="${transaction.id}": ${transaction.description}`);
 
-    const headers = extractRequestIdHeader(request);
-
     // todo(3): change this to use api-sdk-node or private-api-sdk-node, we should add our psc-extensions-api
     //  schema to api.ch.gov.uk-specifications or private.api.ch.gov.uk-specifications and then make an sdk.
     const url = `/transactions/${transaction.id}/persons-with-significant-control-extensions`;
@@ -64,20 +64,20 @@ export const createPscExtension = async (request: Request, transaction: Transact
             throw new Error(`PSC Extension POST request returned no response for transactionId="${transaction.id}"`);
         }
 
-        if (response.status === HttpStatusCode.InternalServerError) {
+        if (response.httpStatusCode === HttpStatusCode.InternalServerError) {
             logger.error(`Internal server error when creating PSC extension for transactionId="${transaction.id}"`);
             throw new Error(`Internal server error when creating PSC extension for transactionId="${transaction.id}"`);
         }
 
-        if (!response.status || response.status !== HttpStatusCode.Created) {
-            throw new Error(`Failed to POST PSC Extension for transactionId="${transaction.id}", status: ${response.status}`);
+        if (!response.httpStatusCode || response.httpStatusCode !== HttpStatusCode.Created) {
+            throw new Error(`Failed to POST PSC Extension for transactionId="${transaction.id}", status: ${response.httpStatusCode}`);
         }
 
-        logger.debug(`POST PSC Extension finished with status ${response.status} for transactionId="${transaction.id}"`);
+        logger.debug(`POST PSC Extension finished with status ${response.httpStatusCode} for transactionId="${transaction.id}"`);
 
         return {
-            httpStatusCode: response.status,
-            resource: response.body
+            httpStatusCode: response.httpStatusCode,
+            resource: response.resource
         } as Resource<PscExtensions>;
 
     } catch (error) {
@@ -86,7 +86,40 @@ export const createPscExtension = async (request: Request, transaction: Transact
     }
 };
 
-const extractRequestIdHeader = (request: Request): { [key: string]: string } => {
-    const requestId = request.headers["x-request-id"] as string;
-    return requestId ? {"x-request-id": requestId} : {};
+export const getPscExtension = async (request: Request, transactionId: string, pscExtensionsId: string): Promise<Resource<PscExtensions>> => {
+    const oAuthApiClient: ApiClient = createOAuthApiClient(request.session);
+    const logReference = `transactionId="${transactionId}", pscExtensionsId="${pscExtensionsId}"`;
+
+    logger.debug(`Retrieving PSC extension for ${logReference}`);
+    const sdkResponse: Resource<PscExtensions> | ApiErrorResponse = await oAuthApiClient.pscVerificationService.getPscVerification(transactionId, pscExtensionsId);
+
+    if (!sdkResponse) {
+        throw new Error(`PSC Extension GET request returned no response for ${logReference}`);
+    }
+    switch (sdkResponse.httpStatusCode) {
+    case HttpStatusCode.Ok:
+        break; // Successful response, proceed further
+    case HttpStatusCode.Unauthorized:
+        // Show the Page Not Found page if the user is not authorized to view the resource
+        throw new HttpError(`User not authorized owner for ${logReference}`, HttpStatusCode.NotFound);
+
+    case undefined:
+        throw new Error(`HTTP status code is undefined - Failed to GET PSC Extension for ${logReference}`);
+    default:
+        throw new HttpError(`Failed to GET PSC Extension for ${logReference}`, sdkResponse.httpStatusCode);
+    }
+
+    const castedSdkResponse = sdkResponse as Resource<PscExtensions>;
+
+    if (!castedSdkResponse.resource) {
+        throw new Error(`PSC Extension API GET request returned no resource for ${logReference}`);
+    }
+    logger.debug(`GET PSC Extension finished with status ${sdkResponse.httpStatusCode} for ${logReference}`);
+
+    return castedSdkResponse;
 };
+
+export function extractRequestIdHeader (request: Request): { [key: string]: string } {
+    const requestId = request.headers["x-request-id"] as string;
+    return requestId ? { "x-request-id": requestId } : {};
+}

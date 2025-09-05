@@ -1,14 +1,14 @@
-import {Request, Response} from "express";
-import {Transaction} from "@companieshouse/api-sdk-node/dist/services/transaction/types";
-import Resource, {ApiErrorResponse} from "@companieshouse/api-sdk-node/dist/services/resource";
-import {postTransaction} from "../../services/transactionService";
-import {createPscExtension, PscExtensions, PscExtensionsData} from "../../services/pscExtensionsService";
-import logger from "../../lib/logger";
+import { Request, Response } from "express";
+import { Transaction } from "@companieshouse/api-sdk-node/dist/services/transaction/types";
+import Resource, { ApiErrorResponse } from "@companieshouse/api-sdk-node/dist/services/resource";
+import { postTransaction } from "../../services/transactionService";
+import { createPscExtension, PscExtensions, PscExtensionsData } from "../../services/pscExtensionsService";
+import { logger } from "../../lib/logger";
 
 export class NewSubmissionHandler {
 
     // todo(1): implement this fully with the web app, when submitting an extension request
-    public async handleNewSubmission(req: Request, res: Response): Promise<string> {
+    public async handleNewSubmission (req: Request, res: Response): Promise<string> {
         const transaction: Transaction = await postTransaction(req);
         logger.info(`CREATED transaction with transactionId="${transaction.id}"`);
 
@@ -17,7 +17,7 @@ export class NewSubmissionHandler {
 
         const companyNumber = req.query.companyNumber as string;
 
-        let nextPageUrl: string = "";
+        let nextPageUrl = "";
         if (this.isErrorResponse(resource)) {
             // todo(any): proper error page i.e extensions already submitted/can't submit more
             // todo(any): 500, server error or something went wrong page if server error?
@@ -38,7 +38,7 @@ export class NewSubmissionHandler {
         return `${nextPageUrl}?companyNumber=${companyNumber}`;
     }
 
-    public async createNewSubmission(request: Request, transaction: Transaction): Promise<Resource<PscExtensions> | ApiErrorResponse> {
+    public async createNewSubmission (request: Request, transaction: Transaction): Promise<Resource<PscExtensions> | ApiErrorResponse> {
         // are these accurate? we need to make sure we have these query params and body.
         const companyNumber = request.query.companyNumber as string;
         const pscNotificationId = request.query.selectedPscId as string;
@@ -67,7 +67,7 @@ export class NewSubmissionHandler {
         return createPscExtension(request, transaction, extensionData);
     }
 
-    public isErrorResponse(obj: any): obj is ApiErrorResponse {
+    public isErrorResponse (obj: any): obj is ApiErrorResponse {
         return obj.httpStatusCode >= 400;
     }
 }

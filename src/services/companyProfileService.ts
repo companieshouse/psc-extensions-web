@@ -1,7 +1,7 @@
-import {Request} from "express";
-import {CompanyProfile} from "@companieshouse/api-sdk-node/dist/services/company-profile/types";
-import {createOAuthApiClient} from "../lib/utils/api.client";
-import logger from "../lib/logger";
+import { Request } from "express";
+import { CompanyProfile } from "@companieshouse/api-sdk-node/dist/services/company-profile/types";
+import { createOAuthApiClient } from "../lib/utils/api.client";
+import { logger } from "../lib/logger";
 
 export const getCompanyProfile = async (req: Request, companyNumber: string): Promise<CompanyProfile> => {
     const oAuthApiClient = createOAuthApiClient(req.session);
