@@ -36,7 +36,7 @@ export class ExtensionConfirmationHandler extends GenericHandler<IndividualPscLi
         const companyNumber = "111111111";
         return {
             ...baseViewData,
-            // company: companyProfile
+            templateName: PATHS.EXTENSION_CONFIRMATION.slice(1),
             companyName,
             companyNumber
         };

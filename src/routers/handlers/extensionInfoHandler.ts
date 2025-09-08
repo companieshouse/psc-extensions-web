@@ -9,7 +9,8 @@ export class ExtensionInfoHandler extends GenericHandler<BaseViewData> {
         const baseViewData = await super.getViewData(req, res);
         return {
             ...baseViewData,
-            backURL: SERVICE_PATH_PREFIX + PATHS.INDIVIDUAL_PSC_LIST
+            backURL: SERVICE_PATH_PREFIX + PATHS.INDIVIDUAL_PSC_LIST,
+            templateName: PATHS.EXTENSION_INFO.slice(1)
         };
     }
 
