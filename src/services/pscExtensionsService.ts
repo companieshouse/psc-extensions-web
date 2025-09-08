@@ -4,7 +4,6 @@ import Resource, { ApiErrorResponse } from "@companieshouse/api-sdk-node/dist/se
 import { HttpStatusCode } from "axios";
 import { createOAuthApiClient } from "../lib/utils/api.client";
 import { logger } from "../lib/logger";
-import ApiClient from "@companieshouse/api-sdk-node/dist/client";
 import { HttpError } from "lib/errors/httpError";
 
 // todo: move this to sdk?
@@ -87,16 +86,20 @@ export const createPscExtension = async (request: Request, transaction: Transact
 };
 
 export const getPscExtension = async (request: Request, transactionId: string, pscExtensionsId: string): Promise<Resource<PscExtensions>> => {
-    const oAuthApiClient: ApiClient = createOAuthApiClient(request.session);
     const logReference = `transactionId="${transactionId}", pscExtensionsId="${pscExtensionsId}"`;
 
-    logger.debug(`Retrieving PSC extension for ${logReference}`);
-    const sdkResponse: Resource<PscExtensions> | ApiErrorResponse = await oAuthApiClient.pscVerificationService.getPscVerification(transactionId, pscExtensionsId);
+    const oAuthApiClient = createOAuthApiClient(request.session);
 
-    if (!sdkResponse) {
+    logger.debug(`Retrieving PSC extension for ${logReference}`);
+    // todo(any): this is psuedo, actually use the sdk and call the psc-extensions-api
+    //  this goes to psc-extensions-api's uk.gov.companieshouse.psc.extensions.api.controller.impl.PscExtensionsControllerImpl#createPscExtension
+    // const response: Resource<PscExtensions> | ApiErrorResponse = await oAuthApiClient.pscExtensionService.getPscExtension(transactionId, pscExtensionsId);
+
+    const response = await oAuthApiClient.companyProfile.getCompanyProfile("");
+    if (!response) {
         throw new Error(`PSC Extension GET request returned no response for ${logReference}`);
     }
-    switch (sdkResponse.httpStatusCode) {
+    switch (response.httpStatusCode) {
     case HttpStatusCode.Ok:
         break; // Successful response, proceed further
     case HttpStatusCode.Unauthorized:
@@ -106,17 +109,17 @@ export const getPscExtension = async (request: Request, transactionId: string, p
     case undefined:
         throw new Error(`HTTP status code is undefined - Failed to GET PSC Extension for ${logReference}`);
     default:
-        throw new HttpError(`Failed to GET PSC Extension for ${logReference}`, sdkResponse.httpStatusCode);
+        throw new HttpError(`Failed to GET PSC Extension for ${logReference}`, response.httpStatusCode);
     }
 
-    const castedSdkResponse = sdkResponse as Resource<PscExtensions>;
+    const castedResponse = response as Resource<PscExtensions>;
 
-    if (!castedSdkResponse.resource) {
+    if (!castedResponse.resource) {
         throw new Error(`PSC Extension API GET request returned no resource for ${logReference}`);
     }
-    logger.debug(`GET PSC Extension finished with status ${sdkResponse.httpStatusCode} for ${logReference}`);
+    logger.debug(`GET PSC Extension finished with status ${response.httpStatusCode} for ${logReference}`);
 
-    return castedSdkResponse;
+    return castedResponse;
 };
 
 export function extractRequestIdHeader (request: Request): { [key: string]: string } {

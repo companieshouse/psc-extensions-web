@@ -2,32 +2,48 @@ import { Request, Response } from "express";
 import { BaseViewData, GenericHandler, ViewModel } from "./abstractGenericHandler";
 import { logger } from "../../lib/logger";
 import { PATHS, ROUTER_VIEWS_FOLDER_PATH } from "../../lib/constants";
-import { CompanyProfile } from "@companieshouse/api-sdk-node/dist/services/company-profile/types";
-import { PersonWithSignificantControl } from "@companieshouse/api-sdk-node/dist/services/psc/types";
-import { getCompanyProfile } from "services/companyProfileService";
-import { getIndividualPscDetails } from "services/pscIndividualService";
 
-interface ConfirmCompanyViewData extends BaseViewData {
-    company: CompanyProfile;
+interface PscListData {
+    pscId: string;
+    pscCeasedOn?: string;
+    pscKind?: string;
+    pscName?: string;
+
 }
 
-export class ExtensionConfirmationHandler extends GenericHandler<ConfirmCompanyViewData> {
+interface IndividualPscListViewData extends BaseViewData {
+    companyName: string;
+    companyNumber: string;
+    dsrEmailAddress: string;
+    dsrPhoneNumber: string;
+    idvImplementationDate: string;
+    canVerifyNowDetails: PscListData[];
+    canVerifyLaterDetails: PscListData[];
+    verifiedPscDetails: PscListData[];
+    exclusivelySuperSecure: boolean;
+    selectedPscId: string | null;
+    showNoPscsMessage: boolean;
+    nextPageUrl: string | null;
+}
 
-    protected override async getViewData (req: Request, res: Response): Promise<ConfirmCompanyViewData> {
+export class ExtensionConfirmationHandler extends GenericHandler<IndividualPscListViewData> {
+
+    protected override async getViewData (req: Request, res: Response): Promise<IndividualPscListViewData> {
 
         const baseViewData = await super.getViewData(req, res);
-        const companyNumber = req.query.companyNumber as string;
-
-        //  const companyProfile: CompanyProfile = await getCompanyProfile(req, companyNumber);
-        // const company = companyProfile;
+        const companyProfile = res.locals.companyProfile;
+        const companyName = companyProfile?.companyName ?? "";
+        const companyNumber = "111111111";
         return {
-            ...baseViewData
+            ...baseViewData,
             // company: companyProfile
+            companyName,
+            companyNumber
         };
 
     }
 
-    public async executeGet (req: Request, res: Response): Promise<ViewModel<ConfirmCompanyViewData>> {
+    public async executeGet (req: Request, res: Response): Promise<ViewModel<IndividualPscListViewData>> {
         logger.info(`called to serve start page`);
         return {
             templatePath: ROUTER_VIEWS_FOLDER_PATH + PATHS.EXTENSION_CONFIRMATION,
