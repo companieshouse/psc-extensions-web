@@ -18,7 +18,7 @@ function resolveLang (lang: any): string {
 
 export const i18nMiddleware = (req: Request, res: Response, next: NextFunction) => {
 
-    const lang = resolveLang(req.query.lang);
+    const lang = resolveLang(req.lang);
 
     Object.assign(res.locals, {
         languageEnabled: locales.enabled,
