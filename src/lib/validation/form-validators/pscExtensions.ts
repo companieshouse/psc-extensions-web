@@ -1,10 +1,11 @@
 import errorManifest from "../../utils/error_manifests/errorManifests";
-import { EXTENSION_REASONS } from "../../../routers/handlers/reasonForExtensionHandler";
+import { validExtensionReasons, ExtensionReason } from "../../constants";
 
 export class PscExtensionsFormsValidator {
 
-    validateExtensionReason (reason: string): string | null {
-        return EXTENSION_REASONS.includes(reason) ? null : errorManifest.validation.extensionReason;
+    validateExtensionReason (reason: string | undefined): string | null {
+        const isValid = typeof reason === "string" && validExtensionReasons.includes(reason as ExtensionReason);
+        return isValid ? null : errorManifest.validation.extensionReason;
     }
 
 }

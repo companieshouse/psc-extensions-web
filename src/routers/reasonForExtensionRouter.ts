@@ -1,6 +1,7 @@
 import { Request, Response, Router } from "express";
 import { ReasonForExtensionHandler } from "./handlers/reasonForExtensionHandler";
 import { handleExceptions } from "../utils/asyncHandler";
+import { PATHS, SERVICE_PATH_PREFIX } from "../lib/constants";
 
 const reasonForExtensionRouter: Router = Router();
 
@@ -17,7 +18,7 @@ reasonForExtensionRouter.post("/", handleExceptions(async (req: Request, res: Re
     if (viewData.errors && Object.keys(viewData.errors).length) {
         res.render(templatePath, viewData);
     } else {
-        res.redirect("/persons-with-significant-control-extension/extension-confirmation");
+        res.redirect(SERVICE_PATH_PREFIX + PATHS.EXTENSION_CONFIRMATION);
     }
 
 }));

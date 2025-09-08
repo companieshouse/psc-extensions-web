@@ -3,5 +3,7 @@
     "submit_request": "Submit request",
     "back": "Back",
     "sign_out": "Sign out",
-    "manage_account": "Manage account"
+    "manage_account": "Manage account",
+    "title_error": "Error: ",
+    "error_summary_title": "There is a problem"
 }

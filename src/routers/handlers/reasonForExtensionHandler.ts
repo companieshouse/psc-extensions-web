@@ -1,23 +1,26 @@
 import { Request, Response } from "express";
 import { BaseViewData, GenericHandler, ViewModel } from "./abstractGenericHandler";
 import logger from "../../lib/logger";
-import { SERVICE_PATH_PREFIX, PATHS, ROUTER_VIEWS_FOLDER_PATH } from "../../lib/constants";
+import { SERVICE_PATH_PREFIX, PATHS, ROUTER_VIEWS_FOLDER_PATH, ExtensionReasons } from "../../lib/constants";
 import { PscExtensionsFormsValidator } from "../../lib/validation/form-validators/pscExtensions";
 
-export const EXTENSION_REASONS = ["reason_for_extension_1", "reason_for_extension_2", "reason_for_extension_3", "reason_for_extension_4", "reason_for_extension_5", "reason_for_extension_6"];
+interface ExtensionReasonViewData extends BaseViewData {
+    reasons: typeof ExtensionReasons;
+}
 
 export class ReasonForExtensionHandler extends GenericHandler<BaseViewData> {
 
-    protected override async getViewData (req: Request, res: Response): Promise<BaseViewData> {
+    protected override async getViewData (req: Request, res: Response): Promise<ExtensionReasonViewData> {
         const baseViewData = await super.getViewData(req, res);
         return {
             ...baseViewData,
             backURL: SERVICE_PATH_PREFIX + PATHS.EXTENSION_INFO,
-            templateName: PATHS.REASON_FOR_EXTENSION.slice(1)
+            templateName: PATHS.REASON_FOR_EXTENSION.slice(1),
+            reasons: ExtensionReasons
         };
     }
 
-    public async executeGet (req: Request, res: Response): Promise<ViewModel<BaseViewData>> {
+    public async executeGet (req: Request, res: Response): Promise<ViewModel<ExtensionReasonViewData>> {
         logger.info(`called to serve start page`);
         return {
             templatePath: ROUTER_VIEWS_FOLDER_PATH + PATHS.REASON_FOR_EXTENSION,
@@ -25,10 +28,10 @@ export class ReasonForExtensionHandler extends GenericHandler<BaseViewData> {
         };
     }
 
-    public async executePost (req: Request, res: Response): Promise<ViewModel<BaseViewData>> {
+    public async executePost (req: Request, res: Response): Promise<ViewModel<ExtensionReasonViewData>> {
 
         const viewData = await this.getViewData(req, res);
-        const selectedOption = req.body.whyDoYouNeedAnExtension;
+        const selectedOption = req.body?.whyDoYouNeedAnExtension;
         const validator = new PscExtensionsFormsValidator();
         const errorKey: string | null = validator.validateExtensionReason(selectedOption);
 

@@ -32,3 +32,16 @@ export const PATHS = {
     EXTENSION_ALREADY_SUBMITTED: "/extension-already-submitted",
     INDIVIDUAL_PSC_LIST: "/persons-with-significant-control-verification/individual/psc-list"
 } as const;
+
+export const ExtensionReasons = {
+    ID_DOCS_DELAYED: "ID_DOCS_DELAYED",
+    POST_OFFICE_VERIFICATION: "POST_OFFICE_VERIFICATION",
+    MEDICAL_TREATMENT: "MEDICAL_TREATMENT",
+    NEED_SUPPORT: "NEED_SUPPORT",
+    TECHNICAL_ISSUES: "TECHNICAL_ISSUES",
+    INCORRECT_PSC_DETAILS: "INCORRECT_PSC_DETAILS"
+} as const;
+
+export const validExtensionReasons = Object.values(ExtensionReasons);
+
+export type ExtensionReason = typeof ExtensionReasons[keyof typeof ExtensionReasons];
