@@ -44,7 +44,6 @@ njk.addGlobal("cdnHost", process.env.CDN_HOST);
 njk.addGlobal("chsUrl", process.env.CHS_URL);
 njk.addGlobal("accountUrl", process.env.ACCOUNT_URL);
 njk.addGlobal("PIWIK_SERVICE_NAME", process.env.PIWIK_SERVICE_NAME);
-njk.addGlobal("PIWIK_START_GOAL_ID", process.env.PIWIK_START_GOAL_ID);
 njk.addGlobal("PIWIK_SITE_ID", process.env.PIWIK_SITE_ID);
 njk.addGlobal("PIWIK_URL", process.env.PIWIK_URL);
 njk.addGlobal("govukRebrand", true);

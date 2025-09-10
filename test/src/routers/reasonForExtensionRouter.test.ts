@@ -1,7 +1,7 @@
 import mocks from "../../mocks/all.middleware.mock";
 import supertest from "supertest";
 import app from "../../../src/app";
-import { SERVICE_PATH_PREFIX, PATHS, ExtensionReasons } from "../../../src/lib/constants";
+import { SERVICE_PATH_PREFIX, PATHS, ExtensionReasons, validExtensionReasons } from "../../../src/lib/constants";
 import { HttpStatusCode } from "axios";
 import * as cheerio from "cheerio";
 
@@ -23,6 +23,29 @@ describe("Reason for extension router/handler integration tests", () => {
 
         it("should return status 200", async () => {
             await router.get(uri).expect(200);
+        });
+
+        it("Should display 6 radio button where each value is an extension reason", async () => {
+
+            const resp = await router
+                .get(uri);
+
+            const $ = cheerio.load(resp.text);
+
+            const radioInputs = $("input.govuk-radios__input");
+
+            const actualValues: string[] = [];
+
+            radioInputs.each((_, el) => {
+                const value = $(el).attr("value");
+                if (value !== undefined) {
+                    actualValues.push(value);
+                }
+            });
+
+            expect(radioInputs.length).toBe(6);
+            expect(actualValues).toEqual(validExtensionReasons);
+
         });
     });
 

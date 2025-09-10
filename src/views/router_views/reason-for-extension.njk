@@ -70,8 +70,9 @@
              {{ govukButton({
                 text: i18n.submit_request,
                 attributes: {
-                        "data-event-id": "submit-request-button"
-                    }
+                    "onclick": "_paq.push(['trackEvent', 'psc-extensions', '" + templateName + "', document.querySelector('input[name=whyDoYouNeedAnExtension]:checked').value])"
+                }
+
              }) }}
     </form>
 
