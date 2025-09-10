@@ -5,7 +5,7 @@ import { logger } from "../lib/logger";
 import Resource, { ApiErrorResponse } from "@companieshouse/api-sdk-node/dist/services/resource";
 import { HttpStatusCode } from "axios";
 
-export const getIndividualPscDetails = async (req: Request, companyNumber: string, pscNotificationId: string): Promise<PersonWithSignificantControl> => {
+export const getIndividualPscDetails = async (req: Request, companyNumber: string, pscNotificationId: string): Promise<Resource<PersonWithSignificantControl>> => {
     const oAuthApiClient = createOAuthApiClient(req.session);
 
     logger.debug(`Getting psc profile from pscName="${pscNotificationId}, ${companyNumber}"`);
@@ -25,5 +25,5 @@ export const getIndividualPscDetails = async (req: Request, companyNumber: strin
         throw new Error(`no PSC with extension state returned for companyNumber="${companyNumber}", notificationId="${pscNotificationId}"`);
     }
 
-    return PscSdkResponse.resource;
+    return PscSdkResponse;
 };
