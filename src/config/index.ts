@@ -4,4 +4,4 @@ export const env = {
     LOG_LEVEL: process.env.API_URL as string,
     LOCALES_ENABLED: process.env.API_URL as string,
     LOCALES_PATH: process.env.API_URL as string
-}; // todo, proper env
+}; // todo, proper env // NOSONAR

@@ -6,7 +6,7 @@ import { createOAuthApiClient } from "../lib/utils/api.client";
 import { logger } from "../lib/logger";
 import { HttpError } from "lib/errors/httpError";
 
-// todo: move this to sdk?
+// todo: move this to sdk? // NOSONAR
 export interface PscExtensionsData {
     companyNumber: string;
     pscNotificationId: string;
@@ -48,15 +48,15 @@ export const createPscExtension = async (request: Request, transaction: Transact
 
     logger.debug(`Creating PSC extension resource for transactionId="${transaction.id}": ${transaction.description}`);
 
-    // todo(3): change this to use api-sdk-node or private-api-sdk-node, we should add our psc-extensions-api
+    // todo(3): change this to use api-sdk-node or private-api-sdk-node, we should add our psc-extensions-api // NOSONAR
     //  schema to api.ch.gov.uk-specifications or private.api.ch.gov.uk-specifications and then make an sdk.
     const url = `/transactions/${transaction.id}/persons-with-significant-control-extensions`;
 
     try {
-        // todo(any): this is psuedo, actually use the sdk and call the psc-extensions-api
+        // todo(any): this is psuedo, actually use the sdk and call the psc-extensions-api // NOSONAR
         //  this goes to psc-extensions-api's uk.gov.companieshouse.psc.extensions.api.controller.impl.PscExtensionsControllerImpl#createPscExtension
         const response = await oAuthApiClient.companyProfile.getCompanyProfile("");
-        // todo: use this after adding to api-sdk-node
+        // todo: use this after adding to api-sdk-node // NOSONAR
         // const response = await oAuthApiClient.pscExtension.postExtensionRequest(url, extensionData, headers);
 
         if (!response) {
@@ -91,7 +91,7 @@ export const getPscExtension = async (request: Request, transactionId: string, p
     const oAuthApiClient = createOAuthApiClient(request.session);
 
     logger.debug(`Retrieving PSC extension for ${logReference}`);
-    // todo(any): this is psuedo, actually use the sdk and call the psc-extensions-api
+    // todo(any): this is psuedo, actually use the sdk and call the psc-extensions-api // NOSONAR
     //  this goes to psc-extensions-api's uk.gov.companieshouse.psc.extensions.api.controller.impl.PscExtensionsControllerImpl#createPscExtension
     // const response: Resource<PscExtensions> | ApiErrorResponse = await oAuthApiClient.pscExtensionService.getPscExtension(transactionId, pscExtensionsId);
 
