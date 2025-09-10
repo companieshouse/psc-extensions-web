@@ -83,7 +83,7 @@ export class PrefixedLogger {
         //  B: just filepath           ~ "    at /path/to/file.ts:line:col"
 
         // Format A (class/method)
-        const classMethodRegex = /at\s+(.*?)\s+\(/;
+        const classMethodRegex = /at\s+([^\s(]+)\s+\(/;
         const classMethodMatch = classMethodRegex.exec(stack[stackPos]);
         if (classMethodMatch?.[1]) {
             const prefix = classMethodMatch[1].replace(".", "::");
