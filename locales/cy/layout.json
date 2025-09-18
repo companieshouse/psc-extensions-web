@@ -6,15 +6,15 @@
   "phase_banner_help_improve": " yn ein helpu i'w wella.",
   "phase_banner_tag": "Adipiscing",
 
-  "footer_policies": "Lorem",
-  "footer_cookies": "Consectetur",
-  "footer_contact_us": "Iaculis suscipit",
-  "footer_developers": "Proin",
-  "footer_accessibility_statement": "Efficitur ipsum",
+  "footer_policies": "Polisïau",
+  "footer_cookies": "Cwcis",
+  "footer_contact_us": "Cysylltu â ni",
+  "footer_developers": "Datblygwyr",
+  "footer_accessibility_statement": "Datganiad hygyrchedd",
 
   "global_footer_ogl_v3": "Drwydded Llywodraeth Agored v3.0",
   "global_footer_ogl_v3_url": "https://www.nationalarchives.gov.uk/doc/open-government-licence-cymraeg/version/3/",
-  "global_footer_licence_p1": "Mae'r holl gynnwys ar gael o dan y ",
+  "global_footer_licence_p1": "Mae'r holl gynnwys ar gael o dan",
   "global_footer_licence_p2": ", ac eithrio lle nodir yn wahanol",
   "global_footer_crown_copyright": "© Hawlfraint y Goron"
 }
