@@ -2,7 +2,6 @@
 // These methods are then called by individual form validators that extend this class
 // Examples of fields common to multiple forms (to include in this class) are: email, username, phone number, postcode, gender, etc...
 
-import logger from "./../logger";
 import errorManifest from "./../utils/error_manifests/default";
 
 export class GenericValidator {
