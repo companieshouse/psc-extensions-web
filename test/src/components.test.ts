@@ -46,11 +46,11 @@ describe("GET extension info router and retrieve components such as footer links
         const $ = cheerio.load(resp.text);
 
         const expectedLinks = [
-            { href: "https://resources.companieshouse.gov.uk/serviceInformation.shtml", text: "Lorem" },
-            { href: "http://chsurl.co/help/cookies", text: "Consectetur" },
-            { href: "https://www.gov.uk/government/organisations/companies-house#org-contacts", text: "Iaculis suscipit" },
-            { href: "https://developer.company-information.service.gov.uk/", text: "Proin" },
-            { href: "http://chsurl.co/help/accessibility-statement", text: "Efficitur ipsum" }
+            { href: "https://resources.companieshouse.gov.uk/serviceInformation.shtml", text: "Polisïau" },
+            { href: "http://chsurl.co/help/cookies", text: "Cwcis" },
+            { href: "https://www.gov.uk/government/organisations/companies-house#org-contacts", text: "Cysylltu â ni" },
+            { href: "https://developer.company-information.service.gov.uk/", text: "Datblygwyr" },
+            { href: "http://chsurl.co/help/accessibility-statement", text: "Datganiad hygyrchedd" }
         ];
 
         const footerLinks = $(".govuk-footer__inline-list-item a");
