@@ -9,14 +9,14 @@ export class ExtensionConfirmationHandler extends GenericHandler<BaseViewData> {
         const baseViewData = await super.getViewData(req, res);
         return {
             ...baseViewData,
-            templateName: PATHS.EXTENSION_CONFIRMATION.slice(1)
+            templateName: PATHS.EXTENSION_CONFIRMATION_FIRST.slice(1)
         };
     }
 
     public async executeGet (req: Request, res: Response): Promise<ViewModel<BaseViewData>> {
         logger.info(`called to serve start page`);
         return {
-            templatePath: ROUTER_VIEWS_FOLDER_PATH + PATHS.EXTENSION_CONFIRMATION,
+            templatePath: ROUTER_VIEWS_FOLDER_PATH + PATHS.EXTENSION_CONFIRMATION_FIRST,
             viewData: await this.getViewData(req, res)
         };
     }

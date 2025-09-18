@@ -9,7 +9,7 @@ export class ExtensionAlreadySubmittedHandler extends GenericHandler<BaseViewDat
         const baseViewData = await super.getViewData(req, res);
         return {
             ...baseViewData,
-            backURL: SERVICE_PATH_PREFIX + PATHS.EXTENSION_CONFIRMATION,
+            backURL: SERVICE_PATH_PREFIX + PATHS.EXTENSION_CONFIRMATION_FIRST,
             templateName: PATHS.EXTENSION_ALREADY_SUBMITTED.slice(1)
         };
     }
