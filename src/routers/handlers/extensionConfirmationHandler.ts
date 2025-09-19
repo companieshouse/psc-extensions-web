@@ -25,9 +25,9 @@ export class ExtensionConfirmationHandler extends GenericHandler<BaseViewData> {
         logger.info(`called to serve start page`);
 
         let templatePath = "";
-        if (req.originalUrl.endsWith(PATHS.FIRST_EXTENSION_CONFIRMATION)) {
+        if (req.originalUrl.includes(PATHS.FIRST_EXTENSION_CONFIRMATION)) {
             templatePath = ROUTER_VIEWS_FOLDER_PATH + PATHS.FIRST_EXTENSION_CONFIRMATION;
-        } else if (req.originalUrl.endsWith(PATHS.SECOND_EXTENSION_CONFIRMATION)) {
+        } else if (req.originalUrl.includes(PATHS.SECOND_EXTENSION_CONFIRMATION)) {
             templatePath = ROUTER_VIEWS_FOLDER_PATH + PATHS.SECOND_EXTENSION_CONFIRMATION;
         }
 
