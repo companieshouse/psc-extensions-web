@@ -3,76 +3,76 @@
 {% from "govuk/components/summary-list/macro.njk" import govukSummaryList %}
 
 {% set panel %}
-<div>
-  {{i18n.extension_confirmation_deadline_html}}
-</div>
-<strong>
-[Extension date]
-</strong>
+  <div>
+    {{i18n.extension_confirmation_deadline_html}}
+  </div>
+  <strong>
+  [Extension date]
+  </strong>
 {% endset %}
 
 {% block main_content %}
   {{ govukPanel({
-  titleText: i18n.extension_confirmation_title,
-  html: panel
-}) }}
- {# TODO: Add PSC and company details and add reference number when implemented #}
-    {{ govukSummaryList({
-  rows: [
-    {
-      key: {
-        text: i18n.extension_confirmation_company_name
+    titleText: i18n.extension_confirmation_title,
+    html: panel
+  }) }}
+  {# TODO: Add PSC and company details and add reference number when implemented #}
+  {{ govukSummaryList({
+    rows: [
+      {
+        key: {
+          text: i18n.extension_confirmation_company_name
+        },
+        value: {
+          text: "[Company name]"
+        }
       },
-      value: {
-        text: "[Company name]"
-      }
-    },
-    {
-      key: {
-        text: i18n.extension_confirmation_company_number
+      {
+        key: {
+          text: i18n.extension_confirmation_company_number
+        },
+        value: {
+          text: "[Company number]"
+        }
       },
-      value: {
-        text: "[Company number]"
-      }
-    },
-    {
-      key: {
-        text: i18n.extension_confirmation_psc_name
+      {
+        key: {
+          text: i18n.extension_confirmation_psc_name
+        },
+        value: {
+          text: "[PSC name]"
+        }
       },
-      value: {
-        text: "[PSC name]"
+      {
+        key: {
+          text: i18n.extension_confirmation_reference_number
+        },
+        value: {
+          text: '[Reference number]'
+        }
       }
-    },
-    {
-      key: {
-        text: i18n.extension_confirmation_reference_number
-      },
-      value: {
-        text: '[Reference number]'
-      }
-    }
-  ]
-}) }}
+    ]
+  }) }}
   
   <p class = "govuk-body">{{i18n.extension_confirmation_info}}</p>
-      <p class="govuk-body">{{i18n.extension_confirmation_info_line1}} <strong>{{userEmailAddress}}</strong>
-        {{i18n.extension_confirmation_info_line2}}</p> 
-        <p class="govuk-body">{{i18n.extension_confirmation_info_line3}}</p>
+  <p class="govuk-body">{{i18n.extension_confirmation_info_line1}} <strong>{{userEmailAddress}}</strong>
+    {{i18n.extension_confirmation_info_line2}}</p> 
+  <p class="govuk-body">{{i18n.extension_confirmation_info_line3}}</p>
 
-        <h2 class="govuk-heading-m">{{i18n.extension_confirmation_verify_extension_title}}</h2>  
-        <p class="govuk-body">{{i18n.extension_confirmation_verify_info_line1}}</p>
-        <p class="govuk-body"></p>
-        <p class="govuk-body"> {{i18n.extension_confirmation_verify_info_line2}} <a data-event-id="guidance-on-verifying-identity-link" href="https://www.gov.uk/guidance/verifying-your-identity-for-companies-house">{{ i18n.extension_confirmation_verify_info_link}}</a> </p>
-      <h2 class="govuk-heading-m">{{i18n.extension_confirmation_another_extension_title}}</h2>  
+  <h2 class="govuk-heading-m">{{i18n.extension_confirmation_verify_extension_title}}</h2>  
+  <p class="govuk-body">{{i18n.extension_confirmation_verify_info_line1}}</p>
+  <p class="govuk-body"></p>
+  <p class="govuk-body"> {{i18n.extension_confirmation_verify_info_line2}} <a data-event-id="guidance-on-verifying-identity-link" href="https://www.gov.uk/guidance/verifying-your-identity-for-companies-house">{{ i18n.extension_confirmation_verify_info_link}}</a> </p>
+  
+  <h2 class="govuk-heading-m">{{i18n.extension_confirmation_another_extension_title}}</h2>  
+  <p class="govuk-body">{{i18n.extension_confirmation_first_another_extension_info}}</p>
 
-      <p class="govuk-body">{{i18n.extension_confirmation_first_another_extension_info}}</p>
-
-      <h2 class="govuk-heading-m">{{i18n.extension_confirmation_links_title}}</h2>
-      <p class="govuk-body">{{i18n.extension_confirmation_links_info}}</p>
-<ul class="govuk-list govuk-list--bullet">
- {# TODO: Update link to direct to individual psc list with provided company number #}
-  <li><a href="/persons-with-significant-control-verification/confirm-company" data-event-id="another-PSC-of-this-company-link" class="govuk-link">{{i18n.extension_confirmation_link_2}}</a></li>
-   <li><a href="/persons-with-significant-control-verification/company-number" data-event-id="PSC-of-different-company-link" class="govuk-link">{{i18n.extension_confirmation_link_1}}</a></li>
-</ul>
+  <h2 class="govuk-heading-m">{{i18n.extension_confirmation_links_title}}</h2>
+  <p class="govuk-body">{{i18n.extension_confirmation_links_info}}</p>
+  <ul class="govuk-list govuk-list--bullet">
+  {# TODO: Update link to direct to individual psc list with provided company number #}
+    <li><a href="/persons-with-significant-control-verification/confirm-company" data-event-id="another-PSC-of-this-company-link" class="govuk-link">{{i18n.extension_confirmation_link_2}}</a></li>
+    <li><a href="/persons-with-significant-control-verification/company-number" data-event-id="PSC-of-different-company-link" class="govuk-link">{{i18n.extension_confirmation_link_1}}</a></li>
+  </ul>
 
 {% endblock %}
