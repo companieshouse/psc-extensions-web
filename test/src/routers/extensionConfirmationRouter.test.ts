@@ -12,18 +12,18 @@ describe("GET extension confirmation router", () => {
     });
 
     it("should check session and user auth before returning the page", async () => {
-        await router.get(SERVICE_PATH_PREFIX + PATHS.FIRST_EXTENSION_CONFIRMATION);
+        const res = await router.get(SERVICE_PATH_PREFIX + PATHS.FIRST_EXTENSION_CONFIRMATION);
+        expect(res.status).toBe(200);
         expect(mocks.mockSessionMiddleware).toHaveBeenCalled();
         expect(mocks.mockAuthenticationMiddleware).toHaveBeenCalled();
+        expect(res.text).toContain("Next time, your request will not be automatically accepted");
     });
 
     it("should check session and user auth before returning the page", async () => {
-        await router.get(SERVICE_PATH_PREFIX + PATHS.SECOND_EXTENSION_CONFIRMATION);
+        const res = await router.get(SERVICE_PATH_PREFIX + PATHS.SECOND_EXTENSION_CONFIRMATION);
+        expect(res.status).toBe(200);
         expect(mocks.mockSessionMiddleware).toHaveBeenCalled();
         expect(mocks.mockAuthenticationMiddleware).toHaveBeenCalled();
-    });
-
-    it("should return status 200", async () => {
-        await router.get(SERVICE_PATH_PREFIX + PATHS.FIRST_EXTENSION_CONFIRMATION).expect(200);
+        expect(res.text).toContain("You cannot request another extension using this service.");
     });
 });
