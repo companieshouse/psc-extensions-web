@@ -14,7 +14,7 @@ export class ReasonForExtensionHandler extends GenericHandler<BaseViewData> {
         const baseViewData = await super.getViewData(req, res);
         return {
             ...baseViewData,
-            backURL: SERVICE_PATH_PREFIX + PATHS.EXTENSION_INFO,
+            backURL: SERVICE_PATH_PREFIX + PATHS.REQUEST_EXTENSION,
             templateName: PATHS.REASON_FOR_EXTENSION.slice(1),
             reasons: ExtensionReasons
         };
