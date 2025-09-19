@@ -24,12 +24,12 @@ export const SERVICE_PATH_PREFIX = "/persons-with-significant-control-extension"
 export const ROUTER_VIEWS_FOLDER_PATH = "router_views";
 
 export const PATHS = {
-    EXTENSION_INFO: "/extension-info",
+    REQUEST_EXTENSION: "/requesting-an-extension",
     HEALTHCHECK: "/healthcheck",
-    EXTENSION_REFUSED: "/extension-refused",
-    REASON_FOR_EXTENSION: "/reason-for-extension",
-    EXTENSION_CONFIRMATION_FIRST: "/extension-confirmation-first",
-    EXTENSION_CONFIRMATION_SECOND: "/extension-confirmation-second",
+    EXTENSION_REFUSED: "/you-cannot-request-an-extension",
+    REASON_FOR_EXTENSION: "/extension-reason",
+    FIRST_EXTENSION_CONFIRMATION: "/first-extension-request-successful",
+    SECOND_EXTENSION_CONFIRMATION: "/second-extension-request-successful",
     EXTENSION_ALREADY_SUBMITTED: "/extension-already-submitted",
     INDIVIDUAL_PSC_LIST: "/persons-with-significant-control-verification/individual/psc-list"
 } as const;
