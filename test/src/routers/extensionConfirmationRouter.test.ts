@@ -11,7 +11,7 @@ describe("GET extension confirmation router", () => {
         jest.clearAllMocks();
     });
 
-    it("should check session and user auth before returning the page", async () => {
+    it("should return status 200 and first extension confirmation screen with text", async () => {
         const res = await router.get(SERVICE_PATH_PREFIX + PATHS.FIRST_EXTENSION_CONFIRMATION);
         expect(res.status).toBe(200);
         expect(mocks.mockSessionMiddleware).toHaveBeenCalled();
@@ -19,7 +19,7 @@ describe("GET extension confirmation router", () => {
         expect(res.text).toContain("Next time, your request will not be automatically accepted");
     });
 
-    it("should check session and user auth before returning the page", async () => {
+    it("should return status 200 and second extension confirmation screen with text", async () => {
         const res = await router.get(SERVICE_PATH_PREFIX + PATHS.SECOND_EXTENSION_CONFIRMATION);
         expect(res.status).toBe(200);
         expect(mocks.mockSessionMiddleware).toHaveBeenCalled();
