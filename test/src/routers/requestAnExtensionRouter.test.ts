@@ -13,13 +13,13 @@ describe("GET extension info router", () => {
     });
 
     it("should check session and user auth before returning the page", async () => {
-        await router.get(SERVICE_PATH_PREFIX + PATHS.EXTENSION_INFO);
+        await router.get(SERVICE_PATH_PREFIX + PATHS.REQUEST_EXTENSION);
         expect(mocks.mockSessionMiddleware).toHaveBeenCalled();
         expect(mocks.mockAuthenticationMiddleware).toHaveBeenCalled();
     });
 
     it("should return status 200", async () => {
-        await router.get(SERVICE_PATH_PREFIX + PATHS.EXTENSION_INFO).expect(200);
+        await router.get(SERVICE_PATH_PREFIX + PATHS.REQUEST_EXTENSION).expect(200);
     });
 });
 
@@ -27,7 +27,7 @@ describe("Cookie banner", () => {
 
     describe("GET method when cookie settings are to be confirmed", () => {
         it("should render the start page with the cookies banner", async () => {
-            const resp = await router.get(SERVICE_PATH_PREFIX + PATHS.EXTENSION_INFO);
+            const resp = await router.get(SERVICE_PATH_PREFIX + PATHS.REQUEST_EXTENSION);
             const START_HEADING = "Requesting an extension";
 
             expect(resp.status).toBe(200);

@@ -18,7 +18,7 @@ reasonForExtensionRouter.post("/", handleExceptions(async (req: Request, res: Re
     if (viewData.errors && Object.keys(viewData.errors).length) {
         res.render(templatePath, viewData);
     } else {
-        res.redirect(SERVICE_PATH_PREFIX + PATHS.EXTENSION_CONFIRMATION);
+        res.redirect(SERVICE_PATH_PREFIX + PATHS.FIRST_EXTENSION_CONFIRMATION);
     }
 
 }));
