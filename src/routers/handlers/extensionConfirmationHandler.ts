@@ -8,9 +8,9 @@ export class ExtensionConfirmationHandler extends GenericHandler<BaseViewData> {
     protected override async getViewData (req: Request, res: Response): Promise<BaseViewData> {
 
         let templateName = "";
-        if (req.originalUrl.endsWith(PATHS.FIRST_EXTENSION_CONFIRMATION)) {
+        if (req.originalUrl.includes(PATHS.FIRST_EXTENSION_CONFIRMATION)) {
             templateName = PATHS.FIRST_EXTENSION_CONFIRMATION.slice(1);
-        } else if (req.originalUrl.endsWith(PATHS.SECOND_EXTENSION_CONFIRMATION)) {
+        } else if (req.originalUrl.includes(PATHS.SECOND_EXTENSION_CONFIRMATION)) {
             templateName = PATHS.SECOND_EXTENSION_CONFIRMATION.slice(1);
         }
 
