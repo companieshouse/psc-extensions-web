@@ -29,6 +29,7 @@ export const PATHS = {
     EXTENSION_REFUSED: "/extension-refused",
     REASON_FOR_EXTENSION: "/reason-for-extension",
     EXTENSION_CONFIRMATION_FIRST: "/extension-confirmation-first",
+    EXTENSION_CONFIRMATION_SECOND: "/extension-confirmation-second",
     EXTENSION_ALREADY_SUBMITTED: "/extension-already-submitted",
     INDIVIDUAL_PSC_LIST: "/persons-with-significant-control-verification/individual/psc-list"
 } as const;
