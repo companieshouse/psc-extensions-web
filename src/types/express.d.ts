@@ -3,7 +3,8 @@ import "express";
 declare global {
   namespace Express {
     interface Request {
-      lang: string;
+      requestId?: string;
+      lang?: string;
     }
   }
 }

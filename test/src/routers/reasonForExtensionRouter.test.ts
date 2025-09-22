@@ -4,9 +4,17 @@ import app from "../../../src/app";
 import { SERVICE_PATH_PREFIX, PATHS, ExtensionReasons, validExtensionReasons } from "../../../src/lib/constants";
 import { HttpStatusCode } from "axios";
 import * as cheerio from "cheerio";
+import { PSC_INDIVIDUAL } from "../../mocks/psc.mock";
 
 const router = supertest(app);
 const uri = SERVICE_PATH_PREFIX + PATHS.REASON_FOR_EXTENSION;
+
+jest.mock("../../../src/services/pscIndividualService", () => ({
+    getPscIndividual: () => ({
+        httpStatusCode: HttpStatusCode.Ok,
+        resource: PSC_INDIVIDUAL
+    })
+}));
 describe("Reason for extension router/handler integration tests", () => {
 
     describe("GET method", () => {

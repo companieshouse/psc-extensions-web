@@ -6,11 +6,11 @@
 
 {% block main_content %}
   {# TODO: Add PSC and company details #}
-  <span class="govuk-caption-l">[PSC Name] ({{ i18n.extension_info_born_caption }} [PSC DOB])</span>
+  <span class="govuk-caption-l">{{pscName}}({{ i18n.extension_info_born_caption }} {{dateOfBirth}})</span>
   <h1 class="govuk-heading-l">{{ i18n.extension_info_title }}</h1>
   <p class="govuk-body">{{ i18n.extension_info_request_extension_description }}</p>
   <p class="govuk-body">{{ i18n.extension_info_submit_request_description }}</p>
-  <p class="govuk-body">{{ i18n.extension_info_role_description_1 }}[Company name]{{ i18n.extension_info_role_description_2 }}</p>
+  <p class="govuk-body">{{ i18n.extension_info_role_description_1 }}{{companyName}}{{ i18n.extension_info_role_description_2 }}</p>
 
 {{ govukButton({
   text: i18n.continue,

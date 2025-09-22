@@ -11,8 +11,7 @@
 
 {% block main_content %}
     <form action="" method="post">
-        {# TODO: Add PSC and company details #}
-        <span class="govuk-caption-l">[PSC Name] ({{ i18n.reason_for_extension_born_caption }} [PSC DOB])</span>
+        <span class="govuk-caption-l">{{pscName}}({{ i18n.reason_for_extension_born_caption }}{{dateOfBirth}})</span>
 
             {% set radioButtonConfig = {
                 name: "whyDoYouNeedAnExtension",
