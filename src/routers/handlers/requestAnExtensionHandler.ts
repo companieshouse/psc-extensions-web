@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { BaseViewData, GenericHandler, ViewModel } from "./abstractGenericHandler";
-import logger from "../../lib/logger";
+import { logger } from "../../lib/logger";
 import { SERVICE_PATH_PREFIX, PATHS, ROUTER_VIEWS_FOLDER_PATH } from "../../lib/constants";
 
 export class RequestAnExtensionHandler extends GenericHandler<BaseViewData> {

@@ -34,6 +34,8 @@ export const PATHS = {
     INDIVIDUAL_PSC_LIST: "/persons-with-significant-control-verification/individual/psc-list"
 } as const;
 
+export const PSC_EXTENSION_WEB_NAMESPACE = "psc-extension-web";
+
 export const ExtensionReasons = {
     ID_DOCS_DELAYED: "ID_DOCS_DELAYED",
     POST_OFFICE_VERIFICATION: "POST_OFFICE_VERIFICATION",

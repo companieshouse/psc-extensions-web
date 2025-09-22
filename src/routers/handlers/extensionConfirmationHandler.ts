@@ -1,11 +1,34 @@
 import { Request, Response } from "express";
 import { BaseViewData, GenericHandler, ViewModel } from "./abstractGenericHandler";
-import logger from "../../lib/logger";
+import { logger } from "../../lib/logger";
 import { PATHS, ROUTER_VIEWS_FOLDER_PATH } from "../../lib/constants";
 
-export class ExtensionConfirmationHandler extends GenericHandler<BaseViewData> {
+interface PscListData {
+    pscId: string;
+    pscCeasedOn?: string;
+    pscKind?: string;
+    pscName?: string;
 
-    protected override async getViewData (req: Request, res: Response): Promise<BaseViewData> {
+}
+
+interface IndividualPscListViewData extends BaseViewData {
+    companyName: string;
+    companyNumber: string;
+    dsrEmailAddress: string;
+    dsrPhoneNumber: string;
+    idvImplementationDate: string;
+    canVerifyNowDetails: PscListData[];
+    canVerifyLaterDetails: PscListData[];
+    verifiedPscDetails: PscListData[];
+    exclusivelySuperSecure: boolean;
+    selectedPscId: string | null;
+    showNoPscsMessage: boolean;
+    nextPageUrl: string | null;
+}
+
+export class ExtensionConfirmationHandler extends GenericHandler<IndividualPscListViewData> {
+
+    protected override async getViewData (req: Request, res: Response): Promise<IndividualPscListViewData> {
 
         let templateName = "";
         if (req.originalUrl.includes(PATHS.FIRST_EXTENSION_CONFIRMATION)) {
@@ -15,13 +38,19 @@ export class ExtensionConfirmationHandler extends GenericHandler<BaseViewData> {
         }
 
         const baseViewData = await super.getViewData(req, res);
+        const companyProfile = res.locals.companyProfile;
+        const companyName = companyProfile?.companyName ?? "";
+        const companyNumber = "111111111";
         return {
             ...baseViewData,
-            templateName: templateName
+            templateName: templateName,
+            companyName,
+            companyNumber
         };
+
     }
 
-    public async executeGet (req: Request, res: Response): Promise<ViewModel<BaseViewData>> {
+    public async executeGet (req: Request, res: Response): Promise<ViewModel<IndividualPscListViewData>> {
         logger.info(`called to serve start page`);
 
         let templatePath = "";
