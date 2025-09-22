@@ -40,7 +40,7 @@ export class ExtensionConfirmationHandler extends GenericHandler<IndividualPscLi
         const baseViewData = await super.getViewData(req, res);
         const companyProfile = res.locals.companyProfile;
         const companyName = companyProfile?.companyName ?? "";
-        const companyNumber = "111111111";
+        const companyNumber = companyProfile?.companyNumber ?? "";
         return {
             ...baseViewData,
             templateName: templateName,
