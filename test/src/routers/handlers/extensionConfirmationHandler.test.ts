@@ -24,7 +24,11 @@ describe("ExtensionConfirmationHandler", () => {
                 originalUrl: PATHS.FIRST_EXTENSION_CONFIRMATION
             };
 
-            const res = {};
+            const res = {
+                locals: {
+                    companyProfile: "Company Profile"
+                }
+            };
             const result = handler.exposeGetViewData(req, res);
 
             expect((await result).templateName).toBe(PATHS.FIRST_EXTENSION_CONFIRMATION.slice(1));
@@ -36,7 +40,11 @@ describe("ExtensionConfirmationHandler", () => {
                 originalUrl: PATHS.SECOND_EXTENSION_CONFIRMATION
             };
 
-            const res = {};
+            const res = {
+                locals: {
+                    companyProfile: "Company Profile"
+                }
+            };
             const result = handler.exposeGetViewData(req, res);
 
             expect((await result).templateName).toBe(PATHS.SECOND_EXTENSION_CONFIRMATION.slice(1));
@@ -49,7 +57,11 @@ describe("ExtensionConfirmationHandler", () => {
             const req = {
                 originalUrl: PATHS.FIRST_EXTENSION_CONFIRMATION
             };
-            const res = {};
+            const res = {
+                locals: {
+                    companyProfile: "Company Profile"
+                }
+            };
             const result = handler.executeGetWithAnyTypeArgs(req, res);
 
             expect((await result).templatePath).toBe(ROUTER_VIEWS_FOLDER_PATH + PATHS.FIRST_EXTENSION_CONFIRMATION);
@@ -60,7 +72,11 @@ describe("ExtensionConfirmationHandler", () => {
             const req = {
                 originalUrl: PATHS.SECOND_EXTENSION_CONFIRMATION
             };
-            const res = {};
+            const res = {
+                locals: {
+                    companyProfile: "Company Profile"
+                }
+            };
             const result = handler.executeGetWithAnyTypeArgs(req, res);
 
             expect((await result).templatePath).toBe(ROUTER_VIEWS_FOLDER_PATH + PATHS.SECOND_EXTENSION_CONFIRMATION);
