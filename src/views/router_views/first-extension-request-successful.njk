@@ -24,7 +24,7 @@
           text: i18n.extension_confirmation_company_name
         },
         value: {
-          text: "[Company name]"
+          text: "company.companyName"
         }
       },
       {
@@ -32,7 +32,7 @@
           text: i18n.extension_confirmation_company_number
         },
         value: {
-          text: "[Company number]"
+          text: "company.CompanyNumber"
         }
       },
       {
@@ -40,7 +40,7 @@
           text: i18n.extension_confirmation_psc_name
         },
         value: {
-          text: "[PSC name]"
+          text: "psc.pscNumber"
         }
       },
       {
@@ -71,7 +71,7 @@
   <p class="govuk-body">{{i18n.extension_confirmation_links_info}}</p>
   <ul class="govuk-list govuk-list--bullet">
   {# TODO: Update link to direct to individual psc list with provided company number #}
-    <li><a href="/persons-with-significant-control-verification/confirm-company" data-event-id="another-PSC-of-this-company-link" class="govuk-link">{{i18n.extension_confirmation_link_2}} [company]</a></li>
+    <li><a href="/persons-with-significant-control-verification/confirm-company" data-event-id="another-PSC-of-this-company-link" class="govuk-link">{{i18n.extension_confirmation_link_2}} company.companyName</a></li>
     <li><a href="/persons-with-significant-control-verification/company-number" data-event-id="PSC-of-different-company-link" class="govuk-link">{{i18n.extension_confirmation_link_1}}</a></li>
   </ul>
 
