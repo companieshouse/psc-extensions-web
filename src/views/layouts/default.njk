@@ -34,7 +34,7 @@
   {% include "partials/nav/top.njk" %}
   {% if backURL %}
     {{ govukBackLink({
-    href: backURL + "?lang=" +lang,
+    href: backURL +"?companyNumber="+ companyNumber + "&"+ "selectedPscId="+ selectedPscId + "?lang=" +lang,
     text: i18n.back
   }) }}
   {% endif %}

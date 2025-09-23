@@ -10,6 +10,8 @@ interface ExtensionReasonViewData extends BaseViewData {
     reasons: typeof ExtensionReasons;
     pscName: string;
     dateOfBirth: string;
+    selectedPscId: string;
+    companyNumber: string;
 }
 
 export class ReasonForExtensionHandler extends GenericHandler<BaseViewData> {
@@ -23,6 +25,8 @@ export class ReasonForExtensionHandler extends GenericHandler<BaseViewData> {
             ...baseViewData,
             pscName: pscIndividual.resource?.name!,
             dateOfBirth: formatDateBorn(pscIndividual.resource?.dateOfBirth),
+            selectedPscId: selectedPscId,
+            companyNumber: companyNumber,
             backURL: SERVICE_PATH_PREFIX + PATHS.EXTENSION_INFO,
             templateName: PATHS.REASON_FOR_EXTENSION.slice(1),
             reasons: ExtensionReasons

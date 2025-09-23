@@ -10,6 +10,7 @@ interface PscViewData extends BaseViewData {
     companyNumber: string;
     pscName: string;
     dateOfBirth: string;
+    selectedPscId: string;
 }
 export function formatDateBorn (dateOfBirth: any): string {
     try {
@@ -38,6 +39,7 @@ export class ExtensionInfoHandler extends GenericHandler<PscViewData> {
             pscName: pscIndividual.resource?.name!,
             companyName: companyProfile.companyName,
             companyNumber: companyProfile.companyNumber,
+            selectedPscId: selectedPscId,
             dateOfBirth: formatDateBorn(pscIndividual.resource?.dateOfBirth),
             backURL: SERVICE_PATH_PREFIX + PATHS.INDIVIDUAL_PSC_LIST,
             templateName: PATHS.EXTENSION_INFO.slice(1)
