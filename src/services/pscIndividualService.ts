@@ -6,13 +6,11 @@ import { ApiErrorResponse } from "@companieshouse/api-sdk-node/dist/services/res
 import { HttpStatusCode } from "axios";
 import logger from "../lib/logger";
 import { createApiKeyClient } from "../lib/utils/api.client";
-import { extractRequestIdHeader } from "../services/companyProfileService";
 
 export const getPscIndividual = async (request: Request, companyNumber: string, pscNotificationId: string): Promise<Resource<PersonWithSignificantControl>> => {
     const apiClient: ApiClient = createApiKeyClient();
 
     logger.debug(`for company with companyNumber="${companyNumber}", notificationId="${pscNotificationId}"`);
-    const headers = extractRequestIdHeader(request);
     const sdkResponse: Resource<PersonWithSignificantControl> | ApiErrorResponse = await apiClient.pscService.getPscIndividual(companyNumber, pscNotificationId);
 
     console.log("sdkResponse", sdkResponse);
