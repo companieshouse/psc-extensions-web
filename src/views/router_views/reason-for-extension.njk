@@ -68,7 +68,7 @@
                   {% endif %}
              {{ govukButton({
                 text: i18n.submit_request,
-                  href: "/persons-with-significant-control-extension/extension-confirmation" +"?companyNumber="+ companyNumber + "&"+ "selectedPscId="+ selectedPscId  +"?lang=" +lang, 
+                  href: "/persons-with-significant-control-extension/extension-confirmation" +"?companyNumber="+ companyNumber + "&"+ "selectedPscId="+ selectedPscId +"%3F", 
                 attributes: {
                     "onclick": "_paq.push(['trackEvent', 'psc-extensions', '" + templateName + "', document.querySelector('input[name=whyDoYouNeedAnExtension]:checked').value])"
                 }
