@@ -16,7 +16,7 @@ describe("GET extension confirmation router", () => {
         expect(res.status).toBe(200);
         expect(mocks.mockSessionMiddleware).toHaveBeenCalled();
         expect(mocks.mockAuthenticationMiddleware).toHaveBeenCalled();
-        expect(res.text).toContain("Next time, your request will not be automatically accepted");
+        expect(res.text).toContain("this service. You must do so before");
     });
 
     it("should return status 200 and second extension confirmation screen with text", async () => {
