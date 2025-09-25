@@ -3,7 +3,7 @@ import { BaseViewData, GenericHandler, ViewModel } from "./abstractGenericHandle
 import logger from "../../lib/logger";
 import { SERVICE_PATH_PREFIX, PATHS, ROUTER_VIEWS_FOLDER_PATH } from "../../lib/constants";
 import { getPscIndividual } from "../../services/pscIndividualService";
-import { formatDateBorn } from "./extensionInfoHandler";
+import { formatDateBorn } from "../handlers/requestAnExtensionHandler";
 
 interface PscViewData extends BaseViewData {
     referenceNumber: string;

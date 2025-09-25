@@ -21,12 +21,12 @@ describe("GET extension info router and retrieve components such as footer links
     });
 
     it("should check session and user auth before returning the page", async () => {
-        await router.get(SERVICE_PATH_PREFIX + PATHS.EXTENSION_INFO);
+        await router.get(SERVICE_PATH_PREFIX + PATHS.REQUEST_EXTENSION);
         expect(mocks.mockSessionMiddleware).toHaveBeenCalled();
         expect(mocks.mockAuthenticationMiddleware).toHaveBeenCalled();
     });
     it("should render the footer with the expected links in English when user has selected 'English' link", async () => {
-        const resp = await request(app).get(`/persons-with-significant-control-extension/extension-info?lang=en`);
+        const resp = await request(app).get(`/persons-with-significant-control-extension/requesting-an-extension?lang=en`);
         expect(resp.status).toBe(HttpStatusCode.Ok);
         const $ = cheerio.load(resp.text);
 
@@ -48,7 +48,7 @@ describe("GET extension info router and retrieve components such as footer links
     });
 
     it("should render the footer with the expected links in Welsh when user has selected 'Cymraeg' link", async () => {
-        const resp = await request(app).get(`/persons-with-significant-control-extension/extension-info?lang=cy`);
+        const resp = await request(app).get(`/persons-with-significant-control-extension/requesting-an-extension?lang=cy`);
         expect(resp.status).toBe(HttpStatusCode.Ok);
         const $ = cheerio.load(resp.text);
 

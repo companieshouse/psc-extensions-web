@@ -4,7 +4,7 @@ import logger from "../../lib/logger";
 import { SERVICE_PATH_PREFIX, PATHS, ROUTER_VIEWS_FOLDER_PATH, ExtensionReasons } from "../../lib/constants";
 import { PscExtensionsFormsValidator } from "../../lib/validation/form-validators/pscExtensions";
 import { getPscIndividual } from "../../services/pscIndividualService";
-import { formatDateBorn } from "./extensionInfoHandler";
+import { formatDateBorn } from "../handlers/requestAnExtensionHandler";
 
 interface ExtensionReasonViewData extends BaseViewData {
     reasons: typeof ExtensionReasons;
@@ -27,7 +27,7 @@ export class ReasonForExtensionHandler extends GenericHandler<BaseViewData> {
             dateOfBirth: formatDateBorn(pscIndividual.resource?.dateOfBirth),
             selectedPscId: selectedPscId,
             companyNumber: companyNumber,
-            backURL: SERVICE_PATH_PREFIX + PATHS.EXTENSION_INFO,
+            backURL: SERVICE_PATH_PREFIX + PATHS.REQUEST_EXTENSION,
             templateName: PATHS.REASON_FOR_EXTENSION.slice(1),
             reasons: ExtensionReasons
         };

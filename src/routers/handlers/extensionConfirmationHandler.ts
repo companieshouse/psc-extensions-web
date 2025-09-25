@@ -24,7 +24,7 @@ export class ExtensionConfirmationHandler extends GenericHandler<PscViewData> {
         const companyProfile = await getCompanyProfile(req, companyNumber);
         return {
             ...baseViewData,
-            templateName: PATHS.EXTENSION_CONFIRMATION.slice(1),
+            templateName: PATHS.FIRST_EXTENSION_CONFIRMATION.slice(1),
             pscName: pscIndividual.resource?.name!,
             companyName: companyProfile.companyName,
             companyNumber: companyProfile.companyNumber
@@ -34,7 +34,7 @@ export class ExtensionConfirmationHandler extends GenericHandler<PscViewData> {
     public async executeGet (req: Request, res: Response): Promise<ViewModel<PscViewData>> {
         logger.info(`called to serve start page`);
         return {
-            templatePath: ROUTER_VIEWS_FOLDER_PATH + PATHS.EXTENSION_CONFIRMATION,
+            templatePath: ROUTER_VIEWS_FOLDER_PATH + PATHS.FIRST_EXTENSION_CONFIRMATION,
             viewData: await this.getViewData(req, res)
         };
     }

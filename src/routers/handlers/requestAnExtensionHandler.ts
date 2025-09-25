@@ -22,8 +22,7 @@ export function formatDateBorn (dateOfBirth: any): string {
         return "Invalid date";
     }
 }
-
-export class ExtensionInfoHandler extends GenericHandler<PscViewData> {
+export class RequestAnExtensionHandler extends GenericHandler<PscViewData> {
 
     protected override async getViewData (req: Request, res: Response): Promise<PscViewData> {
         const baseViewData = await super.getViewData(req, res);
@@ -42,14 +41,14 @@ export class ExtensionInfoHandler extends GenericHandler<PscViewData> {
             selectedPscId: selectedPscId,
             dateOfBirth: formatDateBorn(pscIndividual.resource?.dateOfBirth),
             backURL: SERVICE_PATH_PREFIX + PATHS.INDIVIDUAL_PSC_LIST,
-            templateName: PATHS.EXTENSION_INFO.slice(1)
+            templateName: PATHS.REQUEST_EXTENSION.slice(1)
         };
     }
 
     public async executeGet (req: Request, res: Response): Promise<ViewModel<BaseViewData>> {
         logger.info(`called to serve start page`);
         return {
-            templatePath: ROUTER_VIEWS_FOLDER_PATH + PATHS.EXTENSION_INFO,
+            templatePath: ROUTER_VIEWS_FOLDER_PATH + PATHS.REQUEST_EXTENSION,
             viewData: await this.getViewData(req, res)
         };
     }
