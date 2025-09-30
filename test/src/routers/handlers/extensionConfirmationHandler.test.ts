@@ -83,7 +83,8 @@ describe("ExtensionConfirmationHandler", () => {
             const res = {};
             const result = handler.executeGetWithAnyTypeArgs(req, res);
 
-            expect((await result).templatePath).toBe(ROUTER_VIEWS_FOLDER_PATH + PATHS.FIRST_EXTENSION_CONFIRMATION);
+            expect((await result).templatePath).toBe(ROUTER_VIEWS_FOLDER_PATH + PATHS.EXTENSION_CONFIRMATION);
+            expect((await result).viewData.templateName).toBe(PATHS.FIRST_EXTENSION_CONFIRMATION.slice(1));
         });
 
         it("should return template path and viewData for second extension confirmation", async () => {
@@ -98,7 +99,8 @@ describe("ExtensionConfirmationHandler", () => {
             const res = {};
             const result = handler.executeGetWithAnyTypeArgs(req, res);
 
-            expect((await result).templatePath).toBe(ROUTER_VIEWS_FOLDER_PATH + PATHS.SECOND_EXTENSION_CONFIRMATION);
+            expect((await result).templatePath).toBe(ROUTER_VIEWS_FOLDER_PATH + PATHS.EXTENSION_CONFIRMATION);
+            expect((await result).viewData.templateName).toBe(PATHS.SECOND_EXTENSION_CONFIRMATION.slice(1));
         });
     });
 });

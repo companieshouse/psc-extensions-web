@@ -41,15 +41,8 @@ export class ExtensionConfirmationHandler extends GenericHandler<PscViewData> {
     public async executeGet (req: Request, res: Response): Promise<ViewModel<PscViewData>> {
         logger.info(`called to serve start page`);
 
-        let templatePath = "";
-        if (req.originalUrl.includes(PATHS.FIRST_EXTENSION_CONFIRMATION)) {
-            templatePath = ROUTER_VIEWS_FOLDER_PATH + PATHS.FIRST_EXTENSION_CONFIRMATION;
-        } else if (req.originalUrl.includes(PATHS.SECOND_EXTENSION_CONFIRMATION)) {
-            templatePath = ROUTER_VIEWS_FOLDER_PATH + PATHS.SECOND_EXTENSION_CONFIRMATION;
-        }
-
         return {
-            templatePath: templatePath,
+            templatePath: ROUTER_VIEWS_FOLDER_PATH + PATHS.EXTENSION_CONFIRMATION,
             viewData: await this.getViewData(req, res)
         };
     }
