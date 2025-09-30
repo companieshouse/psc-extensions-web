@@ -2,8 +2,26 @@ import mocks from "../../mocks/all.middleware.mock";
 import supertest from "supertest";
 import app from "../../../src/app";
 import { SERVICE_PATH_PREFIX, PATHS } from "../../../src/lib/constants";
+import { HttpStatusCode } from "axios";
+import { PSC_INDIVIDUAL } from "../../mocks/psc.mock";
 
 const router = supertest(app);
+
+jest.mock("../../../src/services/pscIndividualService", () => ({
+    getPscIndividual: () => ({
+        httpStatusCode: HttpStatusCode.Ok,
+        resource: PSC_INDIVIDUAL
+    })
+}));
+
+jest.mock("../../../src/services/companyProfileService", () => ({
+    getCompanyProfile: () => ({
+        httpStatusCode: HttpStatusCode.Ok,
+        resource: {
+            companyName: "The Company"
+        }
+    })
+}));
 
 describe("GET extension confirmation router", () => {
 

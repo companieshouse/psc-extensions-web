@@ -4,9 +4,16 @@ import app from "../../src/app";
 import * as cheerio from "cheerio";
 import request from "supertest";
 import { SERVICE_PATH_PREFIX, PATHS } from "../../src/lib/constants";
+import { PSC_INDIVIDUAL } from "../mocks/psc.mock";
 
 const router = request(app);
 
+jest.mock("../../src/services/pscIndividualService", () => ({
+    getPscIndividual: () => ({
+        httpStatusCode: HttpStatusCode.Ok,
+        resource: PSC_INDIVIDUAL
+    })
+}));
 describe("GET extension info router and retrieve components such as footer links for both english or welsh depending on selected language", () => {
 
     beforeEach(() => {

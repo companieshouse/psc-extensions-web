@@ -65,14 +65,14 @@ app.use(LocalesMiddleware());
 app.use(i18nMiddleware);
 app.use(templateMiddleware);
 
+// Channel all requests through router dispatch
+routerDispatch(app);
+
 // Unhandled errors
 app.use((err: any, req: Request, res: Response, _next: NextFunction) => {
     logger.error(`${err.name} - appError: ${err.message} - ${err.stack}`);
     res.render("partials/error_500");
 });
-
-// Channel all requests through router dispatch
-routerDispatch(app);
 
 // Unhandled exceptions
 process.on("uncaughtException", (err: any) => {
