@@ -1,7 +1,7 @@
 import { Request } from "express";
 import { createOAuthApiClient } from "../../../src/lib/utils/api.client";
 import { getCompanyProfile } from "../../../src/services/companyProfileService";
-import { COMPANY_NUMBER, badRequestSDKResource, missingSDKResource, mockApiErrorResponse, validCompanyProfile, validSDKResource } from "../../mocks/companyProfile.mock";
+import { COMPANY_NUMBER, missingSDKResource, mockApiErrorResponse, validCompanyProfile, validSDKResource } from "../../mocks/companyProfile.mock";
 
 jest.mock("@companieshouse/api-sdk-node");
 jest.mock("../../../src/lib/utils/api.client");

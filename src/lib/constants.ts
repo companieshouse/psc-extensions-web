@@ -30,6 +30,7 @@ export const PATHS = {
     REASON_FOR_EXTENSION: "/extension-reason",
     FIRST_EXTENSION_CONFIRMATION: "/first-extension-request-successful",
     SECOND_EXTENSION_CONFIRMATION: "/second-extension-request-successful",
+    EXTENSION_CONFIRMATION: "/extension-confirmation",
     EXTENSION_ALREADY_SUBMITTED: "/extension-already-submitted",
     INDIVIDUAL_PSC_LIST: "/persons-with-significant-control-verification/individual/psc-list"
 } as const;
