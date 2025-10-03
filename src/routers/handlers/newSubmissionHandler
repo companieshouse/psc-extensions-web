@@ -1,0 +1,54 @@
+import {Request, Response} from "express";
+import {Transaction} from "@companieshouse/api-sdk-node/dist/services/transaction/types";
+import Resource, {ApiErrorResponse} from "@companieshouse/api-sdk-node/dist/services/resource";
+import {postTransaction} from "../../services/transactionService";
+import {createPscExtension, PscExtensions, PscExtensionsData} from "../../services/pscExtensionService";
+import logger from "../../lib/logger";
+
+export class NewSubmissionHandler {
+
+    // todo(1): implement this fully with the web app, when submitting an extension request
+    public async handleNewSubmission(req: Request, res: Response): Promise<string> {
+        const transaction: Transaction = await postTransaction(req);
+        logger.info(`CREATED transaction with transactionId="${transaction.id}"`);
+
+        const resource = await this.createNewSubmission(req, transaction);
+
+        const companyNumber = req.query.companyNumber as string;
+
+        let nextPageUrl: string = "";
+        if (this.isErrorResponse(resource)) {
+            nextPageUrl = "/extensions/problem-with-psc-data";
+        } else {
+            const pscExtension = resource.resource;
+            logger.info(`CREATED New Resource ${pscExtension?.links?.self}`);
+            const regex = "persons-with-significant-control-extensions/(.*)$";
+            const resourceId = pscExtension?.links?.self?.match(regex);
+            nextPageUrl = `/persons-with-significant-control-extension/first-extension-request-successful/${transaction.id}/${resourceId?.[1]}`;
+        }
+
+        return `${nextPageUrl}?companyNumber=${companyNumber}`;
+    }
+
+    public async createNewSubmission(request: Request, transaction: Transaction): Promise<Resource<PscExtensions> | ApiErrorResponse> {
+        const companyNumber = request.query.companyNumber as string;
+        const pscNotificationId = request.query.selectedPscId as string;
+
+        const extensionReason = request.body.extensionReason as string;
+
+        const extensionData: PscExtensionsData = {
+            companyNumber,
+            pscNotificationId,
+            extensionDetails: {
+                extensionReason,
+                extensionRequestDate: new Date().toISOString()
+            }
+        };
+
+        return createPscExtension(request, transaction, extensionData);
+    }
+
+    public isErrorResponse(obj: any): obj is ApiErrorResponse {
+        return obj.httpStatusCode >= 400;
+    }
+}
