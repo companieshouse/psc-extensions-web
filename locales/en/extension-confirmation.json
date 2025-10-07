@@ -13,6 +13,7 @@
     "extension_confirmation_verify_info_line1": "You need to verify your identity and provide your Companies House personal code and verification statement by the new deadline.",
     "extension_confirmation_verify_info_line2": "For information on how to do this, ",
     "extension_confirmation_verify_info_link": "read the guidance on verifying your identity for Companies House.",
+    "guidance_on_verifying_link": "https://www.gov.uk/guidance/verifying-your-identity-for-companies-house",
     "extension_confirmation_another_extension_title": "If you need to request another extension",
     "extension_confirmation_first_another_extension_info": "You can submit another request using this service. You must do so before the new deadline has passed.",
     "extension_confirmation_second_another_extension_info_line1": "You'll need to provide supporting evidence. You must ",
