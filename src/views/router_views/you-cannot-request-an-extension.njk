@@ -5,8 +5,7 @@
 {% set title =  i18n.extension_refused_title %}
 
 {% block main_content %}
-  {# TODO: Add PSC and company details #}
-   <span class="govuk-caption-l">{{pscName}}({{ i18n.extension_refused_born_caption }}{{dateOfBirth}})</span>
+   <span class="govuk-caption-l">{{pscName}} ({{ i18n.extension_refused_born_caption }} {{dateOfBirth}})</span>
    <h1 class="govuk-heading-l">{{ i18n.extension_refused_title }}</h1>
 
    <p class="govuk-body">{{ i18n.extension_refused_request_extension_description_1 }}</p>

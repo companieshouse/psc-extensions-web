@@ -1,5 +1,6 @@
 {
-    "service_name": "Provide identity verification details for a person with significant control (PSC) - GOV.UK",
+    "service_name": "Provide identity verification details for a person with significant control (PSC)",
+    "add_tab_govuk": " - GOV.UK",
     
     "phase_banner_new_service": "This is a new service - ",
     "phase_banner_feedback_link": "your feedback",

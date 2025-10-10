@@ -64,7 +64,7 @@ describe("Reason for extension router/handler integration tests", () => {
                 .send({ whyDoYouNeedAnExtension: ExtensionReasons.ID_DOCS_DELAYED });
 
             expect(resp.status).toBe(HttpStatusCode.Found);
-            expect(resp.header.location).toBe(`/persons-with-significant-control-extension/first-extension-request-successful`);
+            expect(resp.header.location).toBe(`/persons-with-significant-control-extensions/first-extension-request-successful`);
         });
 
         it("Should display the reason for extension page with the validation errors when no reason is selected", async () => {

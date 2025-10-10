@@ -5,15 +5,13 @@
 {% set title =  i18n.extension_already_submitted_title %}
 
 {% block main_content %}
-  {# TODO: Add PSC and company details #}
    <h1 class="govuk-heading-l">{{ i18n.extension_already_submitted_title }}</h1>
 
    <h2 class="govuk-heading-m">{{ i18n.extension_already_submitted_subtitle }}</h2>
    <p class="govuk-body">{{ i18n.extension_already_submitted_links_info }}</p>
 <ul class="govuk-list govuk-list--bullet">
- {# TODO: Update link to direct to individual psc list with provided company number #}
-  <li><a href="/persons-with-significant-control-verification/confirm-company" data-event-id="another-PSC-of-this-company-link" class="govuk-link">{{i18n.extension_confirmation_link_2}}</a>.</li>
-  <li><a href="/persons-with-significant-control-verification/company-number" data-event-id="PSC-of-different-company-link" class="govuk-link">{{i18n.extension_confirmation_link_1}}</a>.</li>
+        <li><a href="/persons-with-significant-control-verification/individual/psc-list?companyNumber={{companyNumber}}" data-event-id="another-PSC-of-this-company-link" class="govuk-link">{{i18n.extension_confirmation_link_2}} {{ companyName }}</a></li>
+  <li><a href="/persons-with-significant-control-verification/start" data-event-id="PSC-of-different-company-link" class="govuk-link">{{i18n.extension_confirmation_link_1}}</a>.</li>
 </ul>
 
 {% endblock %}
