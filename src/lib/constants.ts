@@ -32,7 +32,7 @@ export const PATHS = {
     SECOND_EXTENSION_CONFIRMATION: "/second-extension-request-successful",
     EXTENSION_CONFIRMATION: "/extension-confirmation",
     EXTENSION_ALREADY_SUBMITTED: "/extension-already-submitted",
-    INDIVIDUAL_PSC_LIST: "/persons-with-significant-control-verification/individual/psc-list"
+    INDIVIDUAL_PSC_LIST: "/persons-with-significant-control-verification/individual/psc-list?companyNumber="
 } as const;
 
 export const ExtensionReasons = {
