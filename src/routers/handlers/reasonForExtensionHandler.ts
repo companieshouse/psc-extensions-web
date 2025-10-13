@@ -27,7 +27,7 @@ export class ReasonForExtensionHandler extends GenericHandler<BaseViewData> {
             dateOfBirth: formatDateBorn(pscIndividual.resource?.dateOfBirth),
             selectedPscId: selectedPscId,
             companyNumber: companyNumber,
-            backURL: SERVICE_PATH_PREFIX + PATHS.REQUEST_EXTENSION + companyNumber + selectedPscId,
+            backURL: SERVICE_PATH_PREFIX + PATHS.REQUEST_EXTENSION + "?companyNumber=" + companyNumber + "&selectedPscId=" + selectedPscId + "%3F",
             templateName: PATHS.REASON_FOR_EXTENSION.slice(1),
             reasons: ExtensionReasons
         };
