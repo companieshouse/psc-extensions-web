@@ -26,7 +26,7 @@
 {% endblock %}
 
 {% block bodyStart %}
-  {# {% include "partials/cookie_consent_banner.njk" %} #}
+   {% include "partials/cookie_consent_banner.njk" %} 
 {% endblock %}
 
 {% block beforeContent %}
@@ -34,7 +34,7 @@
   {% include "partials/nav/top.njk" %}
   {% if backURL %}
     {{ govukBackLink({
-    href: backURL + "?lang=" +lang,
+    href: backURL +"?companyNumber="+ companyNumber + "&"+ "selectedPscId="+ selectedPscId +"%3F",
     text: i18n.back
   }) }}
   {% endif %}

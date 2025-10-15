@@ -4,10 +4,14 @@
 {% from "govuk/components/button/macro.njk" import govukButton %}
 
 {% set title =  i18n.reason_for_extension_title %}
+
+{% if "whyDoYouNeedAnExtension" in errors %}
+  {% set title = i18n.title_error + title %}
+{% endif %}
+
 {% block main_content %}
     <form action="" method="post">
-        {# TODO: Add PSC and company details #}
-        <span class="govuk-caption-l">[PSC Name] ({{ i18n.reason_for_extension_born_caption }} [PSC DOB])</span>
+        <span class="govuk-caption-l">{{pscName}}({{ i18n.reason_for_extension_born_caption }}{{dateOfBirth}})</span>
 
             {% set radioButtonConfig = {
                 name: "whyDoYouNeedAnExtension",
@@ -24,27 +28,27 @@
                 },
                 items: [
                         {
-                            value: "reason_for_extension_1",
+                            value: reasons.ID_DOCS_DELAYED,
                             text: i18n.reason_for_extension_1
                         },
                         {
-                            value: "reason_for_extension_2",
+                            value: reasons.POST_OFFICE_VERIFICATION,
                             text: i18n.reason_for_extension_2
                         },
                         {
-                            value: "reason_for_extension_3",
+                            value: reasons.MEDICAL_TREATMENT,
                             text: i18n.reason_for_extension_3
                         },
                         {
-                            value: "reason_for_extension_4",
+                            value: reasons.NEED_SUPPORT,
                             text: i18n.reason_for_extension_4
                         },
                         {
-                            value: "reason_for_extension_5",
+                            value: reasons.TECHNICAL_ISSUES,
                             text: i18n.reason_for_extension_5
                         },
                         {
-                            value: "reason_for_extension_6",
+                            value: reasons.INCORRECT_PSC_DETAILS,
                             text: i18n.reason_for_extension_6
                         }
                 ]
@@ -64,7 +68,11 @@
                   {% endif %}
              {{ govukButton({
                 text: i18n.submit_request,
-                href: "/persons-with-significant-control-extension/extension-confirmation" + "?lang=" +lang
+                  href: "/persons-with-significant-control-extension/first-extension-request-successful" +"?companyNumber="+ companyNumber + "&"+ "selectedPscId="+ selectedPscId +"%3F", 
+                attributes: {
+                    "onclick": "_paq.push(['trackEvent', 'psc-extensions', '" + templateName + "', document.querySelector('input[name=whyDoYouNeedAnExtension]:checked').value])"
+                }
+
              }) }}
     </form>
 

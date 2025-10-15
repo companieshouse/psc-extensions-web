@@ -6,7 +6,7 @@
 
 {% block main_content %}
   {# TODO: Add PSC and company details #}
-   <span class="govuk-caption-l">[PSC Name] ({{ i18n.extension_refused_born_caption }} [PSC DOB])</span>
+   <span class="govuk-caption-l">{{pscName}}({{ i18n.extension_refused_born_caption }}{{dateOfBirth}})</span>
    <h1 class="govuk-heading-l">{{ i18n.extension_refused_title }}</h1>
 
    <p class="govuk-body">{{ i18n.extension_refused_request_extension_description_1 }}</p>
@@ -16,6 +16,6 @@
       </ul>
 
    <p class="govuk-body"> {{ i18n.extension_refused_request_description }}</p>
-   <p class="govuk-body"> {{i18n.extension_refused_request_guidance_1 }} <a href="https://www.gov.uk/guidance/verifying-your-identity-for-companies-house">{{ i18n.extension_refused_request_guidance_2 }}</a> </p>
+   <p class="govuk-body"> {{i18n.extension_refused_request_guidance_1 }} <a data-event-id="guidance-on-verifying-identity-link"href="https://www.gov.uk/guidance/verifying-your-identity-for-companies-house">{{ i18n.extension_refused_request_guidance_2 }}</a> </p>
 
 {% endblock %}

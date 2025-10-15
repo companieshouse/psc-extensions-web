@@ -1,8 +1,8 @@
-import {Request} from "express";
-import {Transaction} from "@companieshouse/api-sdk-node/dist/services/transaction/types";
-import Resource, {ApiErrorResponse} from "@companieshouse/api-sdk-node/dist/services/resource";
-import {HttpStatusCode} from "axios";
-import {createOAuthApiClient} from "../lib/utils/api.client";
+import { Request } from "express";
+import { Transaction } from "@companieshouse/api-sdk-node/dist/services/transaction/types";
+import Resource, { ApiErrorResponse } from "@companieshouse/api-sdk-node/dist/services/resource";
+import { HttpStatusCode } from "axios";
+import { createOAuthApiClient } from "../lib/utils/api.client";
 import logger from "../lib/logger";
 
 // todo: move this to sdk?
@@ -31,6 +31,11 @@ export interface PscExtensions {
     };
     data?: PscExtensionsData;
 }
+
+const extractRequestIdHeader = (request: Request): { [key: string]: string } => {
+    const requestId = request.headers["x-request-id"] as string;
+    return requestId ? { "x-request-id": requestId } : {};
+};
 
 export const createPscExtension = async (request: Request, transaction: Transaction, extensionData: PscExtensionsData): Promise<Resource<PscExtensions> | ApiErrorResponse> => {
     if (!extensionData) {
@@ -84,9 +89,4 @@ export const createPscExtension = async (request: Request, transaction: Transact
         logger.error(`Error creating PSC extension for transactionId="${transaction.id}": ${error}`);
         throw error;
     }
-};
-
-const extractRequestIdHeader = (request: Request): { [key: string]: string } => {
-    const requestId = request.headers["x-request-id"] as string;
-    return requestId ? {"x-request-id": requestId} : {};
 };

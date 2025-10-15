@@ -4,5 +4,7 @@
   "submit_request": "Cyflwyno’r cais",
   "back": "Yn ôl",
   "sign_out": "Allgofnodi",
-  "manage_account": "Rheoli eich cyfrif"
+  "manage_account": "Rheoli eich cyfrif",
+  "title_error": "Gwall: ",
+  "error_summary_title": "Mae yna broblem"
 }

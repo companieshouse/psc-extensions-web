@@ -1,10 +1,10 @@
-import {Request} from "express";
-import {Transaction} from "@companieshouse/api-sdk-node/dist/services/transaction/types";
-import {CompanyProfile} from "@companieshouse/api-sdk-node/dist/services/company-profile/types";
-import Resource, {ApiErrorResponse} from "@companieshouse/api-sdk-node/dist/services/resource";
-import {HttpStatusCode} from "axios";
-import {createOAuthApiClient} from "../lib/utils/api.client";
-import {getCompanyProfile} from "./companyProfileService";
+import { Request } from "express";
+import { Transaction } from "@companieshouse/api-sdk-node/dist/services/transaction/types";
+import { CompanyProfile } from "@companieshouse/api-sdk-node/dist/services/company-profile/types";
+import Resource, { ApiErrorResponse } from "@companieshouse/api-sdk-node/dist/services/resource";
+import { HttpStatusCode } from "axios";
+import { createOAuthApiClient } from "../lib/utils/api.client";
+import { getCompanyProfile } from "./companyProfileService";
 import logger from "../lib/logger";
 
 const REFERENCE = "PSC_EXTENSION";

@@ -43,6 +43,9 @@ njk.addGlobal("cdnUrlJs", process.env.CDN_URL_JS);
 njk.addGlobal("cdnHost", process.env.CDN_HOST);
 njk.addGlobal("chsUrl", process.env.CHS_URL);
 njk.addGlobal("accountUrl", process.env.ACCOUNT_URL);
+njk.addGlobal("PIWIK_SERVICE_NAME", process.env.PIWIK_SERVICE_NAME);
+njk.addGlobal("PIWIK_SITE_ID", process.env.PIWIK_SITE_ID);
+njk.addGlobal("PIWIK_URL", process.env.PIWIK_URL);
 njk.addGlobal("govukRebrand", true);
 njk.addGlobal("govukFrontendVersion", getGOVUKFrontendVersion());
 
@@ -62,14 +65,14 @@ app.use(LocalesMiddleware());
 app.use(i18nMiddleware);
 app.use(templateMiddleware);
 
+// Channel all requests through router dispatch
+routerDispatch(app);
+
 // Unhandled errors
 app.use((err: any, req: Request, res: Response, _next: NextFunction) => {
     logger.error(`${err.name} - appError: ${err.message} - ${err.stack}`);
     res.render("partials/error_500");
 });
-
-// Channel all requests through router dispatch
-routerDispatch(app);
 
 // Unhandled exceptions
 process.on("uncaughtException", (err: any) => {

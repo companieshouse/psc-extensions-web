@@ -1,7 +1,8 @@
-import {Request} from "express";
-import {CompanyProfile} from "@companieshouse/api-sdk-node/dist/services/company-profile/types";
-import {createOAuthApiClient} from "../lib/utils/api.client";
+import { Request } from "express";
+import { CompanyProfile } from "@companieshouse/api-sdk-node/dist/services/company-profile/types";
+import { createOAuthApiClient } from "../lib/utils/api.client";
 import logger from "../lib/logger";
+import { Headers } from "@companieshouse/api-sdk-node/dist/http";
 
 export const getCompanyProfile = async (req: Request, companyNumber: string): Promise<CompanyProfile> => {
     const oAuthApiClient = createOAuthApiClient(req.session);
@@ -16,3 +17,6 @@ export const getCompanyProfile = async (req: Request, companyNumber: string): Pr
 
     return response.resource;
 };
+
+export const extractRequestIdHeader = (req: Request): Headers =>
+    req.requestId ? { "X-Request-Id": req.requestId } : {};
