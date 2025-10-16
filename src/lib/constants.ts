@@ -47,3 +47,8 @@ export const ExtensionReasons = {
 export const validExtensionReasons = Object.values(ExtensionReasons);
 
 export type ExtensionReason = typeof ExtensionReasons[keyof typeof ExtensionReasons];
+
+// Used for api error responses
+export const Responses = {
+    PROBLEM_WITH_PSC_DATA: "We are currently unable to process an Extensions filing for this PSC"
+} as const;
