@@ -33,10 +33,11 @@ describe("GET extension confirmation router", () => {
     });
 
     it("should return status 200 and first extension confirmation screen with text", async () => {
-        const res = await router.get(PREFIXEDURLS.FIRST_EXTENSION_CONFIRMATION);
+        const res = await router.get(firstExtensionConfirmedUri);
         expect(res.status).toBe(200);
         expect(mocks.mockSessionMiddleware).toHaveBeenCalled();
         expect(mocks.mockAuthenticationMiddleware).toHaveBeenCalled();
+        expect(res.text).toContain("this service. You must do so before");
     });
 
     it("should return status 200 and second extension confirmation screen with text", async () => {
@@ -44,5 +45,6 @@ describe("GET extension confirmation router", () => {
         expect(res.status).toBe(200);
         expect(mocks.mockSessionMiddleware).toHaveBeenCalled();
         expect(mocks.mockAuthenticationMiddleware).toHaveBeenCalled();
+        expect(res.text).toContain("You cannot request another extension using this service.");
     });
 });

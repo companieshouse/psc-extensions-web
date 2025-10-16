@@ -18,4 +18,4 @@ export const getLocaleInfo = (locales: LocalesService, lang: string) => {
     };
 };
 
-export const getLocalesService = () => LocalesService.getInstance(LOCALES_PATH, LOCALES_ENABLED);
+export const getLocalesService = () => LocalesService.getInstance(LOCALES_PATH, LOCALES_ENABLED === "true");

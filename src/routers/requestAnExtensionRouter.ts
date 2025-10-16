@@ -1,8 +1,6 @@
 import { Request, Response, Router } from "express";
 import { RequestAnExtensionHandler } from "./handlers/requestAnExtensionHandler";
 import { handleExceptions } from "../utils/asyncHandler";
-import { addSearchParams } from "../utils/queryParams";
-import { PREFIXEDURLS } from "../lib/constants";
 
 const requestAnExtensionRouter: Router = Router();
 

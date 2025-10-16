@@ -2,7 +2,7 @@ import express, { Request, Response, NextFunction } from "express";
 import nunjucks from "nunjucks";
 import path from "path";
 import cookieParser from "cookie-parser";
-import { getGOVUKFrontendVersion, LocalesMiddleware } from "@companieshouse/ch-node-utils";
+import { getGOVUKFrontendVersion } from "@companieshouse/ch-node-utils";
 import logger from "./lib/logger";
 import routerDispatch from "./router.dispatch";
 import { sessionMiddleware } from "./middleware/session.middleware";
@@ -59,8 +59,6 @@ app.use(cookieParser());
 
 // initiate session and attach to middleware
 app.use(SERVICE_PATH_PREFIX, sessionMiddleware);
-
-app.use(LocalesMiddleware());
 app.use(templateMiddleware);
 
 // Channel all requests through router dispatch

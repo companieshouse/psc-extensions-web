@@ -18,7 +18,7 @@ export const env = {
 } as const;
 
 export const LOCALES_PATH = getEnvironmentValue("LOCALES_PATH", "locales");
-export const LOCALES_ENABLED = getEnvironmentValue("LOCALES_ENABLED", "true") === "true";
+export const LOCALES_ENABLED = getEnvironmentValue("LOCALES_ENABLED", "true");
 
 export const SERVICE_PATH_PREFIX = "/persons-with-significant-control-extensions";
 export const ROUTER_VIEWS_FOLDER_PATH = "router_views";

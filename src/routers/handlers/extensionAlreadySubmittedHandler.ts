@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { BaseViewData, GenericHandler, ViewModel } from "./abstractGenericHandler";
 import logger from "../../lib/logger";
-import { SERVICE_PATH_PREFIX, PREFIXEDURLS, PATHS, ROUTER_VIEWS_FOLDER_PATH, EXTERNALURLS } from "../../lib/constants";
+import { PREFIXEDURLS, PATHS, ROUTER_VIEWS_FOLDER_PATH, EXTERNALURLS } from "../../lib/constants";
 import { addSearchParams } from "../../utils/queryParams";
 import { getLocaleInfo, getLocalesService, selectLang } from "../../utils/localise";
 import { getCompanyProfile } from "../../services/companyProfileService";

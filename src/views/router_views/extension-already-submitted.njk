@@ -1,7 +1,5 @@
 {% extends "layouts/default.njk" %}
 
-{% from "govuk/components/button/macro.njk" import govukButton %}
-
 {% set title =  i18n.extension_already_submitted_title %}
 
 {% block main_content %}
@@ -9,9 +7,9 @@
 
    <h2 class="govuk-heading-m">{{ i18n.extension_already_submitted_subtitle }}</h2>
    <p class="govuk-body">{{ i18n.extension_already_submitted_links_info }}</p>
-<ul class="govuk-list govuk-list--bullet">
-        <li><a href="{{ companyLookupUrl }}" data-event-id="another-PSC-of-this-company-link" class="govuk-link">{{i18n.extension_confirmation_link_2}} {{ companyName }}</a></li>
-  <li><a href="/persons-with-significant-control-verification/start" data-event-id="PSC-of-different-company-link" class="govuk-link">{{i18n.extension_confirmation_link_1}}</a>.</li>
-</ul>
+   <ul class="govuk-list govuk-list--bullet">
+      <li><a href="{{ companyLookupUrl }}" data-event-id="another-PSC-of-this-company-link" class="govuk-link">{{i18n.extension_confirmation_link_2}} {{ companyName }}</a></li>
+      <li><a href="/persons-with-significant-control-verification/start" data-event-id="PSC-of-different-company-link" class="govuk-link">{{i18n.extension_confirmation_link_1}}</a>.</li>
+   </ul>
 
 {% endblock %}
