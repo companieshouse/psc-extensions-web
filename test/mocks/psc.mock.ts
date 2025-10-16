@@ -27,5 +27,5 @@ export const PSC_INDIVIDUAL: PersonWithSignificantControl = {
     },
     dateOfBirth: { year: "2000", month: "04" },
     etag: "etag",
-    notifiedOn: "2023-01-31",
+    notifiedOn: "2023-01-31"
 };

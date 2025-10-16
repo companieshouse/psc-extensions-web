@@ -13,19 +13,35 @@ jest.mock("../../../src/services/pscIndividualService", () => ({
         resource: PSC_INDIVIDUAL
     })
 }));
+
+jest.mock("../../../src/services/companyProfileService", () => ({
+    getCompanyProfile: () => ({
+        httpStatusCode: HttpStatusCode.Ok,
+        resource: {
+            companyName: "The Company"
+        }
+    })
+}));
+
 describe("GET extension confirmation router", () => {
 
     beforeEach(() => {
         jest.clearAllMocks();
     });
 
-    it("should check session and user auth before returning the page for 1st extension request", async () => {
-        await router.get(SERVICE_PATH_PREFIX + PATHS.FIRST_EXTENSION_CONFIRMATION);
+    it("should return status 200 and first extension confirmation screen with text", async () => {
+        const res = await router.get(SERVICE_PATH_PREFIX + PATHS.FIRST_EXTENSION_CONFIRMATION);
+        expect(res.status).toBe(200);
         expect(mocks.mockSessionMiddleware).toHaveBeenCalled();
         expect(mocks.mockAuthenticationMiddleware).toHaveBeenCalled();
+        expect(res.text).toContain("this service. You must do so before");
     });
 
-    it("should return status 200", async () => {
-        await router.get(SERVICE_PATH_PREFIX + PATHS.FIRST_EXTENSION_CONFIRMATION).expect(200);
+    it("should return status 200 and second extension confirmation screen with text", async () => {
+        const res = await router.get(SERVICE_PATH_PREFIX + PATHS.SECOND_EXTENSION_CONFIRMATION);
+        expect(res.status).toBe(200);
+        expect(mocks.mockSessionMiddleware).toHaveBeenCalled();
+        expect(mocks.mockAuthenticationMiddleware).toHaveBeenCalled();
+        expect(res.text).toContain("You cannot request another extension using this service.");
     });
 });
