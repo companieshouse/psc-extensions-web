@@ -22,6 +22,7 @@ export const LOCALES_ENABLED = getEnvironmentValue("LOCALES_ENABLED", "true") ==
 
 export const SERVICE_PATH_PREFIX = "/persons-with-significant-control-extensions";
 export const ROUTER_VIEWS_FOLDER_PATH = "router_views";
+export const VERIFICATIONPREFIX = "/persons-with-significant-control-verification";
 
 export const PATHS = {
     REQUEST_EXTENSION: "/requesting-an-extension",
@@ -54,6 +55,11 @@ export const ExtensionReasons = {
     NEED_SUPPORT: "NEED_SUPPORT",
     TECHNICAL_ISSUES: "TECHNICAL_ISSUES",
     INCORRECT_PSC_DETAILS: "INCORRECT_PSC_DETAILS"
+} as const;
+
+export const EXTERNALURLS = {
+    COMPANY_LOOKUP: "/company-lookup/search",
+    COMPANY_LOOKUP_FORWARD: VERIFICATIONPREFIX + "/confirm-company"
 } as const;
 
 export const validExtensionReasons = Object.values(ExtensionReasons);
