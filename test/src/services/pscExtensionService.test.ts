@@ -193,7 +193,7 @@ describe("pscExtensionService", () => {
             const response = await createPscExtension(req, TRANSACTION_ID, INITIAL_PSC_DATA).catch((error) => {
                 expect(error).toBeInstanceOf(DataIntegrityError);
                 expect(error).toHaveProperty("type", "PSC_DATA");
-                expect(error).toHaveProperty("message", `We are currently unable to process a Extensions filing for this PSC - Failed to POST PSC Extension for transactionId="${TRANSACTION_ID}"`);
+                expect(error).toHaveProperty("message", `We are currently unable to process an Extensions filing for this PSC - Failed to POST PSC Extension for transactionId="${TRANSACTION_ID}"`);
             });
 
             expect(response).toBeUndefined();

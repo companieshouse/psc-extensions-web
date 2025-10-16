@@ -50,5 +50,5 @@ export type ExtensionReason = typeof ExtensionReasons[keyof typeof ExtensionReas
 
 // Used for api error responses
 export const Responses = {
-    PROBLEM_WITH_PSC_DATA: "We are currently unable to process a Extensions filing for this PSC"
+    PROBLEM_WITH_PSC_DATA: "We are currently unable to process an Extensions filing for this PSC"
 } as const;
