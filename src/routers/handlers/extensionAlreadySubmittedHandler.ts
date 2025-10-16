@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { BaseViewData, GenericHandler, ViewModel } from "./abstractGenericHandler";
 import logger from "../../lib/logger";
-import { SERVICE_PATH_PREFIX, PATHS, ROUTER_VIEWS_FOLDER_PATH } from "../../lib/constants";
+import { SERVICE_PATH_PREFIX, PREFIXEDURLS, PATHS, ROUTER_VIEWS_FOLDER_PATH } from "../../lib/constants";
 import { getCompanyProfile } from "../../services/companyProfileService";
 
 interface PscViewData extends BaseViewData {
@@ -19,7 +19,7 @@ export class ExtensionAlreadySubmittedHandler extends GenericHandler<PscViewData
 
         return {
             ...baseViewData,
-            backURL: SERVICE_PATH_PREFIX + PATHS.FIRST_EXTENSION_CONFIRMATION + "?companyNumber=" + companyNumber + "&selectedPscId=" + selectedPscId + "%3F",
+            backURL: PREFIXEDURLS.FIRST_EXTENSION_CONFIRMATION + "?companyNumber=" + companyNumber + "&selectedPscId=" + selectedPscId + "%3F",
             templateName: PATHS.EXTENSION_ALREADY_SUBMITTED.slice(1),
             selectedPscId: selectedPscId,
             companyName: companyProfile.companyName,

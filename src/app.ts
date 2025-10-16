@@ -6,7 +6,6 @@ import { getGOVUKFrontendVersion, LocalesMiddleware } from "@companieshouse/ch-n
 import logger from "./lib/logger";
 import routerDispatch from "./router.dispatch";
 import { sessionMiddleware } from "./middleware/session.middleware";
-import { i18nMiddleware } from "./middleware/i18n.middleware";
 import { templateMiddleware } from "./middleware/template.middleware";
 import { SERVICE_PATH_PREFIX } from "./lib/constants";
 
@@ -62,7 +61,6 @@ app.use(cookieParser());
 app.use(SERVICE_PATH_PREFIX, sessionMiddleware);
 
 app.use(LocalesMiddleware());
-app.use(i18nMiddleware);
 app.use(templateMiddleware);
 
 // Channel all requests through router dispatch

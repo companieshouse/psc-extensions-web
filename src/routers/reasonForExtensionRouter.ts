@@ -1,7 +1,8 @@
 import { Request, Response, Router } from "express";
 import { ReasonForExtensionHandler } from "./handlers/reasonForExtensionHandler";
 import { handleExceptions } from "../utils/asyncHandler";
-import { PATHS, SERVICE_PATH_PREFIX } from "../lib/constants";
+import { PREFIXEDURLS } from "../lib/constants";
+import { addSearchParams } from "../utils/queryParams";
 
 const reasonForExtensionRouter: Router = Router();
 
@@ -20,9 +21,9 @@ reasonForExtensionRouter.post("/", handleExceptions(async (req: Request, res: Re
     } else {
         const companyNumber = req.query.companyNumber as string;
         const selectedPscId = req.query.selectedPscId as string;
-        res.redirect(SERVICE_PATH_PREFIX + PATHS.FIRST_EXTENSION_CONFIRMATION + "?companyNumber=" + companyNumber + "&selectedPscId=" + selectedPscId);
+        const lang = req.query.lang as string;
+        res.redirect(addSearchParams(PREFIXEDURLS.FIRST_EXTENSION_CONFIRMATION, { companyNumber, selectedPscId, lang }));
     }
-
 }));
 
 export default reasonForExtensionRouter;

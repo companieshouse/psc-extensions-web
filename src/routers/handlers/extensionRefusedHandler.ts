@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { BaseViewData, GenericHandler, ViewModel } from "./abstractGenericHandler";
 import logger from "../../lib/logger";
-import { SERVICE_PATH_PREFIX, PATHS, ROUTER_VIEWS_FOLDER_PATH } from "../../lib/constants";
+import { SERVICE_PATH_PREFIX, PREFIXEDURLS, PATHS, ROUTER_VIEWS_FOLDER_PATH } from "../../lib/constants";
 import { getPscIndividual } from "../../services/pscIndividualService";
 import { formatDateBorn } from "../handlers/requestAnExtensionHandler";
 
@@ -23,8 +23,8 @@ export class ExtensionRefusedHandler extends GenericHandler<PscViewData> {
             pscName: pscIndividual.resource?.name!,
             dateOfBirth: formatDateBorn(pscIndividual.resource?.dateOfBirth),
             // TODO: Add search params to backURL
-            backURL: SERVICE_PATH_PREFIX + PATHS.INDIVIDUAL_PSC_LIST,
-            templateName: PATHS.EXTENSION_REFUSED.slice(1)
+            backURL: PREFIXEDURLS.INDIVIDUAL_PSC_LIST,
+            templateName: PREFIXEDURLS.EXTENSION_REFUSED.slice(1)
         };
     }
 
