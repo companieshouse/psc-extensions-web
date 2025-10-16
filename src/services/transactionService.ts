@@ -9,8 +9,9 @@ import logger from "../lib/logger";
 import ApiClient from "@companieshouse/api-sdk-node/dist/client";
 import { HttpError } from "../lib/utils/error_manifests/httpError";
 
-const REFERENCE = "PSC_EXTENSION";
-const DESCRIPTION = "PSC extension request";
+export const REFERENCE = "PSC_EXTENSION";
+export const DESCRIPTION = "PSC extension request";
+export enum TransactionStatus { OPEN = "open", CLOSED = "closed" }
 
 export const getTransaction = async (req: Request, transactionId: string): Promise<Transaction> => {
     const apiClient: ApiClient = createOAuthApiClient(req.session);
