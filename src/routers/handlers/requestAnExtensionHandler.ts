@@ -52,7 +52,7 @@ export class RequestAnExtensionHandler extends GenericHandler<PscViewData> {
             companyNumber: companyProfile.companyNumber,
             selectedPscId: selectedPscId,
             dateOfBirth: formatDateBorn(pscIndividual.resource?.dateOfBirth),
-            backURL: resolveUrlTemplate(PATHS.INDIVIDUAL_PSC_LIST),
+            backURL: resolveUrlTemplate(PREFIXEDURLS.INDIVIDUAL_PSC_LIST),
             templateName: PREFIXEDURLS.REQUEST_EXTENSION.slice(1)
         };
     }

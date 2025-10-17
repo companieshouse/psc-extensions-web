@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import { BaseViewData, GenericHandler, ViewModel } from "./abstractGenericHandler";
 import logger from "../../lib/logger";
 import { addSearchParams } from "../../utils/queryParams";
-import { PATHS, ROUTER_VIEWS_FOLDER_PATH, EXTERNALURLS } from "../../lib/constants";
+import { PATHS, PREFIXEDURLS, ROUTER_VIEWS_FOLDER_PATH, EXTERNALURLS } from "../../lib/constants";
 import { getPscIndividual } from "../../services/pscIndividualService";
 import { getCompanyProfile } from "../../services/companyProfileService";
 import { getLocaleInfo, getLocalesService, selectLang } from "../../utils/localise";
@@ -48,7 +48,7 @@ export class ExtensionConfirmationHandler extends GenericHandler<PscViewData> {
             companyName: companyProfile.companyName,
             companyNumber: companyProfile.companyNumber,
             companyLookupUrl: addSearchParams(EXTERNALURLS.COMPANY_LOOKUP, { forward }),
-            differentPscInCompanyUrl: resolveUrlTemplate(PATHS.INDIVIDUAL_PSC_LIST)
+            differentPscInCompanyUrl: resolveUrlTemplate(PREFIXEDURLS.INDIVIDUAL_PSC_LIST)
 
         };
     }

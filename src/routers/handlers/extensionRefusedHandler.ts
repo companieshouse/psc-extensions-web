@@ -32,7 +32,7 @@ export class ExtensionRefusedHandler extends GenericHandler<PscViewData> {
             ...getLocaleInfo(locales, lang),
             pscName: pscIndividual.resource?.name!,
             dateOfBirth: formatDateBorn(pscIndividual.resource?.dateOfBirth),
-            backURL: resolveUrlTemplate(PATHS.INDIVIDUAL_PSC_LIST),
+            backURL: resolveUrlTemplate(PREFIXEDURLS.INDIVIDUAL_PSC_LIST),
             templateName: PREFIXEDURLS.EXTENSION_REFUSED.slice(1)
         };
     }
