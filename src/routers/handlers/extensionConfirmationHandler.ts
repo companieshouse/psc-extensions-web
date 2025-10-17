@@ -1,9 +1,11 @@
 import { Request, Response } from "express";
 import { BaseViewData, GenericHandler, ViewModel } from "./abstractGenericHandler";
 import logger from "../../lib/logger";
-import { PATHS, ROUTER_VIEWS_FOLDER_PATH } from "../../lib/constants";
+import { addSearchParams } from "../../utils/queryParams";
+import { PATHS, PREFIXED_URLS, ROUTER_VIEWS_FOLDER_PATH, EXTERNALURLS } from "../../lib/constants";
 import { getPscIndividual } from "../../services/pscIndividualService";
 import { getCompanyProfile } from "../../services/companyProfileService";
+import { getLocaleInfo, getLocalesService, selectLang } from "../../utils/localise";
 
 interface PscViewData extends BaseViewData {
     referenceNumber: string;
@@ -12,6 +14,8 @@ interface PscViewData extends BaseViewData {
     pscName: string;
     dateOfBirth: string;
     dueDate: string;
+    companyLookupUrl: string | null;
+    differentPscInCompanyUrl: string | null;
 }
 
 export class ExtensionConfirmationHandler extends GenericHandler<PscViewData> {
@@ -25,16 +29,27 @@ export class ExtensionConfirmationHandler extends GenericHandler<PscViewData> {
         }
 
         const baseViewData = await super.getViewData(req, res);
+        const lang = selectLang(req.query.lang);
+        const locales = getLocalesService();
         const companyNumber = req.query.companyNumber as string;
         const selectedPscId = req.query.selectedPscId as string;
         const pscIndividual = await getPscIndividual(req, companyNumber, selectedPscId);
         const companyProfile = await getCompanyProfile(req, companyNumber);
+        const forward = decodeURI(addSearchParams(EXTERNALURLS.COMPANY_LOOKUP_FORWARD, { companyNumber: "{companyNumber}", lang }));
+
+        function resolveUrlTemplate (PREFIXEDURL: string): string | null {
+            return addSearchParams(PREFIXEDURL, { companyNumber, lang });
+        }
         return {
             ...baseViewData,
+            ...getLocaleInfo(locales, lang),
             templateName: templateName,
             pscName: pscIndividual.resource?.name!,
             companyName: companyProfile.companyName,
-            companyNumber: companyProfile.companyNumber
+            companyNumber: companyProfile.companyNumber,
+            companyLookupUrl: addSearchParams(EXTERNALURLS.COMPANY_LOOKUP, { forward }),
+            differentPscInCompanyUrl: resolveUrlTemplate(PREFIXED_URLS.INDIVIDUAL_PSC_LIST)
+
         };
     }
 

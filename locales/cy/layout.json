@@ -1,5 +1,6 @@
 {
-  "service_name": "Darparwch fanylion gwiriad hunaniaeth ar gyfer person â rheolaeth arwyddocaol (PRhA) - GOV.UK",
+  "service_name": "Darparwch fanylion gwiriad hunaniaeth ar gyfer person â rheolaeth arwyddocaol (PRhA)",
+  "add_tab_govuk": " - GOV.UK",
 
   "phase_banner_new_service": "Mae hwn yn wasanaeth newydd - ",
   "phase_banner_feedback_link": "bydd eich adborth",

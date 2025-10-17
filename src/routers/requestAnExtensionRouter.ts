@@ -10,4 +10,10 @@ requestAnExtensionRouter.get("/", handleExceptions(async (req: Request, res: Res
     res.render(templatePath, viewData);
 }));
 
+requestAnExtensionRouter.post("/", handleExceptions(async (req: Request, res: Response) => {
+    const handler = new RequestAnExtensionHandler();
+    const redirectUrl = await handler.executePost(req, res);
+    res.redirect(redirectUrl);
+}));
+
 export default requestAnExtensionRouter;
