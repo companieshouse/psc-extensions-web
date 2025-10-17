@@ -43,7 +43,7 @@ export class NewSubmissionHandler extends GenericHandler<BaseViewData> {
 
     public async createNewSubmission (request: Request, transaction: Transaction): Promise<Resource<PscExtension> | ApiErrorResponse> {
         const companyNumber = request.query.companyNumber as string;
-        const pscNotificationId = request.query.selectedPscId as string;
+        const pscNotificationId = request.query.pscNotificationId as string;
         const extension: PscExtensionData = {
             companyNumber,
             pscNotificationId

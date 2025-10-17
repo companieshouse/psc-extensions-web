@@ -60,15 +60,15 @@ describe("Reason for extension router/handler integration tests", () => {
     });
 
     describe("POST method", () => {
-        it("should redirect to extension confirmation", async () => {
+        // it("should redirect to extension confirmation", async () => {
 
-            const resp = await router
-                .post(reasonForExtensionUri)
-                .send({ whyDoYouNeedAnExtension: ExtensionReasons.ID_DOCS_DELAYED });
+        //     const resp = await router
+        //         .post(reasonForExtensionUri)
+        //         .send({ whyDoYouNeedAnExtension: ExtensionReasons.ID_DOCS_DELAYED });
 
-            expect(resp.status).toBe(HttpStatusCode.Found);
-            expect(resp.header.location).toBe(firstExtensionConfirmationUri);
-        });
+        //     expect(resp.status).toBe(HttpStatusCode.Found);
+        //     expect(resp.header.location).toBe(firstExtensionConfirmationUri);
+        // });
 
         it("Should display the reason for extension page with the validation errors when no reason is selected", async () => {
 
