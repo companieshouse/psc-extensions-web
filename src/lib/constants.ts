@@ -28,6 +28,7 @@ export const PATHS = {
     HEALTHCHECK: "/healthcheck",
     EXTENSION_REFUSED: "/you-cannot-request-an-extension",
     REASON_FOR_EXTENSION: "/extension-reason",
+    NEW_SUBMISSION: "/new-submission",
     FIRST_EXTENSION_CONFIRMATION: "/first-extension-request-successful",
     SECOND_EXTENSION_CONFIRMATION: "/second-extension-request-successful",
     EXTENSION_CONFIRMATION: "/extension-confirmation",
