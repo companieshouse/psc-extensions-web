@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { BaseViewData, GenericHandler, ViewModel } from "./abstractGenericHandler";
 import logger from "../../lib/logger";
-import { PREFIXEDURLS, PATHS, ROUTER_VIEWS_FOLDER_PATH } from "../../lib/constants";
+import { PREFIXED_URLS, PATHS, ROUTER_VIEWS_FOLDER_PATH } from "../../lib/constants";
 import { getPscIndividual } from "../../services/pscIndividualService";
 import { formatDateBorn } from "../handlers/requestAnExtensionHandler";
 import { getLocaleInfo, getLocalesService, selectLang } from "../../utils/localise";
@@ -32,8 +32,8 @@ export class ExtensionRefusedHandler extends GenericHandler<PscViewData> {
             ...getLocaleInfo(locales, lang),
             pscName: pscIndividual.resource?.name!,
             dateOfBirth: formatDateBorn(pscIndividual.resource?.dateOfBirth),
-            backURL: resolveUrlTemplate(PREFIXEDURLS.INDIVIDUAL_PSC_LIST),
-            templateName: PREFIXEDURLS.EXTENSION_REFUSED.slice(1)
+            backURL: resolveUrlTemplate(PREFIXED_URLS.INDIVIDUAL_PSC_LIST),
+            templateName: PREFIXED_URLS.EXTENSION_REFUSED.slice(1)
         };
     }
 

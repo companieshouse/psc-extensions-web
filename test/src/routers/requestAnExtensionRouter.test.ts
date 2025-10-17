@@ -2,15 +2,15 @@ import * as cheerio from "cheerio";
 import mocks from "../../mocks/all.middleware.mock";
 import supertest from "supertest";
 import app from "../../../src/app";
-import { PREFIXEDURLS } from "../../../src/lib/constants";
+import { PREFIXED_URLS } from "../../../src/lib/constants";
 import { RequestAnExtensionHandler } from "../../../src/routers/handlers/requestAnExtensionHandler";
 import { HttpStatusCode } from "axios";
 import { COMPANY_NUMBER, PSC_INDIVIDUAL, PSC_NOTIFICATION_ID } from "../../mocks/psc.mock";
 
 const router = supertest(app);
 const uriQueryParams = `?companyNumber=${COMPANY_NUMBER}&selectedPscId=${PSC_NOTIFICATION_ID}&lang=en`;
-const requestAnExtensionUri = `${PREFIXEDURLS.REQUEST_EXTENSION}${uriQueryParams}`;
-const reasonForExtensionUri = `${PREFIXEDURLS.REASON_FOR_EXTENSION}${uriQueryParams}`;
+const requestAnExtensionUri = `${PREFIXED_URLS.REQUEST_EXTENSION}${uriQueryParams}`;
+const reasonForExtensionUri = `${PREFIXED_URLS.REASON_FOR_EXTENSION}${uriQueryParams}`;
 
 jest.mock("../../../src/services/pscIndividualService", () => ({
     getPscIndividual: () => ({

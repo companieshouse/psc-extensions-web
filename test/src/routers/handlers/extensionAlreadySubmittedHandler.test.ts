@@ -1,5 +1,5 @@
 import { HttpStatusCode } from "axios";
-import { PATHS, ROUTER_VIEWS_FOLDER_PATH, PREFIXEDURLS } from "../../../../src/lib/constants";
+import { PATHS, ROUTER_VIEWS_FOLDER_PATH, PREFIXED_URLS } from "../../../../src/lib/constants";
 import { ExtensionAlreadySubmittedHandler } from "../../../../src/routers/handlers/extensionAlreadySubmittedHandler";
 import { PSC_INDIVIDUAL } from "../../../mocks/psc.mock";
 
@@ -40,7 +40,7 @@ describe("ExtensionAlreadySubmittedHandler", () => {
         it("should return baseViewData with extension already submitted page", async () => {
             const handler = new TestableExtensionSubmittedHandler();
             const req = {
-                originalUrl: PREFIXEDURLS.EXTENSION_ALREADY_SUBMITTED,
+                originalUrl: PREFIXED_URLS.EXTENSION_ALREADY_SUBMITTED,
                 query: {
                     companyNumber: "12345",
                     selectedPscId: "123"
@@ -58,7 +58,7 @@ describe("ExtensionAlreadySubmittedHandler", () => {
         it("should return template path and data within the Url for extension already submitted page", async () => {
             const handler = new TestableExtensionSubmittedHandler();
             const req = {
-                originalUrl: PREFIXEDURLS.EXTENSION_ALREADY_SUBMITTED,
+                originalUrl: PREFIXED_URLS.EXTENSION_ALREADY_SUBMITTED,
                 query: {
                     companyNumber: "12345",
                     selectedPscId: "123"

@@ -9,13 +9,20 @@ export const selectLang = (lang: any): string => {
     }
 };
 
-export const getLocaleInfo = (locales: LocalesService, lang: string) => {
+export interface LocaleInfo {
+    languageEnabled: boolean;
+    languages: ReturnType<typeof LanguageNames.sourceLocales>;
+    i18n: Record<string, string>;
+    lang: string;
+}
+
+export const getLocaleInfo = (locales: LocalesService, lang: string): LocaleInfo => {
     return {
-        languageEnabled: locales.enabled,
+        languageEnabled: Boolean(locales.enabled),
         languages: LanguageNames.sourceLocales(locales.localesFolder),
         i18n: locales.i18nCh.resolveNamespacesKeys(lang),
         lang
     };
 };
 
-export const getLocalesService = () => LocalesService.getInstance(LOCALES_PATH, LOCALES_ENABLED === "true");
+export const getLocalesService = (): LocalesService => LocalesService.getInstance(LOCALES_PATH, LOCALES_ENABLED === "true");

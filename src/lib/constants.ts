@@ -22,7 +22,7 @@ export const LOCALES_ENABLED = getEnvironmentValue("LOCALES_ENABLED", "true");
 
 export const SERVICE_PATH_PREFIX = "/persons-with-significant-control-extensions";
 export const ROUTER_VIEWS_FOLDER_PATH = "router_views";
-export const VERIFICATIONPREFIX = "/persons-with-significant-control-verification";
+export const VERIFICATION_PREFIX = "/persons-with-significant-control-verification";
 
 export const PATHS = {
     REQUEST_EXTENSION: "/requesting-an-extension",
@@ -36,7 +36,7 @@ export const PATHS = {
     INDIVIDUAL_PSC_LIST: "/individual/psc-list?"
 } as const;
 
-export const PREFIXEDURLS = {
+export const PREFIXED_URLS = {
     REQUEST_EXTENSION: SERVICE_PATH_PREFIX + PATHS.REQUEST_EXTENSION,
     HEALTHCHECK: SERVICE_PATH_PREFIX + PATHS.HEALTHCHECK,
     EXTENSION_REFUSED: SERVICE_PATH_PREFIX + PATHS.EXTENSION_REFUSED,
@@ -45,7 +45,7 @@ export const PREFIXEDURLS = {
     SECOND_EXTENSION_CONFIRMATION: SERVICE_PATH_PREFIX + PATHS.SECOND_EXTENSION_CONFIRMATION,
     EXTENSION_CONFIRMATION: SERVICE_PATH_PREFIX + PATHS.EXTENSION_CONFIRMATION,
     EXTENSION_ALREADY_SUBMITTED: SERVICE_PATH_PREFIX + PATHS.EXTENSION_ALREADY_SUBMITTED,
-    INDIVIDUAL_PSC_LIST: VERIFICATIONPREFIX + PATHS.INDIVIDUAL_PSC_LIST
+    INDIVIDUAL_PSC_LIST: VERIFICATION_PREFIX + PATHS.INDIVIDUAL_PSC_LIST
 } as const;
 
 export const ExtensionReasons = {
@@ -59,7 +59,7 @@ export const ExtensionReasons = {
 
 export const EXTERNALURLS = {
     COMPANY_LOOKUP: "/company-lookup/search",
-    COMPANY_LOOKUP_FORWARD: VERIFICATIONPREFIX + "/confirm-company"
+    COMPANY_LOOKUP_FORWARD: VERIFICATION_PREFIX + "/confirm-company"
 } as const;
 
 export const validExtensionReasons = Object.values(ExtensionReasons);

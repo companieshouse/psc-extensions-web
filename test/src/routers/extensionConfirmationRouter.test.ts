@@ -1,14 +1,14 @@
 import mocks from "../../mocks/all.middleware.mock";
 import supertest from "supertest";
 import app from "../../../src/app";
-import { PREFIXEDURLS } from "../../../src/lib/constants";
+import { PREFIXED_URLS } from "../../../src/lib/constants";
 import { HttpStatusCode } from "axios";
 import { COMPANY_NUMBER, PSC_INDIVIDUAL, PSC_NOTIFICATION_ID } from "../../mocks/psc.mock";
 
 const router = supertest(app);
 const uriQueryParams = `?companyNumber=${COMPANY_NUMBER}&selectedPscId=${PSC_NOTIFICATION_ID}&lang=en`;
-const firstExtensionConfirmedUri = `${PREFIXEDURLS.FIRST_EXTENSION_CONFIRMATION}${uriQueryParams}`;
-const secondExtensionConfirmedUri = `${PREFIXEDURLS.SECOND_EXTENSION_CONFIRMATION}${uriQueryParams}`;
+const firstExtensionConfirmedUri = `${PREFIXED_URLS.FIRST_EXTENSION_CONFIRMATION}${uriQueryParams}`;
+const secondExtensionConfirmedUri = `${PREFIXED_URLS.SECOND_EXTENSION_CONFIRMATION}${uriQueryParams}`;
 
 jest.mock("../../../src/services/pscIndividualService", () => ({
     getPscIndividual: () => ({

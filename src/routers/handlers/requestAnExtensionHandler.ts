@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { BaseViewData, GenericHandler, ViewModel } from "./abstractGenericHandler";
 import logger from "../../lib/logger";
-import { PREFIXEDURLS, PATHS, ROUTER_VIEWS_FOLDER_PATH } from "../../lib/constants";
+import { PREFIXED_URLS, PATHS, ROUTER_VIEWS_FOLDER_PATH } from "../../lib/constants";
 import { getLocaleInfo, getLocalesService, selectLang } from "../../utils/localise";
 import { addSearchParams } from "../../utils/queryParams";
 import { getPscIndividual } from "../../services/pscIndividualService";
@@ -52,8 +52,8 @@ export class RequestAnExtensionHandler extends GenericHandler<PscViewData> {
             companyNumber: companyProfile.companyNumber,
             selectedPscId: selectedPscId,
             dateOfBirth: formatDateBorn(pscIndividual.resource?.dateOfBirth),
-            backURL: resolveUrlTemplate(PREFIXEDURLS.INDIVIDUAL_PSC_LIST),
-            templateName: PREFIXEDURLS.REQUEST_EXTENSION.slice(1)
+            backURL: resolveUrlTemplate(PREFIXED_URLS.INDIVIDUAL_PSC_LIST),
+            templateName: PREFIXED_URLS.REQUEST_EXTENSION.slice(1)
         };
     }
 
@@ -70,6 +70,6 @@ export class RequestAnExtensionHandler extends GenericHandler<PscViewData> {
         const companyNumber = req.query.companyNumber as string;
         const selectedPscId = req.query.selectedPscId as string;
         const lang = selectLang(req.query.lang);
-        return addSearchParams(PREFIXEDURLS.REASON_FOR_EXTENSION, { companyNumber, selectedPscId, lang });
+        return addSearchParams(PREFIXED_URLS.REASON_FOR_EXTENSION, { companyNumber, selectedPscId, lang });
     }
 }
