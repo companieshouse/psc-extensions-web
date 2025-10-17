@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { BaseViewData, GenericHandler, ViewModel } from "./abstractGenericHandler";
 import logger from "../../lib/logger";
-import { PREFIXED_URLS, PATHS, ROUTER_VIEWS_FOLDER_PATH, ExtensionReasons } from "../../lib/constants";
+import { PREFIXED_URLS, PATHS, ROUTER_VIEWS_FOLDER_PATH, EXTENSION_REASONS } from "../../lib/constants";
 import { PscExtensionsFormsValidator } from "../../lib/validation/form-validators/pscExtensions";
 import { getLocaleInfo, getLocalesService, selectLang } from "../../utils/localise";
 import { addSearchParams } from "../../utils/queryParams";
@@ -9,7 +9,7 @@ import { getPscIndividual } from "../../services/pscIndividualService";
 import { formatDateBorn } from "../handlers/requestAnExtensionHandler";
 
 interface ExtensionReasonViewData extends BaseViewData {
-    reasons: typeof ExtensionReasons;
+    reasons: typeof EXTENSION_REASONS;
     pscName: string;
     dateOfBirth: string;
     selectedPscId: string;
@@ -40,7 +40,7 @@ export class ReasonForExtensionHandler extends GenericHandler<BaseViewData> {
             companyNumber: companyNumber,
             backURL: resolveUrlTemplate(PREFIXED_URLS.REQUEST_EXTENSION),
             templateName: PREFIXED_URLS.REASON_FOR_EXTENSION.slice(1),
-            reasons: ExtensionReasons
+            reasons: EXTENSION_REASONS
         };
     }
 

@@ -1,7 +1,7 @@
 import mocks from "../../mocks/all.middleware.mock";
 import supertest from "supertest";
 import app from "../../../src/app";
-import { SERVICE_PATH_PREFIX, PATHS, ExtensionReasons, validExtensionReasons } from "../../../src/lib/constants";
+import { SERVICE_PATH_PREFIX, PATHS, EXTENSION_REASONS, validExtensionReasons } from "../../../src/lib/constants";
 import { HttpStatusCode } from "axios";
 import * as cheerio from "cheerio";
 import { COMPANY_NUMBER, PSC_INDIVIDUAL, PSC_NOTIFICATION_ID } from "../../mocks/psc.mock";
@@ -64,7 +64,7 @@ describe("Reason for extension router/handler integration tests", () => {
 
             const resp = await router
                 .post(reasonForExtensionUri)
-                .send({ whyDoYouNeedAnExtension: ExtensionReasons.ID_DOCS_DELAYED });
+                .send({ whyDoYouNeedAnExtension: EXTENSION_REASONS.ID_DOCS_DELAYED });
 
             expect(resp.status).toBe(HttpStatusCode.Found);
             expect(resp.header.location).toBe(firstExtensionConfirmationUri);

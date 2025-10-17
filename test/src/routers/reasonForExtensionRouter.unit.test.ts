@@ -1,5 +1,5 @@
 import { ReasonForExtensionHandler } from "../../../src/routers/handlers/reasonForExtensionHandler";
-import { ExtensionReasons } from "../../../src/lib/constants";
+import { EXTENSION_REASONS } from "../../../src/lib/constants";
 import { Request, Response } from "express";
 import { HttpStatusCode } from "axios";
 import { COMPANY_NUMBER, PSC_ID, PSC_INDIVIDUAL } from "../../mocks/psc.mock";
@@ -26,7 +26,7 @@ describe("Reason for extension handler", () => {
                     COMPANY_NUMBER,
                     PSC_ID
                 },
-                body: { whyDoYouNeedAnExtension: ExtensionReasons.NEED_SUPPORT }
+                body: { whyDoYouNeedAnExtension: EXTENSION_REASONS.NEED_SUPPORT }
             };
 
             const handler = new ReasonForExtensionHandler();

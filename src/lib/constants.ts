@@ -48,7 +48,7 @@ export const PREFIXED_URLS = {
     INDIVIDUAL_PSC_LIST: VERIFICATION_PREFIX + PATHS.INDIVIDUAL_PSC_LIST
 } as const;
 
-export const ExtensionReasons = {
+export const EXTENSION_REASONS = {
     ID_DOCS_DELAYED: "ID_DOCS_DELAYED",
     POST_OFFICE_VERIFICATION: "POST_OFFICE_VERIFICATION",
     MEDICAL_TREATMENT: "MEDICAL_TREATMENT",
@@ -62,9 +62,9 @@ export const EXTERNALURLS = {
     COMPANY_LOOKUP_FORWARD: VERIFICATION_PREFIX + "/confirm-company"
 } as const;
 
-export const validExtensionReasons = Object.values(ExtensionReasons);
+export const validExtensionReasons = Object.values(EXTENSION_REASONS);
 
-export type ExtensionReason = typeof ExtensionReasons[keyof typeof ExtensionReasons];
+export type ExtensionReason = typeof EXTENSION_REASONS[keyof typeof EXTENSION_REASONS];
 
 // Used for api error responses
 export const Responses = {
