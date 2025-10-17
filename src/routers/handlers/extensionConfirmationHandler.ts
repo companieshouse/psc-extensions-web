@@ -14,7 +14,8 @@ interface PscViewData extends BaseViewData {
     pscName: string;
     dateOfBirth: string;
     dueDate: string;
-    companyLookupUrl: string;
+    companyLookupUrl: string | null;
+    differentPscInCompanyUrl: string | null;
 }
 
 export class ExtensionConfirmationHandler extends GenericHandler<PscViewData> {
@@ -35,6 +36,10 @@ export class ExtensionConfirmationHandler extends GenericHandler<PscViewData> {
         const pscIndividual = await getPscIndividual(req, companyNumber, selectedPscId);
         const companyProfile = await getCompanyProfile(req, companyNumber);
         const forward = decodeURI(addSearchParams(EXTERNALURLS.COMPANY_LOOKUP_FORWARD, { companyNumber: "{companyNumber}", lang }));
+
+        function resolveUrlTemplate (PREFIXEDURL: string): string | null {
+            return addSearchParams(PREFIXEDURL, { companyNumber, lang });
+        }
         return {
             ...baseViewData,
             ...getLocaleInfo(locales, lang),
@@ -42,7 +47,8 @@ export class ExtensionConfirmationHandler extends GenericHandler<PscViewData> {
             pscName: pscIndividual.resource?.name!,
             companyName: companyProfile.companyName,
             companyNumber: companyProfile.companyNumber,
-            companyLookupUrl: addSearchParams(EXTERNALURLS.COMPANY_LOOKUP, { forward })
+            companyLookupUrl: addSearchParams(EXTERNALURLS.COMPANY_LOOKUP, { forward }),
+            differentPscInCompanyUrl: resolveUrlTemplate(PATHS.INDIVIDUAL_PSC_LIST)
 
         };
     }

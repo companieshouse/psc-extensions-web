@@ -23,14 +23,18 @@ export class ExtensionAlreadySubmittedHandler extends GenericHandler<PscViewData
         const companyProfile = await getCompanyProfile(req, companyNumber);
         const forward = decodeURI(addSearchParams(EXTERNALURLS.COMPANY_LOOKUP_FORWARD, { companyNumber: "{companyNumber}", lang }));
 
+        function resolveUrlTemplate (PREFIXEDURL: string): string | null {
+            return addSearchParams(PREFIXEDURL, { companyNumber, selectedPscId, lang });
+        }
+
         return {
             ...baseViewData,
             ...getLocaleInfo(locales, lang),
-            backURL: PREFIXEDURLS.FIRST_EXTENSION_CONFIRMATION + "?companyNumber=" + companyNumber + "&selectedPscId=" + selectedPscId + "%3F",
-            templateName: PATHS.EXTENSION_ALREADY_SUBMITTED.slice(1),
             selectedPscId: selectedPscId,
             companyName: companyProfile.companyName,
             companyNumber: companyProfile.companyNumber,
+            backURL: resolveUrlTemplate(PREFIXEDURLS.FIRST_EXTENSION_CONFIRMATION),
+            templateName: PATHS.EXTENSION_ALREADY_SUBMITTED.slice(1),
             companyLookupUrl: addSearchParams(EXTERNALURLS.COMPANY_LOOKUP, { forward })
         };
     }
