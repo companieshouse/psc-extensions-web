@@ -11,6 +11,7 @@ interface PscViewData extends BaseViewData {
     companyNumber: string;
     selectedPscId: string;
     companyLookupUrl: string;
+    differentPscInCompanyUrl: string | null;
 }
 export class ExtensionAlreadySubmittedHandler extends GenericHandler<PscViewData> {
 
@@ -35,7 +36,8 @@ export class ExtensionAlreadySubmittedHandler extends GenericHandler<PscViewData
             companyNumber: companyProfile.companyNumber,
             backURL: resolveUrlTemplate(PREFIXEDURLS.FIRST_EXTENSION_CONFIRMATION),
             templateName: PATHS.EXTENSION_ALREADY_SUBMITTED.slice(1),
-            companyLookupUrl: addSearchParams(EXTERNALURLS.COMPANY_LOOKUP, { forward })
+            companyLookupUrl: addSearchParams(EXTERNALURLS.COMPANY_LOOKUP, { forward }),
+            differentPscInCompanyUrl: resolveUrlTemplate(PATHS.INDIVIDUAL_PSC_LIST)
         };
     }
 
