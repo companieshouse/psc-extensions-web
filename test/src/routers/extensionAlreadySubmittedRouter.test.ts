@@ -1,7 +1,7 @@
 import mocks from "../../mocks/all.middleware.mock";
 import supertest from "supertest";
 import app from "../../../src/app";
-import { SERVICE_PATH_PREFIX, PATHS, PREFIXEDURLS } from "../../../src/lib/constants";
+import { PREFIXEDURLS } from "../../../src/lib/constants";
 
 const router = supertest(app);
 
