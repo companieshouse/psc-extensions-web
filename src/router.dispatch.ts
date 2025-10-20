@@ -8,7 +8,6 @@ import healthCheckRouter from "./routers/healthCheckRouter";
 import extensionConfirmationRouter from "./routers/extensionConfirmationRouter";
 import extensionAlreadySubmittedRouter from "./routers/extensionAlreadySubmittedRouter";
 import { SERVICE_PATH_PREFIX, PATHS } from "./lib/constants";
-import newSubmissionRouter from "./routers/newSubmissionRouter";
 
 const routerDispatch = (app: Application) => {
     const router = Router();
@@ -17,7 +16,6 @@ const routerDispatch = (app: Application) => {
     router.use(PATHS.HEALTHCHECK, healthCheckRouter);
     router.use(PATHS.REQUEST_EXTENSION, authenticate, requestAnExtensionRouter);
     router.use(PATHS.EXTENSION_REFUSED, authenticate, extensionRefusedRouter);
-    router.use(PATHS.NEW_SUBMISSION, authenticate, newSubmissionRouter);
     router.use(PATHS.REASON_FOR_EXTENSION, authenticate, reasonForExtensionRouter);
     router.use(PATHS.FIRST_EXTENSION_CONFIRMATION, authenticate, extensionConfirmationRouter);
     router.use(PATHS.SECOND_EXTENSION_CONFIRMATION, authenticate, extensionConfirmationRouter);

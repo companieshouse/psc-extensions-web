@@ -19,6 +19,7 @@ interface ExtensionReasonViewData extends BaseViewData {
     dateOfBirth: string;
     selectedPscId: string;
     companyNumber: string;
+    pscNotificationId?: string
 }
 
 export class ReasonForExtensionHandler extends GenericHandler<BaseViewData> {
@@ -69,46 +70,48 @@ export class ReasonForExtensionHandler extends GenericHandler<BaseViewData> {
 
         // create a new submission for the company number provided
         const resource = await this.createNewSubmission(req, transaction);
-        const companyNumber = req.query.companyNumber as string;
-        const pscNotificationId = req.query.pscNotificationId as string;
-
         let nextPageUrl = "";
 
         if (this.isErrorResponse(resource)) {
-            res.redirect(SERVICE_PATH_PREFIX + PATHS.EXTENSION_REFUSED + "/?companyNumber=" + companyNumber + "selectedPscId=" + pscNotificationId);
-            //  return {
-            //     templatePath: ROUTER_VIEWS_FOLDER_PATH + PATHS.REASON_FOR_EXTENSION,
-            //     viewData
-            // };
+
+            //error
+
+             return {
+                templatePath: ROUTER_VIEWS_FOLDER_PATH + PATHS.REASON_FOR_EXTENSION,
+                viewData
+            };
         } else {
             const pscExtension = resource.resource;
             logger.info(`CREATED New Resource ${pscExtension?.links.self}`);
 
             // set up redirect to confirmation screen
-            const regex = "persons-with-significant-control-extension/(.*)$";
-            const resourceId = pscExtension?.links.self.match(regex);
-            nextPageUrl = SERVICE_PATH_PREFIX + PATHS.FIRST_EXTENSION_CONFIRMATION + `/${transaction.id}/${resourceId?.[1]}`;
+            nextPageUrl = SERVICE_PATH_PREFIX + PATHS.FIRST_EXTENSION_CONFIRMATION;
+            
+            return {
+                templatePath: ROUTER_VIEWS_FOLDER_PATH + PATHS.REASON_FOR_EXTENSION,
+                viewData,
 
-            // send the redirect
-            const redirectUrl = `${nextPageUrl}?companyNumber=${companyNumber}+selectedPscId=${pscNotificationId}`;
-            res.redirect(redirectUrl);
-
+            };
         }
-        return {
-            templatePath: ROUTER_VIEWS_FOLDER_PATH + PATHS.REASON_FOR_EXTENSION,
-            viewData
-        };
 
     }
 
     public async createNewSubmission (request: Request, transaction: Transaction): Promise<Resource<PscExtension> | ApiErrorResponse> {
 
+        const selectedPscId = request.query.selectedPscId as string;
         const companyNumber = request.query.companyNumber as string;
-        const pscNotificationId = request.query.pscNotificationId as string;
+        const selectedOption = request.body?.whyDoYouNeedAnExtension;
+
         const extension: PscExtensionData = {
             companyNumber,
-            pscNotificationId
+            pscNotificationId: selectedPscId,
+              extensionDetails: {
+                extensionReason: selectedOption,
+                extensionStatus: "",
+                extensionRequestDate: new Date().toISOString()
+            }
         };
+
         return createPscExtension(request, transaction.id!, extension);
     }
 
