@@ -17,6 +17,17 @@ jest.mock("../../../src/services/pscIndividualService", () => ({
         resource: PSC_INDIVIDUAL
     })
 }));
+jest.mock("../../../src/services/transactionService", () => ({
+    postTransaction: jest.fn().mockResolvedValue({ id: "11111-22222-33333" })
+}));
+jest.mock("../../../src/services/pscExtensionService", () => ({
+    createPscExtension: jest.fn().mockResolvedValue({
+        resource: {
+            links: { self: "persons-with-significant-control-extension/11111-22222-33333" }
+        }
+    })
+}));
+
 describe("Reason for extension router/handler integration tests", () => {
 
     describe("GET method", () => {
@@ -66,7 +77,8 @@ describe("Reason for extension router/handler integration tests", () => {
                 .post(reasonForExtensionUri)
                 .send({ whyDoYouNeedAnExtension: EXTENSION_REASONS.ID_DOCS_DELAYED });
 
-            expect(resp.status).toBe(HttpStatusCode.Ok);
+            expect(resp.status).toBe(HttpStatusCode.Found);
+            expect(resp.header.location).toBe(firstExtensionConfirmationUri);
         });
 
         it("Should display the reason for extension page with the validation errors when no reason is selected", async () => {
