@@ -6,6 +6,7 @@ import { HttpError } from "../lib/utils/error_manifests/httpError";
 import { HttpStatusCode } from "axios";
 import logger from "../lib/logger";
 import { addSearchParams } from "../utils/queryParams";
+import { ValidationStatusResponse } from "@companieshouse/api-sdk-node/dist/services/psc-extensions-link/types";
 
 /**
  * Middleware that validates PSC extension requests.
@@ -36,31 +37,24 @@ export const validateExtensionRequest = handleExceptions(async (req: Request, re
     }
 
     try {
-        // Checks if the extension request is valid (boolean check)
-        const validationResponse = await pscExtensionService.getIsPscExtensionValid(req, transactionId, pscNotificationId, companyNumber);
-        const isValid = validationResponse.isValid;
+        const validationResponse: ValidationStatusResponse = await pscExtensionService.getIsPscExtensionValid(req, transactionId, pscNotificationId, companyNumber);
+        const isValid = validationResponse.valid;
 
-        // If not valid (false), redirect to extension refused screen
         if (!isValid) {
             return res.redirect(addSearchParams(PREFIXED_URLS.EXTENSION_REFUSED, { companyNumber, selectedPscId: pscNotificationId }));
         }
 
-        // If valid (true), check the extension count of the PSC
         const extensionCount = await pscExtensionService.getPscExtensionCount(req, pscNotificationId);
 
         if (extensionCount === 0) {
-            // Redirect to the start screen of the PSC Extension service (First extension request)
             return res.redirect(addSearchParams(PREFIXED_URLS.REQUEST_EXTENSION, { companyNumber, selectedPscId: pscNotificationId }));
         } else if (extensionCount === 1) {
-            // Redirect to extension already submitted screen
-            // This is a work in progress to be complete -> This should redirect to the second extension start screen once developed
+            // TODO: This is a work in progress to be completed -> This should redirect to the second extension start screen once developed
             return res.redirect(addSearchParams(PREFIXED_URLS.EXTENSION_ALREADY_SUBMITTED, { companyNumber, selectedPscId: pscNotificationId }));
         } else {
-            // extensionCount >= 2: Redirect to extension refused screen (maximum number of extension requests submitted by the PSC for this web app)
             return res.redirect(addSearchParams(PREFIXED_URLS.EXTENSION_REFUSED, { companyNumber, selectedPscId: pscNotificationId }));
         }
     } catch (error) {
-        // If any service call fails, pass the error to the partials/error_500 screen
         logger.error(`Error in validateExtensionRequest middleware: ${error}`);
         return next(error);
     }

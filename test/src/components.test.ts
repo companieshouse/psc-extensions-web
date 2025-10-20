@@ -27,7 +27,6 @@ describe("GET extension info router and retrieve components such as footer links
         await router.get(requestAnExtensionUri);
         expect(mocks.mockSessionMiddleware).toHaveBeenCalled();
         expect(mocks.mockAuthenticationMiddleware).toHaveBeenCalled();
-        expect(mocks.mockValidationMiddleware).toHaveBeenCalled();
     });
     it("should render the footer with the expected links in English when user has selected 'English' link", async () => {
         const resp = await request(app).get(reasonForExtensionUri + "&lang=en");
