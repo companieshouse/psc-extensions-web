@@ -49,7 +49,7 @@ export const validateExtensionRequest = handleExceptions(async (req: Request, re
         if (extensionCount === 0) {
             return res.redirect(addSearchParams(PREFIXED_URLS.REQUEST_EXTENSION, { companyNumber, selectedPscId: pscNotificationId }));
         } else if (extensionCount === 1) {
-            // TODO: This is a work in progress to be completed -> This should redirect to the second extension start screen once developed
+            // This is to be done: This is a work in progress to be completed -> This should redirect to the second extension start screen once developed
             return res.redirect(addSearchParams(PREFIXED_URLS.EXTENSION_ALREADY_SUBMITTED, { companyNumber, selectedPscId: pscNotificationId }));
         } else {
             return res.redirect(addSearchParams(PREFIXED_URLS.EXTENSION_REFUSED, { companyNumber, selectedPscId: pscNotificationId }));
