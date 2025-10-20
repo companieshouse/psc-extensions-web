@@ -53,7 +53,7 @@ export const validateExtensionRequest = handleExceptions(async (req: Request, re
             return res.redirect(addSearchParams(PREFIXED_URLS.REQUEST_EXTENSION, { companyNumber, selectedPscId: pscNotificationId }));
         } else if (extensionCount === 1) {
             // Redirect to extension already submitted screen
-            // Todo: This should redirect to the second extension start screen once developed
+            // This is a work in progress to be complete -> This should redirect to the second extension start screen once developed
             return res.redirect(addSearchParams(PREFIXED_URLS.EXTENSION_ALREADY_SUBMITTED, { companyNumber, selectedPscId: pscNotificationId }));
         } else {
             // extensionCount >= 2: Redirect to extension refused screen (maximum number of extension requests submitted by the PSC for this web app)
