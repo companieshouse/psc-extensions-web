@@ -95,7 +95,7 @@ export class ReasonForExtensionHandler extends GenericHandler<BaseViewData> {
             logger.info(`CREATED New Resource ${pscExtension?.links.self}`);
 
             // set up redirect to confirmation screen
-            const nextPageUrl = PREFIXED_URLS.REASON_FOR_EXTENSION;
+            const nextPageUrl = PREFIXED_URLS.FIRST_EXTENSION_CONFIRMATION;
 
             return {
                 nextPageUrl,
