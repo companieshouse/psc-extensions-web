@@ -84,7 +84,7 @@ export class ReasonForExtensionHandler extends GenericHandler<BaseViewData> {
 
         if (this.isErrorResponse(resource)) {
 
-            // error
+            nextPageUrl = PREFIXED_URLS.EXTENSION_REFUSED;
 
             return {
                 templatePath: ROUTER_VIEWS_FOLDER_PATH + PATHS.REASON_FOR_EXTENSION,
