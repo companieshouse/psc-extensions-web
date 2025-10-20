@@ -3,10 +3,13 @@ import mocks from "../mocks/all.middleware.mock";
 import app from "../../src/app";
 import * as cheerio from "cheerio";
 import request from "supertest";
-import { SERVICE_PATH_PREFIX, PATHS } from "../../src/lib/constants";
-import { PSC_INDIVIDUAL } from "../mocks/psc.mock";
+import { PREFIXED_URLS } from "../../src/lib/constants";
+import { COMPANY_NUMBER, PSC_INDIVIDUAL, PSC_NOTIFICATION_ID } from "../mocks/psc.mock";
 
 const router = request(app);
+const uriQueryParams = `?companyNumber=${COMPANY_NUMBER}&selectedPscId=${PSC_NOTIFICATION_ID}`;
+const requestAnExtensionUri = `${PREFIXED_URLS.REQUEST_EXTENSION}${uriQueryParams}`;
+const reasonForExtensionUri = `${PREFIXED_URLS.REASON_FOR_EXTENSION}${uriQueryParams}`;
 
 jest.mock("../../src/services/pscIndividualService", () => ({
     getPscIndividual: () => ({
@@ -21,12 +24,12 @@ describe("GET extension info router and retrieve components such as footer links
     });
 
     it("should check session and user auth before returning the page", async () => {
-        await router.get(SERVICE_PATH_PREFIX + PATHS.REQUEST_EXTENSION);
+        await router.get(requestAnExtensionUri);
         expect(mocks.mockSessionMiddleware).toHaveBeenCalled();
         expect(mocks.mockAuthenticationMiddleware).toHaveBeenCalled();
     });
     it("should render the footer with the expected links in English when user has selected 'English' link", async () => {
-        const resp = await request(app).get(`/persons-with-significant-control-extension/requesting-an-extension?lang=en`);
+        const resp = await request(app).get(reasonForExtensionUri + "&lang=en");
         expect(resp.status).toBe(HttpStatusCode.Ok);
         const $ = cheerio.load(resp.text);
 
@@ -48,7 +51,7 @@ describe("GET extension info router and retrieve components such as footer links
     });
 
     it("should render the footer with the expected links in Welsh when user has selected 'Cymraeg' link", async () => {
-        const resp = await request(app).get(`/persons-with-significant-control-extension/requesting-an-extension?lang=cy`);
+        const resp = await request(app).get(reasonForExtensionUri + "&lang=cy");
         expect(resp.status).toBe(HttpStatusCode.Ok);
         const $ = cheerio.load(resp.text);
 

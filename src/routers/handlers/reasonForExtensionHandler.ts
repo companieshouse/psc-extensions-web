@@ -1,8 +1,10 @@
 import { Request, Response } from "express";
 import { BaseViewData, GenericHandler, ViewModel } from "./abstractGenericHandler";
 import logger from "../../lib/logger";
-import { SERVICE_PATH_PREFIX, PATHS, ROUTER_VIEWS_FOLDER_PATH, ExtensionReasons } from "../../lib/constants";
+import { PREFIXED_URLS, PATHS, ROUTER_VIEWS_FOLDER_PATH, EXTENSION_REASONS } from "../../lib/constants";
 import { PscExtensionsFormsValidator } from "../../lib/validation/form-validators/pscExtensions";
+import { getLocaleInfo, getLocalesService, selectLang } from "../../utils/localise";
+import { addSearchParams } from "../../utils/queryParams";
 import { getPscIndividual } from "../../services/pscIndividualService";
 import { formatDateBorn } from "../handlers/requestAnExtensionHandler";
 import { createPscExtension } from "../../services/pscExtensionService";
@@ -14,7 +16,7 @@ import { HttpStatusCode } from "axios";
 import { postTransaction } from "../../services/transactionService";
 
 interface ExtensionReasonViewData extends BaseViewData {
-    reasons: typeof ExtensionReasons;
+    reasons: typeof EXTENSION_REASONS;
     pscName: string;
     dateOfBirth: string;
     selectedPscId: string;
@@ -24,19 +26,28 @@ interface ExtensionReasonViewData extends BaseViewData {
 export class ReasonForExtensionHandler extends GenericHandler<BaseViewData> {
 
     protected override async getViewData (req: Request, res: Response): Promise<ExtensionReasonViewData> {
+
         const baseViewData = await super.getViewData(req, res);
+        const lang = selectLang(req.query.lang);
+        const locales = getLocalesService();
         const selectedPscId = req.query.selectedPscId as string;
         const companyNumber = req.query.companyNumber as string;
         const pscIndividual = await getPscIndividual(req, companyNumber, selectedPscId);
+
+        function resolveUrlTemplate (PREFIXEDURL: string): string | null {
+            return addSearchParams(PREFIXEDURL, { companyNumber, selectedPscId, lang });
+        }
+
         return {
             ...baseViewData,
+            ...getLocaleInfo(locales, lang),
             pscName: pscIndividual.resource?.name!,
             dateOfBirth: formatDateBorn(pscIndividual.resource?.dateOfBirth),
             selectedPscId: selectedPscId,
             companyNumber: companyNumber,
-            backURL: SERVICE_PATH_PREFIX + PATHS.REQUEST_EXTENSION,
-            templateName: PATHS.REASON_FOR_EXTENSION.slice(1),
-            reasons: ExtensionReasons
+            backURL: resolveUrlTemplate(PREFIXED_URLS.REQUEST_EXTENSION),
+            templateName: PREFIXED_URLS.REASON_FOR_EXTENSION.slice(1),
+            reasons: EXTENSION_REASONS
         };
     }
 
@@ -84,7 +95,7 @@ export class ReasonForExtensionHandler extends GenericHandler<BaseViewData> {
             logger.info(`CREATED New Resource ${pscExtension?.links.self}`);
 
             // set up redirect to confirmation screen
-            nextPageUrl = SERVICE_PATH_PREFIX + PATHS.FIRST_EXTENSION_CONFIRMATION;
+            nextPageUrl = PREFIXED_URLS.REASON_FOR_EXTENSION;
 
             return {
                 templatePath: ROUTER_VIEWS_FOLDER_PATH + PATHS.REASON_FOR_EXTENSION,

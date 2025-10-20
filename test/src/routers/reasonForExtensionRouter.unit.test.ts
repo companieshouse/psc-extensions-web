@@ -1,5 +1,5 @@
 import { ReasonForExtensionHandler } from "../../../src/routers/handlers/reasonForExtensionHandler";
-import { ExtensionReasons } from "../../../src/lib/constants";
+import { EXTENSION_REASONS } from "../../../src/lib/constants";
 import { Request, Response } from "express";
 import { HttpStatusCode } from "axios";
 import { COMPANY_NUMBER, PSC_ID, PSC_INDIVIDUAL } from "../../mocks/psc.mock";
@@ -15,26 +15,37 @@ jest.mock("../../../src/services/pscIndividualService", () => ({
         PSC_ID
     })
 }));
+jest.mock("../../../src/services/transactionService", () => ({
+  postTransaction: jest.fn().mockResolvedValue({ id: "11111-22222-33333" })
+}));
+jest.mock("../../../src/services/pscExtensionService", () => ({
+  createPscExtension: jest.fn().mockResolvedValue({
+    resource: {
+      links: { self: "persons-with-significant-control-extension/11111-22222-33333" }
+    }
+  })
+}));
+
 describe("Reason for extension handler", () => {
 
     describe("executePost", () => {
 
-        // it("should return no errors when form is valid", async () => {
+        it("should return no errors when form is valid", async () => {
 
-        //     req = {
-        //         query: {
-        //             COMPANY_NUMBER,
-        //             PSC_ID
-        //         },
-        //         body: { whyDoYouNeedAnExtension: ExtensionReasons.NEED_SUPPORT }
-        //     };
+            req = {
+                query: {
+                    companyNumber: COMPANY_NUMBER,
+                    selectedPscId: PSC_ID
+                },
+                body: { whyDoYouNeedAnExtension: EXTENSION_REASONS.NEED_SUPPORT }
+            };
 
-        //     const handler = new ReasonForExtensionHandler();
+            const handler = new ReasonForExtensionHandler();
 
-        //     const result = await handler.executePost(req as Request, res as Response);
+            const result = await handler.executePost(req as Request, res as Response);
 
-        //     expect(result.viewData.errors).toEqual({});
-        // });
+            expect(result.viewData.errors).toEqual({});
+        });
 
         it("should return error object with correct errorkey when form is invalid", async () => {
 

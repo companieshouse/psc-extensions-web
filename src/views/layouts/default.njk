@@ -6,7 +6,7 @@
 
 {% set mainContentId = "main-page-content" %}
 
-{% block pageTitle %}{{ title }} - {{ i18n.service_name }}{% endblock %}
+{% block pageTitle %}{{ title }} - {{ i18n.service_name }}{{i18n.add_tab_govuk}}{% endblock %}
 
 {% block head %}
   {{ super() }}
@@ -34,7 +34,7 @@
   {% include "partials/nav/top.njk" %}
   {% if backURL %}
     {{ govukBackLink({
-    href: backURL +"?companyNumber="+ companyNumber + "&"+ "selectedPscId="+ selectedPscId +"%3F",
+    href: backURL,
     text: i18n.back
   }) }}
   {% endif %}
