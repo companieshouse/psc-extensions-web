@@ -19,7 +19,6 @@ interface ExtensionReasonViewData extends BaseViewData {
     dateOfBirth: string;
     selectedPscId: string;
     companyNumber: string;
-    pscNotificationId?: string
 }
 
 export class ReasonForExtensionHandler extends GenericHandler<BaseViewData> {
@@ -74,9 +73,9 @@ export class ReasonForExtensionHandler extends GenericHandler<BaseViewData> {
 
         if (this.isErrorResponse(resource)) {
 
-            //error
+            // error
 
-             return {
+            return {
                 templatePath: ROUTER_VIEWS_FOLDER_PATH + PATHS.REASON_FOR_EXTENSION,
                 viewData
             };
@@ -86,10 +85,10 @@ export class ReasonForExtensionHandler extends GenericHandler<BaseViewData> {
 
             // set up redirect to confirmation screen
             nextPageUrl = SERVICE_PATH_PREFIX + PATHS.FIRST_EXTENSION_CONFIRMATION;
-            
+
             return {
                 templatePath: ROUTER_VIEWS_FOLDER_PATH + PATHS.REASON_FOR_EXTENSION,
-                viewData,
+                viewData
 
             };
         }
@@ -105,7 +104,7 @@ export class ReasonForExtensionHandler extends GenericHandler<BaseViewData> {
         const extension: PscExtensionData = {
             companyNumber,
             pscNotificationId: selectedPscId,
-              extensionDetails: {
+            extensionDetails: {
                 extensionReason: selectedOption,
                 extensionStatus: "",
                 extensionRequestDate: new Date().toISOString()
