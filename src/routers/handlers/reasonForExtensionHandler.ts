@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { BaseViewData, GenericHandler, ViewModel } from "./abstractGenericHandler";
 import logger from "../../lib/logger";
-import { PREFIXED_URLS, PATHS, ROUTER_VIEWS_FOLDER_PATH, EXTENSION_REASONS } from "../../lib/constants";
+import { PREFIXED_URLS, PATHS, ROUTER_VIEWS_FOLDER_PATH, EXTENSION_REASONS, EXTENSION_STATUS } from "../../lib/constants";
 import { PscExtensionsFormsValidator } from "../../lib/validation/form-validators/pscExtensions";
 import { getLocaleInfo, getLocalesService, selectLang } from "../../utils/localise";
 import { addSearchParams } from "../../utils/queryParams";
@@ -112,17 +112,26 @@ export class ReasonForExtensionHandler extends GenericHandler<BaseViewData> {
         const companyNumber = request.query.companyNumber as string;
         const selectedOption = request.body?.whyDoYouNeedAnExtension;
 
+        const extensionStatus = EXTENSION_STATUS.ACCEPTED;
+
         const extension: PscExtensionData = {
             companyNumber,
             pscNotificationId: selectedPscId,
             extensionDetails: {
                 extensionReason: selectedOption,
-                extensionStatus: "",
+                extensionStatus,
                 extensionRequestDate: new Date().toISOString()
             }
         };
 
-        return createPscExtension(request, transaction.id!, extension);
+        const response = await createPscExtension(request, transaction.id!, extension);
+
+        if (this.isErrorResponse(response)) {
+        extension.extensionDetails!.extensionStatus = EXTENSION_STATUS.PENDING;
+        }
+
+        return response;
+
     }
 
     public isErrorResponse (obj: any): obj is ApiErrorResponse {
