@@ -80,7 +80,7 @@ export class ReasonForExtensionHandler extends GenericHandler<BaseViewData> {
 
         // create a new submission for the company number provided
         const resource = await this.createNewSubmission(req, transaction);
-        let nextPageUrl = "";
+        let nextPageUrl: string;
 
         if (this.isErrorResponse(resource)) {
 
