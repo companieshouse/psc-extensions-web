@@ -124,11 +124,9 @@ describe("pscExtensionService", () => {
             const errorMessage = "Error message";
             const mockCreate = {
                 httpStatusCode: status,
-                resource: {
-                    errors: [{
-                        error: errorMessage
-                    }]
-                }
+                errors: [{
+                    error: errorMessage
+                }]
             };
             mockCreatePscExtension.mockResolvedValueOnce(mockCreate);
 

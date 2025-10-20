@@ -3,7 +3,6 @@ import mocks from "../../mocks/all.middleware.mock";
 import supertest from "supertest";
 import app from "../../../src/app";
 import { PREFIXED_URLS } from "../../../src/lib/constants";
-import { RequestAnExtensionHandler } from "../../../src/routers/handlers/requestAnExtensionHandler";
 import { HttpStatusCode } from "axios";
 import { COMPANY_NUMBER, PSC_INDIVIDUAL, PSC_NOTIFICATION_ID } from "../../mocks/psc.mock";
 
@@ -33,6 +32,7 @@ describe("GET extension info router", () => {
         await router.get(requestAnExtensionUri);
         expect(mocks.mockSessionMiddleware).toHaveBeenCalled();
         expect(mocks.mockAuthenticationMiddleware).toHaveBeenCalled();
+        expect(mocks.mockValidationMiddleware).toHaveBeenCalled();
     });
 
     it("should return status 200", async () => {
