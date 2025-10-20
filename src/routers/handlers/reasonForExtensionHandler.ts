@@ -80,13 +80,13 @@ export class ReasonForExtensionHandler extends GenericHandler<BaseViewData> {
 
         // create a new submission for the company number provided
         const resource = await this.createNewSubmission(req, transaction);
-        let nextPageUrl: string;
 
         if (this.isErrorResponse(resource)) {
 
-            nextPageUrl = PREFIXED_URLS.EXTENSION_REFUSED;
+            const nextPageUrl = PREFIXED_URLS.EXTENSION_REFUSED;
 
             return {
+                nextPageUrl,
                 templatePath: ROUTER_VIEWS_FOLDER_PATH + PATHS.REASON_FOR_EXTENSION,
                 viewData
             };
@@ -95,9 +95,10 @@ export class ReasonForExtensionHandler extends GenericHandler<BaseViewData> {
             logger.info(`CREATED New Resource ${pscExtension?.links.self}`);
 
             // set up redirect to confirmation screen
-            nextPageUrl = PREFIXED_URLS.REASON_FOR_EXTENSION;
+            const nextPageUrl = PREFIXED_URLS.REASON_FOR_EXTENSION;
 
             return {
+                nextPageUrl,
                 templatePath: ROUTER_VIEWS_FOLDER_PATH + PATHS.REASON_FOR_EXTENSION,
                 viewData
 
