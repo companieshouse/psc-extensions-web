@@ -9,7 +9,7 @@ export const TRANSACTION_ID = "11111-22222-33333";
 export const PSC_NOTIFICATION_ID = "123456";
 export const PSC_EXTENSION_ID = "662a0de6a2c6f9aead0f32ab";
 export const UVID = "123abc456edf";
-export const SELF_URI = `/transactions/${TRANSACTION_ID}/persons-with-significant-control-extensions/${PSC_EXTENSION_ID}`;
+export const SELF_URI = `/transactions/${TRANSACTION_ID}/persons-with-significant-control-extension/${PSC_EXTENSION_ID}`;
 
 export const INITIAL_PSC_DATA: PscExtensionData = {
     companyNumber: COMPANY_NUMBER,
