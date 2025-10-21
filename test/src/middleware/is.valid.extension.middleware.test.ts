@@ -16,10 +16,10 @@ describe("validateExtensionRequest middleware", () => {
     beforeEach(() => {
         req = {
             query: {
-                selectedPscId: "67890-notification",
-                companyNumber: "12345678"
+                companyNumber: "2222222",
+                selectedPscId: "1111111"
             },
-            originalUrl: "/some-other-path" // Default to a different path so it redirects
+            originalUrl: "/some-other-url"
         };
         res = {
             redirect: jest.fn()
@@ -48,12 +48,12 @@ describe("validateExtensionRequest middleware", () => {
                 try {
                     expect(mockGetIsPscExtensionValid).toHaveBeenCalledWith(
                         req,
-                        "67890-notification",
-                        "12345678"
+                        "1111111",
+                        "2222222"
                     );
-                    expect(mockGetPscExtensionCount).toHaveBeenCalledWith(req, "67890-notification");
+                    expect(mockGetPscExtensionCount).toHaveBeenCalledWith(req, "1111111");
                     expect(res.redirect).toHaveBeenCalledWith(
-                        `${SERVICE_PATH_PREFIX}${PATHS.REQUEST_EXTENSION}?companyNumber=12345678&selectedPscId=67890-notification`
+                        `${SERVICE_PATH_PREFIX}${PATHS.REQUEST_EXTENSION}?companyNumber=2222222&selectedPscId=1111111`
                     );
                     done();
                 } catch (e) {
@@ -63,10 +63,9 @@ describe("validateExtensionRequest middleware", () => {
         });
 
         it("should call next() when count is 0 and user is already on request extension path", (done) => {
-            // Mock being on the request extension path
             const reqOnExtensionPath = {
                 ...req,
-                originalUrl: "/persons-with-significant-control-extensions/requesting-an-extension?companyNumber=12345678&selectedPscId=67890-notification"
+                originalUrl: "/persons-with-significant-control-extensions/requesting-an-extension?companyNumber=2222222&selectedPscId=1111111"
             };
             mockGetIsPscExtensionValid.mockResolvedValue(mockValidationStatusResponse);
             mockGetPscExtensionCount.mockResolvedValue(0);
@@ -77,7 +76,6 @@ describe("validateExtensionRequest middleware", () => {
                         done(error);
                         return;
                     }
-                    // Should call next() instead of redirecting to avoid infinite loop
                     expect(res.redirect).not.toHaveBeenCalled();
                     done();
                 } catch (e) {
@@ -106,12 +104,12 @@ describe("validateExtensionRequest middleware", () => {
                 try {
                     expect(mockGetIsPscExtensionValid).toHaveBeenCalledWith(
                         req,
-                        "67890-notification",
-                        "12345678"
+                        "1111111",
+                        "2222222"
                     );
-                    expect(mockGetPscExtensionCount).toHaveBeenCalledWith(req, "67890-notification");
+                    expect(mockGetPscExtensionCount).toHaveBeenCalledWith(req, "1111111");
                     expect(res.redirect).toHaveBeenCalledWith(
-                        `${SERVICE_PATH_PREFIX}${PATHS.EXTENSION_ALREADY_SUBMITTED}?companyNumber=12345678&selectedPscId=67890-notification`
+                        `${SERVICE_PATH_PREFIX}${PATHS.EXTENSION_ALREADY_SUBMITTED}?companyNumber=2222222&selectedPscId=1111111`
                     );
                     done();
                 } catch (e) {
@@ -140,12 +138,12 @@ describe("validateExtensionRequest middleware", () => {
                 try {
                     expect(mockGetIsPscExtensionValid).toHaveBeenCalledWith(
                         req,
-                        "67890-notification",
-                        "12345678"
+                        "1111111",
+                        "2222222"
                     );
-                    expect(mockGetPscExtensionCount).toHaveBeenCalledWith(req, "67890-notification");
+                    expect(mockGetPscExtensionCount).toHaveBeenCalledWith(req, "1111111");
                     expect(res.redirect).toHaveBeenCalledWith(
-                        `${SERVICE_PATH_PREFIX}${PATHS.EXTENSION_REFUSED}?companyNumber=12345678&selectedPscId=67890-notification`
+                        `${SERVICE_PATH_PREFIX}${PATHS.EXTENSION_REFUSED}?companyNumber=2222222&selectedPscId=1111111`
                     );
                     done();
                 } catch (e) {
@@ -175,11 +173,11 @@ describe("validateExtensionRequest middleware", () => {
                 try {
                     expect(mockGetIsPscExtensionValid).toHaveBeenCalledWith(
                         req,
-                        "67890-notification",
-                        "12345678"
+                        "1111111",
+                        "2222222"
                     );
                     expect(res.redirect).toHaveBeenCalledWith(
-                        `${SERVICE_PATH_PREFIX}${PATHS.EXTENSION_REFUSED}?companyNumber=12345678&selectedPscId=67890-notification`
+                        `${SERVICE_PATH_PREFIX}${PATHS.EXTENSION_REFUSED}?companyNumber=2222222&selectedPscId=1111111`
                     );
                     done();
                 } catch (e) {
@@ -215,10 +213,10 @@ describe("validateExtensionRequest middleware", () => {
                     expect(error.message).toBe("Count service error");
                     expect(mockGetIsPscExtensionValid).toHaveBeenCalledWith(
                         req,
-                        "67890-notification",
-                        "12345678"
+                        "1111111",
+                        "2222222"
                     );
-                    expect(mockGetPscExtensionCount).toHaveBeenCalledWith(req, "67890-notification");
+                    expect(mockGetPscExtensionCount).toHaveBeenCalledWith(req, "1111111");
                     expect(res.redirect).not.toHaveBeenCalled();
                     done();
                 } catch (e) {
