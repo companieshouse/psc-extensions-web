@@ -4,9 +4,9 @@ import { HttpStatusCode } from "axios";
 import { HttpError } from "../../../src/lib/utils/error_manifests/httpError";
 import { createOAuthApiClient } from "../../../src/lib/utils/api.client";
 import { getCompanyProfile } from "../../../src/services/companyProfileService";
-import { getTransaction, postTransaction } from "../../../src/services/transactionService";
+import { closeTransaction, DESCRIPTION, getTransaction, postTransaction, putTransaction, TransactionStatus } from "../../../src/services/transactionService";
 import { validCompanyProfile } from "../../mocks/companyProfile.mock";
-import { COMPANY_NUMBER, CREATED_PSC_TRANSACTION, OPEN_PSC_TRANSACTION, TRANSACTION_ID } from "../../mocks/transaction.mock";
+import { CLOSED_PSC_TRANSACTION, COMPANY_NUMBER, CREATED_PSC_TRANSACTION, OPEN_PSC_TRANSACTION, PSC_EXTENSION_ID, TRANSACTION_ID } from "../../mocks/transaction.mock";
 
 jest.mock("@companieshouse/api-sdk-node");
 jest.mock("../../../src/lib/utils/api.client");
@@ -144,6 +144,80 @@ describe("Transaction service", () => {
             );
         });
 
+    });
+
+    describe("putTransaction", () => {
+        afterEach(() => {
+            expect(mockCreateOAuthApiClient).toHaveBeenCalledTimes(1);
+            expect(mockPutTransaction).toHaveBeenCalledTimes(1);
+        });
+
+        it("should resolve on success", async () => {
+            mockPutTransaction.mockResolvedValueOnce({
+                httpStatusCode: HttpStatusCode.NoContent
+            } as Resource<Transaction>);
+
+            await expect(putTransaction(req, TRANSACTION_ID, DESCRIPTION, TransactionStatus.OPEN, PSC_EXTENSION_ID)).resolves.toBeDefined();
+
+            expect(mockPutTransaction).toHaveBeenCalledWith(OPEN_PSC_TRANSACTION, REQUEST_ID);
+        });
+
+        it("should reject when no response from transaction service", async () => {
+            mockPutTransaction.mockResolvedValueOnce(undefined);
+
+            await expect(putTransaction(req, TRANSACTION_ID, DESCRIPTION, TransactionStatus.OPEN, PSC_EXTENSION_ID)).rejects.toThrow(
+                `No response from Transaction API for transactionId="${TRANSACTION_ID}"`
+            );
+        });
+
+        it.each([400, 404, 405, undefined])("should reject when response from transaction service has status %p", async (status) => {
+            const mockResponse = {
+                httpStatusCode: status as number
+            };
+            mockPutTransaction.mockResolvedValueOnce(mockResponse);
+
+            await expect(putTransaction(req, TRANSACTION_ID, DESCRIPTION, TransactionStatus.OPEN, PSC_EXTENSION_ID)).rejects.toThrow(
+                `HTTP status code ${status} - Failed to put transaction with transactionId="${TRANSACTION_ID}"`
+            );
+        });
+    });
+
+    describe("closeTransaction", () => {
+        afterEach(() => {
+            expect(mockCreateOAuthApiClient).toHaveBeenCalledTimes(1);
+            expect(mockPutTransaction).toHaveBeenCalledTimes(1);
+        });
+
+        it("should resolve on success", async () => {
+            const mockResponse = {
+                httpStatusCode: HttpStatusCode.NoContent
+            };
+            mockPutTransaction.mockResolvedValueOnce(mockResponse as Resource<Transaction>);
+
+            await expect(closeTransaction(req, TRANSACTION_ID, PSC_EXTENSION_ID)).resolves.toBe(mockResponse);
+
+            expect(mockPutTransaction).toHaveBeenCalledWith(CLOSED_PSC_TRANSACTION, REQUEST_ID);
+        });
+
+        it("should reject when no response from transaction service", async () => {
+            mockPutTransaction.mockResolvedValueOnce(undefined);
+            req.query = { companyNumber: COMPANY_NUMBER };
+
+            await expect(closeTransaction(req, TRANSACTION_ID, PSC_EXTENSION_ID)).rejects.toThrow(
+                `Failed to close transaction with transactionId="${TRANSACTION_ID}"`
+            );
+        });
+
+        it.each([400, 404, 405, undefined])("should reject when response from transaction service has status %p", async (status) => {
+            const mockResponse = {
+                httpStatusCode: status as number
+            };
+            mockPutTransaction.mockResolvedValueOnce(mockResponse);
+
+            await expect(closeTransaction(req, TRANSACTION_ID, PSC_EXTENSION_ID)).rejects.toThrow(
+                `Failed to close transaction with transactionId="${TRANSACTION_ID}"`
+            );
+        });
     });
 
 });
