@@ -40,7 +40,24 @@ export const validateExtensionRequest = handleExceptions(async (req: Request, re
 
         const extensionCount = await pscExtensionService.getPscExtensionCount(req, pscNotificationId);
 
+        logger.debug(`Extension count: ${extensionCount} for PSC: ${pscNotificationId} on route: ${req.originalUrl}`);
+
         if (extensionCount === 0) {
+            // For first extension, the psc should be allowed to access the following URLs
+            const firstExtensionRoutes = [
+                PREFIXED_URLS.REQUEST_EXTENSION,
+                PREFIXED_URLS.REASON_FOR_EXTENSION,
+                PREFIXED_URLS.EXTENSION_CONFIRMATION,
+                PREFIXED_URLS.FIRST_EXTENSION_CONFIRMATION
+            ];
+
+            const isOnFirstExtensionFlow = firstExtensionRoutes.some(route => req.originalUrl.includes(route));
+
+            // Allow access if user is on a valid first extension route, prevents redirects to the start page
+            if (isOnFirstExtensionFlow) {
+                return next();
+            }
+
             return res.redirect(addSearchParams(PREFIXED_URLS.REQUEST_EXTENSION, { companyNumber, selectedPscId: pscNotificationId }));
         } else if (extensionCount === 1) {
             // This is to be done: This is a work in progress to be completed -> This should redirect to the second extension start screen once developed

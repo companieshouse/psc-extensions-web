@@ -18,7 +18,8 @@ describe("validateExtensionRequest middleware", () => {
             query: {
                 selectedPscId: "67890-notification",
                 companyNumber: "12345678"
-            }
+            },
+            originalUrl: "/some-other-path" // Default to a different path so it redirects
         };
         res = {
             redirect: jest.fn()
@@ -59,6 +60,30 @@ describe("validateExtensionRequest middleware", () => {
                     done(e);
                 }
             }, 10);
+        });
+
+        it("should call next() when count is 0 and user is already on request extension path", (done) => {
+            // Mock being on the request extension path
+            const reqOnExtensionPath = {
+                ...req,
+                originalUrl: "/persons-with-significant-control-extensions/requesting-an-extension?companyNumber=12345678&selectedPscId=67890-notification"
+            };
+            mockGetIsPscExtensionValid.mockResolvedValue(mockValidationStatusResponse);
+            mockGetPscExtensionCount.mockResolvedValue(0);
+
+            validateExtensionRequest(reqOnExtensionPath as Request, res as Response, (error?: unknown) => {
+                try {
+                    if (error) {
+                        done(error);
+                        return;
+                    }
+                    // Should call next() instead of redirecting to avoid infinite loop
+                    expect(res.redirect).not.toHaveBeenCalled();
+                    done();
+                } catch (e) {
+                    done(e);
+                }
+            });
         });
 
         it("should redirect to extension already submitted page when count is 1", (done) => {
