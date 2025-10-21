@@ -109,15 +109,15 @@ export class ReasonForExtensionHandler extends GenericHandler<BaseViewData> {
 
     public async createNewSubmission (request: Request, transaction: Transaction): Promise<Resource<PscExtension> | ApiErrorResponse> {
 
-        const selectedPscId = request.query.selectedPscId as string;
         const companyNumber = request.query.companyNumber as string;
+        const pscNotificationId = request.query.selectedPscId as string;
         const selectedOption = request.body?.whyDoYouNeedAnExtension;
 
         const extensionStatus = EXTENSION_STATUS.ACCEPTED;
 
         const extension: PscExtensionData = {
             companyNumber,
-            pscNotificationId: selectedPscId,
+            pscNotificationId,
             extensionDetails: {
                 extensionReason: selectedOption,
                 extensionStatus,
