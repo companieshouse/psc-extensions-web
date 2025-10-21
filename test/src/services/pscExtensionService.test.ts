@@ -227,28 +227,22 @@ describe("pscExtensionService", () => {
 
             mockGetIsPscExtensionValid.mockResolvedValueOnce(mockResponse);
 
-            const response = await getIsPscExtensionValid(req, transactionId, pscNotificationId, companyNumber);
+            const response = await getIsPscExtensionValid(req, pscNotificationId, companyNumber);
 
             expect(response).toEqual(mockValidationResponse);
             expect(mockCreateOAuthApiClient).toHaveBeenCalledTimes(1);
             expect(mockGetIsPscExtensionValid).toHaveBeenCalledTimes(1);
-            expect(mockGetIsPscExtensionValid).toHaveBeenCalledWith(transactionId, pscNotificationId, companyNumber, {});
-        });
-
-        it("should throw an error when transactionId is not provided", async () => {
-            await expect(getIsPscExtensionValid(req, "", pscNotificationId, companyNumber))
-                .rejects
-                .toThrow("Aborting: Missing required parameters: transactionId");
+            expect(mockGetIsPscExtensionValid).toHaveBeenCalledWith(pscNotificationId, companyNumber, {});
         });
 
         it("should throw an error when pscNotificationId is not provided", async () => {
-            await expect(getIsPscExtensionValid(req, transactionId, "", companyNumber))
+            await expect(getIsPscExtensionValid(req, "", companyNumber))
                 .rejects
                 .toThrow("Aborting: Missing required parameters: pscNotificationId");
         });
 
         it("should throw an error when companyNumber is not provided", async () => {
-            await expect(getIsPscExtensionValid(req, transactionId, pscNotificationId, ""))
+            await expect(getIsPscExtensionValid(req, pscNotificationId, ""))
                 .rejects
                 .toThrow("Aborting: Missing required parameters: companyNumber");
         });
@@ -256,9 +250,9 @@ describe("pscExtensionService", () => {
         it("should throw an error when no response from API", async () => {
             mockGetIsPscExtensionValid.mockResolvedValueOnce(undefined);
 
-            await expect(getIsPscExtensionValid(req, transactionId, pscNotificationId, companyNumber))
+            await expect(getIsPscExtensionValid(req, pscNotificationId, companyNumber))
                 .rejects
-                .toThrow(`PSC Extension validation GET request returned no response for {"transactionId":"${transactionId}","pscNotificationId":"${pscNotificationId}","companyNumber":"${companyNumber}"}`);
+                .toThrow(`PSC Extension validation GET request returned no response for {"pscNotificationId":"${pscNotificationId}","companyNumber":"${companyNumber}"}`);
         });
 
         it("should throw HttpError when API returns error status code", async () => {
@@ -268,7 +262,7 @@ describe("pscExtensionService", () => {
 
             mockGetIsPscExtensionValid.mockResolvedValueOnce(mockResponse);
 
-            await expect(getIsPscExtensionValid(req, transactionId, pscNotificationId, companyNumber))
+            await expect(getIsPscExtensionValid(req, pscNotificationId, companyNumber))
                 .rejects
                 .toThrow(HttpError);
         });
@@ -280,7 +274,7 @@ describe("pscExtensionService", () => {
 
             mockGetIsPscExtensionValid.mockResolvedValueOnce(mockResponse);
 
-            await expect(getIsPscExtensionValid(req, transactionId, pscNotificationId, companyNumber))
+            await expect(getIsPscExtensionValid(req, pscNotificationId, companyNumber))
                 .rejects
                 .toThrow(HttpError);
         });
@@ -293,9 +287,9 @@ describe("pscExtensionService", () => {
 
             mockGetIsPscExtensionValid.mockResolvedValueOnce(mockResponse);
 
-            await expect(getIsPscExtensionValid(req, transactionId, pscNotificationId, companyNumber))
+            await expect(getIsPscExtensionValid(req, pscNotificationId, companyNumber))
                 .rejects
-                .toThrow(`PSC Extension validation API GET request returned no resource for {"transactionId":"${transactionId}","pscNotificationId":"${pscNotificationId}","companyNumber":"${companyNumber}"}`);
+                .toThrow(`PSC Extension validation API GET request returned no resource for {"pscNotificationId":"${pscNotificationId}","companyNumber":"${companyNumber}"}`);
         });
     });
 

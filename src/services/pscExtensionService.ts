@@ -60,8 +60,8 @@ export const createPscExtension = async (request: Request, transactionId: string
     return castedSdkResponse;
 };
 
-export const getIsPscExtensionValid = async (request: Request, transactionId: string, pscNotificationId: string, companyNumber: string): Promise<ValidationStatusResponse> => {
-    const params = { transactionId, pscNotificationId, companyNumber };
+export const getIsPscExtensionValid = async (request: Request, pscNotificationId: string, companyNumber: string): Promise<ValidationStatusResponse> => {
+    const params = { pscNotificationId, companyNumber };
     if (!Object.values(params).every(Boolean)) {
         const missing = Object.keys(params).filter(key => !params[key as keyof typeof params]);
         throw new Error(`Aborting: Missing required parameters: ${missing.join(", ")}`);
@@ -72,7 +72,7 @@ export const getIsPscExtensionValid = async (request: Request, transactionId: st
     logger.debug(`Getting PSC Extension validation for ${JSON.stringify(params)}`);
 
     const headers = extractRequestIdHeader(request);
-    const sdkResponse: Resource<ValidationStatusResponse> | ApiErrorResponse = await oAuthApiClient.pscExtensionsService.getIsPscExtensionValid(transactionId, pscNotificationId, companyNumber, headers);
+    const sdkResponse: Resource<ValidationStatusResponse> | ApiErrorResponse = await oAuthApiClient.pscExtensionsService.getIsPscExtensionValid(pscNotificationId, companyNumber, headers);
 
     if (!sdkResponse) {
         throw new Error(`PSC Extension validation GET request returned no response for ${JSON.stringify(params)}`);

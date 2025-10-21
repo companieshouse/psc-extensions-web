@@ -16,19 +16,13 @@ import { ValidationStatusResponse } from "@companieshouse/api-sdk-node/dist/serv
  * 3. If validation fails: Redirect to extension refused page
  *
  * Takes in the following query parameters:
- * - transactionId: The transaction ID
  * - pscNotificationId: The PSC notification ID
  * - companyNumber: The company number
  */
 export const validateExtensionRequest = handleExceptions(async (req: Request, res: Response, next: NextFunction): Promise<void> => {
-    const transactionId = req.query.transactionId as string;
     const pscNotificationId = req.query.selectedPscId as string;
     const companyNumber = req.query.companyNumber as string;
 
-    // Check for required query parameters
-    if (!transactionId) {
-        return next(new HttpError("Missing required parameter: transactionId", HttpStatusCode.BadRequest));
-    }
     if (!pscNotificationId) {
         return next(new HttpError("Missing required parameter: selectedPscId", HttpStatusCode.BadRequest));
     }
@@ -37,7 +31,7 @@ export const validateExtensionRequest = handleExceptions(async (req: Request, re
     }
 
     try {
-        const validationResponse: ValidationStatusResponse = await pscExtensionService.getIsPscExtensionValid(req, transactionId, pscNotificationId, companyNumber);
+        const validationResponse: ValidationStatusResponse = await pscExtensionService.getIsPscExtensionValid(req, pscNotificationId, companyNumber);
         const isValid = validationResponse.valid;
 
         if (!isValid) {

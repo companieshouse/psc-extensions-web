@@ -16,7 +16,6 @@ describe("validateExtensionRequest middleware", () => {
     beforeEach(() => {
         req = {
             query: {
-                transactionId: "12345-transaction",
                 selectedPscId: "67890-notification",
                 companyNumber: "12345678"
             }
@@ -48,7 +47,6 @@ describe("validateExtensionRequest middleware", () => {
                 try {
                     expect(mockGetIsPscExtensionValid).toHaveBeenCalledWith(
                         req,
-                        "12345-transaction",
                         "67890-notification",
                         "12345678"
                     );
@@ -83,7 +81,6 @@ describe("validateExtensionRequest middleware", () => {
                 try {
                     expect(mockGetIsPscExtensionValid).toHaveBeenCalledWith(
                         req,
-                        "12345-transaction",
                         "67890-notification",
                         "12345678"
                     );
@@ -118,7 +115,6 @@ describe("validateExtensionRequest middleware", () => {
                 try {
                     expect(mockGetIsPscExtensionValid).toHaveBeenCalledWith(
                         req,
-                        "12345-transaction",
                         "67890-notification",
                         "12345678"
                     );
@@ -154,7 +150,6 @@ describe("validateExtensionRequest middleware", () => {
                 try {
                     expect(mockGetIsPscExtensionValid).toHaveBeenCalledWith(
                         req,
-                        "12345-transaction",
                         "67890-notification",
                         "12345678"
                     );
@@ -195,7 +190,6 @@ describe("validateExtensionRequest middleware", () => {
                     expect(error.message).toBe("Count service error");
                     expect(mockGetIsPscExtensionValid).toHaveBeenCalledWith(
                         req,
-                        "12345-transaction",
                         "67890-notification",
                         "12345678"
                     );
@@ -210,21 +204,6 @@ describe("validateExtensionRequest middleware", () => {
     });
 
     describe("when required parameters are missing", () => {
-        it("should call next with error when transactionId is missing", (done) => {
-            req.query = { ...req.query, transactionId: undefined };
-
-            validateExtensionRequest(req as Request, res as Response, (error?: any) => {
-                try {
-                    expect(error).toBeInstanceOf(HttpError);
-                    expect(mockGetIsPscExtensionValid).not.toHaveBeenCalled();
-                    expect(res.redirect).not.toHaveBeenCalled();
-                    done();
-                } catch (e) {
-                    done(e);
-                }
-            });
-        });
-
         it("should call next with error when selectedPscId is missing", (done) => {
             req.query = { ...req.query, selectedPscId: undefined };
 
