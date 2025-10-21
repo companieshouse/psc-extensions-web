@@ -70,8 +70,3 @@ export type ExtensionReason = typeof EXTENSION_REASONS[keyof typeof EXTENSION_RE
 export const Responses = {
     PROBLEM_WITH_PSC_DATA: "We are currently unable to process an Extensions filing for this PSC"
 } as const;
-
-export const EXTENSION_STATUS = {
-    PENDING: "PENDING",
-    ACCEPTED: "ACCEPTED"
-} as const;

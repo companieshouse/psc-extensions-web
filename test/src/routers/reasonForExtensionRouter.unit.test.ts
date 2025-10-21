@@ -15,17 +15,6 @@ jest.mock("../../../src/services/pscIndividualService", () => ({
         PSC_ID
     })
 }));
-jest.mock("../../../src/services/transactionService", () => ({
-    postTransaction: jest.fn().mockResolvedValue({ id: "11111-22222-33333" })
-}));
-jest.mock("../../../src/services/pscExtensionService", () => ({
-    createPscExtension: jest.fn().mockResolvedValue({
-        resource: {
-            links: { self: "persons-with-significant-control-extension/11111-22222-33333" }
-        }
-    })
-}));
-
 describe("Reason for extension handler", () => {
 
     describe("executePost", () => {
@@ -34,8 +23,8 @@ describe("Reason for extension handler", () => {
 
             req = {
                 query: {
-                    companyNumber: COMPANY_NUMBER,
-                    selectedPscId: PSC_ID
+                    COMPANY_NUMBER,
+                    PSC_ID
                 },
                 body: { whyDoYouNeedAnExtension: EXTENSION_REASONS.NEED_SUPPORT }
             };

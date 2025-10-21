@@ -1,7 +1,7 @@
 import { Request } from "express";
 import { Transaction } from "@companieshouse/api-sdk-node/dist/services/transaction/types";
 import { CompanyProfile } from "@companieshouse/api-sdk-node/dist/services/company-profile/types";
-import Resource, { ApiErrorResponse, ApiResponse } from "@companieshouse/api-sdk-node/dist/services/resource";
+import Resource, { ApiErrorResponse } from "@companieshouse/api-sdk-node/dist/services/resource";
 import { HttpStatusCode } from "axios";
 import { createOAuthApiClient } from "../lib/utils/api.client";
 import { getCompanyProfile } from "./companyProfileService";
@@ -75,46 +75,4 @@ export const postTransaction = async (req: Request): Promise<Transaction> => {
     logger.debug(`Received transaction with status code ${sdkResponse.httpStatusCode} for companyNumber="${companyNumber}"`);
 
     return Promise.resolve(castedSdkResponse.resource);
-};
-
-export const putTransaction = async (req: Request, transactionId: string, description: string, transactionStatus: string, objectId: string | undefined): Promise<ApiResponse<Transaction>> => {
-    const apiClient: ApiClient = createOAuthApiClient(req.session);
-
-    const transaction: Transaction = {
-        description,
-        id: transactionId,
-        reference: [REFERENCE, objectId].join("_"),
-        status: transactionStatus
-    };
-
-    logger.debug(`Updating transaction with transactionId="${transactionId}", status="${transactionStatus}"`);
-    const requestId = req.headers["x-request-id"] as string | undefined;
-    const sdkResponse: ApiResponse<Transaction> | ApiErrorResponse = await apiClient.transaction.putTransaction(transaction, requestId);
-
-    if (!sdkResponse) {
-        return Promise.reject(new Error(`No response from Transaction API for transactionId="${transactionId}"`));
-    }
-
-    if (!sdkResponse.httpStatusCode || sdkResponse.httpStatusCode !== HttpStatusCode.NoContent) {
-        return Promise.reject(new Error(`HTTP status code ${sdkResponse.httpStatusCode} - Failed to put transaction with transactionId="${transactionId}"`));
-    }
-
-    const castedSdkResponse: ApiResponse<Transaction> = sdkResponse as ApiResponse<Transaction>;
-
-    logger.debug(`Updated transaction with transactionId="${transactionId}"`);
-
-    return Promise.resolve(castedSdkResponse);
-};
-
-export const closeTransaction = async (req: Request, transactionId: string, objectId: string | undefined): Promise<Resource<Transaction> | ApiErrorResponse> => {
-    logger.debug(`Closing transaction with transactionId="${transactionId}", updating reference`);
-
-    const putResponse: ApiResponse<Transaction> = await putTransaction(req, transactionId, DESCRIPTION, TransactionStatus.CLOSED, objectId)
-        .catch((sdkResponse) => {
-            return Promise.reject(new Error(`Failed to close transaction with transactionId="${transactionId}"`));
-        });
-
-    logger.debug(`Closed transaction with transactionId="${transactionId}"`);
-
-    return Promise.resolve(putResponse);
 };
