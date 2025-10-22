@@ -35,7 +35,10 @@
   {% if backURL %}
     {{ govukBackLink({
     href: backURL,
-    text: i18n.back
+    text: i18n.back,
+    attributes: {
+      "data-event-id": "back-link"
+    }
   }) }}
   {% endif %}
    {% include "ch-node-utils/templates/locales-banner.njk" %}
