@@ -10,7 +10,6 @@ This is a web frontend for the PSC Extensions journey. It was created based on [
 The code present in this repository is used to define and deploy a dockerised container in AWS ECS.
 This is done by calling a [module](https://github.com/companieshouse/terraform-modules/tree/main/aws/ecs) from terraform-modules. Application specific attributes are injected and the service is then deployed using Terraform via the CICD platform 'Concourse'.
 
-
 Application specific attributes | Value                                | Description
 :---------|:-----------------------------------------------------------------------------|:-----------
 **ECS Cluster**        |filing-maintain                                      | ECS cluster (stack) the service belongs to
@@ -45,6 +44,7 @@ Application specific attributes | Value                                | Descrip
 - [Sonarqube](https://www.sonarqube.org)
 - [Docker](https://www.docker.com/)
 - [Git](https://git-scm.com/downloads)
+
 
 ## Installing and Running
 
@@ -88,3 +88,4 @@ To run the tests, type the following command:
 To get a test coverage report, run:
 
 ```npm run coverage```
+
