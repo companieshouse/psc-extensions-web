@@ -20,7 +20,7 @@ export const env = {
 export const LOCALES_PATH = getEnvironmentValue("LOCALES_PATH", "locales");
 export const LOCALES_ENABLED = getEnvironmentValue("LOCALES_ENABLED", "true");
 
-export const SERVICE_PATH_PREFIX = "/persons-with-significant-control-extensions";
+export const SERVICE_PATH_PREFIX = "/persons-with-significant-control-extension";
 export const ROUTER_VIEWS_FOLDER_PATH = "router_views";
 export const VERIFICATION_PREFIX = "/persons-with-significant-control-verification";
 
@@ -69,9 +69,4 @@ export type ExtensionReason = typeof EXTENSION_REASONS[keyof typeof EXTENSION_RE
 // Used for api error responses
 export const Responses = {
     PROBLEM_WITH_PSC_DATA: "We are currently unable to process an Extensions filing for this PSC"
-} as const;
-
-export const EXTENSION_STATUS = {
-    PENDING: "PENDING",
-    ACCEPTED: "ACCEPTED"
 } as const;

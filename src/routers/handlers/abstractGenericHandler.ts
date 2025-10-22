@@ -32,7 +32,6 @@ export abstract class GenericHandler<T extends BaseViewData> {
 }
 
 export interface ViewModel<T> {
-    nextPageUrl? : string;
     templatePath: string;
     viewData: T;
 }

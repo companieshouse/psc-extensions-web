@@ -17,17 +17,6 @@ jest.mock("../../../src/services/pscIndividualService", () => ({
         resource: PSC_INDIVIDUAL
     })
 }));
-jest.mock("../../../src/services/transactionService", () => ({
-    postTransaction: jest.fn().mockResolvedValue({ id: "11111-22222-33333" })
-}));
-jest.mock("../../../src/services/pscExtensionService", () => ({
-    createPscExtension: jest.fn().mockResolvedValue({
-        resource: {
-            links: { self: "persons-with-significant-control-extension/11111-22222-33333" }
-        }
-    })
-}));
-
 describe("Reason for extension router/handler integration tests", () => {
 
     describe("GET method", () => {
