@@ -31,7 +31,6 @@ Application specific attributes | Value                                | Descrip
 - [ECS service config dev repository](https://github.com/companieshouse/ecs-service-configs-dev)
 - [ECS service config production repository](https://github.com/companieshouse/ecs-service-configs-production)
 
-
 ## Frontend Technologies and Utils
 
 - [NodeJS](https://nodejs.org/)
@@ -44,7 +43,6 @@ Application specific attributes | Value                                | Descrip
 - [Sonarqube](https://www.sonarqube.org)
 - [Docker](https://www.docker.com/)
 - [Git](https://git-scm.com/downloads)
-
 
 ## Installing and Running
 
@@ -88,4 +86,3 @@ To run the tests, type the following command:
 To get a test coverage report, run:
 
 ```npm run coverage```
-
