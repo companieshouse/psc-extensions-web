@@ -16,7 +16,9 @@ jest.mock("../../../src/services/pscIndividualService", () => ({
     })
 }));
 jest.mock("../../../src/services/transactionService", () => ({
-    postTransaction: jest.fn().mockResolvedValue({ id: "11111-22222-33333" })
+    postTransaction: jest.fn().mockResolvedValue({ id: "11111-22222-33333" }),
+    getTransaction: jest.fn().mockResolvedValue({ id: "11111-22222-33333" })
+
 }));
 jest.mock("../../../src/services/pscExtensionService", () => ({
     createPscExtension: jest.fn().mockResolvedValue({
@@ -39,12 +41,17 @@ describe("Reason for extension handler", () => {
                 },
                 body: { whyDoYouNeedAnExtension: EXTENSION_REASONS.NEED_SUPPORT }
             };
+            const res = {
+                redirect: jest.fn()
+            } as unknown as Response;
 
             const handler = new ReasonForExtensionHandler();
 
             const result = await handler.executePost(req as Request, res as Response);
 
-            expect(result.viewData.errors).toEqual({});
+            expect(res.redirect).toHaveBeenCalled();
+
+            expect(result).toBeUndefined();
         });
 
         it("should return error object with correct errorkey when form is invalid", async () => {
@@ -61,7 +68,7 @@ describe("Reason for extension handler", () => {
 
             const result = await handler.executePost(req as Request, res as Response);
 
-            expect(result.viewData.errors).toEqual({
+            expect(result?.viewData.errors).toEqual({
                 whyDoYouNeedAnExtension: {
                     summary: "reason_for_extension_error_message"
                 }

@@ -1,15 +1,16 @@
 import mocks from "../../mocks/all.middleware.mock";
 import supertest from "supertest";
 import app from "../../../src/app";
-import { SERVICE_PATH_PREFIX, PATHS, EXTENSION_REASONS, validExtensionReasons } from "../../../src/lib/constants";
+import { SERVICE_PATH_PREFIX, PATHS, EXTENSION_REASONS, validExtensionReasons, PREFIXED_URLS } from "../../../src/lib/constants";
 import { HttpStatusCode } from "axios";
 import * as cheerio from "cheerio";
 import { COMPANY_NUMBER, PSC_INDIVIDUAL, PSC_NOTIFICATION_ID } from "../../mocks/psc.mock";
 
 const router = supertest(app);
-const uriQueryParams = `?companyNumber=${COMPANY_NUMBER}&selectedPscId=${PSC_NOTIFICATION_ID}&lang=en`;
-const reasonForExtensionUri = `${SERVICE_PATH_PREFIX + PATHS.REASON_FOR_EXTENSION}${uriQueryParams}`;
-const firstExtensionConfirmationUri = `${SERVICE_PATH_PREFIX + PATHS.FIRST_EXTENSION_CONFIRMATION}${uriQueryParams}`;
+const uriQueryParams = `?companyNumber=${COMPANY_NUMBER}&selectedPscId=${PSC_NOTIFICATION_ID}&id=11111-22222-33333&lang=en`;
+const uriQueryParamsTransaction = `?companyNumber=${COMPANY_NUMBER}&selectedPscId=${PSC_NOTIFICATION_ID}&lang=en`;
+const reasonForExtensionUri = `${SERVICE_PATH_PREFIX + PATHS.REASON_FOR_EXTENSION}${uriQueryParamsTransaction}`;
+const firstExtensionConfirmationUri = `${SERVICE_PATH_PREFIX + PATHS.FIRST_EXTENSION_CONFIRMATION}${uriQueryParamsTransaction}`;
 
 jest.mock("../../../src/services/pscIndividualService", () => ({
     getPscIndividual: (): { httpStatusCode: number; resource: typeof PSC_INDIVIDUAL } => ({
@@ -18,12 +19,13 @@ jest.mock("../../../src/services/pscIndividualService", () => ({
     })
 }));
 jest.mock("../../../src/services/transactionService", () => ({
-    postTransaction: jest.fn().mockResolvedValue({ id: "11111-22222-33333" })
+    postTransaction: jest.fn().mockResolvedValue({ id: "11111-22222-33333" }),
+    getTransaction: jest.fn().mockResolvedValue({ id: "11111-22222-33333" })
 }));
 jest.mock("../../../src/services/pscExtensionService", () => ({
     createPscExtension: jest.fn().mockResolvedValue({
         resource: {
-            links: { self: "persons-with-significant-control-extension/11111-22222-33333" }
+            links: { self: "persons-with-significant-control-extensions/11111-22222-33333" }
         }
     })
 }));
@@ -78,13 +80,15 @@ describe("Reason for extension router/handler integration tests", () => {
                 .send({ whyDoYouNeedAnExtension: EXTENSION_REASONS.ID_DOCS_DELAYED });
 
             expect(resp.status).toBe(HttpStatusCode.Found);
-            expect(resp.header.location).toBe(firstExtensionConfirmationUri);
+            expect(resp.header.location).toBe("/persons-with-significant-control-extensions/first-extension-request-successful?companyNumber=12345678&selectedPscId=123456&id=11111-22222-33333&lang=en");
+            console.log(resp.status, resp.header, resp.text);
+
         });
 
         it("Should display the reason for extension page with the validation errors when no reason is selected", async () => {
 
             const resp = await router
-                .post(reasonForExtensionUri)
+                .post("/persons-with-significant-control-extensions/extension-reason?companyNumber=12345678&selectedPscId=123456&lang=en")
                 .send({ });
 
             const $ = cheerio.load(resp.text);

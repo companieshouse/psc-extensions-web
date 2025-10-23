@@ -13,7 +13,7 @@ import { Resource } from "@companieshouse/api-sdk-node";
 import { ApiErrorResponse } from "@companieshouse/api-sdk-node/dist/services/resource";
 import { Transaction } from "@companieshouse/api-sdk-node/dist/services/transaction/types";
 import { HttpStatusCode } from "axios";
-import { postTransaction } from "../../services/transactionService";
+import { getTransaction, postTransaction } from "../../services/transactionService";
 
 interface ExtensionReasonViewData extends BaseViewData {
     reasons: typeof EXTENSION_REASONS;
@@ -59,13 +59,14 @@ export class ReasonForExtensionHandler extends GenericHandler<BaseViewData> {
         };
     }
 
-    public async executePost (req: Request, res: Response): Promise<ViewModel<ExtensionReasonViewData>> {
+    public async executePost (req: Request, res: Response) {
         const viewData = await this.getViewData(req, res);
         const selectedOption = req.body?.whyDoYouNeedAnExtension;
         const validator = new PscExtensionsFormsValidator();
         const errorKey: string | null = validator.validateExtensionReason(selectedOption);
 
         if (errorKey) {
+            console.log("Validation failed, rendering error page");
             viewData.errors = { whyDoYouNeedAnExtension: { summary: errorKey } };
             return {
                 templatePath: ROUTER_VIEWS_FOLDER_PATH + PATHS.REASON_FOR_EXTENSION,
@@ -80,29 +81,27 @@ export class ReasonForExtensionHandler extends GenericHandler<BaseViewData> {
 
         // create a new submission for the company number provided
         const resource = await this.createNewSubmission(req, transaction);
+        const trans = await getTransaction(req, transaction.id!);
+        const id = transaction.id as string;
+
+        const companyNumber = req.query.companyNumber as string;
+        const selectedPscId = req.query.selectedPscId as string;
+        const lang = req.query.lang as string;
+
+        let nextPageUrl = "";
 
         if (this.isErrorResponse(resource)) {
 
-            const nextPageUrl = PREFIXED_URLS.EXTENSION_REFUSED;
+            nextPageUrl = addSearchParams(PREFIXED_URLS.EXTENSION_REFUSED, { companyNumber, selectedPscId, lang });
 
-            return {
-                nextPageUrl,
-                templatePath: ROUTER_VIEWS_FOLDER_PATH + PATHS.REASON_FOR_EXTENSION,
-                viewData
-            };
         } else {
             const pscExtension = resource.resource;
             logger.info(`CREATED New Resource ${pscExtension?.links.self}`);
 
             // set up redirect to confirmation screen
-            const nextPageUrl = PREFIXED_URLS.FIRST_EXTENSION_CONFIRMATION;
+            nextPageUrl = addSearchParams(PREFIXED_URLS.FIRST_EXTENSION_CONFIRMATION, { companyNumber, selectedPscId, id, lang });
 
-            return {
-                nextPageUrl,
-                templatePath: ROUTER_VIEWS_FOLDER_PATH + PATHS.REASON_FOR_EXTENSION,
-                viewData
-
-            };
+            return res.redirect(nextPageUrl);
         }
 
     }
