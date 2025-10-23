@@ -65,7 +65,7 @@ describe("validateExtensionRequest middleware", () => {
         it("should call next() when count is 0 and user is already on request extension path", (done) => {
             const reqOnExtensionPath = {
                 ...req,
-                originalUrl: "/persons-with-significant-control-extensions/requesting-an-extension?companyNumber=2222222&selectedPscId=1111111"
+                originalUrl: "/persons-with-significant-control-extension/requesting-an-extension?companyNumber=2222222&selectedPscId=1111111"
             };
             mockGetIsPscExtensionValid.mockResolvedValue(mockValidationStatusResponse);
             mockGetPscExtensionCount.mockResolvedValue(0);
