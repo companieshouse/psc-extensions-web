@@ -20,7 +20,8 @@ jest.mock("../../../src/services/pscIndividualService", () => ({
 }));
 jest.mock("../../../src/services/transactionService", () => ({
     postTransaction: jest.fn().mockResolvedValue({ id: "11111-22222-33333" }),
-    getTransaction: jest.fn().mockResolvedValue({ id: "11111-22222-33333" })
+    getTransaction: jest.fn().mockResolvedValue({ id: "11111-22222-33333" }),
+    closeTransaction: jest.fn().mockResolvedValue({ id: "11111-22222-33333" })
 }));
 jest.mock("../../../src/services/pscExtensionService", () => ({
     createPscExtension: jest.fn().mockResolvedValue({

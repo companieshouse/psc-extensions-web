@@ -13,7 +13,7 @@ import { Resource } from "@companieshouse/api-sdk-node";
 import { ApiErrorResponse } from "@companieshouse/api-sdk-node/dist/services/resource";
 import { Transaction } from "@companieshouse/api-sdk-node/dist/services/transaction/types";
 import { HttpStatusCode } from "axios";
-import { getTransaction, postTransaction } from "../../services/transactionService";
+import { closeTransaction, postTransaction } from "../../services/transactionService";
 
 interface ExtensionReasonViewData extends BaseViewData {
     reasons: typeof EXTENSION_REASONS;
@@ -81,12 +81,13 @@ export class ReasonForExtensionHandler extends GenericHandler<BaseViewData> {
 
         // create a new submission for the company number provided
         const resource = await this.createNewSubmission(req, transaction);
-        const trans = await getTransaction(req, transaction.id!);
         const id = transaction.id as string;
 
         const companyNumber = req.query.companyNumber as string;
         const selectedPscId = req.query.selectedPscId as string;
         const lang = req.query.lang as string;
+
+        await closeTransaction(req, transaction.id!, selectedPscId);
 
         let nextPageUrl = "";
 
