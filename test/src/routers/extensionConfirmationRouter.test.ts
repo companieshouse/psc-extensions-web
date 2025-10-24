@@ -37,6 +37,7 @@ describe("GET extension confirmation router", () => {
         expect(res.status).toBe(200);
         expect(mocks.mockSessionMiddleware).toHaveBeenCalled();
         expect(mocks.mockAuthenticationMiddleware).toHaveBeenCalled();
+        expect(mocks.mockValidationMiddleware).toHaveBeenCalled();
         expect(res.text).toContain("this service. You must do so before");
     });
 
@@ -45,6 +46,7 @@ describe("GET extension confirmation router", () => {
         expect(res.status).toBe(200);
         expect(mocks.mockSessionMiddleware).toHaveBeenCalled();
         expect(mocks.mockAuthenticationMiddleware).toHaveBeenCalled();
+        expect(mocks.mockValidationMiddleware).toHaveBeenCalled();
         expect(res.text).toContain("You cannot request another extension using this service.");
     });
 });

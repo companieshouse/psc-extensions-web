@@ -10,7 +10,6 @@ This is a web frontend for the PSC Extensions journey. It was created based on [
 The code present in this repository is used to define and deploy a dockerised container in AWS ECS.
 This is done by calling a [module](https://github.com/companieshouse/terraform-modules/tree/main/aws/ecs) from terraform-modules. Application specific attributes are injected and the service is then deployed using Terraform via the CICD platform 'Concourse'.
 
-
 Application specific attributes | Value                                | Description
 :---------|:-----------------------------------------------------------------------------|:-----------
 **ECS Cluster**        |filing-maintain                                      | ECS cluster (stack) the service belongs to
@@ -31,7 +30,6 @@ Application specific attributes | Value                                | Descrip
 ### Useful Links
 - [ECS service config dev repository](https://github.com/companieshouse/ecs-service-configs-dev)
 - [ECS service config production repository](https://github.com/companieshouse/ecs-service-configs-production)
-
 
 ## Frontend Technologies and Utils
 

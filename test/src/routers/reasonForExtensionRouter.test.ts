@@ -43,6 +43,7 @@ describe("Reason for extension router/handler integration tests", () => {
             await router.get(reasonForExtensionUri);
             expect(mocks.mockSessionMiddleware).toHaveBeenCalled();
             expect(mocks.mockAuthenticationMiddleware).toHaveBeenCalled();
+            expect(mocks.mockValidationMiddleware).toHaveBeenCalled();
         });
 
         it("should return status 200", async () => {

@@ -2,10 +2,10 @@ import { Resource } from "@companieshouse/api-sdk-node";
 import { HttpStatusCode } from "axios";
 import { Request } from "express";
 import { createOAuthApiClient } from "../../../src/lib/utils/api.client";
-import { createPscExtension } from "../../../src/services/pscExtensionService";
+import { createPscExtension, getIsPscExtensionValid, getPscExtensionCount } from "../../../src/services/pscExtensionService";
 import { INDIVIDUAL_DATA, INDIVIDUAL_EXTENSION_CREATED, INITIAL_PSC_DATA } from "../../mocks/pscExtension.mock";
 import { TRANSACTION_ID } from "../../mocks/transaction.mock";
-import { PscExtension, PscExtensionData } from "@companieshouse/api-sdk-node/dist/services/psc-extensions-link/types";
+import { PscExtension, PscExtensionData, ValidationStatusResponse } from "@companieshouse/api-sdk-node/dist/services/psc-extensions-link/types";
 import { DataIntegrityError } from "../../../src/lib/utils/error_manifests/dataIntegrityError";
 import { HttpError } from "../../../src/lib/utils/error_manifests/httpError";
 import { Responses } from "../../../src/lib/constants";
@@ -14,11 +14,15 @@ jest.mock("@companieshouse/api-sdk-node");
 jest.mock("../../../src/lib/utils/api.client");
 
 const mockCreatePscExtension = jest.fn();
+const mockGetIsPscExtensionValid = jest.fn();
+const mockGetPscExtensionCount = jest.fn();
 const mockCreateOAuthApiClient = createOAuthApiClient as jest.Mock;
 
 mockCreateOAuthApiClient.mockReturnValue({
     pscExtensionsService: {
-        postPscExtension: mockCreatePscExtension
+        postPscExtension: mockCreatePscExtension,
+        getIsPscExtensionValid: mockGetIsPscExtensionValid,
+        getPscExtensionCount: mockGetPscExtensionCount
     }
 });
 
@@ -124,11 +128,9 @@ describe("pscExtensionService", () => {
             const errorMessage = "Error message";
             const mockCreate = {
                 httpStatusCode: status,
-                resource: {
-                    errors: [{
-                        error: errorMessage
-                    }]
-                }
+                errors: [{
+                    error: errorMessage
+                }]
             };
             mockCreatePscExtension.mockResolvedValueOnce(mockCreate);
 
@@ -200,6 +202,197 @@ describe("pscExtensionService", () => {
             expect(mockCreateOAuthApiClient).toHaveBeenCalledTimes(1);
             expect(mockCreatePscExtension).toHaveBeenCalledTimes(1);
             expect(mockCreatePscExtension).toHaveBeenCalledWith(TRANSACTION_ID, INITIAL_PSC_DATA, {});
+        });
+    });
+
+    describe("getIsPscExtensionValid", () => {
+        const transactionId = TRANSACTION_ID;
+        const pscNotificationId = "PSCDATA5";
+        const companyNumber = "00006400";
+
+        beforeEach(() => {
+            jest.clearAllMocks();
+        });
+
+        it("should return ValidationStatusResponse on success", async () => {
+            const mockValidationResponse: ValidationStatusResponse = {
+                errors: [],
+                valid: true
+            };
+
+            const mockResponse: Resource<ValidationStatusResponse> = {
+                httpStatusCode: HttpStatusCode.Ok,
+                resource: mockValidationResponse
+            };
+
+            mockGetIsPscExtensionValid.mockResolvedValueOnce(mockResponse);
+
+            const response = await getIsPscExtensionValid(req, pscNotificationId, companyNumber);
+
+            expect(response).toEqual(mockValidationResponse);
+            expect(mockCreateOAuthApiClient).toHaveBeenCalledTimes(1);
+            expect(mockGetIsPscExtensionValid).toHaveBeenCalledTimes(1);
+            expect(mockGetIsPscExtensionValid).toHaveBeenCalledWith(pscNotificationId, companyNumber, {});
+        });
+
+        it("should throw an error when pscNotificationId is not provided", async () => {
+            await expect(getIsPscExtensionValid(req, "", companyNumber))
+                .rejects
+                .toThrow("Aborting: Missing required parameters: pscNotificationId");
+        });
+
+        it("should throw an error when companyNumber is not provided", async () => {
+            await expect(getIsPscExtensionValid(req, pscNotificationId, ""))
+                .rejects
+                .toThrow("Aborting: Missing required parameters: companyNumber");
+        });
+
+        it("should throw an error when no response from API", async () => {
+            mockGetIsPscExtensionValid.mockResolvedValueOnce(undefined);
+
+            await expect(getIsPscExtensionValid(req, pscNotificationId, companyNumber))
+                .rejects
+                .toThrow(`PSC Extension validation GET request returned no response for {"pscNotificationId":"${pscNotificationId}","companyNumber":"${companyNumber}"}`);
+        });
+
+        it("should throw HttpError when API returns error status code", async () => {
+            const mockResponse = {
+                httpStatusCode: HttpStatusCode.NotFound
+            };
+
+            mockGetIsPscExtensionValid.mockResolvedValueOnce(mockResponse);
+
+            await expect(getIsPscExtensionValid(req, pscNotificationId, companyNumber))
+                .rejects
+                .toThrow(HttpError);
+        });
+
+        it("should throw HttpError when API returns undefined status code", async () => {
+            const mockResponse = {
+                httpStatusCode: undefined
+            };
+
+            mockGetIsPscExtensionValid.mockResolvedValueOnce(mockResponse);
+
+            await expect(getIsPscExtensionValid(req, pscNotificationId, companyNumber))
+                .rejects
+                .toThrow(HttpError);
+        });
+
+        it("should throw an error when resource is not provided in response", async () => {
+            const mockResponse: Resource<ValidationStatusResponse> = {
+                httpStatusCode: HttpStatusCode.Ok,
+                resource: undefined
+            };
+
+            mockGetIsPscExtensionValid.mockResolvedValueOnce(mockResponse);
+
+            await expect(getIsPscExtensionValid(req, pscNotificationId, companyNumber))
+                .rejects
+                .toThrow(`PSC Extension validation API GET request returned no resource for {"pscNotificationId":"${pscNotificationId}","companyNumber":"${companyNumber}"}`);
+        });
+    });
+
+    describe("getPscExtensionCount", () => {
+        const pscNotificationId = "PSCDATA5";
+
+        beforeEach(() => {
+            jest.clearAllMocks();
+        });
+
+        it("should return count on success", async () => {
+            const expectedCount = 2;
+            const mockResponse: Resource<number> = {
+                httpStatusCode: HttpStatusCode.Ok,
+                resource: expectedCount
+            };
+
+            mockGetPscExtensionCount.mockResolvedValueOnce(mockResponse);
+
+            const response = await getPscExtensionCount(req, pscNotificationId);
+
+            expect(response).toBe(expectedCount);
+            expect(mockCreateOAuthApiClient).toHaveBeenCalledTimes(1);
+            expect(mockGetPscExtensionCount).toHaveBeenCalledTimes(1);
+            expect(mockGetPscExtensionCount).toHaveBeenCalledWith(pscNotificationId, {});
+        });
+
+        it("should return 0 when count is 0", async () => {
+            const expectedCount = 0;
+            const mockResponse: Resource<number> = {
+                httpStatusCode: HttpStatusCode.Ok,
+                resource: expectedCount
+            };
+
+            mockGetPscExtensionCount.mockResolvedValueOnce(mockResponse);
+
+            const response = await getPscExtensionCount(req, pscNotificationId);
+
+            expect(response).toBe(expectedCount);
+        });
+
+        it("should throw an error when pscNotificationId is not provided", async () => {
+            await expect(getPscExtensionCount(req, ""))
+                .rejects
+                .toThrow("Aborting: pscNotificationId is required for PSC Extension Count GET request");
+        });
+
+        it("should throw an error when no response from API", async () => {
+            mockGetPscExtensionCount.mockResolvedValueOnce(undefined);
+
+            await expect(getPscExtensionCount(req, pscNotificationId))
+                .rejects
+                .toThrow(`PSC Extension Count GET request returned no response for pscNotificationId="${pscNotificationId}"`);
+        });
+
+        it("should throw HttpError when API returns error status code", async () => {
+            const mockResponse = {
+                httpStatusCode: HttpStatusCode.InternalServerError
+            };
+
+            mockGetPscExtensionCount.mockResolvedValueOnce(mockResponse);
+
+            await expect(getPscExtensionCount(req, pscNotificationId))
+                .rejects
+                .toThrow(HttpError);
+        });
+
+        it("should throw HttpError when API returns undefined status code", async () => {
+            const mockResponse = {
+                httpStatusCode: undefined
+            };
+
+            mockGetPscExtensionCount.mockResolvedValueOnce(mockResponse);
+
+            await expect(getPscExtensionCount(req, pscNotificationId))
+                .rejects
+                .toThrow(HttpError);
+        });
+
+        it("should throw an error when resource is undefined", async () => {
+            const mockResponse: Resource<number> = {
+                httpStatusCode: HttpStatusCode.Ok,
+                resource: undefined
+            };
+
+            mockGetPscExtensionCount.mockResolvedValueOnce(mockResponse);
+
+            await expect(getPscExtensionCount(req, pscNotificationId))
+                .rejects
+                .toThrow(`PSC Extension Count API GET request returned no resource for pscNotificationId="${pscNotificationId}"`);
+        });
+
+        it("should throw an error when resource is null", async () => {
+            const mockResponse = {
+                httpStatusCode: HttpStatusCode.Ok,
+                resource: null
+            };
+
+            mockGetPscExtensionCount.mockResolvedValueOnce(mockResponse);
+
+            await expect(getPscExtensionCount(req, pscNotificationId))
+                .rejects
+                .toThrow(`PSC Extension Count API GET request returned no resource for pscNotificationId="${pscNotificationId}"`);
         });
     });
 

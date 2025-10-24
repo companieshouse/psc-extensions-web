@@ -37,8 +37,8 @@ describe("Reason for extension handler", () => {
 
             req = {
                 query: {
-                    companyNumber: COMPANY_NUMBER,
-                    selectedPscId: PSC_ID
+                    COMPANY_NUMBER,
+                    PSC_ID
                 },
                 body: { whyDoYouNeedAnExtension: EXTENSION_REASONS.NEED_SUPPORT }
             };

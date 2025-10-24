@@ -34,7 +34,7 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@companieshouse/api-sdk-node": "^2.0.304",
+    "@companieshouse/api-sdk-node": "^2.0.307",
     "@companieshouse/ch-node-utils": "^2.1.8",
     "@companieshouse/node-session-handler": "^5.2.0",
     "@companieshouse/structured-logging-node": "^1.0.8",
@@ -46,7 +46,6 @@
     "http-errors": "^1.7.3",
     "ioredis": "4.16.2",
     "js-yaml": "^3.14.0",
-    "node-mocks-http": "^1.17.2",
     "nunjucks": "3.2.4",
     "uuid": "8.0.0",
     "yargs": "15.3.1"
