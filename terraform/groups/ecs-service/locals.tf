@@ -66,3 +66,4 @@ locals {
     { "name" : "PORT", "value" : local.container_port }
   ])
 }
+
