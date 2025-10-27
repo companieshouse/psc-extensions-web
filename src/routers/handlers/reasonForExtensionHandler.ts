@@ -89,8 +89,6 @@ export class ReasonForExtensionHandler extends GenericHandler<BaseViewData> {
 
         await closeTransaction(req, transaction.id!, selectedPscId);
 
-        // let nextPageUrl: string = "";
-
         if (this.isErrorResponse(resource)) {
 
             const nextPageUrl = addSearchParams(PREFIXED_URLS.EXTENSION_REFUSED, { companyNumber, selectedPscId, lang });
