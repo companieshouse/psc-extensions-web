@@ -38,6 +38,7 @@ export class ExtensionConfirmationHandler extends GenericHandler<PscViewData> {
         const companyProfile = await getCompanyProfile(req, companyNumber);
         const transactionId = req.query.id as string;
         const forward = decodeURI(addSearchParams(EXTERNALURLS.COMPANY_LOOKUP_FORWARD, { companyNumber: "{companyNumber}", lang }));
+        const getDate= pscIndividual.resource?.identityVerificationDetails?.appointmentVerificationStatementDueOn;
 
         function resolveUrlTemplate (PREFIXEDURL: string): string | null {
             return addSearchParams(PREFIXEDURL, { companyNumber, lang });
@@ -49,7 +50,7 @@ export class ExtensionConfirmationHandler extends GenericHandler<PscViewData> {
             pscName: pscIndividual.resource?.name!,
             companyName: companyProfile.companyName,
             companyNumber: companyProfile.companyNumber,
-            dueDate: this.getLocalizedDate(pscIndividual.resource?.identityVerificationDetails?.appointmentVerificationStatementDueOn!, lang),
+            dueDate: this.getLocalizedDate(getDate, lang),
             referenceNumber: transactionId,
             companyLookupUrl: addSearchParams(EXTERNALURLS.COMPANY_LOOKUP, { forward }),
             differentPscInCompanyUrl: resolveUrlTemplate(PREFIXED_URLS.INDIVIDUAL_PSC_LIST)
