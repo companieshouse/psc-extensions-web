@@ -89,18 +89,20 @@ export class ReasonForExtensionHandler extends GenericHandler<BaseViewData> {
 
         await closeTransaction(req, transaction.id!, selectedPscId);
 
-        let nextPageUrl = "";
+        // let nextPageUrl: string = "";
 
         if (this.isErrorResponse(resource)) {
 
-            nextPageUrl = addSearchParams(PREFIXED_URLS.EXTENSION_REFUSED, { companyNumber, selectedPscId, lang });
+            const nextPageUrl = addSearchParams(PREFIXED_URLS.EXTENSION_REFUSED, { companyNumber, selectedPscId, lang });
+
+            return res.redirect(nextPageUrl);
 
         } else {
             const pscExtension = resource.resource;
             logger.info(`CREATED New Resource ${pscExtension?.links.self}`);
 
             // set up redirect to confirmation screen
-            nextPageUrl = addSearchParams(PREFIXED_URLS.FIRST_EXTENSION_CONFIRMATION, { companyNumber, selectedPscId, id, lang });
+            const nextPageUrl = addSearchParams(PREFIXED_URLS.FIRST_EXTENSION_CONFIRMATION, { companyNumber, selectedPscId, id, lang });
 
             return res.redirect(nextPageUrl);
         }
