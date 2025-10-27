@@ -1,7 +1,7 @@
 {% from "govuk/components/phase-banner/macro.njk" import govukPhaseBanner %}
 
 {% set phaseBannerContent %}
-  {{ i18n.phase_banner_new_service }}<a class="govuk-link" href="https://www.smartsurvey.co.uk/s/provide-idv-for-psc-legal-ent-fdbk/">{{ i18n.phase_banner_feedback_link }}</a>{{ i18n.phase_banner_help_improve }}
+  {{ i18n.phase_banner_new_service }}<a class="govuk-link" data-event-id="feedback-link-click" href="https://www.smartsurvey.co.uk/s/provide-idv-for-psc-legal-ent-fdbk/">{{ i18n.phase_banner_feedback_link }}</a>{{ i18n.phase_banner_help_improve }}
 {% endset %}
   
 {{ govukPhaseBanner({
