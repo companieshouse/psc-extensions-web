@@ -59,7 +59,7 @@ export class ReasonForExtensionHandler extends GenericHandler<BaseViewData> {
         };
     }
 
-    public async executePost (req: Request, res: Response): Promise<| { templatePath: string; viewData: ExtensionReasonViewData }| { nextPageUrl: string }> {
+    public async executePost (req: Request, res: Response): Promise<ViewModel<ExtensionReasonViewData> | { nextPageUrl: string }> {
         const viewData = await this.getViewData(req, res);
         const extensionReason = req.body?.whyDoYouNeedAnExtension;
         const validator = new PscExtensionsFormsValidator();
@@ -119,7 +119,7 @@ export class ReasonForExtensionHandler extends GenericHandler<BaseViewData> {
             companyNumber,
             pscNotificationId: selectedPscId,
             extensionDetails: {
-                extensionReason: extensionReason,
+                extensionReason,
                 extensionStatus,
                 extensionRequestDate: new Date().toISOString()
             }
@@ -128,7 +128,7 @@ export class ReasonForExtensionHandler extends GenericHandler<BaseViewData> {
         const response = await createPscExtension(request, transaction.id!, extension);
 
         if (this.isErrorResponse(response)) {
-        extension.extensionDetails!.extensionStatus = EXTENSION_STATUS.PENDING;
+            extension.extensionDetails!.extensionStatus = EXTENSION_STATUS.PENDING;
         }
 
         return response;

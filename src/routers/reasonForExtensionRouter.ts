@@ -15,9 +15,9 @@ reasonForExtensionRouter.post("/", handleExceptions(async (req: Request, res: Re
     const result = await handler.executePost(req, res);
     if ("nextPageUrl" in result) {
         return res.redirect(result.nextPageUrl);
-    }
-    if ("templatePath" in result && "viewData" in result) {
-        return res.render(result.templatePath, result.viewData);
+    } else {
+        const { templatePath, viewData } = result;
+        res.render(templatePath, viewData);
     }
 }));
 
