@@ -1,5 +1,5 @@
 import { ReasonForExtensionHandler } from "../../../src/routers/handlers/reasonForExtensionHandler";
-import { EXTENSION_REASONS } from "../../../src/lib/constants";
+import { EXTENSION_REASONS, PREFIXED_URLS } from "../../../src/lib/constants";
 import { Request, Response } from "express";
 import { HttpStatusCode } from "axios";
 import { COMPANY_NUMBER, PSC_ID, PSC_INDIVIDUAL } from "../../mocks/psc.mock";
@@ -50,9 +50,13 @@ describe("Reason for extension handler", () => {
 
             const result = await handler.executePost(req as Request, res as Response);
 
-            expect(res.redirect).toHaveBeenCalled();
-
-            expect(result).toBeUndefined();
+            if ("nextPageUrl" in result) {
+                expect(result.nextPageUrl).toContain(PREFIXED_URLS.FIRST_EXTENSION_CONFIRMATION);
+            } else if ("templatePath" in result && "viewData" in result) {
+                expect(result.viewData.errors).toEqual({});
+            } else {
+                throw new Error("Unexpected result shape: neither redirect nor viewData returned.");
+            }
         });
 
         it("should return error object with correct errorkey when form is invalid", async () => {
@@ -69,11 +73,17 @@ describe("Reason for extension handler", () => {
 
             const result = await handler.executePost(req as Request, res as Response);
 
-            expect(result?.viewData.errors).toEqual({
-                whyDoYouNeedAnExtension: {
-                    summary: "reason_for_extension_error_message"
-                }
-            });
-        });
+            if ("viewData" in result && "templatePath" in result) {
+                expect(result.viewData.errors).toEqual({
+                    whyDoYouNeedAnExtension: {
+                        summary: "reason_for_extension_error_message"
+                    }
+                });
+            } else {
+                throw new Error("Expected a render result, but got a redirect instead.");
+            }
+
+        }
+        );
     });
 });

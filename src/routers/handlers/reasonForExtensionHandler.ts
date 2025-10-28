@@ -59,14 +59,14 @@ export class ReasonForExtensionHandler extends GenericHandler<BaseViewData> {
         };
     }
 
-    public async executePost (req: Request, res: Response) {
+    public async executePost (req: Request, res: Response): Promise<| { templatePath: string; viewData: ExtensionReasonViewData }| { nextPageUrl: string }> {
         const viewData = await this.getViewData(req, res);
-        const selectedOption = req.body?.whyDoYouNeedAnExtension;
+        const extensionReason = req.body?.whyDoYouNeedAnExtension;
         const validator = new PscExtensionsFormsValidator();
-        const errorKey: string | null = validator.validateExtensionReason(selectedOption);
+        const errorKey: string | null = validator.validateExtensionReason(extensionReason);
 
         if (errorKey) {
-            console.log("Validation failed, rendering error page");
+            logger.error("Validation failed, rendering error page");
             viewData.errors = { whyDoYouNeedAnExtension: { summary: errorKey } };
             return {
                 templatePath: ROUTER_VIEWS_FOLDER_PATH + PATHS.REASON_FOR_EXTENSION,
@@ -93,7 +93,7 @@ export class ReasonForExtensionHandler extends GenericHandler<BaseViewData> {
 
             const nextPageUrl = addSearchParams(PREFIXED_URLS.EXTENSION_REFUSED, { companyNumber, selectedPscId, lang });
 
-            return res.redirect(nextPageUrl);
+            return { nextPageUrl };
 
         } else {
             const pscExtension = resource.resource;
@@ -102,7 +102,7 @@ export class ReasonForExtensionHandler extends GenericHandler<BaseViewData> {
             // set up redirect to confirmation screen
             const nextPageUrl = addSearchParams(PREFIXED_URLS.FIRST_EXTENSION_CONFIRMATION, { companyNumber, selectedPscId, id, lang });
 
-            return res.redirect(nextPageUrl);
+            return { nextPageUrl };
         }
 
     }
@@ -111,7 +111,7 @@ export class ReasonForExtensionHandler extends GenericHandler<BaseViewData> {
 
         const selectedPscId = request.query.selectedPscId as string;
         const companyNumber = request.query.companyNumber as string;
-        const selectedOption = request.body?.whyDoYouNeedAnExtension;
+        const extensionReason = request.body?.whyDoYouNeedAnExtension;
 
         const extensionStatus = EXTENSION_STATUS.ACCEPTED;
 
@@ -119,7 +119,7 @@ export class ReasonForExtensionHandler extends GenericHandler<BaseViewData> {
             companyNumber,
             pscNotificationId: selectedPscId,
             extensionDetails: {
-                extensionReason: selectedOption,
+                extensionReason: extensionReason,
                 extensionStatus,
                 extensionRequestDate: new Date().toISOString()
             }

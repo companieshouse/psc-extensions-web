@@ -13,8 +13,11 @@ reasonForExtensionRouter.get("/", handleExceptions(async (req: Request, res: Res
 reasonForExtensionRouter.post("/", handleExceptions(async (req: Request, res: Response) => {
     const handler = new ReasonForExtensionHandler();
     const result = await handler.executePost(req, res);
-    if (result?.templatePath && result?.viewData) {
-        res.render(result.templatePath, result.viewData);
+    if ("nextPageUrl" in result) {
+        return res.redirect(result.nextPageUrl);
+    }
+    if ("templatePath" in result && "viewData" in result) {
+        return res.render(result.templatePath, result.viewData);
     }
 }));
 
