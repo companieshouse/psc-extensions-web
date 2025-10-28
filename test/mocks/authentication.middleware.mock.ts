@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from "express";
-import {  authenticate } from "../../src/middleware/authentication.middleware";
+import { authenticate } from "../../src/middleware/authentication.middleware";
 
 jest.mock("../../src/middleware/authentication.middleware");
 
