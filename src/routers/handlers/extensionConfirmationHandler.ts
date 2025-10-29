@@ -6,6 +6,7 @@ import { PATHS, PREFIXED_URLS, ROUTER_VIEWS_FOLDER_PATH, EXTERNALURLS } from "..
 import { getPscIndividual } from "../../services/pscIndividualService";
 import { getCompanyProfile } from "../../services/companyProfileService";
 import { getLocaleInfo, getLocalesService, selectLang } from "../../utils/localise";
+import { internationaliseDate } from "../../utils/date";
 
 interface PscViewData extends BaseViewData {
     referenceNumber: string;
@@ -35,7 +36,9 @@ export class ExtensionConfirmationHandler extends GenericHandler<PscViewData> {
         const selectedPscId = req.query.selectedPscId as string;
         const pscIndividual = await getPscIndividual(req, companyNumber, selectedPscId);
         const companyProfile = await getCompanyProfile(req, companyNumber);
+        const transactionId = req.query.id as string;
         const forward = decodeURI(addSearchParams(EXTERNALURLS.COMPANY_LOOKUP_FORWARD, { companyNumber: "{companyNumber}", lang }));
+        const getDate = pscIndividual.resource?.identityVerificationDetails?.appointmentVerificationStatementDueOn;
 
         function resolveUrlTemplate (PREFIXEDURL: string): string | null {
             return addSearchParams(PREFIXEDURL, { companyNumber, lang });
@@ -47,6 +50,8 @@ export class ExtensionConfirmationHandler extends GenericHandler<PscViewData> {
             pscName: pscIndividual.resource?.name!,
             companyName: companyProfile.companyName,
             companyNumber: companyProfile.companyNumber,
+            dueDate: this.getLocalizedDate(getDate, lang),
+            referenceNumber: transactionId,
             companyLookupUrl: addSearchParams(EXTERNALURLS.COMPANY_LOOKUP, { forward }),
             differentPscInCompanyUrl: resolveUrlTemplate(PREFIXED_URLS.INDIVIDUAL_PSC_LIST)
 
@@ -60,5 +65,9 @@ export class ExtensionConfirmationHandler extends GenericHandler<PscViewData> {
             templatePath: ROUTER_VIEWS_FOLDER_PATH + PATHS.EXTENSION_CONFIRMATION,
             viewData: await this.getViewData(req, res)
         };
+    }
+
+    private getLocalizedDate (date: Date | undefined, lang: string): string {
+        return date === undefined ? "" : internationaliseDate(date.toString(), lang);
     }
 }

@@ -18,8 +18,8 @@ const routerDispatch = (app: Application): void => {
     router.use(PATHS.REQUEST_EXTENSION, authenticate, validateExtensionRequest, requestAnExtensionRouter);
     router.use(PATHS.EXTENSION_REFUSED, authenticate, extensionRefusedRouter);
     router.use(PATHS.REASON_FOR_EXTENSION, authenticate, validateExtensionRequest, reasonForExtensionRouter);
-    router.use(PATHS.FIRST_EXTENSION_CONFIRMATION, authenticate, validateExtensionRequest, extensionConfirmationRouter);
-    router.use(PATHS.SECOND_EXTENSION_CONFIRMATION, authenticate, validateExtensionRequest, extensionConfirmationRouter);
+    router.use(PATHS.FIRST_EXTENSION_CONFIRMATION, authenticate, extensionConfirmationRouter);
+    router.use(PATHS.SECOND_EXTENSION_CONFIRMATION, authenticate, extensionConfirmationRouter);
     router.use(PATHS.EXTENSION_ALREADY_SUBMITTED, authenticate, extensionAlreadySubmittedRouter);
     router.use("/", (req: Request, res: Response) => {
         res.status(404).render("partials/error_400");
