@@ -5,6 +5,7 @@ import { SERVICE_PATH_PREFIX, PATHS, EXTENSION_REASONS, validExtensionReasons, P
 import { HttpStatusCode } from "axios";
 import * as cheerio from "cheerio";
 import { COMPANY_NUMBER, PSC_INDIVIDUAL, PSC_NOTIFICATION_ID } from "../../mocks/psc.mock";
+import { getPscExtensionCount } from "../../../src/services/pscExtensionService";
 
 const router = supertest(app);
 const uriQueryParams = `?companyNumber=${COMPANY_NUMBER}&selectedPscId=${PSC_NOTIFICATION_ID}&id=11111-22222-33333&lang=en`;
@@ -28,7 +29,8 @@ jest.mock("../../../src/services/pscExtensionService", () => ({
         resource: {
             links: { self: "persons-with-significant-control-extensions/11111-22222-33333" }
         }
-    })
+    }),
+    getPscExtensionCount: jest.fn()
 }));
 
 describe("Reason for extension router/handler integration tests", () => {
@@ -75,16 +77,31 @@ describe("Reason for extension router/handler integration tests", () => {
     });
 
     describe("POST method", () => {
-        it("should redirect to extension confirmation", async () => {
+
+        it("should redirect to first extension confirmation when extension count is 0", async () => {
+            (getPscExtensionCount as jest.Mock).mockResolvedValueOnce(0);
 
             const resp = await router
                 .post(reasonForExtensionUri)
                 .send({ whyDoYouNeedAnExtension: EXTENSION_REASONS.ID_DOCS_DELAYED });
 
             expect(resp.status).toBe(HttpStatusCode.Found);
-            expect(resp.header.location).toBe("/persons-with-significant-control-extensions/first-extension-request-successful?companyNumber=12345678&selectedPscId=123456&id=11111-22222-33333&lang=en");
-            console.log(resp.status, resp.header, resp.text);
+            expect(resp.header.location).toBe(
+                "/persons-with-significant-control-extensions/first-extension-request-successful?companyNumber=12345678&selectedPscId=123456&id=11111-22222-33333&lang=en"
+            );
+        });
 
+        it("should redirect to second extension confirmation when extension count is greater than 1", async () => {
+            (getPscExtensionCount as jest.Mock).mockResolvedValueOnce(2);
+
+            const resp = await router
+                .post(reasonForExtensionUri)
+                .send({ whyDoYouNeedAnExtension: EXTENSION_REASONS.ID_DOCS_DELAYED });
+
+            expect(resp.status).toBe(HttpStatusCode.Found);
+            expect(resp.header.location).toBe(
+                "/persons-with-significant-control-extensions/second-extension-request-successful?companyNumber=12345678&selectedPscId=123456&id=11111-22222-33333&lang=en"
+            );
         });
 
         it("Should display the reason for extension page with the validation errors when no reason is selected", async () => {
