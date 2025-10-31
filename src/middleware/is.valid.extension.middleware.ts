@@ -69,14 +69,12 @@ export const validateExtensionRequest = handleExceptions(async (req: Request, re
             ];
             const isOnSecondExtensionFlow = secondExtensionRoutes.some(route => req.originalUrl.includes(route));
 
-            // Allow access if user is on a valid first extension route, prevents redirects to the start page
+            // Allow access if user is on a valid second extension route, prevents redirects to the start page
             if (isOnSecondExtensionFlow) {
                 return next();
             }
 
             return res.redirect(addSearchParams(PREFIXED_URLS.REQUEST_EXTENSION, { companyNumber, selectedPscId: pscNotificationId }));
-
-            // This is to be done: This is a work in progress to be completed -> This should redirect to the second extension start screen once developed
 
         } else if (extensionCount === 2) {
 
