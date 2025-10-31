@@ -23,5 +23,8 @@
   "extension_confirmation_links_title": "Beth ydych chi am ei wneud nesaf?",
   "extension_confirmation_links_info": "Darparu manylion gwiriad hunaniaeth neu ofyn am estyniad ar gyfer:",
   "extension_confirmation_link_2": "PRhA arall o",
-  "extension_confirmation_link_1": "PRhA o gwmni gwahanol"
+  "extension_confirmation_link_1": "PRhA o gwmni gwahanol",
+  "extension_confirmation_feedback_title": "Adborth",
+  "extension_confirmation_feedback_info": "Helpwch ni i wella’r gwasanaeth hwn. ",
+  "extension_confirmation_feedback_link": "Cwblhewch ein harolwg cyflym (yn agor mewn tab newydd)."
 }

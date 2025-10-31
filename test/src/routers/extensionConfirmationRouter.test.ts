@@ -7,6 +7,8 @@ import { COMPANY_NUMBER, PSC_INDIVIDUAL, PSC_NOTIFICATION_ID } from "../../mocks
 
 const router = supertest(app);
 const uriQueryParams = `?companyNumber=${COMPANY_NUMBER}&selectedPscId=${PSC_NOTIFICATION_ID}&lang=en`;
+const uriQueryParamsWelsh = `?companyNumber=${COMPANY_NUMBER}&selectedPscId=${PSC_NOTIFICATION_ID}&lang=cy`;
+const firstExtensionConfirmedUriWelsh = `${PREFIXED_URLS.FIRST_EXTENSION_CONFIRMATION}${uriQueryParamsWelsh}`;
 const firstExtensionConfirmedUri = `${PREFIXED_URLS.FIRST_EXTENSION_CONFIRMATION}${uriQueryParams}`;
 const secondExtensionConfirmedUri = `${PREFIXED_URLS.SECOND_EXTENSION_CONFIRMATION}${uriQueryParams}`;
 
@@ -46,5 +48,23 @@ describe("GET extension confirmation router", () => {
         expect(mocks.mockSessionMiddleware).toHaveBeenCalled();
         expect(mocks.mockAuthenticationMiddleware).toHaveBeenCalled();
         expect(res.text).toContain("You cannot request another extension using this service.");
+    });
+
+    it("should return first extension confirmation screen with feedback text", async () => {
+        const res = await router.get(firstExtensionConfirmedUri);
+        expect(res.status).toBe(200);
+        expect(mocks.mockSessionMiddleware).toHaveBeenCalled();
+        expect(mocks.mockAuthenticationMiddleware).toHaveBeenCalled();
+        expect(res.text).toContain("Feedback");
+        expect(res.text).toContain("Help us improve this service.");
+    });
+
+    it("should return first extension confirmation screen with feedback text in Welsh", async () => {
+        const res = await router.get(firstExtensionConfirmedUriWelsh);
+        expect(res.status).toBe(200);
+        expect(mocks.mockSessionMiddleware).toHaveBeenCalled();
+        expect(mocks.mockAuthenticationMiddleware).toHaveBeenCalled();
+        expect(res.text).toContain("Adborth");
+        expect(res.text).toContain("Helpwch ni i wella’r gwasanaeth hwn. ");
     });
 });

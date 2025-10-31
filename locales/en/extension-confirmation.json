@@ -23,5 +23,8 @@
     "extension_confirmation_links_title": "What do you want to do next?",
     "extension_confirmation_links_info": "Provide identity verification details or request an extension for:",
     "extension_confirmation_link_2": "another PSC of",
-    "extension_confirmation_link_1": "a PSC of a different company"
+    "extension_confirmation_link_1": "a PSC of a different company",
+    "extension_confirmation_feedback_title": "Feedback",
+    "extension_confirmation_feedback_info": "Help us improve this service. ",
+    "extension_confirmation_feedback_link": "Complete our quick survey(opens in new tab)."
 }
