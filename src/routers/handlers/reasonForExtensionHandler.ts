@@ -14,6 +14,7 @@ import { ApiErrorResponse } from "@companieshouse/api-sdk-node/dist/services/res
 import { Transaction } from "@companieshouse/api-sdk-node/dist/services/transaction/types";
 import { HttpStatusCode } from "axios";
 import { closeTransaction, postTransaction } from "../../services/transactionService";
+import { getUserEmail } from "../../lib/utils/session.util";
 
 interface ExtensionReasonViewData extends BaseViewData {
     reasons: typeof EXTENSION_REASONS;
@@ -118,6 +119,7 @@ export class ReasonForExtensionHandler extends GenericHandler<BaseViewData> {
         const extension: PscExtensionData = {
             companyNumber,
             pscNotificationId: selectedPscId,
+            requesterEmail: getUserEmail(request.session),
             extensionDetails: {
                 extensionReason,
                 extensionStatus,
