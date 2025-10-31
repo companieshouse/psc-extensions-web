@@ -49,12 +49,12 @@ export const PREFIXED_URLS = {
 } as const;
 
 export const EXTENSION_REASONS = {
-    ID_DOCS_DELAYED: "ID_DOCS_DELAYED",
-    POST_OFFICE_VERIFICATION: "POST_OFFICE_VERIFICATION",
-    MEDICAL_TREATMENT: "MEDICAL_TREATMENT",
-    NEED_SUPPORT: "NEED_SUPPORT",
-    TECHNICAL_ISSUES: "TECHNICAL_ISSUES",
-    INCORRECT_PSC_DETAILS: "INCORRECT_PSC_DETAILS"
+    ID_DOCS_DELAYED: "reason_for_extension_1",
+    POST_OFFICE_VERIFICATION: "reason_for_extension_2",
+    MEDICAL_TREATMENT: "reason_for_extension_3",
+    NEED_SUPPORT: "reason_for_extension_4",
+    TECHNICAL_ISSUES: "reason_for_extension_5",
+    INCORRECT_PSC_DETAILS: "reason_for_extension_6"
 } as const;
 
 export const EXTERNALURLS = {
