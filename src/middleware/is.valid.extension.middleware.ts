@@ -7,7 +7,6 @@ import { HttpStatusCode } from "axios";
 import logger from "../lib/logger";
 import { addSearchParams } from "../utils/queryParams";
 import { ValidationStatusResponse } from "@companieshouse/api-sdk-node/dist/services/psc-extensions-link/types";
-import { getTransaction } from "../services/transactionService";
 
 /**
  * Middleware that validates PSC extension requests.
