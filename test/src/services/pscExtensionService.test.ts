@@ -158,6 +158,7 @@ describe("pscExtensionService", () => {
 
         it("should throw a DataIntegrityError when pscNotificationId is undefined", async () => {
             const incompleteData: PscExtensionData = {
+                requesterEmail: "exmaple@eample.com",
                 companyNumber: INITIAL_PSC_DATA.companyNumber
             };
 
