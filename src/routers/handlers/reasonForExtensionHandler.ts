@@ -7,7 +7,7 @@ import { getLocaleInfo, getLocalesService, selectLang } from "../../utils/locali
 import { addSearchParams } from "../../utils/queryParams";
 import { getPscIndividual } from "../../services/pscIndividualService";
 import { formatDateBorn } from "../handlers/requestAnExtensionHandler";
-import { createPscExtension } from "../../services/pscExtensionService";
+import { createPscExtension, getPscExtensionCount } from "../../services/pscExtensionService";
 import { PscExtension, PscExtensionData } from "@companieshouse/api-sdk-node/dist/services/psc-extensions-link/types";
 import { Resource } from "@companieshouse/api-sdk-node";
 import { ApiErrorResponse } from "@companieshouse/api-sdk-node/dist/services/resource";
@@ -88,6 +88,7 @@ export class ReasonForExtensionHandler extends GenericHandler<BaseViewData> {
         const lang = req.query.lang as string;
 
         await closeTransaction(req, transaction.id!, selectedPscId);
+        const extensionCount = await getPscExtensionCount(req, selectedPscId);
 
         if (this.isErrorResponse(resource)) {
 
@@ -99,8 +100,13 @@ export class ReasonForExtensionHandler extends GenericHandler<BaseViewData> {
             const pscExtension = resource.resource;
             logger.info(`CREATED New Resource ${pscExtension?.links.self}`);
 
+            const confirmationUrl =
+            extensionCount > 1
+                ? PREFIXED_URLS.SECOND_EXTENSION_CONFIRMATION
+                : PREFIXED_URLS.FIRST_EXTENSION_CONFIRMATION;
+
             // set up redirect to confirmation screen
-            const nextPageUrl = addSearchParams(PREFIXED_URLS.FIRST_EXTENSION_CONFIRMATION, { companyNumber, selectedPscId, id, lang });
+            const nextPageUrl = addSearchParams(confirmationUrl, { companyNumber, selectedPscId, id, lang });
 
             return { nextPageUrl };
         }

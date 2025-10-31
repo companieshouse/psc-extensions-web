@@ -26,7 +26,9 @@ jest.mock("../../../src/services/pscExtensionService", () => ({
         resource: {
             links: { self: "persons-with-significant-control-extension/11111-22222-33333" }
         }
-    })
+    }),
+    getPscExtensionCount: jest.fn()
+
 }));
 
 describe("Reason for extension handler", () => {
