@@ -12,6 +12,7 @@ export const UVID = "123abc456edf";
 export const SELF_URI = `/transactions/${TRANSACTION_ID}/persons-with-significant-control-extensions/${PSC_EXTENSION_ID}`;
 
 export const INITIAL_PSC_DATA: PscExtensionData = {
+    requesterEmail: "example@example.com",
     companyNumber: COMPANY_NUMBER,
     pscNotificationId: PSC_NOTIFICATION_ID
 };
@@ -22,6 +23,7 @@ export const LINKS: Links = {
 };
 
 export const INDIVIDUAL_DATA: PscExtensionData = {
+    requesterEmail: "example@example.com",
     companyNumber: COMPANY_NUMBER,
     pscNotificationId: PSC_NOTIFICATION_ID,
     extensionDetails: {
@@ -32,6 +34,7 @@ export const INDIVIDUAL_DATA: PscExtensionData = {
 };
 
 export const INITIAL_PERSONAL_CODE_DATA: PscExtensionData = {
+    requesterEmail: "example@example.com",
     companyNumber: COMPANY_NUMBER,
     pscNotificationId: PSC_NOTIFICATION_ID,
     extensionDetails: {
@@ -40,7 +43,7 @@ export const INITIAL_PERSONAL_CODE_DATA: PscExtensionData = {
 };
 
 
-function initPscExtension(data: PscExtensionData) {
+function initPscExtension (data: PscExtensionData) {
     return {
         createdAt: FIRST_DATE,
         updatedAt: FIRST_DATE,
