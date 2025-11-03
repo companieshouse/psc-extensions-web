@@ -54,7 +54,6 @@ export class ExtensionConfirmationHandler extends GenericHandler<PscViewData> {
             referenceNumber: transactionId,
             companyLookupUrl: addSearchParams(EXTERNALURLS.COMPANY_LOOKUP, { forward }),
             differentPscInCompanyUrl: resolveUrlTemplate(PREFIXED_URLS.INDIVIDUAL_PSC_LIST)
-
         };
     }
 
