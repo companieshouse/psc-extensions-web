@@ -47,7 +47,6 @@ export const validateExtensionRequest = handleExceptions(async (req: Request, re
             const firstExtensionRoutes = [
                 PREFIXED_URLS.REQUEST_EXTENSION,
                 PREFIXED_URLS.REASON_FOR_EXTENSION,
-                PREFIXED_URLS.EXTENSION_CONFIRMATION,
                 PREFIXED_URLS.FIRST_EXTENSION_CONFIRMATION
             ];
 
@@ -64,7 +63,6 @@ export const validateExtensionRequest = handleExceptions(async (req: Request, re
             const secondExtensionRoutes = [
                 PREFIXED_URLS.REQUEST_EXTENSION,
                 PREFIXED_URLS.REASON_FOR_EXTENSION,
-                PREFIXED_URLS.EXTENSION_CONFIRMATION,
                 PREFIXED_URLS.SECOND_EXTENSION_CONFIRMATION
             ];
             const isOnSecondExtensionFlow = secondExtensionRoutes.some(route => req.originalUrl.includes(route));
