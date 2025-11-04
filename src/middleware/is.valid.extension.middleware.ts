@@ -47,7 +47,6 @@ export const validateExtensionRequest = handleExceptions(async (req: Request, re
             const firstExtensionRoutes = [
                 PREFIXED_URLS.REQUEST_EXTENSION,
                 PREFIXED_URLS.REASON_FOR_EXTENSION,
-                PREFIXED_URLS.EXTENSION_CONFIRMATION,
                 PREFIXED_URLS.FIRST_EXTENSION_CONFIRMATION
             ];
 
@@ -60,11 +59,27 @@ export const validateExtensionRequest = handleExceptions(async (req: Request, re
 
             return res.redirect(addSearchParams(PREFIXED_URLS.REQUEST_EXTENSION, { companyNumber, selectedPscId: pscNotificationId }));
         } else if (extensionCount === 1) {
-            // This is to be done: This is a work in progress to be completed -> This should redirect to the second extension start screen once developed
-            return res.redirect(addSearchParams(PREFIXED_URLS.EXTENSION_ALREADY_SUBMITTED, { companyNumber, selectedPscId: pscNotificationId }));
-        } else {
+
+            const secondExtensionRoutes = [
+                PREFIXED_URLS.REQUEST_EXTENSION,
+                PREFIXED_URLS.REASON_FOR_EXTENSION,
+                PREFIXED_URLS.SECOND_EXTENSION_CONFIRMATION
+            ];
+            const isOnSecondExtensionFlow = secondExtensionRoutes.some(route => req.originalUrl.includes(route));
+
+            // Allow access if user is on a valid second extension route, prevents redirects to the start page
+            if (isOnSecondExtensionFlow) {
+                return next();
+            }
+
+            return res.redirect(addSearchParams(PREFIXED_URLS.REQUEST_EXTENSION, { companyNumber, selectedPscId: pscNotificationId }));
+
+        } else if (extensionCount === 2) {
+
             return res.redirect(addSearchParams(PREFIXED_URLS.EXTENSION_REFUSED, { companyNumber, selectedPscId: pscNotificationId }));
+
         }
+
     } catch (error) {
         logger.error(`Error in validateExtensionRequest middleware: ${error}`);
         return next(error);
