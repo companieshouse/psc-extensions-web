@@ -4,6 +4,7 @@ import logger from "../../lib/logger";
 import { addSearchParams } from "../../utils/queryParams";
 import { PATHS, PREFIXED_URLS, ROUTER_VIEWS_FOLDER_PATH, EXTERNALURLS } from "../../lib/constants";
 import { getPscIndividual } from "../../services/pscIndividualService";
+import { getPscExtensionCount } from "../../services/pscExtensionService";
 import { getCompanyProfile } from "../../services/companyProfileService";
 import { getLocaleInfo, getLocalesService, selectLang } from "../../utils/localise";
 import { internationaliseDate } from "../../utils/date";
@@ -37,8 +38,24 @@ export class ExtensionConfirmationHandler extends GenericHandler<PscViewData> {
         const pscIndividual = await getPscIndividual(req, companyNumber, selectedPscId);
         const companyProfile = await getCompanyProfile(req, companyNumber);
         const transactionId = req.query.id as string;
+        const extensionCount = await getPscExtensionCount(req, selectedPscId);
         const forward = decodeURI(addSearchParams(EXTERNALURLS.COMPANY_LOOKUP_FORWARD, { companyNumber: "{companyNumber}", lang }));
-        const getDate = pscIndividual.resource?.identityVerificationDetails?.appointmentVerificationStatementDueOn;
+
+        let getDate = pscIndividual.resource?.identityVerificationDetails?.appointmentVerificationStatementDueOn;
+        if (getDate) {
+            const newExtensionDate = new Date(getDate);
+
+            // add 14 days for the first extension
+            newExtensionDate.setDate(newExtensionDate.getDate() + 14);
+
+            // If extensionCount > 1, add another 14 days
+            if (extensionCount > 1) {
+                const secondExtensionDate = 14;
+                newExtensionDate.setDate(newExtensionDate.getDate() + secondExtensionDate);
+            }
+
+            getDate = newExtensionDate;
+        }
 
         function resolveUrlTemplate (PREFIXEDURL: string): string | null {
             return addSearchParams(PREFIXEDURL, { companyNumber, lang });
