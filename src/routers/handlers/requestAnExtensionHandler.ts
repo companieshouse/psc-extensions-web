@@ -51,7 +51,7 @@ export class RequestAnExtensionHandler extends GenericHandler<PscViewData> {
             companyName: companyProfile.companyName,
             companyNumber: companyProfile.companyNumber,
             selectedPscId: selectedPscId,
-            dateOfBirth: formatDateBorn(pscIndividual.resource?.dateOfBirth, lang),
+            dateOfBirth: formatDateBorn(pscIndividual.resource?.dateOfBirth, selectLang(req.query.lang)),
             backURL: resolveUrlTemplate(PREFIXED_URLS.INDIVIDUAL_PSC_LIST),
             templateName: PREFIXED_URLS.REQUEST_EXTENSION.slice(1)
         };
