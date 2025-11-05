@@ -7,6 +7,7 @@ import logger from "./lib/logger";
 import routerDispatch from "./router.dispatch";
 import { sessionMiddleware } from "./middleware/session.middleware";
 import { templateMiddleware } from "./middleware/template.middleware";
+import { pageNotFound } from "./middleware/pageNotFound.middleware";
 import { SERVICE_PATH_PREFIX } from "./lib/constants";
 
 const app = express();
@@ -63,6 +64,9 @@ app.use(templateMiddleware);
 
 // Channel all requests through router dispatch
 routerDispatch(app);
+
+// 404 - page not found error
+app.use(pageNotFound);
 
 // Unhandled errors
 app.use((err: any, req: Request, res: Response, _next: NextFunction) => {
