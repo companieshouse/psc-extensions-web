@@ -8,6 +8,7 @@ import routerDispatch from "./router.dispatch";
 import { sessionMiddleware } from "./middleware/session.middleware";
 import { templateMiddleware } from "./middleware/template.middleware";
 import { pageNotFound } from "./middleware/pageNotFound.middleware";
+import { internalServerError } from "./middleware/internalServerError.middleware";
 import { SERVICE_PATH_PREFIX } from "./lib/constants";
 
 const app = express();
@@ -67,6 +68,9 @@ routerDispatch(app);
 
 // 404 - page not found error
 app.use(pageNotFound);
+
+// 500 - internal server error
+app.use(internalServerError);
 
 // Unhandled errors
 app.use((err: any, req: Request, res: Response, _next: NextFunction) => {
