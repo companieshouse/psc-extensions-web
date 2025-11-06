@@ -43,11 +43,18 @@ export class ExtensionConfirmationHandler extends GenericHandler<PscViewData> {
         const forward = decodeURI(addSearchParams(EXTERNALURLS.COMPANY_LOOKUP_FORWARD, { companyNumber: "{companyNumber}", lang }));
 
         let getDate = pscIndividual.resource?.identityVerificationDetails?.appointmentVerificationStatementDueOn;
-        const originalDateFromSession = await getSessionValue(req, "originalDate");
+        let originalDateFromSession;
 
-        if (!originalDateFromSession && getDate) {
-            await saveDataInSession(req, "originalDate", getDate);
+        try {
+            originalDateFromSession = await getSessionValue(req, "originalDate");
+            if (!originalDateFromSession && getDate) {
+                await saveDataInSession(req, "originalDate", getDate);
+            }
+        } catch (error) {
+            logger.error(`Error handling session data: ${error}`);
+            originalDateFromSession = null;
         }
+
         const originalDate = originalDateFromSession || getDate;
 
         if (originalDate && (typeof originalDate === "string" || originalDate instanceof Date)) {
