@@ -3,7 +3,7 @@ import { BaseViewData, GenericHandler, ViewModel } from "./abstractGenericHandle
 import logger from "../../lib/logger";
 import { PREFIXED_URLS, PATHS, ROUTER_VIEWS_FOLDER_PATH } from "../../lib/constants";
 import { getPscIndividual } from "../../services/pscIndividualService";
-import { formatDateBorn } from "../handlers/requestAnExtensionHandler";
+import { formatDateBorn } from "../../utils/date";
 import { getLocaleInfo, getLocalesService, selectLang } from "../../utils/localise";
 
 import { addSearchParams } from "../../utils/queryParams";

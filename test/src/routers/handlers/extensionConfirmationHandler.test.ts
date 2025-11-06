@@ -85,8 +85,8 @@ describe("ExtensionConfirmationHandler", () => {
 
             await handler.exposeGetViewData(req, {});
 
-            expect(mockGetSessionValue).toHaveBeenCalledWith(req, "originalDate");
-            expect(mockSaveDataInSession).toHaveBeenCalledWith(req, "originalDate", PSC_INDIVIDUAL.identityVerificationDetails?.appointmentVerificationStatementDueOn);
+            expect(mockGetSessionValue).toHaveBeenCalledWith(req, "originalVerificationDueDate");
+            expect(mockSaveDataInSession).toHaveBeenCalledWith(req, "originalVerificationDueDate", PSC_INDIVIDUAL.identityVerificationDetails?.appointmentVerificationStatementDueOn);
         });
 
         it("should not save original date in session when session value already exists", async () => {
@@ -101,7 +101,7 @@ describe("ExtensionConfirmationHandler", () => {
 
             await handler.exposeGetViewData(req, {});
 
-            expect(mockGetSessionValue).toHaveBeenCalledWith(req, "originalDate");
+            expect(mockGetSessionValue).toHaveBeenCalledWith(req, "originalVerificationDueDate");
             expect(mockSaveDataInSession).not.toHaveBeenCalled();
         });
 
