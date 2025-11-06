@@ -69,13 +69,10 @@ routerDispatch(app);
 // 404 - page not found error
 app.use(pageNotFound);
 
-// 500 - internal server error
-app.use(internalServerError);
-
-// Unhandled errors
+// Unhandled errors - 500 internal server errors
 app.use((err: any, req: Request, res: Response, _next: NextFunction) => {
     logger.error(`${err.name} - appError: ${err.message} - ${err.stack}`);
-    res.render("partials/error_500");
+    internalServerError(req, res);
 });
 
 // Unhandled exceptions
