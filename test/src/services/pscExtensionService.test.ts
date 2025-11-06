@@ -207,7 +207,6 @@ describe("pscExtensionService", () => {
     });
 
     describe("getIsPscExtensionValid", () => {
-        const transactionId = TRANSACTION_ID;
         const pscNotificationId = "PSCDATA5";
         const companyNumber = "00006400";
 

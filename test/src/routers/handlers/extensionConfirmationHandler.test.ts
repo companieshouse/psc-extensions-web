@@ -121,8 +121,8 @@ describe("ExtensionConfirmationHandler", () => {
         });
     });
 
-    describe("getViewData - Date Calculation", () => {
-        it("should add 14 days for first extension (extensionCount = 1)", async () => {
+    describe("getViewData - Extension verification dates", () => {
+        it("should add 14 days for first extension", async () => {
             const handler = new TestableExtensionConfirmationHandler();
             const req = {
                 ...baseReq,
@@ -138,7 +138,23 @@ describe("ExtensionConfirmationHandler", () => {
             expect(result.dueDate).toBeDefined();
         });
 
-        it("should use session date over database value", async () => {
+        it("should add 14 days for second extension, using the already updated 1st extension date)", async () => {
+            const handler = new TestableExtensionConfirmationHandler();
+            const req = {
+                ...baseReq,
+                originalUrl: PATHS.SECOND_EXTENSION_CONFIRMATION
+            };
+
+            mockGetPscIndividual.mockResolvedValue(mockPscIndividualResource);
+            mockGetPscExtensionCount.mockResolvedValue(2);
+            mockGetSessionValue.mockResolvedValue(null);
+
+            const result = await handler.exposeGetViewData(req, {});
+
+            expect(result.dueDate).toBeDefined();
+        });
+
+        it("should use session date over database date when rendering new extension verification date", async () => {
             const handler = new TestableExtensionConfirmationHandler();
             const req = {
                 ...baseReq,
@@ -156,7 +172,7 @@ describe("ExtensionConfirmationHandler", () => {
         });
     });
 
-    describe("getViewData - Template Name", () => {
+    describe("getViewData", () => {
         it("should return baseViewData with first extension confirmation template name", async () => {
             const handler = new TestableExtensionConfirmationHandler();
             const req = {

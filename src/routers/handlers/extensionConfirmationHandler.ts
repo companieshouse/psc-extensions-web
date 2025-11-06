@@ -7,7 +7,7 @@ import { getPscIndividual } from "../../services/pscIndividualService";
 import { getPscExtensionCount } from "../../services/pscExtensionService";
 import { getCompanyProfile } from "../../services/companyProfileService";
 import { getLocaleInfo, getLocalesService, selectLang } from "../../utils/localise";
-import { formatDateBorn, internationaliseDate } from "../../utils/date";
+import { internationaliseDate } from "../../utils/date";
 import { saveDataInSession, getSessionValue } from "../../lib/utils/sessionHelper";
 
 interface PscViewData extends BaseViewData {
@@ -42,20 +42,20 @@ export class ExtensionConfirmationHandler extends GenericHandler<PscViewData> {
         const extensionCount = await getPscExtensionCount(req, selectedPscId);
         const forward = decodeURI(addSearchParams(EXTERNALURLS.COMPANY_LOOKUP_FORWARD, { companyNumber: "{companyNumber}", lang }));
 
-        let getDate = pscIndividual.resource?.identityVerificationDetails?.appointmentVerificationStatementDueOn;
+        let getVerificationDueDate = pscIndividual.resource?.identityVerificationDetails?.appointmentVerificationStatementDueOn;
         let originalVerificationDateFromSession;
 
         try {
             originalVerificationDateFromSession = await getSessionValue(req, "originalVerificationDueDate");
-            if (!originalVerificationDateFromSession && getDate) {
-                await saveDataInSession(req, "originalVerificationDueDate", getDate);
+            if (!originalVerificationDateFromSession && getVerificationDueDate) {
+                await saveDataInSession(req, "originalVerificationDueDate", getVerificationDueDate);
             }
         } catch (error) {
             logger.error(`Error handling session data: ${error}`);
             originalVerificationDateFromSession = null;
         }
 
-        const originalVerificationDueDate = originalVerificationDateFromSession || getDate;
+        const originalVerificationDueDate = originalVerificationDateFromSession || getVerificationDueDate;
 
         if (originalVerificationDueDate && (typeof originalVerificationDueDate === "string" || originalVerificationDueDate instanceof Date)) {
             const newExtensionVerificationDueDate = new Date(originalVerificationDueDate);
@@ -68,7 +68,7 @@ export class ExtensionConfirmationHandler extends GenericHandler<PscViewData> {
                 newExtensionVerificationDueDate.setDate(newExtensionVerificationDueDate.getDate() + 14);
             }
 
-            getDate = newExtensionVerificationDueDate;
+            getVerificationDueDate = newExtensionVerificationDueDate;
         }
 
         function resolveUrlTemplate (PREFIXEDURL: string): string | null {
@@ -81,7 +81,7 @@ export class ExtensionConfirmationHandler extends GenericHandler<PscViewData> {
             pscName: pscIndividual.resource?.name!,
             companyName: companyProfile.companyName,
             companyNumber: companyProfile.companyNumber,
-            dueDate: this.getLocalizedDate(getDate, lang),
+            dueDate: this.getLocalizedDate(getVerificationDueDate, lang),
             referenceNumber: transactionId,
             companyLookupUrl: addSearchParams(EXTERNALURLS.COMPANY_LOOKUP, { forward }),
             differentPscInCompanyUrl: resolveUrlTemplate(PREFIXED_URLS.INDIVIDUAL_PSC_LIST)
