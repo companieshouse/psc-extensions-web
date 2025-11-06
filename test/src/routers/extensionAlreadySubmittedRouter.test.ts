@@ -1,14 +1,22 @@
 import mocks from "../../mocks/all.middleware.mock";
 import supertest from "supertest";
-import app from "../../../src/app";
 import { PREFIXED_URLS } from "../../../src/lib/constants";
+import { validSDKResource } from "../../mocks/companyProfile.mock";
+import app from "../../../src/app";
+import * as companyProfileService from "../../../src/services/companyProfileService";
+
+jest.mock("../../../src/services/companyProfileService", () => ({
+    getCompanyProfile: jest.fn()
+}));
 
 const router = supertest(app);
+const mockGetCompanyProfile = companyProfileService.getCompanyProfile as jest.Mock;
 
 describe("GET extension already submitted router", () => {
 
     beforeEach(() => {
         jest.clearAllMocks();
+        mockGetCompanyProfile.mockResolvedValue(validSDKResource);
     });
 
     it("should check session and user auth before returning the page", async () => {

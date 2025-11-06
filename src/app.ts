@@ -7,6 +7,8 @@ import logger from "./lib/logger";
 import routerDispatch from "./router.dispatch";
 import { sessionMiddleware } from "./middleware/session.middleware";
 import { templateMiddleware } from "./middleware/template.middleware";
+import { pageNotFound } from "./middleware/pageNotFound.middleware";
+import { internalServerError } from "./middleware/internalServerError.middleware";
 import { SERVICE_PATH_PREFIX } from "./lib/constants";
 
 const app = express();
@@ -64,10 +66,13 @@ app.use(templateMiddleware);
 // Channel all requests through router dispatch
 routerDispatch(app);
 
-// Unhandled errors
+// 404 - page not found error
+app.use(pageNotFound);
+
+// Unhandled errors - 500 internal server errors
 app.use((err: any, req: Request, res: Response, _next: NextFunction) => {
     logger.error(`${err.name} - appError: ${err.message} - ${err.stack}`);
-    res.render("partials/error_500");
+    internalServerError(req, res);
 });
 
 // Unhandled exceptions

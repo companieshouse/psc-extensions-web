@@ -31,7 +31,9 @@
 
 {% block beforeContent %}
   {% include "partials/phase-banner.njk" %}
-  {% include "partials/nav/top.njk" %}
+  {% if userEmailAddress %}
+    {% include "partials/nav/top.njk" %}
+  {% endif %}
   {% if backURL %}
     {{ govukBackLink({
     href: backURL,

@@ -1,5 +1,5 @@
 // Do Router dispatch here, i.e. map incoming routes to appropriate router
-import { Application, Request, Response, Router } from "express";
+import { Application, Router } from "express";
 import { authenticate } from "./middleware/authentication.middleware";
 import { validateExtensionRequest } from "./middleware/is.valid.extension.middleware";
 import requestAnExtensionRouter from "./routers/requestAnExtensionRouter";
@@ -21,9 +21,6 @@ const routerDispatch = (app: Application): void => {
     router.use(PATHS.FIRST_EXTENSION_CONFIRMATION, authenticate, extensionConfirmationRouter);
     router.use(PATHS.SECOND_EXTENSION_CONFIRMATION, authenticate, extensionConfirmationRouter);
     router.use(PATHS.EXTENSION_ALREADY_SUBMITTED, authenticate, extensionAlreadySubmittedRouter);
-    router.use("/", (req: Request, res: Response) => {
-        res.status(404).render("partials/error_400");
-    });
 };
 
 export default routerDispatch;
