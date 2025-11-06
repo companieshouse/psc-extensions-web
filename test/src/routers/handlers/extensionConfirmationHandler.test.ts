@@ -1,6 +1,6 @@
 import { PATHS, ROUTER_VIEWS_FOLDER_PATH } from "../../../../src/lib/constants";
 import { ExtensionConfirmationHandler } from "../../../../src/routers/handlers/extensionConfirmationHandler";
-import { PSC_INDIVIDUAL, PSC_INDIVIDUAL_WITHOUT_DATE, COMPANY_NUMBER, PSC_ID } from "../../../mocks/psc.mock";
+import { PSC_INDIVIDUAL, COMPANY_NUMBER, PSC_ID } from "../../../mocks/psc.mock";
 import { validCompanyProfile } from "../../../mocks/companyProfile.mock";
 import { TRANSACTION_ID } from "../../../mocks/pscExtension.mock";
 
@@ -48,11 +48,6 @@ describe("ExtensionConfirmationHandler", () => {
     const mockPscIndividualResource = {
         httpStatusCode: 200,
         resource: PSC_INDIVIDUAL
-    };
-
-    const mockPscIndividualWithoutDateResource = {
-        httpStatusCode: 200,
-        resource: PSC_INDIVIDUAL_WITHOUT_DATE
     };
 
     const baseReq = {
