@@ -15,10 +15,11 @@ interface PscViewData extends BaseViewData {
     selectedPscId: string;
 }
 
-export function formatDateBorn (dateOfBirth: any): string {
+export function formatDateBorn (dateOfBirth: any, lang: string): string {
     try {
-        const formattedMonth = Intl.DateTimeFormat(dateOfBirth, { month: "long" }).format(new Date("" + dateOfBirth?.month));
+        const formattedMonth = Intl.DateTimeFormat(lang, { month: "long" }).format(new Date("" + dateOfBirth?.month));
         const formattedYear = dateOfBirth?.year?.toString() ?? "";
+
         return `${formattedMonth} ${formattedYear}`;
     } catch (error) {
         logger.error(`Error formatting date: ${error}`);
@@ -51,7 +52,7 @@ export class RequestAnExtensionHandler extends GenericHandler<PscViewData> {
             companyName: companyProfile.companyName,
             companyNumber: companyProfile.companyNumber,
             selectedPscId: selectedPscId,
-            dateOfBirth: formatDateBorn(pscIndividual.resource?.dateOfBirth),
+            dateOfBirth: formatDateBorn(pscIndividual.resource?.dateOfBirth, selectLang(req.query.lang)),
             backURL: resolveUrlTemplate(PREFIXED_URLS.INDIVIDUAL_PSC_LIST),
             templateName: PREFIXED_URLS.REQUEST_EXTENSION.slice(1)
         };

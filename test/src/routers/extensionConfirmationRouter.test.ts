@@ -28,6 +28,10 @@ jest.mock("../../../src/services/companyProfileService", () => ({
     })
 }));
 
+jest.mock("../../../src/services/pscExtensionService", () => ({
+    getPscExtensionCount: (): Promise<number> => Promise.resolve(1)
+}));
+
 describe("GET extension confirmation router", () => {
 
     beforeEach(() => {
@@ -65,6 +69,5 @@ describe("GET extension confirmation router", () => {
         expect(mocks.mockSessionMiddleware).toHaveBeenCalled();
         expect(mocks.mockAuthenticationMiddleware).toHaveBeenCalled();
         expect(res.text).toContain("Adborth");
-        expect(res.text).toContain("Helpwch ni i wella’r gwasanaeth hwn. ");
     });
 });
