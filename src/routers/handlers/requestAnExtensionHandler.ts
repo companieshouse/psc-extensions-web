@@ -17,8 +17,9 @@ interface PscViewData extends BaseViewData {
 
 export function formatDateBorn (dateOfBirth: any, lang: string): string {
     try {
-        const formattedMonth = Intl.DateTimeFormat(dateOfBirth, { month: "long" }).format(new Date("" + dateOfBirth?.month));
+        const formattedMonth = Intl.DateTimeFormat(lang, { month: "long" }).format(new Date("" + dateOfBirth?.month));
         const formattedYear = dateOfBirth?.year?.toString() ?? "";
+
         return `${formattedMonth} ${formattedYear}`;
     } catch (error) {
         logger.error(`Error formatting date: ${error}`);

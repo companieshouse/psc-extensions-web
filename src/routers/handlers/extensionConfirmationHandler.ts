@@ -8,6 +8,7 @@ import { getPscExtensionCount } from "../../services/pscExtensionService";
 import { getCompanyProfile } from "../../services/companyProfileService";
 import { getLocaleInfo, getLocalesService, selectLang } from "../../utils/localise";
 import { internationaliseDate } from "../../utils/date";
+import { saveDataInSession, getSessionValue } from "../../lib/utils/sessionHelper";
 
 interface PscViewData extends BaseViewData {
     referenceNumber: string;
@@ -42,16 +43,22 @@ export class ExtensionConfirmationHandler extends GenericHandler<PscViewData> {
         const forward = decodeURI(addSearchParams(EXTERNALURLS.COMPANY_LOOKUP_FORWARD, { companyNumber: "{companyNumber}", lang }));
 
         let getDate = pscIndividual.resource?.identityVerificationDetails?.appointmentVerificationStatementDueOn;
-        if (getDate) {
-            const newExtensionDate = new Date(getDate);
+        const originalDateFromSession = await getSessionValue(req, "originalDate");
 
-            // add 14 days for the first extension
+        if (!originalDateFromSession && getDate) {
+            await saveDataInSession(req, "originalDate", getDate);
+        }
+        const originalDate = originalDateFromSession || getDate;
+
+        if (originalDate && (typeof originalDate === "string" || originalDate instanceof Date)) {
+            const newExtensionDate = new Date(originalDate);
+
+            // Add 14 days for the first extension
             newExtensionDate.setDate(newExtensionDate.getDate() + 14);
 
             // If extensionCount > 1, add another 14 days
             if (extensionCount > 1) {
-                const secondExtensionDate = 14;
-                newExtensionDate.setDate(newExtensionDate.getDate() + secondExtensionDate);
+                newExtensionDate.setDate(newExtensionDate.getDate() + 14);
             }
 
             getDate = newExtensionDate;
