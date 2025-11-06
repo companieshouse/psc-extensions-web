@@ -3,5 +3,6 @@
   "404_check_typed_address": "Os gwnaethoch deipio'r cyfeiriad gwe, gwiriwch ei fod yn gywir.",
   "404_check_pasted_address": "Os gwnaethoch ludo'r cyfeiriad gwe, gwiriwch eich bod wedi copïo'r cyfeiriad cyfan.",
   "404_arrived_via_bad_url_1": "Os yw'r cyfeiriad gwe yn gywir neu os gwnaethoch ddewis cysylltiad neu fotwm, ",
-  "404_arrived_via_bad_url_2": "cysylltwch â thîm cymorth Tŷ'r Cwmnïau."
+  "404_arrived_via_bad_url_2": "cysylltwch â thîm cymorth Tŷ'r Cwmnïau",
+  "404_full_stop": "."
 }
