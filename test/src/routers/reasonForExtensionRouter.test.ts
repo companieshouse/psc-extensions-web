@@ -1,17 +1,15 @@
 import mocks from "../../mocks/all.middleware.mock";
 import supertest from "supertest";
 import app from "../../../src/app";
-import { SERVICE_PATH_PREFIX, PATHS, EXTENSION_REASONS, validExtensionReasons, PREFIXED_URLS } from "../../../src/lib/constants";
+import { SERVICE_PATH_PREFIX, PATHS, EXTENSION_REASONS, validExtensionReasons } from "../../../src/lib/constants";
 import { HttpStatusCode } from "axios";
 import * as cheerio from "cheerio";
 import { COMPANY_NUMBER, PSC_INDIVIDUAL, PSC_NOTIFICATION_ID } from "../../mocks/psc.mock";
 import { getPscExtensionCount } from "../../../src/services/pscExtensionService";
 
 const router = supertest(app);
-const uriQueryParams = `?companyNumber=${COMPANY_NUMBER}&selectedPscId=${PSC_NOTIFICATION_ID}&id=11111-22222-33333&lang=en`;
 const uriQueryParamsTransaction = `?companyNumber=${COMPANY_NUMBER}&selectedPscId=${PSC_NOTIFICATION_ID}&lang=en`;
 const reasonForExtensionUri = `${SERVICE_PATH_PREFIX + PATHS.REASON_FOR_EXTENSION}${uriQueryParamsTransaction}`;
-const firstExtensionConfirmationUri = `${SERVICE_PATH_PREFIX + PATHS.FIRST_EXTENSION_CONFIRMATION}${uriQueryParamsTransaction}`;
 
 jest.mock("../../../src/services/pscIndividualService", () => ({
     getPscIndividual: (): { httpStatusCode: number; resource: typeof PSC_INDIVIDUAL } => ({
