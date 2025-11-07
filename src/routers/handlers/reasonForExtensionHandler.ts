@@ -6,7 +6,7 @@ import { PscExtensionsFormsValidator } from "../../lib/validation/form-validator
 import { getLocaleInfo, getLocalesService, selectLang } from "../../utils/localise";
 import { addSearchParams } from "../../utils/queryParams";
 import { getPscIndividual } from "../../services/pscIndividualService";
-import { formatDateBorn } from "../handlers/requestAnExtensionHandler";
+import { formatDateBorn } from "../../utils/date";
 import { createPscExtension, getPscExtensionCount } from "../../services/pscExtensionService";
 import { PscExtension, PscExtensionData } from "@companieshouse/api-sdk-node/dist/services/psc-extensions-link/types";
 import { Resource } from "@companieshouse/api-sdk-node";

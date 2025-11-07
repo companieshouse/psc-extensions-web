@@ -42,33 +42,33 @@ export class ExtensionConfirmationHandler extends GenericHandler<PscViewData> {
         const extensionCount = await getPscExtensionCount(req, selectedPscId);
         const forward = decodeURI(addSearchParams(EXTERNALURLS.COMPANY_LOOKUP_FORWARD, { companyNumber: "{companyNumber}", lang }));
 
-        let getDate = pscIndividual.resource?.identityVerificationDetails?.appointmentVerificationStatementDueOn;
-        let originalDateFromSession;
+        let getVerificationDueDate = pscIndividual.resource?.identityVerificationDetails?.appointmentVerificationStatementDueOn;
+        let originalVerificationDateFromSession;
 
         try {
-            originalDateFromSession = await getSessionValue(req, "originalDate");
-            if (!originalDateFromSession && getDate) {
-                await saveDataInSession(req, "originalDate", getDate);
+            originalVerificationDateFromSession = await getSessionValue(req, "originalVerificationDueDate");
+            if (!originalVerificationDateFromSession && getVerificationDueDate) {
+                await saveDataInSession(req, "originalVerificationDueDate", getVerificationDueDate);
             }
         } catch (error) {
             logger.error(`Error handling session data: ${error}`);
-            originalDateFromSession = null;
+            originalVerificationDateFromSession = null;
         }
 
-        const originalDate = originalDateFromSession || getDate;
+        const originalVerificationDueDate = originalVerificationDateFromSession || getVerificationDueDate;
 
-        if (originalDate && (typeof originalDate === "string" || originalDate instanceof Date)) {
-            const newExtensionDate = new Date(originalDate);
+        if (originalVerificationDueDate && (typeof originalVerificationDueDate === "string" || originalVerificationDueDate instanceof Date)) {
+            const newExtensionVerificationDueDate = new Date(originalVerificationDueDate);
 
             // Add 14 days for the first extension
-            newExtensionDate.setDate(newExtensionDate.getDate() + 14);
+            newExtensionVerificationDueDate.setDate(newExtensionVerificationDueDate.getDate() + 14);
 
             // If extensionCount > 1, add another 14 days
             if (extensionCount > 1) {
-                newExtensionDate.setDate(newExtensionDate.getDate() + 14);
+                newExtensionVerificationDueDate.setDate(newExtensionVerificationDueDate.getDate() + 14);
             }
 
-            getDate = newExtensionDate;
+            getVerificationDueDate = newExtensionVerificationDueDate;
         }
 
         function resolveUrlTemplate (PREFIXEDURL: string): string | null {
@@ -81,7 +81,7 @@ export class ExtensionConfirmationHandler extends GenericHandler<PscViewData> {
             pscName: pscIndividual.resource?.name!,
             companyName: companyProfile.companyName,
             companyNumber: companyProfile.companyNumber,
-            dueDate: this.getLocalizedDate(getDate, lang),
+            dueDate: this.getLocalizedDate(getVerificationDueDate, lang),
             referenceNumber: transactionId,
             companyLookupUrl: addSearchParams(EXTERNALURLS.COMPANY_LOOKUP, { forward }),
             differentPscInCompanyUrl: resolveUrlTemplate(PREFIXED_URLS.INDIVIDUAL_PSC_LIST)

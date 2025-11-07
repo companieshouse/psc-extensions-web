@@ -6,6 +6,7 @@ import { getLocaleInfo, getLocalesService, selectLang } from "../../utils/locali
 import { addSearchParams } from "../../utils/queryParams";
 import { getPscIndividual } from "../../services/pscIndividualService";
 import { getCompanyProfile } from "../../services/companyProfileService";
+import { formatDateBorn } from "../../utils/date";
 
 interface PscViewData extends BaseViewData {
     companyName: string;
@@ -13,18 +14,6 @@ interface PscViewData extends BaseViewData {
     pscName: string;
     dateOfBirth: string;
     selectedPscId: string;
-}
-
-export function formatDateBorn (dateOfBirth: any, lang: string): string {
-    try {
-        const formattedMonth = Intl.DateTimeFormat(lang, { month: "long" }).format(new Date("" + dateOfBirth?.month));
-        const formattedYear = dateOfBirth?.year?.toString() ?? "";
-
-        return `${formattedMonth} ${formattedYear}`;
-    } catch (error) {
-        logger.error(`Error formatting date: ${error}`);
-        return "Invalid date";
-    }
 }
 
 export class RequestAnExtensionHandler extends GenericHandler<PscViewData> {
