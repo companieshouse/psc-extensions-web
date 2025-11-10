@@ -46,9 +46,10 @@ export class ExtensionConfirmationHandler extends GenericHandler<PscViewData> {
         let originalVerificationDateFromSession;
 
         try {
-            originalVerificationDateFromSession = await getSessionValue(req, "originalVerificationDueDate");
+            const sessionKey = `originalVerificationDueDate_${selectedPscId}`;
+            originalVerificationDateFromSession = await getSessionValue(req, sessionKey);
             if (!originalVerificationDateFromSession && getVerificationDueDate) {
-                await saveDataInSession(req, "originalVerificationDueDate", getVerificationDueDate);
+                await saveDataInSession(req, sessionKey, getVerificationDueDate);
             }
         } catch (error) {
             logger.error(`Error handling session data: ${error}`);
