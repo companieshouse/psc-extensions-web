@@ -13,8 +13,6 @@ export const getPscIndividual = async (request: Request, companyNumber: string, 
     logger.debug(`for company with companyNumber="${companyNumber}", notificationId="${pscNotificationId}"`);
     const sdkResponse: Resource<PersonWithSignificantControl> | ApiErrorResponse = await apiClient.pscService.getPscIndividual(companyNumber, pscNotificationId);
 
-    console.log("sdkResponse", sdkResponse);
-
     if (sdkResponse?.httpStatusCode !== HttpStatusCode.Ok) {
         if (sdkResponse?.httpStatusCode) {
             logger.error(`sdk responded with HTTP status code ${sdkResponse.httpStatusCode}`);
