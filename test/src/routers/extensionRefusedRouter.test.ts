@@ -1,7 +1,7 @@
 import mocks from "../../mocks/all.middleware.mock";
 import supertest from "supertest";
 import app from "../../../src/app";
-import { SERVICE_PATH_PREFIX, PATHS } from "../../../src/lib/constants";
+import { PATHS, SERVICE_PATH_PREFIX } from "../../../src/lib/constants";
 import { HttpStatusCode } from "axios";
 import { PSC_INDIVIDUAL } from "../../mocks/psc.mock";
 const router = supertest(app);

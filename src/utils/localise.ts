@@ -1,11 +1,11 @@
 import { LanguageNames, LocalesService } from "@companieshouse/ch-node-utils";
-import { LOCALES_PATH, LOCALES_ENABLED } from "../lib/constants";
+import { LOCALES_ENABLED, LOCALES_PATH } from "../lib/constants";
 
 export const selectLang = (lang: any): string => {
     switch (lang) {
-    case "cy": return "cy";
-    case "en":
-    default: return "en";
+        case "cy": return "cy";
+        case "en":
+        default: return "en";
     }
 };
 
