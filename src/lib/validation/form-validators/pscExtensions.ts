@@ -1,5 +1,5 @@
 import errorManifest from "../../utils/error_manifests/errorManifests";
-import { validExtensionReasons, ExtensionReason } from "../../constants";
+import { ExtensionReason, validExtensionReasons } from "../../constants";
 
 export class PscExtensionsFormsValidator {
 

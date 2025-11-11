@@ -2,7 +2,7 @@
 
 jest.mock("@companieshouse/web-security-node");
 
-import { authMiddleware, AuthOptions } from "@companieshouse/web-security-node";
+import { AuthOptions, authMiddleware } from "@companieshouse/web-security-node";
 import { Request, Response } from "express";
 import { authenticate } from "../../../src/middleware/authentication.middleware";
 

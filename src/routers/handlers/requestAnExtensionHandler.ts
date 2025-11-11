@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { BaseViewData, GenericHandler, ViewModel } from "./abstractGenericHandler";
 import logger from "../../lib/logger";
-import { PREFIXED_URLS, PATHS, ROUTER_VIEWS_FOLDER_PATH } from "../../lib/constants";
+import { PATHS, PREFIXED_URLS, ROUTER_VIEWS_FOLDER_PATH } from "../../lib/constants";
 import { getLocaleInfo, getLocalesService, selectLang } from "../../utils/localise";
 import { addSearchParams } from "../../utils/queryParams";
 import { getPscIndividual } from "../../services/pscIndividualService";
@@ -40,7 +40,7 @@ export class RequestAnExtensionHandler extends GenericHandler<PscViewData> {
             pscName: pscIndividual.resource?.name!,
             companyName: companyProfile.companyName,
             companyNumber: companyProfile.companyNumber,
-            selectedPscId: selectedPscId,
+            selectedPscId,
             dateOfBirth: formatDateBorn(pscIndividual.resource?.dateOfBirth, selectLang(req.query.lang)),
             backURL: resolveUrlTemplate(PREFIXED_URLS.INDIVIDUAL_PSC_LIST),
             templateName: PREFIXED_URLS.REQUEST_EXTENSION.slice(1)

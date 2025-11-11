@@ -1,6 +1,6 @@
 import { Request } from "express";
 import { Session } from "@companieshouse/node-session-handler";
-import { saveDataInSession, getSessionValue } from "../../../../src/lib/utils/sessionHelper";
+import { getSessionValue, saveDataInSession } from "../../../../src/lib/utils/sessionHelper";
 
 describe("sessionHelper", () => {
     let mockRequest: Partial<Request>;

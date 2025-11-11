@@ -1,5 +1,5 @@
 import { HttpStatusCode } from "axios";
-import { PATHS, ROUTER_VIEWS_FOLDER_PATH, PREFIXED_URLS } from "../../../../src/lib/constants";
+import { PATHS, PREFIXED_URLS, ROUTER_VIEWS_FOLDER_PATH } from "../../../../src/lib/constants";
 import { ExtensionAlreadySubmittedHandler } from "../../../../src/routers/handlers/extensionAlreadySubmittedHandler";
 import { PSC_INDIVIDUAL } from "../../../mocks/psc.mock";
 

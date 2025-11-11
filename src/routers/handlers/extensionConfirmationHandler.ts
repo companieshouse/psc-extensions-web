@@ -2,13 +2,13 @@ import { Request, Response } from "express";
 import { BaseViewData, GenericHandler, ViewModel } from "./abstractGenericHandler";
 import logger from "../../lib/logger";
 import { addSearchParams } from "../../utils/queryParams";
-import { PATHS, PREFIXED_URLS, ROUTER_VIEWS_FOLDER_PATH, EXTERNALURLS } from "../../lib/constants";
+import { EXTERNALURLS, PATHS, PREFIXED_URLS, ROUTER_VIEWS_FOLDER_PATH } from "../../lib/constants";
 import { getPscIndividual } from "../../services/pscIndividualService";
 import { getPscExtensionCount } from "../../services/pscExtensionService";
 import { getCompanyProfile } from "../../services/companyProfileService";
 import { getLocaleInfo, getLocalesService, selectLang } from "../../utils/localise";
 import { internationaliseDate } from "../../utils/date";
-import { saveDataInSession, getSessionValue } from "../../lib/utils/sessionHelper";
+import { getSessionValue, saveDataInSession } from "../../lib/utils/sessionHelper";
 
 interface PscViewData extends BaseViewData {
     referenceNumber: string;
@@ -78,7 +78,7 @@ export class ExtensionConfirmationHandler extends GenericHandler<PscViewData> {
         return {
             ...baseViewData,
             ...getLocaleInfo(locales, lang),
-            templateName: templateName,
+            templateName,
             pscName: pscIndividual.resource?.name!,
             companyName: companyProfile.companyName,
             companyNumber: companyProfile.companyNumber,

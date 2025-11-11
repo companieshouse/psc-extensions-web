@@ -1,7 +1,7 @@
 import mocks from "../../mocks/all.middleware.mock";
 import supertest from "supertest";
 import app from "../../../src/app";
-import { SERVICE_PATH_PREFIX, PATHS, EXTENSION_REASONS, validExtensionReasons } from "../../../src/lib/constants";
+import { EXTENSION_REASONS, PATHS, SERVICE_PATH_PREFIX, validExtensionReasons } from "../../../src/lib/constants";
 import { HttpStatusCode } from "axios";
 import * as cheerio from "cheerio";
 import { COMPANY_NUMBER, PSC_INDIVIDUAL, PSC_NOTIFICATION_ID } from "../../mocks/psc.mock";

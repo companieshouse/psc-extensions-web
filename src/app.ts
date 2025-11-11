@@ -1,4 +1,4 @@
-import express, { Request, Response, NextFunction } from "express";
+import express, { NextFunction, Request, Response } from "express";
 import nunjucks from "nunjucks";
 import path from "path";
 import cookieParser from "cookie-parser";
