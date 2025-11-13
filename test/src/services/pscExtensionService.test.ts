@@ -216,7 +216,7 @@ describe("pscExtensionService", () => {
 
         it("should return ValidationStatusResponse on success", async () => {
             const mockValidationResponse: ValidationStatusResponse = {
-                errors: [],
+                validationStatusError: [],
                 valid: true
             };
 
