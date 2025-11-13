@@ -35,7 +35,8 @@ export const validateExtensionRequest = handleExceptions(async (req: Request, re
         const isValid = validationResponse.valid;
 
         if (!isValid) {
-            logger.error(`Validation failed for PSC ID: ${pscNotificationId}. Validation Errors: ${JSON.stringify(validationResponse.errors)}`);
+            // TODO: uncomment this once we have updated to the most recent version of api-sdk-node
+            // logger.error(`Validation failed for PSC ID: ${pscNotificationId}. Validation Errors: ${JSON.stringify(validationResponse.validationStatusError)}`);
             return res.redirect(addSearchParams(PREFIXED_URLS.EXTENSION_REFUSED, { companyNumber, selectedPscId: pscNotificationId }));
         }
 
