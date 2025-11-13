@@ -35,6 +35,7 @@ export const validateExtensionRequest = handleExceptions(async (req: Request, re
         const isValid = validationResponse.valid;
 
         if (!isValid) {
+            logger.error(`Validation failed for PSC ID: ${pscNotificationId}. Validation Errors: ${JSON.stringify(validationResponse.errors)}`);
             return res.redirect(addSearchParams(PREFIXED_URLS.EXTENSION_REFUSED, { companyNumber, selectedPscId: pscNotificationId }));
         }
 
