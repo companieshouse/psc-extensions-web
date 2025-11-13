@@ -10,6 +10,16 @@
 {% endif %}
 
 {% block main_content %}
+    <script type="application/javascript">
+        const extensionReasonTextMap = {
+            '{{ reasons.ID_DOCS_DELAYED }}': '{{ i18n.reason_for_extension_1 }}',
+            '{{ reasons.POST_OFFICE_VERIFICATION }}': '{{ i18n.reason_for_extension_2 }}',
+            '{{ reasons.MEDICAL_TREATMENT }}': '{{ i18n.reason_for_extension_3 }}',
+            '{{ reasons.NEED_SUPPORT }}': '{{ i18n.reason_for_extension_4 }}',
+            '{{ reasons.TECHNICAL_ISSUES }}': '{{ i18n.reason_for_extension_5 }}',
+            '{{ reasons.INCORRECT_PSC_DETAILS }}': '{{ i18n.reason_for_extension_6 }}'
+        };
+    </script>
     <form action="" method="post">
         <span class="govuk-caption-l">{{pscName}} ({{ i18n.reason_for_extension_born_caption }} {{dateOfBirth}})</span>
 
@@ -69,9 +79,8 @@
              {{ govukButton({
                 text: i18n.submit_request,
                 attributes: {
-                    "onclick": "_paq.push(['trackEvent', 'psc-extensions', '" + templateName + "', document.querySelector('input[name=whyDoYouNeedAnExtension]:checked').value])"
+                    "onclick": "var selectedRadio = document.querySelector('input[name=whyDoYouNeedAnExtension]:checked'); if(selectedRadio) { _paq.push(['trackEvent', 'psc-extensions', '" + templateName + "', extensionReasonTextMap[selectedRadio.value]]); } _paq.push(['trackEvent', 'psc-extensions', '" + templateName + "', 'submit-request-button']);"
                 }
-
              }) }}
     </form>
 
