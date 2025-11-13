@@ -38,7 +38,7 @@ describe("GET extension info router and retrieve components such as footer links
             { href: "http://chsurl.co/help/cookies", text: "Cookies" },
             { href: "https://www.gov.uk/government/organisations/companies-house#org-contacts", text: "Contact us" },
             { href: "https://developer.company-information.service.gov.uk/", text: "Developers" },
-            { href: "http://chsurl.co/help/accessibility-statement", text: "Accessibility Statement" }
+            { href: "https://find-and-update.company-information.service.gov.uk/persons-with-significant-control-verification/accessibility-statement", text: "Accessibility Statement" }
         ];
 
         const footerLinks = $(".govuk-footer__inline-list-item a");
@@ -60,7 +60,7 @@ describe("GET extension info router and retrieve components such as footer links
             { href: "http://chsurl.co/help/cookies", text: "Cwcis" },
             { href: "https://www.gov.uk/government/organisations/companies-house#org-contacts", text: "Cysylltu â ni" },
             { href: "https://developer.company-information.service.gov.uk/", text: "Datblygwyr" },
-            { href: "http://chsurl.co/help/accessibility-statement", text: "Datganiad hygyrchedd" }
+            { href: "https://find-and-update.company-information.service.gov.uk/persons-with-significant-control-verification/accessibility-statement", text: "Datganiad hygyrchedd" }
         ];
 
         const footerLinks = $(".govuk-footer__inline-list-item a");
