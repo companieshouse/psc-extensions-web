@@ -79,7 +79,7 @@
              {{ govukButton({
                 text: i18n.submit_request,
                 attributes: {
-                    "onclick": "var selectedRadio = document.querySelector('input[name=whyDoYouNeedAnExtension]:checked'); if(selectedRadio) { _paq.push(['trackEvent', 'psc-extensions', '" + templateName + "', extensionReasonTextMap[selectedRadio.value]]); } _paq.push(['trackEvent', 'psc-extensions', '" + templateName + "', 'submit-request-button']);"
+                    "onclick": "const selectedRadio = document.querySelector('input[name=whyDoYouNeedAnExtension]:checked'); if(selectedRadio) { _paq.push(['trackEvent', '" + templateName + "', extensionReasonTextMap[selectedRadio.value].toLowerCase()]); } _paq.push(['trackEvent', '" + templateName + "', 'submit-request-button']); return true;"
                 }
              }) }}
     </form>
