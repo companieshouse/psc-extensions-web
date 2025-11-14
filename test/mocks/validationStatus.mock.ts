@@ -2,17 +2,15 @@ import { ValidationStatusResponse } from "@companieshouse/api-sdk-node/dist/serv
 
 export const mockValidationStatusResponse: ValidationStatusResponse = {
     valid: true,
-    errors: []
+    validationStatusError: []
 };
 
 export const mockInvalidValidationStatusResponse: ValidationStatusResponse = {
     valid: false,
-    errors: [
+    validationStatusError: [
         {
-            error: "PSC extension request is not valid",
-            location: "validation",
-            locationType: "field",
-            type: "validation"
+            message: "PSC extension request is not valid",
+            field: "validation"
         }
     ]
 };
