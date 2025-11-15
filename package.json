@@ -45,7 +45,7 @@
     "govuk-frontend": "5.10.2",
     "http-errors": "^1.7.3",
     "ioredis": "4.16.2",
-    "js-yaml": "^3.14.0",
+    "js-yaml": "^4.1.1",
     "nunjucks": "3.2.4",
     "uuid": "8.0.0",
     "yargs": "15.3.1"
