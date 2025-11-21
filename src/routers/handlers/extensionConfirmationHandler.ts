@@ -84,7 +84,7 @@ export class ExtensionConfirmationHandler extends GenericHandler<PscViewData> {
             companyNumber: companyProfile.companyNumber,
             dueDate: this.getLocalizedDate(getVerificationDueDate, lang),
             referenceNumber: transactionId,
-            companyLookupUrl: addSearchParams(EXTERNALURLS.COMPANY_LOOKUP, { forward }),
+            companyLookupUrl: addSearchParams(EXTERNALURLS.COMPANY_LOOKUP, { forward, lang }),
             differentPscInCompanyUrl: resolveUrlTemplate(PREFIXED_URLS.INDIVIDUAL_PSC_LIST)
         };
     }
