@@ -9,6 +9,7 @@ export const prepareCSPConfig = (nonce: string): HelmetOptions => {
     const ONE_YEAR_SECONDS = 31536000;
     const CHS_URL = process.env.CHS_URL as string;
     const HTTP_CHS_URL: string = CHS_URL.replace(/^https:\/\//, "http://");
+    const IS_LOCAL = process.env.ENV_NAME === "local";
     // Design System hash value from: https://frontend.design-system.service.gov.uk/import-javascript/#if-our-inline-javascript-snippet-is-blocked-by-a-content-security-policy
     const DS_SCRIPT_HASH = `'sha256-GUQ5ad8JK5KmEWmROf3LZd9ge94daqNvd8xy9YS1iDw='`;
 
@@ -38,6 +39,8 @@ export const prepareCSPConfig = (nonce: string): HelmetOptions => {
                 objectSrc: [`'none'`]
             }
         },
+        crossOriginOpenerPolicy: IS_LOCAL ? false : { policy: "same-origin" },
+        originAgentCluster: !IS_LOCAL,
         referrerPolicy: {
             policy: ["same-origin"]
         },
