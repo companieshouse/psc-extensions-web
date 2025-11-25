@@ -14,7 +14,8 @@ export const env = {
     CHS_URL: getEnvironmentValue("CHS_URL"),
     COOKIE_DOMAIN: getEnvironmentValue("COOKIE_DOMAIN"),
     COOKIE_NAME: getEnvironmentValue("COOKIE_NAME"),
-    COOKIE_SECRET: getEnvironmentValue("COOKIE_SECRET")
+    COOKIE_SECRET: getEnvironmentValue("COOKIE_SECRET"),
+    ENV_NAME: getEnvironmentValue("ENV_NAME")
 } as const;
 
 export const LOCALES_PATH = getEnvironmentValue("LOCALES_PATH", "locales");

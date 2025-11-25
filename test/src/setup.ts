@@ -13,3 +13,4 @@ process.env.COOKIE_NAME = "cookie_name";
 process.env.LOCALES_ENABLED = "true";
 process.env.CHS_API_KEY = "CHS_API_KEY";
 process.env.CHS_INTERNAL_API_KEY = "CHS_INTERNAL_API_KEY";
+process.env.ENV_NAME = "TEST";
