@@ -10,7 +10,7 @@
 {% endif %}
 
 {% block main_content %}
-    <script type="application/javascript">
+    <script type="application/javascript" nonce={{ nonce | dump | safe }}>
         const extensionReasonTextMap = {
             '{{ reasons.ID_DOCS_DELAYED }}': '{{ i18n.reason_for_extension_1 }}',
             '{{ reasons.POST_OFFICE_VERIFICATION }}': '{{ i18n.reason_for_extension_2 }}',

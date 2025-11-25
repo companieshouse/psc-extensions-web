@@ -65,6 +65,12 @@ app.use(cookieParser());
 const nonce: string = uuidv4();
 app.use(helmet(prepareCSPConfig(nonce)));
 
+app.use((req: Request, res: Response, next: NextFunction) => {
+    res.locals.nonce = nonce;
+    res.locals.cspNonce = nonce;
+    next();
+});
+
 // initiate session and attach to middleware
 app.use(SERVICE_PATH_PREFIX, sessionMiddleware);
 app.use(templateMiddleware);
