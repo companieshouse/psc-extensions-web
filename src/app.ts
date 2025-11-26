@@ -12,7 +12,7 @@ import { internalServerError } from "./middleware/internalServerError.middleware
 import { SERVICE_PATH_PREFIX } from "./lib/constants";
 import helmet from "helmet";
 import { v4 as uuidv4 } from "uuid";
-import { prepareCSPConfig } from "../src/middleware/content.security.policy.middleware";
+import { prepareCSPConfig } from "./middleware/content.security.policy.middleware";
 
 const app = express();
 
