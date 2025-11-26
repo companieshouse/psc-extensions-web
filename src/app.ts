@@ -10,6 +10,9 @@ import { templateMiddleware } from "./middleware/template.middleware";
 import { pageNotFound } from "./middleware/pageNotFound.middleware";
 import { internalServerError } from "./middleware/internalServerError.middleware";
 import { SERVICE_PATH_PREFIX } from "./lib/constants";
+import helmet from "helmet";
+import { v4 as uuidv4 } from "uuid";
+import { prepareCSPConfig } from "../src/middleware/content.security.policy.middleware";
 
 const app = express();
 
@@ -58,6 +61,15 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 app.use(cookieParser());
+
+const nonce: string = uuidv4();
+app.use(helmet(prepareCSPConfig(nonce)));
+
+app.use((req: Request, res: Response, next: NextFunction) => {
+    res.locals.nonce = nonce;
+    res.locals.cspNonce = nonce;
+    next();
+});
 
 // initiate session and attach to middleware
 app.use(SERVICE_PATH_PREFIX, sessionMiddleware);
