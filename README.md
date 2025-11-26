@@ -86,4 +86,3 @@ To run the tests, type the following command:
 To get a test coverage report, run:
 
 ```npm run coverage```
-
