@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from "express";
-import { authMiddleware, AuthOptions } from "@companieshouse/web-security-node";
+import { AuthOptions, authMiddleware } from "@companieshouse/web-security-node";
 import { env } from "../lib/constants";
 import { handleExceptions } from "../utils/asyncHandler";
 

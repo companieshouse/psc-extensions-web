@@ -1,4 +1,3 @@
-
 const errorManifest = {
     validation: {
         extensionReason: "reason_for_extension_error_message"

@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { BaseViewData, GenericHandler, ViewModel } from "../abstractGenericHandler";
 import logger from "../../../lib/logger";
-import { ROUTER_VIEWS_FOLDER_PATH, PREFIXED_URLS } from "../../../lib/constants";
+import { PREFIXED_URLS, ROUTER_VIEWS_FOLDER_PATH } from "../../../lib/constants";
 import { getLocaleInfo, getLocalesService, selectLang } from "../../../utils/localise";
 
 export class PageNotFoundHandler extends GenericHandler<BaseViewData> {

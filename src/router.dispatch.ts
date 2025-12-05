@@ -8,7 +8,7 @@ import reasonForExtensionRouter from "./routers/reasonForExtensionRouter";
 import healthCheckRouter from "./routers/healthCheckRouter";
 import extensionConfirmationRouter from "./routers/extensionConfirmationRouter";
 import extensionAlreadySubmittedRouter from "./routers/extensionAlreadySubmittedRouter";
-import { SERVICE_PATH_PREFIX, PATHS } from "./lib/constants";
+import { PATHS, SERVICE_PATH_PREFIX } from "./lib/constants";
 
 const routerDispatch = (app: Application): void => {
     const router = Router();
