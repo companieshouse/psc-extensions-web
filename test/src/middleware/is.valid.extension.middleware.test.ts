@@ -1,9 +1,9 @@
 import { Request, Response } from "express";
 import { validateExtensionRequest } from "../../../src/middleware/is.valid.extension.middleware";
 import { getIsPscExtensionValid, getPscExtensionCount } from "../../../src/services/pscExtensionService";
-import { SERVICE_PATH_PREFIX, PATHS } from "../../../src/lib/constants";
+import { PATHS, SERVICE_PATH_PREFIX } from "../../../src/lib/constants";
 import { HttpError } from "../../../src/lib/utils/error_manifests/httpError";
-import { mockValidationStatusResponse, mockInvalidValidationStatusResponse } from "../../mocks/validationStatus.mock";
+import { mockInvalidValidationStatusResponse, mockValidationStatusResponse } from "../../mocks/validationStatus.mock";
 
 jest.mock("../../../src/services/pscExtensionService");
 const mockGetIsPscExtensionValid = getIsPscExtensionValid as jest.MockedFunction<typeof getIsPscExtensionValid>;

@@ -13,7 +13,6 @@ describe("session utils", () => {
                     [SignInInfoKeys.AccessToken]: {
                         [SignInInfoKeys.AccessToken]: "mockAccessToken"
                     },
-                    /* eslint-disable @typescript-eslint/camelcase */
                     user_profile: {
                         email: "test@example.com"
                     }

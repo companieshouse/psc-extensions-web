@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { BaseViewData, GenericHandler, ViewModel } from "./abstractGenericHandler";
 import logger from "../../lib/logger";
-import { PREFIXED_URLS, PATHS, ROUTER_VIEWS_FOLDER_PATH, EXTENSION_REASONS, EXTENSION_STATUS } from "../../lib/constants";
+import { EXTENSION_REASONS, EXTENSION_STATUS, PATHS, PREFIXED_URLS, ROUTER_VIEWS_FOLDER_PATH } from "../../lib/constants";
 import { PscExtensionsFormsValidator } from "../../lib/validation/form-validators/pscExtensions";
 import { getLocaleInfo, getLocalesService, selectLang } from "../../utils/localise";
 import { addSearchParams } from "../../utils/queryParams";
@@ -44,8 +44,8 @@ export class ReasonForExtensionHandler extends GenericHandler<BaseViewData> {
             ...getLocaleInfo(locales, lang),
             pscName: pscIndividual.resource?.name!,
             dateOfBirth: formatDateBorn(pscIndividual.resource?.dateOfBirth, selectLang(req.query.lang)),
-            selectedPscId: selectedPscId,
-            companyNumber: companyNumber,
+            selectedPscId,
+            companyNumber,
             backURL: resolveUrlTemplate(PREFIXED_URLS.REQUEST_EXTENSION),
             templateName: PREFIXED_URLS.REASON_FOR_EXTENSION.slice(1),
             reasons: EXTENSION_REASONS

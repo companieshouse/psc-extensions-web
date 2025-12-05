@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { BaseViewData, GenericHandler, ViewModel } from "./abstractGenericHandler";
 import logger from "../../lib/logger";
-import { PREFIXED_URLS, PATHS, ROUTER_VIEWS_FOLDER_PATH, EXTERNALURLS } from "../../lib/constants";
+import { EXTERNALURLS, PATHS, PREFIXED_URLS, ROUTER_VIEWS_FOLDER_PATH } from "../../lib/constants";
 import { addSearchParams } from "../../utils/queryParams";
 import { getLocaleInfo, getLocalesService, selectLang } from "../../utils/localise";
 import { getCompanyProfile } from "../../services/companyProfileService";
@@ -31,7 +31,7 @@ export class ExtensionAlreadySubmittedHandler extends GenericHandler<PscViewData
         return {
             ...baseViewData,
             ...getLocaleInfo(locales, lang),
-            selectedPscId: selectedPscId,
+            selectedPscId,
             companyName: companyProfile.companyName,
             companyNumber: companyProfile.companyNumber,
             backURL: resolveUrlTemplate(PREFIXED_URLS.FIRST_EXTENSION_CONFIRMATION),

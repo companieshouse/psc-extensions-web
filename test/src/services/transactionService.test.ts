@@ -4,7 +4,7 @@ import { HttpStatusCode } from "axios";
 import { HttpError } from "../../../src/lib/utils/error_manifests/httpError";
 import { createOAuthApiClient } from "../../../src/lib/utils/api.client";
 import { getCompanyProfile } from "../../../src/services/companyProfileService";
-import { closeTransaction, DESCRIPTION, getTransaction, postTransaction, putTransaction, TransactionStatus } from "../../../src/services/transactionService";
+import { DESCRIPTION, TransactionStatus, closeTransaction, getTransaction, postTransaction, putTransaction } from "../../../src/services/transactionService";
 import { validCompanyProfile } from "../../mocks/companyProfile.mock";
 import { CLOSED_PSC_TRANSACTION, COMPANY_NUMBER, CREATED_PSC_TRANSACTION, OPEN_PSC_TRANSACTION, PSC_EXTENSION_ID, TRANSACTION_ID } from "../../mocks/transaction.mock";
 
