@@ -1,6 +1,6 @@
 import { PATHS, ROUTER_VIEWS_FOLDER_PATH } from "../../../../src/lib/constants";
 import { ExtensionConfirmationHandler } from "../../../../src/routers/handlers/extensionConfirmationHandler";
-import { PSC_INDIVIDUAL, COMPANY_NUMBER, PSC_ID } from "../../../mocks/psc.mock";
+import { COMPANY_NUMBER, PSC_ID, PSC_INDIVIDUAL } from "../../../mocks/psc.mock";
 import { validCompanyProfile } from "../../../mocks/companyProfile.mock";
 import { TRANSACTION_ID } from "../../../mocks/pscExtension.mock";
 

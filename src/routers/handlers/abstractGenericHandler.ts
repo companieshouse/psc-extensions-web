@@ -23,7 +23,6 @@ export abstract class GenericHandler<T extends BaseViewData> {
     errorManifest: any;
     private viewData!: T;
 
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     protected async getViewData (_req: Request, _res: Response): Promise<T> {
         this.errorManifest = errorManifest;
         this.viewData = defaultBaseViewData as T;

@@ -1,4 +1,4 @@
-import { ROUTER_VIEWS_FOLDER_PATH, PREFIXED_URLS } from "../../../../../src/lib/constants";
+import { PREFIXED_URLS, ROUTER_VIEWS_FOLDER_PATH } from "../../../../../src/lib/constants";
 import { InternalServerErrorHandler } from "../../../../../src/routers/handlers/error/internalServerErrorHandler";
 
 class TestableInternalServerErrorHandler extends InternalServerErrorHandler {
