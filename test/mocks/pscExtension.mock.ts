@@ -1,4 +1,4 @@
-import { PscExtension, PscExtensionData, Links } from "@companieshouse/api-sdk-node/dist/services/psc-extensions-link/types";
+import { Links, PscExtension, PscExtensionData } from "@companieshouse/api-sdk-node/dist/services/psc-extensions-link/types";
 import { ApiErrorResponse } from "@companieshouse/api-sdk-node/dist/services/resource";
 
 export const FIRST_DATE = new Date(2024, 0, 2, 3, 4, 5, 6);
@@ -41,7 +41,6 @@ export const INITIAL_PERSONAL_CODE_DATA: PscExtensionData = {
         extensionReason: ""
     }
 };
-
 
 function initPscExtension (data: PscExtensionData) {
     return {
