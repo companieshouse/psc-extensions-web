@@ -1,4 +1,4 @@
-import { Request, Response, NextFunction } from "express";
+import { NextFunction, Request, Response } from "express";
 
 const mockValidationMiddleware = jest.fn((req: Request, res: Response, next: NextFunction) => {
     return next();
