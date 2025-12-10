@@ -1,4 +1,3 @@
-
 # psc-extensions-web
 
 This is a web frontend for the PSC Extensions journey. It was created based on [Typescript Web Starter for Companies House](https://github.com/companieshouse/node-review-web-starter-ts).
