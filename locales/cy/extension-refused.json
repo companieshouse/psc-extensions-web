@@ -1,11 +1,11 @@
 {
-  "extension_refused_title": "[CY] You cannot request another extension in this service",
+  "extension_refused_title": "Ni allwch ofyn am estyniad arall yn y gwasanaeth hwn",
   "extension_refused_born_caption": "Ganwyd",
-  "extension_refused_sub_heading_1": "[CY] If you've missed your verification deadline",
-  "extension_refused_body_text_1": "[CY] If your deadline has passed, we cannot give you another extension. You should verify your identity and provide your verification details as soon as possible.",
-  "extension_refused_guidance_link_text": "[CY] Guidance on verifying your identity for Companies House",
+  "extension_refused_sub_heading_1": "Os ydych wedi methu eich dyddiad cau gwiriad",
+  "extension_refused_body_text_1": "Os yw'ch dyddiad cau wedi mynd heibio, ni allwn roi estyniad arall i chi. Dylech gwblhau gwiriad hunaniaeth a darparu eich manylion gwiriad cyn gynted â phosibl.",
+  "extension_refused_guidance_link_text": "Canllawiau ar gwblhau gwiriad hunaniaeth ar gyfer Tŷ'r Cwmnïau",
   "extension_refused_guidance_link": "https://www.gov.uk/guidance/verifying-your-identity-for-companies-house.cy",
-  "extension_refused_sub_heading_2": "[CY] If your verification deadline has not passed",
-  "extension_refused_body_text_2": "[CY] You can request another extension. This time, you'll need to provide supporting evidence.",
-  "extension_refused_online_form_link": "[CY] Submit your request and supporting evidence using this online form"
+  "extension_refused_sub_heading_2": "Os nad yw'ch dyddiad cau gwiriad wedi mynd heibio",
+  "extension_refused_body_text_2": "Gallwch ofyn am estyniad arall. Y tro hwn, bydd angen i chi ddarparu tystiolaeth ategol. ",
+  "extension_refused_online_form_link": "Cyflwynwch eich cais a'ch tystiolaeth ategol gan ddefnyddio'r ffurflen ar-lein hon."
 }
