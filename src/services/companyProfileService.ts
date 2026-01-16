@@ -18,5 +18,5 @@ export const getCompanyProfile = async (req: Request, companyNumber: string): Pr
     return response.resource;
 };
 
-export const extractRequestIdHeader = (req: Request): Headers =>
+export const extractRequestIdHeader = (req: any): Headers =>
     req.requestId ? { "X-Request-Id": req.requestId } : {};
