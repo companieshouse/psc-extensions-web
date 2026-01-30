@@ -1,6 +1,6 @@
 import { Request } from "express";
 import { Session } from "@companieshouse/node-session-handler";
-import { getSessionValue, saveDataInSession } from "../../../../src/lib/utils/sessionHelper";
+import { getSessionValue } from "../../../../src/lib/utils/sessionHelper";
 
 describe("sessionHelper", () => {
     let mockRequest: Partial<Request>;
@@ -15,24 +15,6 @@ describe("sessionHelper", () => {
         mockRequest = {
             session: mockSession as Session
         };
-    });
-
-    describe("saveDataInSession", () => {
-        it("should save data in session successfully", async () => {
-            const testName = "testKey";
-            const testValue = "testValue";
-
-            await saveDataInSession(mockRequest as Request, testName, testValue);
-
-            expect(mockSession.setExtraData).toHaveBeenCalledWith(testName, testValue);
-        });
-
-        it("should throw error when session is not available", async () => {
-            mockRequest.session = undefined;
-
-            await expect(saveDataInSession(mockRequest as Request, "key", "value"))
-                .rejects.toThrow("Session not available");
-        });
     });
 
     describe("getSessionValue", () => {

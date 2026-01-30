@@ -4,11 +4,9 @@ import logger from "../../lib/logger";
 import { addSearchParams } from "../../utils/queryParams";
 import { EXTERNALURLS, PATHS, PREFIXED_URLS, ROUTER_VIEWS_FOLDER_PATH } from "../../lib/constants";
 import { getPscIndividual } from "../../services/pscIndividualService";
-import { getPscExtensionCount } from "../../services/pscExtensionService";
 import { getCompanyProfile } from "../../services/companyProfileService";
 import { getLocaleInfo, getLocalesService, selectLang } from "../../utils/localise";
 import { internationaliseDate } from "../../utils/date";
-import { getSessionValue, saveDataInSession } from "../../lib/utils/sessionHelper";
 
 interface PscViewData extends BaseViewData {
     referenceNumber: string;
@@ -39,38 +37,8 @@ export class ExtensionConfirmationHandler extends GenericHandler<PscViewData> {
         const pscIndividual = await getPscIndividual(req, companyNumber, selectedPscId);
         const companyProfile = await getCompanyProfile(req, companyNumber);
         const transactionId = req.query.id as string;
-        const extensionCount = await getPscExtensionCount(req, selectedPscId);
         const forward = decodeURI(addSearchParams(EXTERNALURLS.COMPANY_LOOKUP_FORWARD, { companyNumber: "{companyNumber}", lang }));
-
-        let getVerificationDueDate = pscIndividual.resource?.identityVerificationDetails?.appointmentVerificationStatementDueOn;
-        let originalVerificationDateFromSession;
-
-        try {
-            const sessionKey = `originalVerificationDueDate_${selectedPscId}`;
-            originalVerificationDateFromSession = await getSessionValue(req, sessionKey);
-            if (!originalVerificationDateFromSession && getVerificationDueDate) {
-                await saveDataInSession(req, sessionKey, getVerificationDueDate);
-            }
-        } catch (error) {
-            logger.error(`Error handling session data: ${error}`);
-            originalVerificationDateFromSession = null;
-        }
-
-        const originalVerificationDueDate = originalVerificationDateFromSession || getVerificationDueDate;
-
-        if (originalVerificationDueDate && (typeof originalVerificationDueDate === "string" || originalVerificationDueDate instanceof Date)) {
-            const newExtensionVerificationDueDate = new Date(originalVerificationDueDate);
-
-            // Add 14 days for the first extension
-            newExtensionVerificationDueDate.setDate(newExtensionVerificationDueDate.getDate() + 14);
-
-            // If extensionCount > 1, add another 14 days
-            if (extensionCount > 1) {
-                newExtensionVerificationDueDate.setDate(newExtensionVerificationDueDate.getDate() + 14);
-            }
-
-            getVerificationDueDate = newExtensionVerificationDueDate;
-        }
+        const getVerificationDueDate = pscIndividual.resource?.identityVerificationDetails?.appointmentVerificationStatementDueOn;
 
         function resolveUrlTemplate (PREFIXEDURL: string): string | null {
             return addSearchParams(PREFIXEDURL, { companyNumber, lang });
