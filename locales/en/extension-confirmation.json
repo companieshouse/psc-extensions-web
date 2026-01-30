@@ -1,6 +1,5 @@
 {
-    "extension_confirmation_title": "Extension request successful",
-    "extension_confirmation_deadline_html": "Verification deadline extended to",
+    "extension_confirmation_title": "Extension request accepted",
     "extension_confirmation_company_name": "Company name",
     "extension_confirmation_company_number": "Company number",
     "extension_confirmation_psc_name": "PSC name",
@@ -8,7 +7,8 @@
     "extension_confirmation_info": "You've been given an additional 14 days to provide your identity verification details.",
     "extension_confirmation_info_line1": "We've sent an email to ",
     "extension_confirmation_info_line2": "to confirm that you submitted a request.",
-    "extension_confirmation_info_line3": "It will take a few minutes for the service to update with your new deadline. You'll then receive another email confirming the new deadline. We'll also send a letter to the PSC address on our records.",
+    "extension_confirmation_info_line3": "It will take a few minutes for the service to update with your new deadline.",
+    "extension_confirmation_info_line4": "We'll also email you the new deadline date, and send a letter to the PSC address on our records.",
     "extension_confirmation_verify_extension_title": "Verifying your identity",
     "extension_confirmation_verify_info_line1": "You need to verify your identity and provide your Companies House personal code and verification statement by the new deadline.",
     "extension_confirmation_verify_info_line2": "For information on how to do this, ",

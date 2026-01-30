@@ -16,9 +16,6 @@ class TestableExtensionConfirmationHandler extends ExtensionConfirmationHandler 
 
 const mockGetPscIndividual = jest.fn();
 const mockGetCompanyProfile = jest.fn();
-const mockGetPscExtensionCount = jest.fn();
-const mockSaveDataInSession = jest.fn();
-const mockGetSessionValue = jest.fn();
 const mockLoggerError = jest.fn();
 const mockLoggerInfo = jest.fn();
 
@@ -28,15 +25,6 @@ jest.mock("../../../../src/services/pscIndividualService", () => ({
 
 jest.mock("../../../../src/services/companyProfileService", () => ({
     getCompanyProfile: (...args: any[]) => mockGetCompanyProfile(...args)
-}));
-
-jest.mock("../../../../src/services/pscExtensionService", () => ({
-    getPscExtensionCount: (...args: any[]) => mockGetPscExtensionCount(...args)
-}));
-
-jest.mock("../../../../src/lib/utils/sessionHelper", () => ({
-    saveDataInSession: (...args: any[]) => mockSaveDataInSession(...args),
-    getSessionValue: (...args: any[]) => mockGetSessionValue(...args)
 }));
 
 jest.mock("../../../../src/lib/logger", () => ({
@@ -63,108 +51,6 @@ describe("ExtensionConfirmationHandler", () => {
         jest.clearAllMocks();
         mockGetPscIndividual.mockResolvedValue(mockPscIndividualResource);
         mockGetCompanyProfile.mockResolvedValue(validCompanyProfile);
-        mockGetPscExtensionCount.mockResolvedValue(1);
-        mockGetSessionValue.mockResolvedValue(null);
-        mockSaveDataInSession.mockResolvedValue(undefined);
-    });
-
-    describe("getViewData - Session Handling", () => {
-        it("should save original date in session when no session value exists and PSC has due date", async () => {
-            const handler = new TestableExtensionConfirmationHandler();
-            const req = {
-                ...baseReq,
-                originalUrl: PATHS.FIRST_EXTENSION_CONFIRMATION
-            };
-
-            mockGetSessionValue.mockResolvedValue(null);
-
-            await handler.exposeGetViewData(req, {});
-
-            expect(mockGetSessionValue).toHaveBeenCalledWith(req, "originalVerificationDueDate_67edfE436y35hetsie6zuAZtr");
-            expect(mockSaveDataInSession).toHaveBeenCalledWith(req, "originalVerificationDueDate_67edfE436y35hetsie6zuAZtr", PSC_INDIVIDUAL.identityVerificationDetails?.appointmentVerificationStatementDueOn);
-        });
-
-        it("should not save original date in session when session value already exists", async () => {
-            const handler = new TestableExtensionConfirmationHandler();
-            const req = {
-                ...baseReq,
-                originalUrl: PATHS.FIRST_EXTENSION_CONFIRMATION
-            };
-
-            const existingSessionDate = new Date("2023-12-01");
-            mockGetSessionValue.mockResolvedValue(existingSessionDate);
-
-            await handler.exposeGetViewData(req, {});
-
-            expect(mockGetSessionValue).toHaveBeenCalledWith(req, "originalVerificationDueDate_67edfE436y35hetsie6zuAZtr");
-            expect(mockSaveDataInSession).not.toHaveBeenCalled();
-        });
-
-        it("should handle session error and set originalDateFromSession to null", async () => {
-            const handler = new TestableExtensionConfirmationHandler();
-            const req = {
-                ...baseReq,
-                originalUrl: PATHS.FIRST_EXTENSION_CONFIRMATION
-            };
-
-            const sessionError = new Error("Session error");
-            mockGetSessionValue.mockRejectedValue(sessionError);
-
-            await handler.exposeGetViewData(req, {});
-
-            expect(mockLoggerError).toHaveBeenCalledWith(`Error handling session data: ${sessionError}`);
-        });
-    });
-
-    describe("getViewData - Extension verification dates", () => {
-        it("should add 14 days for first extension", async () => {
-            const handler = new TestableExtensionConfirmationHandler();
-            const req = {
-                ...baseReq,
-                originalUrl: PATHS.FIRST_EXTENSION_CONFIRMATION
-            };
-
-            mockGetPscIndividual.mockResolvedValue(mockPscIndividualResource);
-            mockGetPscExtensionCount.mockResolvedValue(1);
-            mockGetSessionValue.mockResolvedValue(null);
-
-            const result = await handler.exposeGetViewData(req, {});
-
-            expect(result.dueDate).toBeDefined();
-        });
-
-        it("should add 14 days for second extension, using the already updated 1st extension date)", async () => {
-            const handler = new TestableExtensionConfirmationHandler();
-            const req = {
-                ...baseReq,
-                originalUrl: PATHS.SECOND_EXTENSION_CONFIRMATION
-            };
-
-            mockGetPscIndividual.mockResolvedValue(mockPscIndividualResource);
-            mockGetPscExtensionCount.mockResolvedValue(2);
-            mockGetSessionValue.mockResolvedValue(null);
-
-            const result = await handler.exposeGetViewData(req, {});
-
-            expect(result.dueDate).toBeDefined();
-        });
-
-        it("should use session date over database date when rendering new extension verification date", async () => {
-            const handler = new TestableExtensionConfirmationHandler();
-            const req = {
-                ...baseReq,
-                originalUrl: PATHS.FIRST_EXTENSION_CONFIRMATION
-            };
-
-            const sessionDate = new Date("2023-12-15");
-
-            mockGetPscIndividual.mockResolvedValue(mockPscIndividualResource);
-            mockGetSessionValue.mockResolvedValue(sessionDate);
-
-            await handler.exposeGetViewData(req, {});
-
-            expect(mockSaveDataInSession).not.toHaveBeenCalled();
-        });
     });
 
     describe("getViewData", () => {
