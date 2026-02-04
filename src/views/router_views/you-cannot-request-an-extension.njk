@@ -16,5 +16,9 @@
    <p class="govuk-body">{{ i18n.extension_refused_body_text_2 }}
       <a data-event-id="request-third-extension-link" href="https://submit.forms.service.gov.uk/form/262187/request-to-extend-the-identity-verification-deadline-for-a-psc/4GWbjwfm">{{ i18n.extension_refused_online_form_link }}</a>.
    </p>
-  
+   
+   <script nonce={{ nonce | dump | safe }}>
+      window._paq = window._paq || [];
+      _paq.push(['trackGoal', "{{ PIWIK_EXTENSION_DEADLINE_PASSED_GOAL_ID }}"]);
+   </script>
 {% endblock %}
