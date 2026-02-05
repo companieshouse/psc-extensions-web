@@ -1,0 +1,8 @@
+{
+"too_many_extensions_born_caption": "Born",
+"too_many_extensions_header": "You cannot request another extension using this service",
+"too_many_extensions_paragraph_one" : "You have requested and been given 2 extensions. You cannot request any more using this service.",
+"too_many_extensions_paragraph_two": "If you want to request another extension, you'll need to provide supporting evidence using an online form instead. You must do this before your current deadline has passed.",
+"too_many_extensions_request_submit_text":  "Submit your request and supporting evidence using this online form", 
+"too_many_extensions_request_submit_url": ""
+}
