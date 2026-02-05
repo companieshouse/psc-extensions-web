@@ -27,7 +27,7 @@ describe("GET stop screen router", () => {
     })
 
     it("Should render the stop screen extension-limit-exceeded with a successful status code", async () => {
-        let stopType: STOP_TYPE = STOP_TYPE.EXTENSION_LIMIT_EXCEEDED
+        const stopType: STOP_TYPE = STOP_TYPE.EXTENSION_LIMIT_EXCEEDED
         const stopScreenURL = getUrlWithStopType(PREFIXED_URLS.STOP_SCREEN,stopType);
         await router.get(getUrlWithStopType(stopScreenURL,stopType)).expect(200);
 
