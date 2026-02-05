@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { BaseViewData, GenericHandler, ViewModel } from "./abstractGenericHandler";
 import logger from "../../lib/logger";
-import { EXTENSION_REASONS, EXTENSION_STATUS, PATHS, PREFIXED_URLS, ROUTER_VIEWS_FOLDER_PATH } from "../../lib/constants";
+import { EXTENSION_REASONS, EXTENSION_STATUS, PATHS, PREFIXED_URLS, ROUTER_VIEWS_FOLDER_PATH, STOP_TYPE } from "../../lib/constants";
 import { PscExtensionsFormsValidator } from "../../lib/validation/form-validators/pscExtensions";
 import { getLocaleInfo, getLocalesService, selectLang } from "../../utils/localise";
 import { addSearchParams } from "../../utils/queryParams";
@@ -15,6 +15,7 @@ import { Transaction } from "@companieshouse/api-sdk-node/dist/services/transact
 import { HttpStatusCode } from "axios";
 import { closeTransaction, postTransaction } from "../../services/transactionService";
 import { getUserEmail } from "../../lib/utils/session.util";
+import { getUrlWithStopType } from "../../utils/url";
 
 interface ExtensionReasonViewData extends BaseViewData {
     reasons: typeof EXTENSION_REASONS;
@@ -93,7 +94,7 @@ export class ReasonForExtensionHandler extends GenericHandler<BaseViewData> {
 
         if (this.isErrorResponse(resource)) {
 
-            const nextPageUrl = addSearchParams(PREFIXED_URLS.EXTENSION_REFUSED, { companyNumber, selectedPscId, lang });
+            const nextPageUrl = addSearchParams(getUrlWithStopType(PREFIXED_URLS.STOP_SCREEN, STOP_TYPE.VERIFY_DEADLINE_PASSED), { companyNumber, selectedPscId });
 
             return { nextPageUrl };
 
