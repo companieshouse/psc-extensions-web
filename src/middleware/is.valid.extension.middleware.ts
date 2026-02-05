@@ -1,12 +1,13 @@
 import { NextFunction, Request, Response } from "express";
 import { handleExceptions } from "../utils/asyncHandler";
 import * as pscExtensionService from "../services/pscExtensionService";
-import { PREFIXED_URLS } from "../lib/constants";
+import { PREFIXED_URLS, STOP_TYPE } from "../lib/constants";
 import { HttpError } from "../lib/utils/error_manifests/httpError";
 import { HttpStatusCode } from "axios";
 import logger from "../lib/logger";
 import { addSearchParams } from "../utils/queryParams";
 import { ValidationStatusResponse } from "@companieshouse/api-sdk-node/dist/services/psc-extensions-link/types";
+import { getUrlWithStopType } from "../utils/url";
 
 /**
  * Middleware that validates PSC extension requests.
@@ -36,7 +37,7 @@ export const validateExtensionRequest = handleExceptions(async (req: Request, re
 
         if (!isValid) {
             logger.error(`Validation failed for PSC ID: ${pscNotificationId}. Validation Errors: ${JSON.stringify(validationResponse.validationStatusError)}`);
-            return res.redirect(addSearchParams(PREFIXED_URLS.EXTENSION_REFUSED, { companyNumber, selectedPscId: pscNotificationId }));
+            return res.redirect(addSearchParams(getUrlWithStopType(PREFIXED_URLS.STOP_SCREEN, STOP_TYPE.VERIFY_DEADLINE_PASSED), { companyNumber, selectedPscId: pscNotificationId }));
         }
 
         const extensionCount = await pscExtensionService.getPscExtensionCount(req, pscNotificationId);
@@ -76,8 +77,7 @@ export const validateExtensionRequest = handleExceptions(async (req: Request, re
             return res.redirect(addSearchParams(PREFIXED_URLS.REQUEST_EXTENSION, { companyNumber, selectedPscId: pscNotificationId }));
 
         } else if (extensionCount === 2) {
-
-            return res.redirect(addSearchParams(PREFIXED_URLS.EXTENSION_REFUSED, { companyNumber, selectedPscId: pscNotificationId }));
+            return res.redirect(addSearchParams(getUrlWithStopType(PREFIXED_URLS.STOP_SCREEN, STOP_TYPE.EXTENSION_LIMIT_EXCEEDED), { companyNumber, selectedPscId: pscNotificationId }));
 
         }
 
