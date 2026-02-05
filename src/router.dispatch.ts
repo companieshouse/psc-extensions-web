@@ -9,6 +9,7 @@ import healthCheckRouter from "./routers/healthCheckRouter";
 import extensionConfirmationRouter from "./routers/extensionConfirmationRouter";
 import extensionAlreadySubmittedRouter from "./routers/extensionAlreadySubmittedRouter";
 import { PATHS, SERVICE_PATH_PREFIX } from "./lib/constants";
+import extensionLimitExceededRouter from "./routers/extensionLimitExceededRouter";
 
 const routerDispatch = (app: Application): void => {
     const router = Router();
@@ -21,6 +22,7 @@ const routerDispatch = (app: Application): void => {
     router.use(PATHS.FIRST_EXTENSION_CONFIRMATION, authenticate, extensionConfirmationRouter);
     router.use(PATHS.SECOND_EXTENSION_CONFIRMATION, authenticate, extensionConfirmationRouter);
     router.use(PATHS.EXTENSION_ALREADY_SUBMITTED, authenticate, extensionAlreadySubmittedRouter);
+    router.use(PATHS.EXTENSION_LIMIT_EXCEEDED, authenticate, extensionLimitExceededRouter);
 };
 
 export default routerDispatch;
