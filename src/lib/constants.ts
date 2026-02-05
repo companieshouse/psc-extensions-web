@@ -24,11 +24,17 @@ export const LOCALES_ENABLED = getEnvironmentValue("LOCALES_ENABLED", "true");
 export const SERVICE_PATH_PREFIX = "/persons-with-significant-control-extensions";
 export const ROUTER_VIEWS_FOLDER_PATH = "router_views";
 export const VERIFICATION_PREFIX = "/persons-with-significant-control-verification";
+export const STOP_SCREEN_FOLDER_PATH = "router_views/stopScreen/"
+
+export enum STOP_TYPE {
+    VERIFY_DEADLINE_PASSED = "extension-deadline-passed",
+    EXTENSION_LIMIT_EXCEEDED = "extension-limit-exceeded",
+}
 
 export const PATHS = {
     REQUEST_EXTENSION: "/requesting-an-extension",
     HEALTHCHECK: "/healthcheck",
-    EXTENSION_REFUSED: "/you-cannot-request-an-extension",
+    STOP_SCREEN: "/stop/:stopType",
     REASON_FOR_EXTENSION: "/extension-reason",
     FIRST_EXTENSION_CONFIRMATION: "/first-extension-request-successful",
     SECOND_EXTENSION_CONFIRMATION: "/second-extension-request-successful",
@@ -42,7 +48,7 @@ export const PATHS = {
 export const PREFIXED_URLS = {
     REQUEST_EXTENSION: SERVICE_PATH_PREFIX + PATHS.REQUEST_EXTENSION,
     HEALTHCHECK: SERVICE_PATH_PREFIX + PATHS.HEALTHCHECK,
-    EXTENSION_REFUSED: SERVICE_PATH_PREFIX + PATHS.EXTENSION_REFUSED,
+    STOP_SCREEN: SERVICE_PATH_PREFIX + PATHS.STOP_SCREEN,
     REASON_FOR_EXTENSION: SERVICE_PATH_PREFIX + PATHS.REASON_FOR_EXTENSION,
     FIRST_EXTENSION_CONFIRMATION: SERVICE_PATH_PREFIX + PATHS.FIRST_EXTENSION_CONFIRMATION,
     SECOND_EXTENSION_CONFIRMATION: SERVICE_PATH_PREFIX + PATHS.SECOND_EXTENSION_CONFIRMATION,
