@@ -27,6 +27,7 @@ export const VERIFICATION_PREFIX = "/persons-with-significant-control-verificati
 export const STOP_SCREEN_FOLDER_PATH = "router_views/stopScreen/"
 
 export enum STOP_TYPE {
+    VERIFY_DEADLINE_PASSED= "extension-deadline-passed",
     EXTENSION_LIMIT_EXCEEDED = "extension-limit-exceeded",
 }
 
