@@ -24,12 +24,12 @@ export const LOCALES_ENABLED = getEnvironmentValue("LOCALES_ENABLED", "true");
 export const SERVICE_PATH_PREFIX = "/persons-with-significant-control-extensions";
 export const ROUTER_VIEWS_FOLDER_PATH = "router_views";
 export const VERIFICATION_PREFIX = "/persons-with-significant-control-verification";
-export const STOP_SCREEN_FOLDER_PATH = "router_views/stopScreen/"
+export const STOP_SCREEN_FOLDER_PATH = "router_views/stopScreen/";
 
 export enum STOP_TYPE {
     VERIFY_DEADLINE_PASSED= "extension-deadline-passed",
     EXTENSION_LIMIT_EXCEEDED = "extension-limit-exceeded",
-}
+};
 
 export const PATHS = {
     REQUEST_EXTENSION: "/requesting-an-extension",

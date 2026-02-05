@@ -148,4 +148,4 @@ export class ReasonForExtensionHandler extends GenericHandler<BaseViewData> {
         return obj.httpStatusCode === HttpStatusCode.InternalServerError;
     }
 
-}
+};

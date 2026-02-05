@@ -143,7 +143,7 @@ describe("validateExtensionRequest middleware", () => {
                         "2222222"
                     );
                     expect(mockGetPscExtensionCount).toHaveBeenCalledWith(req, "1111111");
-                    const stopTypeURL: string = getUrlWithStopType(PREFIXED_URLS.STOP_SCREEN,STOP_TYPE.EXTENSION_LIMIT_EXCEEDED);
+                    const stopTypeURL: string = getUrlWithStopType(PREFIXED_URLS.STOP_SCREEN, STOP_TYPE.EXTENSION_LIMIT_EXCEEDED);
                     expect(res.redirect).toHaveBeenCalledWith(
                         `${stopTypeURL}?companyNumber=2222222&selectedPscId=1111111`
                     );
@@ -178,7 +178,7 @@ describe("validateExtensionRequest middleware", () => {
                         "1111111",
                         "2222222"
                     );
-                    const stopTypeURL: string = getUrlWithStopType(PREFIXED_URLS.STOP_SCREEN,STOP_TYPE.VERIFY_DEADLINE_PASSED);
+                    const stopTypeURL: string = getUrlWithStopType(PREFIXED_URLS.STOP_SCREEN, STOP_TYPE.VERIFY_DEADLINE_PASSED);
                     expect(res.redirect).toHaveBeenCalledWith(
                         `${stopTypeURL}?companyNumber=2222222&selectedPscId=1111111`
                     );

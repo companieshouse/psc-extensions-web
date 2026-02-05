@@ -51,7 +51,8 @@ const setContent = async (req: Request, res: Response, stopType: STOP_TYPE, base
                 templateName: stopType,
                 dateOfBirth: formatDateBorn(pscIndividual.resource?.dateOfBirth, selectLang(lang)),
                 backURL: addSearchParams(resolveUrlTemplate(PREFIXED_URLS.INDIVIDUAL_PSC_LIST), { companyNumber, selectedPscId, lang }),
-                extraData: [companyName] };
+                extraData: [companyName]
+            };
         }
         case STOP_TYPE.EXTENSION_LIMIT_EXCEEDED: {
             return {
