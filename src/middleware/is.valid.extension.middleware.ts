@@ -77,7 +77,7 @@ export const validateExtensionRequest = handleExceptions(async (req: Request, re
 
         } else if (extensionCount === 2) {
 
-            return res.redirect(addSearchParams(PREFIXED_URLS.EXTENSION_REFUSED, { companyNumber, selectedPscId: pscNotificationId }));
+            return res.redirect(addSearchParams(PREFIXED_URLS.EXTENSION_LIMIT_EXCEEDED, { companyNumber, selectedPscId: pscNotificationId }));
 
         }
 
