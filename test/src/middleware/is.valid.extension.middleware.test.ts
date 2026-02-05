@@ -143,7 +143,7 @@ describe("validateExtensionRequest middleware", () => {
                     );
                     expect(mockGetPscExtensionCount).toHaveBeenCalledWith(req, "1111111");
                     expect(res.redirect).toHaveBeenCalledWith(
-                        `${SERVICE_PATH_PREFIX}${PATHS.EXTENSION_REFUSED}?companyNumber=2222222&selectedPscId=1111111`
+                        `${SERVICE_PATH_PREFIX}${PATHS.EXTENSION_LIMIT_EXCEEDED}?companyNumber=2222222&selectedPscId=1111111`
                     );
                     done();
                 } catch (e) {
