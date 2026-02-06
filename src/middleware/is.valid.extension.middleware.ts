@@ -8,7 +8,7 @@ import logger from "../lib/logger";
 import { addSearchParams } from "../utils/queryParams";
 import { ValidationStatusResponse } from "@companieshouse/api-sdk-node/dist/services/psc-extensions-link/types";
 import { getUrlWithStopType } from "../utils/url";
-import {  selectLang } from "../utils/localise";
+import { selectLang } from "../utils/localise";
 /**
  * Middleware that validates PSC extension requests.
  *
