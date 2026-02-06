@@ -6,15 +6,26 @@
    <span class="govuk-caption-l">{{pscName}} ({{ i18n.extension_refused_born_caption }} {{dateOfBirth}})</span>
    <h1 class="govuk-heading-l">{{ i18n.extension_refused_title }}</h1>
    
-   <h2 class="govuk-heading-m">{{ i18n.extension_refused_sub_heading_1 }}</h2>
-   <p class="govuk-body">{{ i18n.extension_refused_body_text_1 }}</p>
-   <p class="govuk-body">
+   <p class="govuk-body">{{ i18n.extension_refused_paragraph_one}}</p>
+   
+   <p class="govuk-body">{{ i18n.extension_refused_paragraph_two}}</p>
+ 
+
+     <p class="govuk-body">
+      {{i18n.extension_refused_guidance_link_preface}}
       <a data-event-id="guidance-on-verifying-identity-link" href={{ i18n.extension_refused_guidance_link }}>{{ i18n.extension_refused_guidance_link_text }}</a>
    </p>
+
+ {% from "govuk/components/warning-text/macro.njk" import govukWarningText %}
+
+ {{ govukWarningText({
+   text: i18n.extension_refused_warning_text,
+   iconFallbackText: "Warning"
+ })}}
  
-   <h2 class="govuk-heading-m">{{ i18n.extension_refused_sub_heading_2 }}</h2>
-   <p class="govuk-body">{{ i18n.extension_refused_body_text_2 }}
-      <a data-event-id="request-third-extension-link" href="https://submit.forms.service.gov.uk/form/262187/request-to-extend-the-identity-verification-deadline-for-a-psc/4GWbjwfm">{{ i18n.extension_refused_online_form_link }}</a>.
-   </p>
+  <script nonce={{ nonce | dump | safe }}>
+      window._paq = window._paq || [];
+      _paq.push(['trackGoal', "{{ PIWIK_EXTENSION_DEADLINE_PASSED_GOAL_ID }}"]);
+   </script>
   
 {% endblock %}
