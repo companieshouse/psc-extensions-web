@@ -8,7 +8,7 @@ import logger from "../lib/logger";
 import { addSearchParams } from "../utils/queryParams";
 import { ValidationStatusResponse } from "@companieshouse/api-sdk-node/dist/services/psc-extensions-link/types";
 import { getUrlWithStopType } from "../utils/url";
-
+import {  selectLang } from "../utils/localise";
 /**
  * Middleware that validates PSC extension requests.
  *
@@ -23,7 +23,7 @@ import { getUrlWithStopType } from "../utils/url";
 export const validateExtensionRequest = handleExceptions(async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     const pscNotificationId = req.query.selectedPscId as string;
     const companyNumber = req.query.companyNumber as string;
-
+    const lang = selectLang(req.query.lang);
     if (!pscNotificationId) {
         return next(new HttpError("Missing required parameter: selectedPscId", HttpStatusCode.BadRequest));
     }
@@ -37,7 +37,7 @@ export const validateExtensionRequest = handleExceptions(async (req: Request, re
 
         if (!isValid) {
             logger.error(`Validation failed for PSC ID: ${pscNotificationId}. Validation Errors: ${JSON.stringify(validationResponse.validationStatusError)}`);
-            return res.redirect(addSearchParams(getUrlWithStopType(PREFIXED_URLS.STOP_SCREEN, STOP_TYPE.VERIFY_DEADLINE_PASSED), { companyNumber, selectedPscId: pscNotificationId }));
+            return res.redirect(addSearchParams(getUrlWithStopType(PREFIXED_URLS.STOP_SCREEN, STOP_TYPE.VERIFY_DEADLINE_PASSED), { companyNumber, selectedPscId: pscNotificationId, lang }));
         }
 
         const extensionCount = await pscExtensionService.getPscExtensionCount(req, pscNotificationId);
@@ -77,7 +77,7 @@ export const validateExtensionRequest = handleExceptions(async (req: Request, re
             return res.redirect(addSearchParams(PREFIXED_URLS.REQUEST_EXTENSION, { companyNumber, selectedPscId: pscNotificationId }));
 
         } else if (extensionCount === 2) {
-            return res.redirect(addSearchParams(getUrlWithStopType(PREFIXED_URLS.STOP_SCREEN, STOP_TYPE.EXTENSION_LIMIT_EXCEEDED), { companyNumber, selectedPscId: pscNotificationId }));
+            return res.redirect(addSearchParams(getUrlWithStopType(PREFIXED_URLS.STOP_SCREEN, STOP_TYPE.EXTENSION_LIMIT_EXCEEDED), { companyNumber, selectedPscId: pscNotificationId, lang }));
 
         }
 
