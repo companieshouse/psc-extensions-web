@@ -1,5 +1,5 @@
-import { addSearchParams } from "../.././../src/utils/queryParams";
-import { PREFIXED_URLS } from "../../../src/lib/constants";
+import { addSearchParams } from "../../.././../src/utils/queryParams";
+import { PREFIXED_URLS } from "../../../../src/lib/constants";
 
 describe("behaviour when adding search params to URI", () => {
     it("should leave the URI unchanged when params are empty", () => {

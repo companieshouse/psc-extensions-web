@@ -3,7 +3,7 @@ import { Application, Router } from "express";
 import { authenticate } from "./middleware/authentication.middleware";
 import { validateExtensionRequest } from "./middleware/is.valid.extension.middleware";
 import requestAnExtensionRouter from "./routers/requestAnExtensionRouter";
-import extensionRefusedRouter from "./routers/extensionRefusedRouter";
+import stopScreenRouter from "./routers/stopScreenRouter";
 import reasonForExtensionRouter from "./routers/reasonForExtensionRouter";
 import healthCheckRouter from "./routers/healthCheckRouter";
 import extensionConfirmationRouter from "./routers/extensionConfirmationRouter";
@@ -16,7 +16,7 @@ const routerDispatch = (app: Application): void => {
     app.use(SERVICE_PATH_PREFIX, router);
     router.use(PATHS.HEALTHCHECK, healthCheckRouter);
     router.use(PATHS.REQUEST_EXTENSION, authenticate, validateExtensionRequest, requestAnExtensionRouter);
-    router.use(PATHS.EXTENSION_REFUSED, authenticate, extensionRefusedRouter);
+    router.use(PATHS.STOP_SCREEN, authenticate, stopScreenRouter);
     router.use(PATHS.REASON_FOR_EXTENSION, authenticate, validateExtensionRequest, reasonForExtensionRouter);
     router.use(PATHS.FIRST_EXTENSION_CONFIRMATION, authenticate, extensionConfirmationRouter);
     router.use(PATHS.SECOND_EXTENSION_CONFIRMATION, authenticate, extensionConfirmationRouter);

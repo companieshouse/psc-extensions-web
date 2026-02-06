@@ -1,9 +1,10 @@
 import { Request, Response } from "express";
 import { validateExtensionRequest } from "../../../src/middleware/is.valid.extension.middleware";
 import { getIsPscExtensionValid, getPscExtensionCount } from "../../../src/services/pscExtensionService";
-import { PATHS, SERVICE_PATH_PREFIX } from "../../../src/lib/constants";
+import { PATHS, PREFIXED_URLS, SERVICE_PATH_PREFIX, STOP_TYPE } from "../../../src/lib/constants";
 import { HttpError } from "../../../src/lib/utils/error_manifests/httpError";
 import { mockInvalidValidationStatusResponse, mockValidationStatusResponse } from "../../mocks/validationStatus.mock";
+import { getUrlWithStopType } from "../../../src/utils/url";
 
 jest.mock("../../../src/services/pscExtensionService");
 const mockGetIsPscExtensionValid = getIsPscExtensionValid as jest.MockedFunction<typeof getIsPscExtensionValid>;
@@ -17,7 +18,8 @@ describe("validateExtensionRequest middleware", () => {
         req = {
             query: {
                 companyNumber: "2222222",
-                selectedPscId: "1111111"
+                selectedPscId: "1111111",
+                lang: "en"
             },
             originalUrl: "/some-other-url"
         };
@@ -142,8 +144,9 @@ describe("validateExtensionRequest middleware", () => {
                         "2222222"
                     );
                     expect(mockGetPscExtensionCount).toHaveBeenCalledWith(req, "1111111");
+                    const stopTypeURL: string = getUrlWithStopType(PREFIXED_URLS.STOP_SCREEN, STOP_TYPE.EXTENSION_LIMIT_EXCEEDED);
                     expect(res.redirect).toHaveBeenCalledWith(
-                        `${SERVICE_PATH_PREFIX}${PATHS.EXTENSION_REFUSED}?companyNumber=2222222&selectedPscId=1111111`
+                        `${stopTypeURL}?companyNumber=2222222&selectedPscId=1111111&lang=en`
                     );
                     done();
                 } catch (e) {
@@ -176,8 +179,9 @@ describe("validateExtensionRequest middleware", () => {
                         "1111111",
                         "2222222"
                     );
+                    const stopTypeURL: string = getUrlWithStopType(PREFIXED_URLS.STOP_SCREEN, STOP_TYPE.VERIFY_DEADLINE_PASSED);
                     expect(res.redirect).toHaveBeenCalledWith(
-                        `${SERVICE_PATH_PREFIX}${PATHS.EXTENSION_REFUSED}?companyNumber=2222222&selectedPscId=1111111`
+                        `${stopTypeURL}?companyNumber=2222222&selectedPscId=1111111&lang=en`
                     );
                     done();
                 } catch (e) {

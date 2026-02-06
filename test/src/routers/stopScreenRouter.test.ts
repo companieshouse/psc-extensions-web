@@ -1,9 +1,10 @@
 import mocks from "../../mocks/all.middleware.mock";
 import supertest from "supertest";
 import app from "../../../src/app";
-import { PATHS, SERVICE_PATH_PREFIX } from "../../../src/lib/constants";
+import { PREFIXED_URLS, STOP_TYPE } from "../../../src/lib/constants";
 import { HttpStatusCode } from "axios";
 import { PSC_INDIVIDUAL } from "../../mocks/psc.mock";
+import { getUrlWithStopType } from "../../../src/utils/url";
 const router = supertest(app);
 
 jest.mock("../../../src/services/pscIndividualService", () => ({
@@ -12,19 +13,21 @@ jest.mock("../../../src/services/pscIndividualService", () => ({
         resource: PSC_INDIVIDUAL
     })
 }));
-describe("GET extension refused router", () => {
+describe("GET stop screen router", () => {
 
     beforeEach(() => {
         jest.clearAllMocks();
     });
 
-    it("should check session and user auth before returning the page", async () => {
-        await router.get(SERVICE_PATH_PREFIX + PATHS.EXTENSION_REFUSED);
+    afterEach(() => {
         expect(mocks.mockSessionMiddleware).toHaveBeenCalled();
         expect(mocks.mockAuthenticationMiddleware).toHaveBeenCalled();
     });
 
-    it("should return status 200", async () => {
-        await router.get(SERVICE_PATH_PREFIX + PATHS.EXTENSION_REFUSED).expect(200);
+    it("Should render the stop screen extension-limit-exceeded with a successful status code", async () => {
+        const stopType: STOP_TYPE = STOP_TYPE.EXTENSION_LIMIT_EXCEEDED;
+        const stopScreenURL = getUrlWithStopType(PREFIXED_URLS.STOP_SCREEN, stopType);
+        await router.get(getUrlWithStopType(stopScreenURL, stopType)).expect(200);
+
     });
 });

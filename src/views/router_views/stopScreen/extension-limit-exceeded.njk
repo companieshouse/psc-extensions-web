@@ -1,0 +1,21 @@
+{% extends "layouts/default.njk" %}
+
+{% set title = i18n.extension_limit_exceeded_header %}
+
+{% block main_content %}
+
+    <span class="govuk-caption-l">{{pscName}} ({{ i18n.extension_limit_exceeded_born_caption }} {{dateOfBirth}})</span>
+
+    <h1 class="govuk-heading-l">{{ i18n.extension_limit_exceeded_header }}</h1>
+
+    <p class ="govuk-body">{{ i18n.extension_limit_exceeded_paragraph_one }}</p>
+
+    <p class="govuk-body">{{ i18n.extension_limit_exceeded_paragraph_two}} </p>
+      <a data-event-id="request-third-extension-link" href="https://submit.forms.service.gov.uk/form/262187/request-to-extend-the-identity-verification-deadline-for-a-psc/4GWbjwfm">{{i18n.extension_limit_exceeded_request_submit_text}}</a>.
+
+     <script nonce={{ nonce | dump | safe }}>
+      window._paq = window._paq || [];
+      _paq.push(['trackGoal', "{{ PIWIK_REQUEST_ANOTHER_EXTENSION_GOAL_ID }}"]);
+   </script>
+
+{% endblock %}
