@@ -36,7 +36,7 @@ const setContent = async (req: Request, res: Response, stopType: STOP_TYPE, base
 
     const companyNumber = req.query.companyNumber as string;
     const selectedPscId = req.query.selectedPscId as string;
-    const lang = res.locals.lang;
+    const lang = selectLang(req.query.lang);
     const locales = getLocalesService();
     const companyProfile = res.locals.companyProfile;
     const pscIndividual = await getPscIndividual(req, companyNumber, selectedPscId);
