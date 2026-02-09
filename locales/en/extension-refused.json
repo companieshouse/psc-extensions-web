@@ -1,11 +1,11 @@
 {
-    "extension_refused_title": "You cannot request another extension in this service",
+    "extension_refused_title": "You cannot request an extension",
     "extension_refused_born_caption": "Born",
-    "extension_refused_sub_heading_1": "If you've missed your verification deadline",
-    "extension_refused_body_text_1": "If your deadline has passed, we cannot give you another extension. You should verify your identity and provide your verification details as soon as possible.",
-    "extension_refused_guidance_link_text": "Guidance on verifying your identity for Companies House",
-    "extension_refused_guidance_link": "https://www.gov.uk/guidance/verifying-your-identity-for-companies-house",
-    "extension_refused_sub_heading_2": "If your verification deadline has not passed",
-    "extension_refused_body_text_2": "You can request another extension. This time, you'll need to provide supporting evidence.",
-    "extension_refused_online_form_link": "Submit your request and supporting evidence using this online form"
+    "extension_refused_paragraph_one": "Your verification deadline has passed. This means you cannot request an extension.",
+    "extension_refused_paragraph_two": "You now need to verify your identity as soon as possible. After you've verified, you must return to this service and provide your Companies House personal code, to confirm your identity has been verified.",
+    "extension_refused_guidance_link_text": "guidance on verifying your identity for Companies House",
+    "extension_refused_warning_text": "If you do not comply with identity verification requirements, you may face prosecution and a fine through the courts, or a financial penalty. We may also display a note against your name on the public register.",
+    "extension_refused_guidance_link_preface": "For more information, read the ",
+    "extension_refused_guidance_link": "https://www.gov.uk/guidance/verifying-your-identity-for-companies-house"
+
 }

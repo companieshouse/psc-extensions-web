@@ -24,10 +24,8 @@ describe("GET stop screen router", () => {
         expect(mocks.mockAuthenticationMiddleware).toHaveBeenCalled();
     });
 
-    it("Should render the stop screen extension-limit-exceeded with a successful status code", async () => {
-        const stopType: STOP_TYPE = STOP_TYPE.EXTENSION_LIMIT_EXCEEDED;
+    it.each(Object.values(STOP_TYPE))("Should render the stop screen '%s' with successful status code", async (stopType: STOP_TYPE) => {
         const stopScreenURL = getUrlWithStopType(PREFIXED_URLS.STOP_SCREEN, stopType);
         await router.get(getUrlWithStopType(stopScreenURL, stopType)).expect(200);
-
     });
 });
