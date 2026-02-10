@@ -51,6 +51,7 @@ njk.addGlobal("PIWIK_SERVICE_NAME", process.env.PIWIK_SERVICE_NAME);
 njk.addGlobal("PIWIK_SITE_ID", process.env.PIWIK_SITE_ID);
 njk.addGlobal("PIWIK_EXTENSION_DEADLINE_PASSED_GOAL_ID", process.env.PIWIK_EXTENSION_DEADLINE_PASSED_GOAL_ID);
 njk.addGlobal("PIWIK_REQUEST_ANOTHER_EXTENSION_GOAL_ID", process.env.PIWIK_REQUEST_ANOTHER_EXTENSION_GOAL_ID);
+njk.addGlobal("EXTEND_EXTENSION_DEADLINE_URL", process.env.EXTEND_EXTENSION_DEADLINE_URL);
 njk.addGlobal("PIWIK_URL", process.env.PIWIK_URL);
 njk.addGlobal("govukRebrand", true);
 njk.addGlobal("govukFrontendVersion", getGOVUKFrontendVersion());
