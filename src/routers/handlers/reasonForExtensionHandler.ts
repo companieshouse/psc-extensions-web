@@ -43,7 +43,7 @@ export class ReasonForExtensionHandler extends GenericHandler<BaseViewData> {
         return {
             ...baseViewData,
             ...getLocaleInfo(locales, lang),
-            pscName: pscIndividual.resource?.name!,
+            pscName: pscIndividual.resource?.name || "",
             dateOfBirth: formatDateBorn(pscIndividual.resource?.dateOfBirth, selectLang(req.query.lang)),
             selectedPscId,
             companyNumber,

@@ -6,7 +6,7 @@ import { env } from "../../config";
 import { getAccessToken } from "./session.util";
 
 export const createOAuthApiClient = (session: Session | undefined, baseUrl: string = env.API_URL): ApiClient => {
-    if (!session) throw new Error();
+    if (!session) { throw new Error(); }
     return createApiClient(undefined, getAccessToken(session), baseUrl);
 };
 

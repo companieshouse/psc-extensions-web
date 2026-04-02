@@ -47,7 +47,7 @@ export class ExtensionConfirmationHandler extends GenericHandler<PscViewData> {
             ...baseViewData,
             ...getLocaleInfo(locales, lang),
             templateName,
-            pscName: pscIndividual.resource?.name!,
+            pscName: pscIndividual.resource?.name || "",
             companyName: companyProfile.companyName,
             companyNumber: companyProfile.companyNumber,
             dueDate: this.getLocalizedDate(getVerificationDueDate, lang),

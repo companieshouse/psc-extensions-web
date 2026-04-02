@@ -15,7 +15,7 @@
     "lint": "eslint 'src/*.ts' 'src/**/*.ts' 'test/src/**/*.ts'",
     "lint:fix": "eslint 'src/*.ts' 'src/**/*.ts' 'test/src/**/*.ts' --fix",
     "test": "jest",
-    "coverage": "jest --coverage --passWithNoTests",
+    "coverage": "jest --coverage --passWithNoTests --coverageProvider=v8",
     "sonarqube-base-branch": "sonar-scanner",
     "sonarqube-pull-request": "sonar-scanner -D sonar.pullrequest.base=main",
     "sonarqube": "branch=$(git rev-parse --symbolic-full-name --abbrev-ref HEAD); if [[ $branch == \"HEAD\" ]]; then echo $branch && npm run sonarqube-base-branch; else echo $branch && npm run sonarqube-pull-request; fi;",
@@ -52,6 +52,8 @@
     "yargs": "15.3.1"
   },
   "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "@stylistic/eslint-plugin": "^5.9.0",
     "@types/cheerio": "^0.22.18",
     "@types/cookie-parser": "^1.4.3",
     "@types/express": "^4.17.6",
@@ -64,18 +66,11 @@
     "@types/nunjucks": "3.1.2",
     "@types/supertest": "^6.0.2",
     "@types/uuid": "7.0.3",
-    "@typescript-eslint/eslint-plugin": "^8.37.0",
-    "@typescript-eslint/parser": "^8.37.0",
+    "@typescript-eslint/eslint-plugin": "^8.56.1",
+    "@typescript-eslint/parser": "^8.56.1",
+    "eslint": "^10.0.2",
+    "globals": "^17.3.0",
     "cheerio": "^1.0.0-rc.12",
-    "eslint": "^9.31.0",
-    "eslint-plugin-check-file": "^3.3.0",
-    "eslint-plugin-import": "^2.32.0",
-    "eslint-plugin-n": "^17.21.0",
-    "eslint-config-standard": "14.1.1",
-    "eslint-plugin-node": "11.1.0",
-    "eslint-plugin-promise": "^7.2.1",
-    "eslint-plugin-unused-imports": "^4.1.4",
-    "eslint-plugin-standard": "4.0.1",
     "gulp": "^5.0.0",
     "gulp-clean": "^0.4.0",
     "gulp-concat": "^2.6.1",
@@ -101,7 +96,9 @@
   },
   "overrides": {
     "chokidar": "3.5.3",
-    "glob-parent": "6.0.2"
+    "glob-parent": "6.0.2",
+    "micromatch": "4.0.8",
+    "minimatch": "10.2.1"
   },
   "directories": {
     "test": "test"

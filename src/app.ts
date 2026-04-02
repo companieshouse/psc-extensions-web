@@ -32,8 +32,7 @@ const nunjucksLoaderOpts = {
 };
 
 const njk = new nunjucks.Environment(
-    new nunjucks.FileSystemLoader(app.get("views"),
-        nunjucksLoaderOpts)
+    new nunjucks.FileSystemLoader(app.get("views"), nunjucksLoaderOpts)
 );
 
 njk.express(app);

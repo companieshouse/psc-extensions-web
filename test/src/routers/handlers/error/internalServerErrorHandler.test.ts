@@ -58,7 +58,7 @@ describe("InternalServerErrorHandler", () => {
             const res = {} as any;
 
             mockSelectLang.mockReturnValueOnce("en");
-            mockGetLocalesService.mockReturnValueOnce({ enabled: true, localesFolder: "locales", i18nCh: { resolveNamespacesKeys: (l: string) => ({}) } });
+            mockGetLocalesService.mockReturnValueOnce({ enabled: true, localesFolder: "locales", i18nCh: { resolveNamespacesKeys: (_l: string) => ({}) } });
             mockGetLocaleInfo.mockReturnValueOnce({ languageEnabled: true, languages: {}, i18n: {}, lang: "en" });
 
             const result = handler.executeGetWithAnyTypeArgs(req, res);
