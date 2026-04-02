@@ -6,7 +6,7 @@ export class HttpError extends Error {
     constructor (message: string, status: number | (typeof HttpStatusCode)[keyof typeof HttpStatusCode]) {
         super(message);
         this.name = "HttpError";
-        this.status = status as number;
+        this.status = status;
 
         // Maintains stack trace for where the error was thrown
         if (Error.captureStackTrace) {
