@@ -3,7 +3,7 @@ import { HttpStatusCode } from "axios";
 export class HttpError extends Error {
     public status: number;
 
-    constructor (message: string, status: number | HttpStatusCode) {
+    constructor (message: string, status: number | (typeof HttpStatusCode)[keyof typeof HttpStatusCode]) {
         super(message);
         this.name = "HttpError";
         this.status = status;

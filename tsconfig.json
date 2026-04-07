@@ -1,14 +1,13 @@
 {
   "compilerOptions": {
     "target": "ES2022",
-    "module": "commonjs",
+    "module": "nodenext",
     "esModuleInterop": true,
-    "moduleResolution": "node",
+    "moduleResolution": "nodenext",
     "resolveJsonModule": true,
     "pretty": true,
     "sourceMap": true,
     "outDir": "./dist",
-    "baseUrl": "./src",
     "skipLibCheck": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
@@ -21,7 +20,8 @@
     "types": [
       "node",
       "jest"
-    ]
+    ],
+    "rootDir": "./src"
   },
   "ts-node": {
     "esm": true
