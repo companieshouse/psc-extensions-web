@@ -17,7 +17,7 @@ export const createPscExtension = async (request: Request, transactionId: string
     if (!extensionData.companyNumber) {
         throw new Error(`Aborting: companyNumber is required for PSC Extension POST request for transactionId="${transactionId}"`);
     }
-    if (extensionData.pscNotificationId == null) {
+    if (extensionData.pscNotificationId === null || extensionData.pscNotificationId === undefined) {
         throw new DataIntegrityError(`Aborting: pscNotificationId is required for PSC Extension POST request for transactionId="${transactionId}"`, DataIntegrityErrorType.PSC_DATA);
     }
 
