@@ -98,7 +98,7 @@
     "chokidar": "3.5.3",
     "glob-parent": "6.0.2",
     "micromatch": "4.0.8",
-    "minimatch": "10.2.1"
+    "minimatch": "10.2.3"
   },
   "directories": {
     "test": "test"
