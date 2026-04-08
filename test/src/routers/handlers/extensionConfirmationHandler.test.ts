@@ -89,6 +89,28 @@ describe("ExtensionConfirmationHandler", () => {
 
             expect(result.templateName).toBe("");
         });
+
+        it("should return an empty pscName when pscIndividual.resource.name is undefined", async () => {
+            const handler = new TestableExtensionConfirmationHandler();
+            const req = {
+                ...baseReq,
+                originalUrl: PATHS.FIRST_EXTENSION_CONFIRMATION
+            };
+
+            const mockPscIndividualWithoutName = {
+                httpStatusCode: 200,
+                resource: {
+                    ...PSC_INDIVIDUAL,
+                    name: undefined
+                }
+            };
+
+            mockGetPscIndividual.mockResolvedValue(mockPscIndividualWithoutName);
+
+            const result = await handler.exposeGetViewData(req, {});
+
+            expect(result.pscName).toBe("");
+        });
     });
 
     describe("executeGet", () => {
