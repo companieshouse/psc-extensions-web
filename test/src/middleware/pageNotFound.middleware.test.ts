@@ -1,5 +1,3 @@
-/* eslint-disable import/first */
-
 import { Request, Response } from "express";
 
 const mockExecuteGet = jest.fn();

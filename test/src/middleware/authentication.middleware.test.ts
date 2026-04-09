@@ -1,5 +1,3 @@
-/* eslint-disable import/first */
-
 jest.mock("@companieshouse/web-security-node");
 
 import { AuthOptions, authMiddleware } from "@companieshouse/web-security-node";

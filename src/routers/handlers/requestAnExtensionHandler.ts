@@ -37,7 +37,7 @@ export class RequestAnExtensionHandler extends GenericHandler<PscViewData> {
         return {
             ...baseViewData,
             ...getLocaleInfo(locales, lang),
-            pscName: pscIndividual.resource?.name!,
+            pscName: pscIndividual.resource?.name ?? "",
             companyName: companyProfile.companyName,
             companyNumber: companyProfile.companyNumber,
             selectedPscId,
@@ -55,7 +55,7 @@ export class RequestAnExtensionHandler extends GenericHandler<PscViewData> {
         };
     }
 
-    public async executePost (req: Request, res: Response) {
+    public executePost (req: Request, _res: Response) {
         logger.info(`called`);
         const companyNumber = req.query.companyNumber as string;
         const selectedPscId = req.query.selectedPscId as string;

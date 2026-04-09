@@ -1,68 +1,137 @@
-import js from '@eslint/js'
-import globals from 'globals'
-import { defineConfig } from 'eslint/config'
-import tsParser from '@typescript-eslint/parser'
-import typescriptEslint from '@typescript-eslint/eslint-plugin'
-import checkFile from 'eslint-plugin-check-file'
-import unusedImports from 'eslint-plugin-unused-imports'
-import { eslintConfigStandard } from './eslint.standard.mjs'
+import typescriptEslint from "@typescript-eslint/eslint-plugin";
+import stylisticTs from '@stylistic/eslint-plugin';
+import globals from "globals";
+import tsParser from "@typescript-eslint/parser";
+import js from "@eslint/js";
 
-export default defineConfig([
-  eslintConfigStandard,
-  {
-    files: ['src/**/*.*', 'test/**/*.*'],
+const normalize = (cfg) => (Array.isArray(cfg) ? cfg : [cfg]);
 
-    languageOptions: {
-      globals: {
-        ...globals.node,
-        ...globals.commonjs,
-        ...globals.jest
-      },
-      parser: tsParser,
-      parserOptions: {
-        ecmaFeatures: {}
-      }
+const configArray = [
+    ...normalize(js.configs.recommended),
+    ...normalize(typescriptEslint.configs["flat/eslint-recommended"]),
+    ...normalize(typescriptEslint.configs["flat/recommended"]),
+    {
+        plugins: {
+            "@typescript-eslint": typescriptEslint,
+            '@stylistic/ts': stylisticTs,
+        },
+
+        languageOptions: {
+            globals: {
+                ...globals.node,
+                ...globals.jest,
+            },
+
+            parser: tsParser,
+            ecmaVersion: "latest",
+            sourceType: "commonjs",
+        },
+
+        rules: {
+            "@typescript-eslint/ban-types": "off",
+            "@typescript-eslint/explicit-module-boundary-types": "off",
+            "@typescript-eslint/no-explicit-any": "off",
+            "@typescript-eslint/no-inferrable-types": "off",
+
+            "@typescript-eslint/no-unused-vars": [
+                "error",
+                {
+                    argsIgnorePattern: "^_",
+                },
+            ],
+
+            semi: ["error", "always"],
+            "@stylistic/ts/type-annotation-spacing": "error",
+            "arrow-spacing": "error",
+
+            "brace-style": [
+                "error",
+                "1tbs",
+                {
+                    allowSingleLine: true,
+                },
+            ],
+
+            "comma-spacing": [
+                "error",
+                {
+                    before: false,
+                    after: true,
+                },
+            ],
+
+            curly: "error",
+            eqeqeq: "error",
+            "eol-last": ["warn", "always"],
+
+            indent: [
+                "error",
+                4,
+                {
+                    FunctionExpression: {
+                        parameters: "first",
+                    },
+
+                    CallExpression: {
+                        arguments: "first",
+                    },
+
+                    outerIIFEBody: 2,
+                    SwitchCase: 2,
+                    offsetTernaryExpressions: true,
+                },
+            ],
+
+            "key-spacing": [
+                "error",
+                {
+                    afterColon: true,
+                },
+            ],
+
+            "keyword-spacing": [
+                "error",
+                {
+                    before: true,
+                    after: true,
+                },
+            ],
+
+            "no-duplicate-imports": "error",
+            "no-irregular-whitespace": "error",
+            "no-trailing-spaces": "error",
+            "no-multi-spaces": "error",
+
+            "no-multiple-empty-lines": [
+                "error",
+                {
+                    max: 1,
+                    maxEOF: 1,
+                },
+            ],
+
+            "no-underscore-dangle": [
+                "error",
+                {
+                    allowFunctionParams: true,
+                },
+            ],
+
+            "no-unused-vars": "off",
+            "no-whitespace-before-property": "error",
+            "object-curly-spacing": ["error", "always"],
+            "require-await": "error",
+            "space-infix-ops": "error",
+
+            "spaced-comment": [
+                "error",
+                "always",
+                {
+                    markers: ["/", "*"],
+                },
+            ],
+        },
     },
+];
 
-    plugins: {
-      js,
-      '@typescript-eslint': typescriptEslint,
-      'check-file': checkFile,
-      'unused-imports': unusedImports
-    },
-
-    extends: ['js/recommended'],
-
-    rules: {
-      '@typescript-eslint/no-explicit-any': 'off',
-      indent: [
-        'error',
-        4,
-        {
-          SwitchCase: 1
-        }
-      ],
-
-      quotes: [
-        'error',
-        'double',
-        {
-          allowTemplateLiterals: true
-        }
-      ],
-
-      semi: [2, 'always'],
-      'no-unused-vars': 'off',
-      'padded-blocks': 'off',
-
-      'sort-imports': [
-        'error',
-        {
-          ignoreDeclarationSort: true
-        }
-      ],
-
-      'unused-imports/no-unused-imports': 'error'
-    }
-  }
-])
+export default configArray;
