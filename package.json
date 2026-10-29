@@ -34,7 +34,7 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@companieshouse/api-sdk-node": "^2.0.366",
+    "@companieshouse/api-sdk-node": "^2.0.372",
     "@companieshouse/ch-node-utils": "^2.1.13",
     "@companieshouse/node-session-handler": "^5.2.18",
     "@companieshouse/structured-logging-node": "^2.0.15",
@@ -110,7 +110,10 @@
     "chokidar": "3.5.3",
     "glob-parent": "6.0.2",
     "micromatch": "4.0.8",
-    "minimatch": "10.2.3"
+    "minimatch": "10.2.3",
+    "deepmerge": "4.1.2",
+    "node-forge": "^1.4.2",
+    "qs": "^6.17.0"
   },
   "directories": {
     "test": "test"
